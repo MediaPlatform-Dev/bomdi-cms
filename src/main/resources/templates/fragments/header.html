@@ -1,0 +1,8 @@
+<div class="px-3 py-2 border-bottom mb-3">
+	<div class="container d-flex flex-wrap justify-content-end">
+		<div class="text-start">
+			<a class="btn btn-light text-dark me-2" sec:authorize="!isAuthenticated()" th:href="@{/login}">로그인</a>
+			<a class="btn btn-light text-dark me-2" sec:authorize="isAuthenticated()" th:href="@{/logout}">로그아웃</a>
+		</div>
+	</div>
+</div>
