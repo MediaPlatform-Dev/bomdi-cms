@@ -1,4 +1,4 @@
-package com.megazone.cms.application.dto;
+package com.megazone.bomdi.cms.application.dto;
 
 import org.hibernate.validator.constraints.Length;
 

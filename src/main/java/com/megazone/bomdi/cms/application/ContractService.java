@@ -1,12 +1,13 @@
-package com.megazone.cms.application;
-
-import com.megazone.cms.application.dto.*;
-import com.megazone.cms.domain.*;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+package com.megazone.bomdi.cms.application;
 
 import java.util.List;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import lombok.RequiredArgsConstructor;
+
+import com.megazone.bomdi.cms.application.dto.*;
+import com.megazone.bomdi.cms.domain.*;
 
 @RequiredArgsConstructor
 @Transactional(readOnly = true)

@@ -1,6 +1,6 @@
-package com.megazone.cms.application.dto;
+package com.megazone.bomdi.cms.application.dto;
 
-import com.megazone.cms.domain.Contract;
+import com.megazone.bomdi.cms.domain.Contract;
 
 public record ContractDetailResponse(
     Long id,

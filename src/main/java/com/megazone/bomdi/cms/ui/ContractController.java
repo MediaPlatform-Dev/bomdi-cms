@@ -1,15 +1,16 @@
-package com.megazone.cms.ui;
+package com.megazone.bomdi.cms.ui;
 
-import com.megazone.cms.application.ContractService;
-import com.megazone.cms.application.dto.*;
-import lombok.RequiredArgsConstructor;
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import lombok.RequiredArgsConstructor;
 
-import java.util.List;
+import com.megazone.bomdi.cms.application.ContractService;
+import com.megazone.bomdi.cms.application.dto.*;
 
 @RequiredArgsConstructor
 @Controller

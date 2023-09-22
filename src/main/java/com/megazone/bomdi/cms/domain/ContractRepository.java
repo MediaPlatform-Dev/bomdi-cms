@@ -1,4 +1,4 @@
-package com.megazone.cms.domain;
+package com.megazone.bomdi.cms.domain;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
