@@ -4,19 +4,42 @@
 <body>
 	<header th:replace="~{fragments/header}"></header>
 	<div class="container">
-		<div class="py-5 text-center">
-			<h2>계약 수정</h2>
-		</div>
-		<form method="post" th:action="'/contracts/' + ${contract.id} + '/update'">
-			<label for="name" class="form-label">계약 이름</label>
-			<input type="text" class="form-control" id="name" name="name" placeholder="계약 이름" required th:value="${contract.name}">
-			<label for="contents" class="form-label">계약 내용</label>
-			<input type="text" class="form-control" id="contents" name="contents" placeholder="계약 내용" required th:value="${contract.contents}">
-			<label for="contractor" class="form-label">담당자</label>
-			<input type="text" class="form-control" id="contractor" name="contractor" placeholder="담당자" required th:value="${contract.contractor}" th:attr="disabled=true">
+		<h2 class="mb-4">계약 수정</h2>
+
+		<form method="post" th:action="@{/contracts/{id} (id=${contract.id})}" onsubmit="return updateContract()">
+			<input type="hidden" name="_method" value="put">
+
+			<div class="form-group row">
+				<label for="name" class="col-form-label col-md-2">계약 이름</label>
+				<div class="col-md">
+					<input type="text" class="form-control" id="name" name="name" placeholder="계약 이름" required th:value="${contract.name}">
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="contents" class="col-form-label col-md-2">계약 내용</label>
+				<div class="col-md">
+					<input type="text" class="form-control" id="contents" name="contents" placeholder="계약 내용" required th:value="${contract.contents}">
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="contractor" class="col-form-label col-md-2">담당자</label>
+				<div class="col-md">
+					<input type="text" class="form-control" id="contractor" name="contractor" placeholder="담당자" required th:value="${contract.contractor}" th:attr="disabled=true">
+				</div>
+			</div>
 			<br>
-			<button type="submit" class="btn btn-primary">수정</button>
+
+			<button type="submit" class="btn btn-primary">계약 수정</button>
+			<a th:href="@{/}" class="btn btn-secondary">목록</a>
 		</form>
 	</div>
+
+	<footer th:replace="~{fragments/footer}"></footer>
+
+	<script>
+      function updateContract() {
+        return confirm("계약을 수정하시겠습니까?");
+      }
+	</script>
 </body>
 </html>

@@ -9,9 +9,9 @@ import lombok.*;
 @Entity
 public class Contract extends AuditingFields {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
     private String contents;
 

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head}"></head>
+<body>
+	<header th:replace="~{fragments/header}"></header>
+	<div class="container">
+		<h2 class="mb-4">계약 목록</h2>
+
+		<table class="table table-striped table-fixed table-responsive">
+		<thead class="table-light">
+			<tr>
+				<th>#</th>
+				<th>계약 이름</th>
+				<th>계약 내용</th>
+				<th>담당자</th>
+				<th>수정</th>
+				<th>삭제</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="contract, stat : ${contracts}">
+				<td th:text="${contracts.size() - stat.index}"></td>
+				<td th:text="${contract.name}">계약 이름</td>
+				<td th:text="${contract.contents}">계약 내용</td>
+				<td th:text="${contract.contractor}">담당자</td>
+				<td>
+					<a th:href="@{/contracts/{id}/form (id=${contract.id})}" class="btn btn-sm btn-primary">수정</a>
+				</td>
+				<td>
+					<form method="post" th:action="@{/contracts/{id} (id=${contract.id})}"
+							onsubmit="return deleteContract()">
+						<input type="hidden" name="_method" value="delete">
+						<button type="submit" class="btn btn-sm btn-danger">삭제</button>
+					</form>
+				</td>
+			</tr>
+		</tbody>
+		</table>
+
+		<a th:href="@{/contracts/form}" class="btn btn-success">계약 등록</a>
+	</div>
+
+	<footer th:replace="~{fragments/footer}"></footer>
+
+	<script>
+      function deleteContract() {
+        return confirm("계약을 삭제하시겠습니까?");
+      }
+	</script>
+</body>
+</html>

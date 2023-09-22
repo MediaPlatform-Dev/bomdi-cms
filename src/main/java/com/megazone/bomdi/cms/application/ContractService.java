@@ -2,12 +2,16 @@ package com.megazone.bomdi.cms.application;
 
 import java.util.List;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 
 import com.megazone.bomdi.cms.application.dto.*;
-import com.megazone.bomdi.cms.domain.*;
+import com.megazone.bomdi.cms.domain.Contract;
+import com.megazone.bomdi.cms.domain.Contractor;
+import com.megazone.bomdi.cms.repository.ContractRepository;
+import com.megazone.bomdi.cms.repository.ContractorRepository;
 
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -18,7 +22,7 @@ public class ContractService {
     private final ContractorRepository contractorRepository;
 
     @Transactional
-    public void create(ContractRequest request) {
+    public void create(ContractCreateRequest request) {
         Contractor contractor = contractorRepository.findByName(request.contractor())
             .orElseGet(() -> new Contractor(request.contractor()));
 
@@ -27,7 +31,7 @@ public class ContractService {
     }
 
     public List<ContractResponse> findAll() {
-        return contractRepository.findAll()
+        return contractRepository.findAll(Sort.by(Sort.Direction.DESC, "id"))
             .stream()
             .map(ContractResponse::of)
             .toList();

@@ -13,7 +13,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 public abstract class AuditingFields {
 
     @CreatedDate
-    private LocalDateTime createdDateTime;
+    private LocalDateTime createdAt;
+
     @LastModifiedDate
-    private LocalDateTime updatedDateTime;
+    private LocalDateTime updatedAt;
 }

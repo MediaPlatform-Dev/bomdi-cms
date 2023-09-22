@@ -1,4 +1,4 @@
-package com.megazone.bomdi.cms.ui;
+package com.megazone.bomdi.cms.web.ui;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

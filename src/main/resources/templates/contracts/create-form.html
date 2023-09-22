@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head}"></head>
+<body>
+	<header th:replace="~{fragments/header}"></header>
+
+	<div class="container">
+		<h2 class="mb-4">계약 등록</h2>
+
+		<form id="form" method="post" th:action="@{/contracts}" onsubmit="return createContract()" th:object="${form}">
+			<div class="form-group row">
+				<label th:for="name" class="col-form-label col-md-2">계약 이름</label>
+				<div class="col-md">
+					<input type="text" th:field="*{name}" placeholder="계약 이름" required class="form-control">
+				</div>
+			</div>
+			<div class="form-group row">
+				<label th:for="contents" class="col-form-label col-md-2">계약 내용</label>
+				<div class="col-md">
+					<input type="text" th:field="*{contents}" placeholder="계약 내용" required class="form-control">
+				</div>
+			</div>
+			<div class="form-group row">
+				<label th:for="contractor" class="col-form-label col-md-2">담당자</label>
+				<div class="col-md">
+					<input type="text" th:field="*{contractor}" placeholder="담당자" required class="form-control">
+				</div>
+			</div>
+			<br>
+
+			<button type="submit" class="btn btn-primary">계약 등록</button>
+			<a th:href="@{/}" class="btn btn-secondary">목록</a>
+		</form>
+	</div>
+
+	<footer th:replace="~{fragments/footer}"></footer>
+
+	<script>
+      function createContract() {
+        return confirm("계약을 등록하시겠습니까?");
+      }
+	</script>
+</body>
+</html>
