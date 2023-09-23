@@ -22,7 +22,7 @@ public class ContractService {
     private final ContractorRepository contractorRepository;
 
     @Transactional
-    public void create(ContractCreateRequest request) {
+    public void createContract(ContractCreateRequest request) {
         Contractor contractor = contractorRepository.findByName(request.contractor())
             .orElseGet(() -> new Contractor(request.contractor()));
 
@@ -30,30 +30,30 @@ public class ContractService {
         contractRepository.save(contract);
     }
 
-    public List<ContractResponse> findAll() {
+    public List<ContractResponse> getContractList() {
         return contractRepository.findAll(Sort.by(Sort.Direction.DESC, "id"))
             .stream()
             .map(ContractResponse::of)
             .toList();
     }
 
-    public ContractDetailResponse findById(Long contractId) {
-        return ContractDetailResponse.of(getById(contractId));
+    public ContractDetailResponse getContract(Long contractId) {
+        return ContractDetailResponse.of(getContractById(contractId));
     }
 
     @Transactional
-    public void update(Long contractId, ContractUpdateRequest request) {
-        Contract contract = getById(contractId);
+    public void updateContract(Long contractId, ContractUpdateRequest request) {
+        Contract contract = getContractById(contractId);
         contract.update(request.name(), request.contents());
     }
 
-    private Contract getById(Long contractId) {
+    private Contract getContractById(Long contractId) {
         return contractRepository.findById(contractId)
             .orElseThrow(() -> new IllegalArgumentException(contractId + "를 찾을 수 없습니다."));
     }
 
     @Transactional
-    public void delete(Long contractId) {
+    public void deleteContract(Long contractId) {
         contractRepository.deleteById(contractId);
     }
 }

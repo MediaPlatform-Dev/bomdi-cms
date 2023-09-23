@@ -1,30 +1,43 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragments/head}"></head>
+<head th:replace="~{fragments/head}">
+	<title>제목</title>
+</head>
 <body>
 	<header th:replace="~{fragments/header}"></header>
+
 	<div class="container">
 		<h2 class="mb-4">계약 수정</h2>
 
-		<form method="post" th:action="@{/contracts/{id} (id=${contract.id})}" onsubmit="return updateContract()">
+		<form method="post" th:action="@{/contracts/{id}/form (id=${contract.id})}" onsubmit="return updateContract()" th:object="${form}">
 			<input type="hidden" name="_method" value="put">
 
 			<div class="form-group row">
-				<label for="name" class="col-form-label col-md-2">계약 이름</label>
+				<label th:for="name" class="col-form-label col-md-2">계약 이름</label>
 				<div class="col-md">
-					<input type="text" class="form-control" id="name" name="name" placeholder="계약 이름" required th:value="${contract.name}">
+					<input type="text" th:id="name" th:name="name" th:value="${contract.name}" placeholder="계약 이름" required
+							th:class="'form-control' + (${#fields.hasErrors('name')} ?
+							' is-invalid' : (${#strings.isEmpty(form.name)} ? '' : ' is-valid'))">
+					<div class="invalid-feedback">
+						<p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Invalid value</p>
+					</div>
 				</div>
 			</div>
 			<div class="form-group row">
-				<label for="contents" class="col-form-label col-md-2">계약 내용</label>
+				<label th:for="contents" class="col-form-label col-md-2">계약 내용</label>
 				<div class="col-md">
-					<input type="text" class="form-control" id="contents" name="contents" placeholder="계약 내용" required th:value="${contract.contents}">
+					<input type="text" th:id="contents" th:name="contents" th:value="${contract.contents}" placeholder="계약 내용" required
+							th:class="'form-control' + (${#fields.hasErrors('contents')} ?
+							' is-invalid' : (${#strings.isEmpty(form.contents)} ? '' : ' is-valid'))">
+					<div class="invalid-feedback">
+						<p th:if="${#fields.hasErrors('contents')}" th:errors="*{contents}">Invalid value</p>
+					</div>
 				</div>
 			</div>
 			<div class="form-group row">
-				<label for="contractor" class="col-form-label col-md-2">담당자</label>
+				<label th:for="contractor" class="col-form-label col-md-2">담당자</label>
 				<div class="col-md">
-					<input type="text" class="form-control" id="contractor" name="contractor" placeholder="담당자" required th:value="${contract.contractor}" th:attr="disabled=true">
+					<input type="text" th:field="${contract.contractor}" placeholder="담당자" class="form-control-plaintext">
 				</div>
 			</div>
 			<br>

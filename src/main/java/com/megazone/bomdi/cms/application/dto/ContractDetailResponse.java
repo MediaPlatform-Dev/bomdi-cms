@@ -16,4 +16,12 @@ public record ContractDetailResponse(
             entity.getContents(),
             entity.getContractor().getName());
     }
+
+    public static ContractDetailResponse of(Long contractId, ContractUpdateRequest form) {
+        return new ContractDetailResponse(
+            contractId,
+            form.name(),
+            form.contents(),
+            form.contractor());
+    }
 }
