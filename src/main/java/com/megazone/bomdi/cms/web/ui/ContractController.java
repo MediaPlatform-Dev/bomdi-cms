@@ -31,19 +31,16 @@ public class ContractController {
     }
 
     @GetMapping("/form")
-    public String createForm(ContractCreateRequest emptyForm, Model model) {
-        model.addAttribute(FORM, emptyForm);
+    public String createForm(@ModelAttribute(FORM) ContractCreateRequest emptyForm) {
         return "contracts/create-form";
     }
 
     @PostMapping("/form")
     public String create(
         @Valid @ModelAttribute(FORM) ContractCreateRequest createForm,
-        BindingResult bindingResult,
-        Model model
+        BindingResult bindingResult
     ) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute(FORM, createForm);
             return "contracts/create-form";
         }
 
@@ -54,11 +51,10 @@ public class ContractController {
     @GetMapping("/{contractId}/form")
     public String updateForm(
         @PathVariable Long contractId,
-        ContractUpdateRequest emptyForm,
+        @ModelAttribute(FORM) ContractUpdateRequest emptyForm,
         Model model
     ) {
         model.addAttribute(CONTRACT, contractService.getContract(contractId));
-        model.addAttribute(FORM, emptyForm);
         return "contracts/update-form";
     }
 
@@ -71,7 +67,6 @@ public class ContractController {
     ) {
         if (bindingResult.hasErrors()) {
             model.addAttribute(CONTRACT, ContractDetailResponse.of(contractId, updateForm));
-            model.addAttribute(FORM, updateForm);
             return "contracts/update-form";
         }
 

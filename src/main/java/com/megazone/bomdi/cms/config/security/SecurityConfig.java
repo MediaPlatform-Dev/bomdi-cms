@@ -6,10 +6,8 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.*;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -26,7 +24,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    public UserDetailsManager memberFixtures() {
+    public UserDetailsService memberFixtures() {
         UserDetails user = createMember("user", "user", "USER");
         UserDetails admin = createMember("admin", "admin", "ADMIN");
         return new InMemoryUserDetailsManager(user, admin);
