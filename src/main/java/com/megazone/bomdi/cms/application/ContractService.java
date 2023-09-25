@@ -33,7 +33,7 @@ public class ContractService {
     public List<ContractResponse> getContractList() {
         return contractRepository.findAll(Sort.by(Sort.Direction.DESC, "id"))
             .stream()
-            .map(ContractResponse::of)
+            .map(ContractResponse::from)
             .toList();
     }
 

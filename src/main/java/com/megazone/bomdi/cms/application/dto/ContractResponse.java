@@ -10,7 +10,7 @@ public record ContractResponse(
     String contractor
 ) {
 
-    public static ContractResponse of(Contract entity) {
+    public static ContractResponse from(Contract entity) {
         return new ContractResponse(
             entity.getId(),
             entity.getName(),
