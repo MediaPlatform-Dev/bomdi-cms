@@ -41,6 +41,12 @@
 				</div>
 			</div>
 			<div class="form-group row">
+				<label th:for="createdBy" class="col-form-label col-md-2">계약 생성자</label>
+				<div class="col-md">
+					<input type="text" th:field="${contract.createdBy}" readonly class="form-control-plaintext">
+				</div>
+			</div>
+			<div class="form-group row">
 				<label th:for="modifiedBy" class="col-form-label col-md-2">마지막 수정자</label>
 				<div class="col-md">
 					<input type="text" th:field="${contract.modifiedBy}" readonly class="form-control-plaintext">

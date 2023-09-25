@@ -9,6 +9,7 @@ public record ContractDetailResponse(
     String name,
     String contents,
     String contractor,
+    String createdBy,
     String modifiedBy
 ) {
 
@@ -18,6 +19,7 @@ public record ContractDetailResponse(
             entity.getName(),
             entity.getContents(),
             entity.getContractor().getName(),
+            Optional.ofNullable(entity.getCreatedBy()).orElse(""),
             Optional.ofNullable(entity.getModifiedBy()).orElse("")
         );
     }
@@ -28,6 +30,7 @@ public record ContractDetailResponse(
             form.name(),
             form.contents(),
             form.contractor(),
+            "",
             ""
         );
     }

@@ -1,7 +1,7 @@
 package com.megazone.bomdi.cms.domain;
 
-import jakarta.persistence.EntityListeners;
-import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
 
 import lombok.Getter;
@@ -14,7 +14,12 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 public abstract class AuditingFields {
 
     @CreatedDate
+    @Column(updatable = false)
     private LocalDateTime createdAt;
+
+    @CreatedBy
+    @Column(updatable = false)
+    protected String createdBy;
 
     @LastModifiedDate
     private LocalDateTime updatedAt;
