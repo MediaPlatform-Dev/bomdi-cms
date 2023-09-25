@@ -40,6 +40,12 @@
 					<input type="text" th:field="${contract.contractor}" placeholder="담당자" readonly class="form-control-plaintext">
 				</div>
 			</div>
+			<div class="form-group row">
+				<label th:for="modifiedBy" class="col-form-label col-md-2">마지막 수정자</label>
+				<div class="col-md">
+					<input type="text" th:field="${contract.modifiedBy}" readonly class="form-control-plaintext">
+				</div>
+			</div>
 			<br>
 
 			<button type="submit" class="btn btn-primary">계약 수정</button>

@@ -38,7 +38,7 @@ public class ContractService {
     }
 
     public ContractDetailResponse getContract(Long contractId) {
-        return ContractDetailResponse.of(getContractById(contractId));
+        return ContractDetailResponse.from(getContractById(contractId));
     }
 
     @Transactional
