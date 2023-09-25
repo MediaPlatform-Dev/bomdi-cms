@@ -9,6 +9,11 @@ spring:
     properties:
       hibernate:
         format_sql: true
+      org:
+        hibernate:
+          envers:
+            audit_table_suffix: _history
+            store_data_at_delete: true
     open-in-view: true
     defer-datasource-initialization: true
 

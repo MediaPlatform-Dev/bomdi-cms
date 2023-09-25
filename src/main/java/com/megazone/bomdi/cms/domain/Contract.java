@@ -3,9 +3,13 @@ package com.megazone.bomdi.cms.domain;
 import jakarta.persistence.*;
 
 import lombok.*;
+import org.hibernate.envers.Audited;
+
+import static org.hibernate.envers.RelationTargetAuditMode.NOT_AUDITED;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
+@Audited
 @Entity
 public class Contract extends AuditingFields {
 
@@ -15,6 +19,7 @@ public class Contract extends AuditingFields {
     private String name;
     private String contents;
 
+    @Audited(targetAuditMode = NOT_AUDITED)
     @JoinColumn(name = "contractor_id")
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Contractor contractor;
