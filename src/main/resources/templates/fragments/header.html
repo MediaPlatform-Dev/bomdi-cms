@@ -1,7 +1,8 @@
+<link rel="stylesheet" type="text/css" href="css/header.css">
 <div class="mb-5 pt-3 pb-3 border-bottom">
 	<div class="container d-flex flex-wrap justify-content-end">
 		<div class="col-md-6 text-start">
-			<h1 class="fs-3">BOMDI - 계약 관리 시스템</h1>
+			<h1 class="fs-3"><a th:href="@{/}">BOMDI - 계약 관리 시스템</a></h1>
 		</div>
 		<div class="col-md-6 text-end">
 			<a class="btn btn-light text-dark me-2" sec:authorize="!isAuthenticated()" th:href="@{/login}">로그인</a>
