@@ -3,6 +3,7 @@ package com.megazone.bomdi.cms.domain;
 import jakarta.persistence.*;
 
 import lombok.*;
+import org.hibernate.envers.Audited;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
