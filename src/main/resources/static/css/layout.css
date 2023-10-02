@@ -311,7 +311,7 @@ letter-spacing: -0.4px;
 .tabTitleArea h3 {border-bottom: 4px solid #c80038; display: inline-block; margin-bottom:-1px; padding: 15px 5px 10px 0;}
 
 .subTitle {display: flex; justify-content: space-between; margin-top:30px; }
-.subTitle h3{color:#000; font-size: 20px; font-weight: 600; }
+.subTitle h3{color:#000; font-size: 20px; font-weight: 600; line-height: 1.8;}
 .subText {font-size: 14px; font-weight: 300; color:#666; margin-bottom: 15px;}
 
 /* table type01 */
@@ -325,7 +325,6 @@ letter-spacing: -0.4px;
 .tbl_type01 tr:hover td {background-color: #f4f6f9;}
 .tbl_type01 td a.btn_U{border-radius: 20px; line-height: 30px; border: 1px solid #ccc; color: #333; font-weight: 600; font-size:13px;  padding: 5px 20px; background: #FFF;}
 .tbl_type01 td a.btn_D{border-radius: 20px; line-height: 30px; border: 1px solid #ccc; color: #333; font-weight: 600; font-size:13px; padding: 5px 20px; background: #FFF;}
-
 
 .templateArea{display: flex; flex-flow: row wrap; margin: 0 -10px 15px;}
 .templateArea dl{flex: 1; text-align: center; margin:10px; cursor: pointer;}
@@ -357,18 +356,18 @@ letter-spacing: -0.4px;
 .searchTable1 table td p{color:#454545; font-size:15px; text-align:left; padding-bottom: 5px; font-weight: 600; }
 .searchTable1 table td {font-size:14px; color:#686f77;font-size:14px; padding:7px 10px 7px 0;}
 .searchTable1 table td:last-of-type{padding-right: 0;}
-.searchTable1 table td input[type=text].inputArea{border:1px solid #bebebe; color:#333333;  border-radius: 5px; padding-left:10px; padding-top: 5px;  height:36px; background:#FFF;
+.searchTable1 table td input[type=text].inputArea{border:1px solid #bebebe; color:#333333; font-weight: 600; border-radius: 5px; padding-left:10px; padding-top: 5px;  height:36px; background:#FFF;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;}
-.searchTable1 table td input[type=text].inputDate{border:1px solid #bebebe; color:#333333;  border-radius: 5px; padding-left:10px; padding-top: 5px; height:36px; background:#FFF url(../img/ico_calendar.png) no-repeat right 8px;
+.searchTable1 table td input[type=text].inputDate{border:1px solid #bebebe; color:#333333; font-weight: 600; border-radius: 5px; padding-left:10px; padding-top: 5px; height:36px; background:#FFF url(../img/ico_calendar.png) no-repeat right 8px;
         box-sizing: border-box;
         -moz-box-sizing: border-box;
         -webkit-box-sizing: border-box;}
 .searchTable1 table td button.calendar{background:url(../img/ico_calendar.png) no-repeat; width:20px; height:20px; margin:4px 0 4px 10px;}
 .searchTable1 table td textarea{border:1px solid #c0c6cd; padding:5px; color:#777; font-size:14px; color:#686f77;}
 .searchTable1 table td.border-left{border-left:1px solid #c0c6cd;}
-.searchTable1 table td select {border:1px solid #bebebe; color:#333333;  border-radius: 5px; padding-left:10px; padding-top: 5px;  height:38px; padding-bottom:1px; background:#FFF url(../img/ico_select.png) no-repeat right center; padding-right: 30px; } 
+.searchTable1 table td select {border:1px solid #bebebe; color:#333333; font-weight: 600; border-radius: 5px; padding-left:10px; padding-top: 5px;  height:38px; padding-bottom:1px; background:#FFF url(../img/ico_select.png) no-repeat right center; padding-right: 30px; }
 .searchTable1 table td select {vertical-align:middle;}
 .searchTable1 table td select:focus {outline:0;}
 .searchTable1 table td select::-ms-expand {display: none;}
@@ -391,7 +390,7 @@ letter-spacing: -0.4px;
 
 
 .btnArea{display: flex; justify-content: flex-end; padding-top: 10px;}
-.btn {margin-left:auto;font-size: 14px; text-align: center; height: 35px; line-height: 30px; font-weight: 600;  white-space: nowrap;vertical-align: middle; cursor: pointer; border: 1px solid transparent; border-radius: 40px; letter-spacing:0; margin-left: 5px;}
+.btn {font-size: 14px; text-align: center; height: 35px; line-height: 30px; font-weight: 600;  white-space: nowrap;vertical-align: middle; cursor: pointer; border: 1px solid transparent; border-radius: 40px; letter-spacing:0; margin-left: 5px;}
 .btnType01 {background-color: #1528a0; color: #fff; width: 130px;}
 .btnType01:hover{background-color: #1a295c; }
 .btnType02 {border:2px solid #818285; background-color: #fff; color: #2d2e32; width: 130px;}
@@ -399,15 +398,17 @@ letter-spacing: -0.4px;
 .btnType03 {background-color: #1528a0; color: #fff; padding: 0 40px; font-family:'samsungonelatin700'; font-size: 16px;}
 .btnType03:hover{background-color: #1a295c; }
 
-.btn-create {border-radius: 5px; height: 29px; line-height: 26px; background:#FFF url(../img/ico_create.png) no-repeat 15px 4px; color:#1428a0; border-color:#1428a0; width: 80px; display: inline-block; padding-left: 25px; margin-bottom: 8px; font-weight:600; }
+.btn-create {border-radius: 5px; height: 29px; line-height: 26px; background:#FFF url(../img/ico_create.png) no-repeat 15px 4px; color:#1428a0; border-color:#1428a0; width: 80px; display: inline-block; padding-left: 25px; font-weight:600; }
 .btn-create:hover,.btn-create:focus, .btn-create:active  {background:#1428a0 url(../img/ico_create_ov.png) no-repeat 15px 4px; border-color:#1428a0; color:#FFF;}
+.btn-add {border-radius: 5px; height: 29px; line-height: 26px; background:#FFF url(../img/icon_plus.png) no-repeat 11px 7px; color:#1428a0; border-color:#1428a0; width: 85px; display: inline-block; padding-left: 20px; font-weight:600; }
+.btn-add:hover,.btn-create:focus, .btn-create:active  {background:#1428a0 url(../img/icon_plus_ov.png) no-repeat 11px 7px; border-color:#1428a0; color:#FFF;}
 
 .mz-radioset{display: flex;}
 .mz-radio {
     position: relative;
     min-width: 24px;
     min-height: 24px;
-    margin-right: 27px;
+    margin-right: 20px;
     vertical-align: top;
 }
 .mz-radio input[type=radio] {
@@ -432,10 +433,10 @@ letter-spacing: -0.4px;
 }
 .mz-radio label {
     padding-left: 28px;
-    font-size: 15px;
+    font-size: 14px;
     vertical-align: top;
     margin-top: 1px;
-	line-height:20px;
+	line-height:24px;
 	font-weight:700;
 
 }
@@ -445,6 +446,61 @@ letter-spacing: -0.4px;
 
 .mz-radio input[type=radio]:checked + label{color:#000000;}
 
+.subTitle02 {display: flex; justify-content: space-between; margin-top: 20px; margin-bottom: 10px;}
+.subTitle02 h3{font-size: 18px; font-weight: 700;}
+
+/* table type02 */
+.tbl_type02 table{ width: 100%; border-top:2px solid #595959; margin:5px 0; }
+.tbl_type02 th{background:#e3e6ef;  border-bottom: 1px solid #cfcfcf; padding:0 10px 0 20px; height: 46px; font-size: 15px; line-height: 22px; color:#333; font-weight: 700; text-align: left;}
+.tbl_type02 th.center{padding:0; text-align: center;}
+.tbl_type02 td.center{padding:0; text-align: center;}
+.tbl_type02 td{border-bottom: 1px solid #cfcfcf; padding:0 10px; height: 46px; font-size: 15px; line-height: 22px; color:#333; font-weight: 600;}
+.tbl_type02 td .clickable {color:#333; font-weight: 600;}
+.tbl_type02 td .clickable:hover {color:#000; font-weight: 600;}
+.tbl_type02 td .search{display: flex; margin: 5px 0;}
+.tbl_type02 td a.btn_s{border-radius: 5px; color: #fff; font-weight: 600; font-size:13px;  padding: 4px 20px; background: #3e55a1;}
+.tbl_type02 table td input[type=text]{border:1px solid #bebebe; color:#333333; font-weight: 600; border-radius: 5px; padding-left:10px; height:32px; line-height: 30px;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;}
+.tbl_type02 table td input[type=text].inputDate{border:1px solid #bebebe; color:#333333; font-weight: 600; border-radius: 5px; padding-left:10px; height:30px; background:#FFF url(../img/ico_calendar.png) no-repeat top 5px right 0;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;}
+.tbl_type02 table td input[type=text].readonly{background: #f0f0f0;}
+.tbl_type02 table td button.calendar{background:url(../img/ico_calendar.png) no-repeat; width:20px; height:20px; margin:4px 0 4px 10px;}
+.tbl_type02 table td textarea{border:1px solid #c0c6cd; padding:5px; font-size:14px; color:#333333; font-weight: 600; margin-top:5px;}
+.tbl_type02 table td select {border:1px solid #bebebe; color:#333333; font-size:14px; font-weight: 600;  border-radius: 5px; padding-left:10px;  height:32px; padding-bottom:1px; background:#FFF url(../img/ico_select.png) no-repeat right center; padding-right: 30px; } 
+.tbl_type02 table td select {vertical-align:middle;}
+.tbl_type02 table td select:focus {outline:0;}
+.tbl_type02 table td select::-ms-expand {display: none;}
+.tbl_type02 table td select{-webkit-appearance: none;
+	-moz-appearance: none;}
+
+.chkbx {position: relative;min-height: 24px;margin-right: 27px;vertical-align: top;}
+.chkbx input[type=checkbox] {position: absolute;top: 2px;left: 0;width: 18px;height: 18px;background-image: url("../img/chkbx.png");background-position: center center;background-size: 24px;background-repeat: no-repeat;}
+.chkbx input[type=checkbox]:checked:disabled {background-image: url("../img/chkbx_on_dis.png");}
+.chkbx input[type=checkbox]::-ms-check {border: 1px solid #A0A0A0;}
+.chkbx label {padding-left: 25px;font-size: 14px;vertical-align: top;margin-top: 1px;line-height:24px;font-weight:700;cursor:pointer;}
+
+
+.btn-wrap{display: flex; margin: 30px 0; justify-content: center;}
+.btn-wrap >.btn {font-size: 14px; text-align: center; height: 35px; line-height: 30px; font-weight: 600;  white-space: nowrap;vertical-align: middle; cursor: pointer; border: 1px solid transparent; border-radius: 40px; letter-spacing:0; margin-left: 5px;}
+.btn-blue {background-color: #005ae0; color: #fff; width: 130px;}
+.btn-blue:hover{background-color: #1a295c; }
+.btn-navy {background-color: #1528a0; color: #fff; width: 130px;}
+.btn-navy:hover{background-color: #000; }
+.btn-wt {border:2px solid #818285; background-color: #555; color: #fff; width: 130px;}
+.btn-wt:hover{background-color: #1a295c; border:2px solid #1a295c;color: #fff; }
+
 .footerArea {
 	bottom: 0; height: 40px; line-height: 40px; font-size: 14px; display: flex; justify-content: center;
+}
+
+.invalid-feedback {
+	display: none;
+	width: 100%;
+	margin-top: 0.25rem;
+	font-size: 0.875em;
+	color: #dc3545;
 }
