@@ -1,0 +1,126 @@
+<div class="snb"><!--<div class="snb compact">-->
+	<div class="topArea">
+		<h1 class="logo"></h1>
+		<a class="menuBtn" id="snbToggle" href="#!">메뉴</a>
+	</div>
+	<div class="innerRow">
+		<div class="userArea clickable">
+			<dl>
+				<dt>홍길동</dt>
+				<dd>메가존</dd>
+			</dl>
+		</div>
+	</div>
+	<div class="innerRow">
+		<span class="systemText">MEGAZONE CMS</span>
+		<ul class="nav">
+			<li class="depth01 active"><a class="mn_1"><i>계약등록관리</i></a></li>
+			<li class="depth01"><a class="mn_2"><i>계약승인관리</i></a></li>
+		</ul>
+	</div>
+
+
+	<!-- 상세 네비게이션 시작  -->
+	<div class="lnb"> <!-- <div class="lnb on"> -->
+		<div class="lnbHeader">
+			<h1 class="logo"></h1>
+			<span class="systemText">MEGAZONE CMS</span>
+		</div>
+		<div class="searchBar">
+			<input type="search" placeholder="SEARCH">
+		</div>
+
+		<ul class="lnbNav">
+			<li class="depth02 active"><a class="clickable">CMS 요약</a></li>
+			<li class="depth02"><a class="clickable">중국</a></li>
+			<li class="depth02"><a class="clickable">홍콩</a></li>
+			<li class="depth02"><a class="clickable">싱가포르</a></li>
+			<li class="depth02"><a class="clickable">대만</a></li>
+			<li class="depth02"><a class="clickable">말레이시아</a></li>
+			<li class="depth02"><a class="clickable">베트남</a></li>
+		</ul>
+
+		<div class="subMenuArea on"> <!-- <div class="subMenuArea"> -->
+			<ul class="sub">
+				<li class="depth03 active openArrow">
+					<a class="dep03_item">매출</a>
+
+					<div class="depth04">
+						<a class="dep04_item clickable">매출실적</a>
+
+						<ol class="depth05">
+							<li class="active"><a class="dep05_item">조직별</a></li>
+							<li><a class="dep05_item">부문별</a></li>
+							<li><a class="dep05_item">채널별</a></li>
+							<li><a class="dep05_item">제품군별</a></li>
+							<li><a class="dep05_item">브랜드별</a></li>
+							<li><a class="dep05_item">제품/채널별</a></li>
+						</ol>
+					</div>
+				</li>
+				<li class="depth03 openArrow">
+					<a class="dep03_item">생산</a>
+
+					<div class="depth04">
+						<a class="dep04_item clickable">생산실적</a>
+
+						<ol class="depth05">
+							<li><a class="dep05_item">브랜드별</a></li>
+							<li><a class="dep05_item">제품군별</a></li>
+						</ol>
+					</div>
+				</li>
+				<li class="depth03 closeArrow">
+					<a class="dep03_item">손익</a>
+
+					<div class="depth04">
+						<a class="dep04_item clickable">Daily Closing</a>
+
+						<ol class="depth05">
+							<li><a class="dep05_item">DC후 매출 기준</a></li>
+							<li><a class="dep05_item">순매출 기준</a></li>
+						</ol>
+					</div>
+				</li>
+				<li class="depth03 openArrow">
+					<a class="dep03_item">유통재고</a>
+
+					<div class="depth04">
+						<a class="dep04_item clickable">현황</a>
+
+						<ol class="depth05">
+							<li><a class="dep05_item">사업부별</a></li>
+							<li><a class="dep05_item">영업팀별</a></li>
+						</ol>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<!-- 사용자 설정 start -->
+	<div class="userSetting hidden"><!--<div class="userSetting">-->
+		<a class="layerCloseBtn"></a>
+		<div class="layerTopArea flexColumn">
+			<label>사용자 설정</label>
+			<!--<div class="selects">-->
+			<!--	<select class="form-control" name="">-->
+			<!--		<option value="" selected>Change Language</option>-->
+			<!--		<option value="">korean</option>-->
+			<!--	</select>-->
+			<!--</div>-->
+		</div>
+		<div class="adminArea">
+			<!--<p class="title">Admin</p>-->
+			<ul class="adminList">
+				<li><a>비밀번호 변경</a></li>
+				<!--<li><a>권한 등록</a></li>-->
+				<!--<li><a>이력 조회</a></li>-->
+			</ul>
+		</div>
+		<!--<a class="btnLogout" sec:authorize="!isAuthenticated()" th:href="@{/login}">로그인</a>-->
+		<a class="btnLogout" sec:authorize="isAuthenticated()" th:href="@{/logout}">로그아웃</a>
+	</div>
+	<!-- 사용자 설정 end -->
+</div>
+<!-- side navigation end -->
