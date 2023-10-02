@@ -4,55 +4,296 @@
 	<title>제목</title>
 </head>
 <body>
-	<header th:replace="~{fragments/header}"></header>
-
-	<div class="container">
-		<h2 class="mb-4">계약 등록</h2>
-
-		<form method="post" th:action="@{/contracts/form}" onsubmit="return createContract()" th:object="${form}">
-			<div class="form-group row">
-				<label th:for="name" class="col-form-label col-md-2">계약 이름</label>
-				<div class="col-md">
-					<input type="text" th:field="*{name}" placeholder="계약 이름" required
-							th:class="'form-control' + (${#fields.hasErrors('name')} ?
-							' is-invalid' : (${#strings.isEmpty(#object.name)} ? '' : ' is-valid'))">
-					<div class="invalid-feedback">
-						<p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Invalid value</p>
+	<div class="wrap">
+		<nav th:replace="~{fragments/snb}"></nav>
+		<!-- content start -->
+		<div class="container">
+			<header th:replace="~{fragments/header}"></header>
+			<div class="content">
+				<form method="post" th:action="@{/contracts/form}" onsubmit="return createContract()" th:object="${form}">
+					<!-- 입력1 -->
+					<div class="section">
+						<div class="subTitle02">
+							<h3>계약유형</h3>
+						</div>
+						<div class="tbl_type02">
+							<table>
+							<colgroup>
+								<col style="width: 15%;">
+								<col style="width: 18%;">
+								<col style="width: 15%;">
+								<col style="width: 18%;">
+								<col style="width: 15%;">
+								<col >
+							</colgroup>
+							<tr>
+								<th>계약구분1</th>
+								<td>
+									<div class="mz-radioset">
+										<div class="mz-radio">
+											<input type="radio" name="Security" id="Security01" value="" checked="">
+											<label for="Security01">매출</label>
+										</div>
+										<div class="mz-radio">
+											<input type="radio" name="Security" id="Security02" value="">
+											<label for="Security02">매입</label>
+										</div>
+									</div>
+								</td>
+								<th>계약구분2</th>
+								<td>
+									<select id="" name="" style="width:100%;">
+										<option>COR[1]</option>
+										<option>COR[2]</option>
+									</select>
+								</td>
+								<th>계약구분3</th>
+								<td>
+									<select id="" name="" style="width:100%;">
+										<option>COR[1]</option>
+										<option>COR[2]</option>
+									</select>
+								</td>
+							</tr>
+							</table>
+						</div>
 					</div>
-				</div>
-			</div>
-			<div class="form-group row">
-				<label th:for="contents" class="col-form-label col-md-2">계약 내용</label>
-				<div class="col-md">
-					<input type="text" th:field="*{contents}" placeholder="계약 내용" required
-							th:class="'form-control' + (${#fields.hasErrors('contents')} ?
-							' is-invalid' : (${#strings.isEmpty(#object.contents)} ? '' : ' is-valid'))">
-					<div class="invalid-feedback">
-						<p th:if="${#fields.hasErrors('contents')}" th:errors="*{contents}">Invalid value</p>
-					</div>
-				</div>
-			</div>
-			<div class="form-group row">
-				<label th:for="contractor" class="col-form-label col-md-2">담당자</label>
-				<div class="col-md">
-					<input type="text" th:field="*{contractor}" placeholder="담당자" required
-							th:class="'form-control' + (${#fields.hasErrors('contractor')} ?
-							' is-invalid' : (${#strings.isEmpty(#object.contractor)} ? '' : ' is-valid'))">
-					<div class="invalid-feedback">
-						<p th:if="${#fields.hasErrors('contractor')}" th:errors="*{contractor}">Invalid value</p>
-					</div>
-				</div>
-			</div>
-			<br>
+					<!-- 입력 1 -->
+					<!-- 입력 2 -->
+					<div class="section">
+						<div class="subTitle02">
+							<h3>계약 기본정보1</h3>
+						</div>
+						<div class="tbl_type02">
+							<table>
+							<colgroup>
+								<col style="width: 15%;">
+								<col style="width: 18%;">
+								<col style="width: 15%;">
+								<col style="width: 18%;">
+								<col style="width: 15%;">
+								<col >
+							</colgroup>
+							<tr>
+								<th>매출 승인여부</th>
+								<td><input class="inputArea" style="width: 100%;" type="text" value="" placeholder="매출승인여부"></td>
+								<th>매출 갱신 여부</th>
+								<td><input class="inputArea" style="width: 100%;" type="text" value="" placeholder="매출승인여부"></td>
+								<th>매출 계약번호</th>
+								<td><input class="inputArea" style="width: 100%;" type="text" value="" placeholder="매출승인여부"></td>
+							</tr>
+							<tr>
+								<th th:for="contents">갱신전 매출 계약번호</th>
+								<!--<td><input class="inputArea" style="width: 100%;" type="text" value="" placeholder="매출승인여부"></td>-->
+								<td>
+									<input th:field="*{contents}" required
+											class="inputArea" style="width: 100%;" type="text" value="" placeholder="계약내용">
+									<div class="invalid-feedback">
+										<p th:if="${#fields.hasErrors('contents')}" th:errors="*{contents}">Invalid value</p>
+									</div>
+								</td>
 
-			<button type="submit" class="btn btn-primary">계약 등록</button>
-			<a th:href="@{/}" class="btn btn-secondary">목록</a>
-		</form>
+								<th th:for="contractor">Sales Force 계약번호</th>
+								<td>
+									<input th:field="*{contractor}" required
+											class="inputArea" style="width: 100%;" type="text" value="" placeholder="담당자">
+									<div class="invalid-feedback">
+										<p th:if="${#fields.hasErrors('contractor')}" th:errors="*{contractor}">Invalid value</p>
+									</div>
+								</td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<th th:for="name" >계약명</th>
+								<!--<td colspan="5"><input class="inputArea" style="width: 100%;" type="text" value="" placeholder="계약명"></td>-->
+								<td colspan="5">
+									<input th:field="*{name}" required
+											class="inputArea" style="width: 100%;" type="text" value="" placeholder="계약명">
+									<div class="invalid-feedback">
+										<p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Invalid value</p>
+									</div>
+								</td>
+							</tr>
+							</table>
+						</div>
+					</div>
+					<!-- 입력 2 -->
+					<!-- 입력 3 -->
+					<div class="section">
+						<div class="subTitle02">
+							<h3>계약 기본정보2</h3>
+						</div>
+						<div class="tbl_type02">
+							<table>
+							<colgroup>
+								<col style="width: 15%;">
+								<col style="width: 18%;">
+								<col style="width: 15%;">
+								<col style="width: 18%;">
+								<col style="width: 15%;">
+								<col >
+							</colgroup>
+							<tr>
+								<th>접수 방법 구분</th>
+								<td>
+									<select id="" name="" style="width:100%;">
+										<option>COR[1]</option>
+										<option>COR[2]</option>
+									</select>
+								</td>
+								<th>자사법인</th>
+								<td>
+									<select id="" name="" style="width:100%;">
+										<option>COR[1]</option>
+										<option>COR[2]</option>
+									</select>
+								</td>
+								<th>서비스 분류</th>
+								<td><input class="inputArea" style="width: 100%;" type="text" value="" placeholder="서비스 분류"></td>
+							</tr>
+							<tr>
+								<th>체결분류</th>
+								<td><input class="inputArea" style="width: 100%;" type="text" value="" placeholder="체결분류"></td>
+								<th>거래처 구분</th>
+								<td>
+									<select id="" name="" style="width:100%;">
+										<option>COR[1]</option>
+										<option>COR[2]</option>
+									</select>
+								</td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<th>거래처명</th>
+								<td colspan="5">
+									<div class="search">
+										<input class="inputArea readonly" style="width: 100%;" type="text" value="" placeholder="거래처명" readonly>
+										<a class="btn_s mL5">검색 </a>
+									</div>
+								</td>
+
+							</tr>
+							<tr>
+								<th>계약금액</th>
+								<td colspan="2">
+									<div class="search">
+										<select id="" name="" style="width:100%;">
+											<option>COR[1]</option>
+											<option>COR[2]</option>
+										</select>
+										<input class="inputArea mL5" style="width: 100%;" type="text" value="" placeholder="금액">
+									</div>
+								</td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<th>계약기간</th>
+								<td colspan="2">
+									<div class="search">
+										<input class="inputDate" style="width: 100%;" type="text" value="2022-07-18"  id="datepicker" data-mindate="today"/>
+										<p class="mL10 mR10">~</p>
+										<input class="inputDate" style="width: 100%;" type="text" value="2022-07-18"  id="datepicker" data-mindate="today"/>
+									</div>
+								</td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<th>계약팀 담당자</th>
+								<td>
+									<div class="search">
+										<input class="inputArea" style="width: 100%;" type="text" value="" placeholder="거래처명" readonly>
+										<a class="btn_s mL5">검색</a>
+									</div>
+								</td>
+								<th>세일즈 담당자</th>
+								<td>
+									<div class="search">
+										<input class="inputArea" style="width: 100%;" type="text" value="" placeholder="거래처명" readonly>
+										<a class="btn_s mL5">검색</a>
+									</div>
+								</td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<th>AWS 통합 빌링(신규)</th>
+								<td colspan="5">
+									<div class="chkbx">
+										<input type="checkbox" name="" id="">
+										<label for="">확인</label>
+									</div>
+								</td>
+
+							</tr>
+							<tr>
+								<th>특이사항</th>
+								<td colspan="5">
+									<textarea style="width: 100%; height:100px;"></textarea>
+								</td>
+
+							</tr>
+							</table>
+						</div>
+					</div>
+					<!-- 입력 3 -->
+					<!-- 입력 4 -->
+					<div class="section">
+						<div class="subTitle02">
+							<h3>계약정보</h3>
+							<div><a href="#" class="btn btn-add">행추가</a></div>
+						</div>
+						<div class="tbl_type02">
+							<table>
+							<colgroup>
+								<col width="10%">
+								<col width="20%">
+								<col width="20%">
+								<col >
+								<col width="20%">
+							</colgroup>
+							<tr>
+								<th class="center">No</th>
+								<th class="center">담당자 구분</th>
+								<th class="center">이름</th>
+								<th class="center">이메일</th>
+								<th class="center">비고</th>
+							</tr>
+							<tr>
+								<td class="center">1</td>
+								<td><input class="inputArea" style="width: 100%;" type="text" value="" placeholder="담당자 구분"></td>
+								<td><input class="inputArea" style="width: 100%;" type="text" value="" placeholder="이름"></td>
+								<td><input class="inputArea" style="width: 100%;" type="text" value="" placeholder="이메일"></td>
+								<td><input class="inputArea" style="width: 100%;" type="text" value="" placeholder="비고"></td>
+							</tr>
+							</table>
+						</div>
+					</div>
+					<!-- 입력 4 -->
+					<!-- 버튼 -->
+					<div class="btn-wrap">
+						<!--<button type="button" class="btn btn-blue">저장</button>-->
+						<!--<button type="button" class="btn btn-navy">등록</button>-->
+						<!--<button type="button" class="btn btn-wt">취소</button>-->
+						<button type="submit" class="btn btn-navy">등록</button>
+						<a th:href="@{/contracts}" class="btn btn-wt">취소</a>
+					</div>
+					<!-- 버튼 -->
+				</form>
+			</div>
+		<!-- content end -->
 	</div>
 
-	<footer th:replace="~{fragments/footer}"></footer>
-
 	<script>
+      $(function () {
+        //$('#datePickerFr, #datePickerTo').datepicker();
+      });
+
       function createContract() {
         return confirm("계약을 등록하시겠습니까?");
       }
