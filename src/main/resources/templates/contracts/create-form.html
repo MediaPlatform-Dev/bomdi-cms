@@ -10,7 +10,7 @@
 		<div class="container">
 			<header th:replace="~{fragments/header}"></header>
 			<div class="content">
-				<form method="post" th:action="@{/contracts/form}" onsubmit="return createContract()" th:object="${form}">
+				<form method="post" th:action="@{/contracts/form}" onsubmit="return createContract()" th:object="${form}" enctype="multipart/form-data">
 					<!-- 입력1 -->
 					<div class="section">
 						<div class="subTitle02">
@@ -277,9 +277,9 @@
 					<!-- 입력 4 -->
 					<div class="section">
 						<div class="subTitle02">
-							<h3>계약 정보</h3>
+							<h3>고객사 담당자</h3>
 							<div>
-								<button type="button" class="btn btn-add" onclick="addRow()">행 추가</button>
+								<button type="button" class="btn btn-add" onclick="addClient()">담당자 추가</button>
 							</div>
 						</div>
 						<div class="tbl_type02">
@@ -301,23 +301,58 @@
 							<tr th:each="clientInfo, stat : *{clientInfos}">
 								<td class="center" th:text="${stat.index} + 1"></td>
 								<td>
-									<input th:field="*{clientInfos[${stat.index}].type}" class="inputArea" style="width: 100%;" type="text" th:value="${clientInfo.type}" placeholder="담당자 구분" />
+									<input th:field="*{clientInfos[__${stat.index}__].type}" class="inputArea" style="width: 100%;" type="text" th:value="${clientInfo.type}" placeholder="담당자 구분" />
 								</td>
 								<td>
-									<input th:field="*{clientInfos[${stat.index}].name}" class="inputArea" style="width: 100%;" type="text" th:value="${clientInfo.name}" placeholder="이름" />
+									<input th:field="*{clientInfos[__${stat.index}__].name}" class="inputArea" style="width: 100%;" type="text" th:value="${clientInfo.name}" placeholder="이름" />
 								</td>
 								<td>
-									<input th:field="*{clientInfos[${stat.index}].email}" class="inputArea" style="width: 100%;" type="text" th:value="${clientInfo.email}" placeholder="이메일" />
+									<input th:field="*{clientInfos[__${stat.index}__].email}" class="inputArea" style="width: 100%;" type="text" th:value="${clientInfo.email}" placeholder="이메일" />
 								</td>
 								<td>
-									<input th:field="*{clientInfos[${stat.index}].etc}" class="inputArea" style="width: 100%;" type="text" th:value="${clientInfo.etc}" placeholder="비고" />
+									<input th:field="*{clientInfos[__${stat.index}__].etc}" class="inputArea" style="width: 100%;" type="text" th:value="${clientInfo.etc}" placeholder="비고" />
 								</td>
 							</tr>
 							</table>
 						</div>
 					</div>
 					<!-- 입력 4 -->
-					<!-- 버튼 -->
+
+					<!-- 입력 5 -->
+					<div class="section">
+						<div class="subTitle02">
+							<h3>첨부 파일</h3>
+						</div>
+						<div class="tbl_type02">
+							<table>
+							<colgroup>
+								<col width="20%">
+								<col width="60%">
+							</colgroup>
+							<tr>
+								<th class="center">계약서</th>
+								<td>
+									<input type="file" th:field="*{contractFile}" />
+								</td>
+							</tr>
+							<tr>
+								<th class="center">사업자 등록증</th>
+								<td>
+									<input type="file" th:field="*{businessRegistrationFile}" />
+								</td>
+							</tr>
+							<tr>
+								<th class="center">기타</th>
+								<td>
+									<input type="file" th:field="*{etcFile}" />
+								</td>
+							</tr>
+							</table>
+						</div>
+					</div>
+					<!-- 입력 5 -->
+
+					<!-- 등록 버튼 -->
 					<div class="btn-wrap">
 						<!--<button type="button" class="btn btn-blue">저장</button>-->
 						<!--<button type="button" class="btn btn-navy">등록</button>-->
@@ -326,6 +361,7 @@
 						<a th:href="@{/contracts}" class="btn btn-wt">취소</a>
 					</div>
 					<!-- 버튼 -->
+
 				</form>
 			</div>
 			<!-- content end -->
@@ -333,7 +369,7 @@
 		<script>
           let rowIndex = 1;
 
-          function addRow() {
+          function addClient() {
             const table = document.getElementById('forList');
             const newRow = table.insertRow(-1);
 

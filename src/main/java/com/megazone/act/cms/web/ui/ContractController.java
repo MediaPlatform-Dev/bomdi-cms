@@ -41,10 +41,11 @@ public class ContractController {
     @PostMapping("/form")
     public String create(
         @Valid @ModelAttribute(FORM) ContractCreateRequest createForm,
-        BindingResult bindingResult
+        BindingResult bindingResult, Model model
     ) {
         log.info(">>> 요청 Form: {}", createForm);
         if (bindingResult.hasErrors()) {
+            model.addAttribute(FORM, createForm);
             return "contracts/create-form";
         }
 
