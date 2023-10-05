@@ -4,7 +4,7 @@
 <body>
 	<div class="wrap">
 
-		<nav th:replace="~{fragments/snb}"></nav>
+		<nav th:replace="~{fragments/side-navigation-bar}"></nav>
 
 		<div class="container">
 			<header th:replace="~{fragments/header}"></header>
@@ -53,11 +53,11 @@
 						<tr>
 							<td>
 								<p>계약시작</p>
-								<input class="inputDate" style="width: 100%;" type="text" value="2022-07-18" id="datePickerFr" data-mindate="today" />
+								<input class="inputDate" style="width: 100%;" type="text" id="datePickerFr" data-mindate="today" />
 							</td>
 							<td>
 								<p>계약종료</p>
-								<input class="inputDate" style="width: 100%;" type="text" value="2022-07-18" id="datePickerTo" data-mindate="today" />
+								<input class="inputDate" style="width: 100%;" type="text" id="datePickerTo" data-mindate="today" />
 							</td>
 							<td>
 								<p>서비스분류</p>

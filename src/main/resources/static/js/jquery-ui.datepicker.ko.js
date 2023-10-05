@@ -15,6 +15,7 @@ jQuery(function ($) {
     isRTL: false,
     showMonthAfterYear: true,
     yearSuffix: '  ',
+    todayHighlight :true,
 
     changeYear: true,
     changeMonth: true,

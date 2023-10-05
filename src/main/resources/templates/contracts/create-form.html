@@ -5,7 +5,7 @@
 </head>
 <body>
 	<div class="wrap">
-		<nav th:replace="~{fragments/snb}"></nav>
+		<nav th:replace="~{fragments/side-navigation-bar}"></nav>
 		<!-- content start -->
 		<div class="container">
 			<header th:replace="~{fragments/header}"></header>
@@ -24,34 +24,34 @@
 								<col style="width: 15%;">
 								<col style="width: 18%;">
 								<col style="width: 15%;">
-								<col >
+								<col>
 							</colgroup>
 							<tr>
-								<th>계약구분1</th>
+								<th>계약 구분 1</th>
 								<td>
 									<div class="mz-radioset">
-										<div class="mz-radio">
-											<input type="radio" name="Security" id="Security01" value="" checked="">
-											<label for="Security01">매출</label>
-										</div>
-										<div class="mz-radio">
-											<input type="radio" name="Security" id="Security02" value="">
-											<label for="Security02">매입</label>
+										<div th:each="type : *{contractType.values}" class="mz-radio">
+											<input type="radio" th:field="*{contractType}" th:value="${type.name}" checked="">
+											<label th:for="${#ids.prev('contractType')}" th:text="${type.type}"></label>
 										</div>
 									</div>
 								</td>
-								<th>계약구분2</th>
+								<th>계약 구분 2</th>
 								<td>
-									<select id="" name="" style="width:100%;">
-										<option>COR[1]</option>
-										<option>COR[2]</option>
+									<select th:field="*{contractType2}" style="width:100%;">
+										<option th:each="type : *{contractType2.values}"
+												th:value="${type.name}"
+												th:text="${type.type}">
+										</option>
 									</select>
 								</td>
-								<th>계약구분3</th>
+								<th>계약 구분 3</th>
 								<td>
-									<select id="" name="" style="width:100%;">
-										<option>COR[1]</option>
-										<option>COR[2]</option>
+									<select th:field="*{contractType3}" style="width:100%;">
+										<option th:each="type : *{contractType3.values}"
+												th:value="${type.name}"
+												th:text="${type.type}">
+										</option>
 									</select>
 								</td>
 							</tr>
@@ -62,7 +62,7 @@
 					<!-- 입력 2 -->
 					<div class="section">
 						<div class="subTitle02">
-							<h3>계약 기본정보1</h3>
+							<h3>계약 기본정보 1</h3>
 						</div>
 						<div class="tbl_type02">
 							<table>
@@ -72,40 +72,49 @@
 								<col style="width: 15%;">
 								<col style="width: 18%;">
 								<col style="width: 15%;">
-								<col >
+								<col>
 							</colgroup>
 							<tr>
-								<th>매출 승인여부</th>
-								<td><input class="inputArea" style="width: 100%;" type="text" value="" placeholder="매출승인여부"></td>
-								<th>매출 갱신 여부</th>
-								<td><input class="inputArea" style="width: 100%;" type="text" value="" placeholder="매출승인여부"></td>
+								<th>매출 승인</th>
+								<td>
+									<div class="chkbx">
+										<input type="checkbox" th:field="*{isSalesApproved}">
+										<label th:for="isSalesApproved">승인</label>
+									</div>
+								</td>
+								<th>매출 갱신</th>
+								<td>
+									<div class="chkbx">
+										<input type="checkbox" th:field="*{isSalesUpdated}">
+										<label th:for="isSalesUpdated">승인</label>
+									</div>
+								</td>
 								<th>매출 계약번호</th>
-								<td><input class="inputArea" style="width: 100%;" type="text" value="" placeholder="매출승인여부"></td>
+								<td><input class="inputArea" th:field="*{salesContractId}" style="width: 100%;" type="text" value="" placeholder="매출 계약 번호"></td>
 							</tr>
 							<tr>
-								<th th:for="contents">갱신전 매출 계약번호</th>
-								<!--<td><input class="inputArea" style="width: 100%;" type="text" value="" placeholder="매출승인여부"></td>-->
+								<th th:for="beforeUpdateSalesId">갱신전 매출 계약번호</th>
 								<td>
-									<input th:field="*{contents}" required
-											class="inputArea" style="width: 100%;" type="text" value="" placeholder="계약내용">
+									<input th:field="*{beforeUpdateSalesId}" required
+											class="inputArea" style="width: 100%;" type="text" value="" placeholder="갱신전 매출 계약번호">
 									<div class="invalid-feedback">
-										<p th:if="${#fields.hasErrors('contents')}" th:errors="*{contents}">Invalid value</p>
+										<p th:if="${#fields.hasErrors('beforeUpdateSalesId')}" th:errors="*{beforeUpdateSalesId}">Invalid value</p>
 									</div>
 								</td>
 
-								<th th:for="contractor">Sales Force 계약번호</th>
+								<th th:for="salesForceContractId">Sales Force 계약번호</th>
 								<td>
-									<input th:field="*{contractor}" required
-											class="inputArea" style="width: 100%;" type="text" value="" placeholder="담당자">
+									<input th:field="*{salesForceContractId}" required
+											class="inputArea" style="width: 100%;" type="text" value="" placeholder="Sales Force 계약번호">
 									<div class="invalid-feedback">
-										<p th:if="${#fields.hasErrors('contractor')}" th:errors="*{contractor}">Invalid value</p>
+										<p th:if="${#fields.hasErrors('salesForceContractId')}" th:errors="*{salesForceContractId}">Invalid value</p>
 									</div>
 								</td>
 								<td></td>
 								<td></td>
 							</tr>
 							<tr>
-								<th th:for="name" >계약명</th>
+								<th th:for="name">계약명</th>
 								<!--<td colspan="5"><input class="inputArea" style="width: 100%;" type="text" value="" placeholder="계약명"></td>-->
 								<td colspan="5">
 									<input th:field="*{name}" required
@@ -122,7 +131,7 @@
 					<!-- 입력 3 -->
 					<div class="section">
 						<div class="subTitle02">
-							<h3>계약 기본정보2</h3>
+							<h3>계약 기본정보 2</h3>
 						</div>
 						<div class="tbl_type02">
 							<table>
@@ -132,34 +141,55 @@
 								<col style="width: 15%;">
 								<col style="width: 18%;">
 								<col style="width: 15%;">
-								<col >
+								<col>
 							</colgroup>
 							<tr>
 								<th>접수 방법 구분</th>
 								<td>
-									<select id="" name="" style="width:100%;">
-										<option>COR[1]</option>
-										<option>COR[2]</option>
+									<select th:field="*{submissionType}" style="width:100%;">
+										<option th:each="type : *{submissionType.values}"
+												th:value="${type.name}"
+												th:text="${type.name}">
+										</option>
 									</select>
 								</td>
-								<th>자사법인</th>
+								<th>자사 법인</th>
 								<td>
-									<select id="" name="" style="width:100%;">
-										<option>COR[1]</option>
-										<option>COR[2]</option>
+									<select th:field="*{ownCorporationType}" style="width:100%;">
+										<option th:each="type : *{ownCorporationType.values}"
+												th:value="${type.name}"
+												th:text="${type.type}">
+										</option>
 									</select>
 								</td>
 								<th>서비스 분류</th>
-								<td><input class="inputArea" style="width: 100%;" type="text" value="" placeholder="서비스 분류"></td>
+								<td>
+									<select th:field="*{serviceType}" style="width:100%;">
+										<option th:each="type : *{serviceType.values}"
+												th:value="${type.name}"
+												th:text="${type.type}">
+										</option>
+									</select>
+								</td>
 							</tr>
 							<tr>
-								<th>체결분류</th>
-								<td><input class="inputArea" style="width: 100%;" type="text" value="" placeholder="체결분류"></td>
+								<th>체결 분류</th>
+								<td>
+									<select style="width:100%;">
+										<option th:each="type : *{dealType.values}"
+												th:value="${type.name}"
+												th:text="${type.type}">
+										</option>
+									</select>
+									<!--<input class="inputArea" style="width: 100%;" type="text" value="" placeholder="체결분류">-->
+								</td>
 								<th>거래처 구분</th>
 								<td>
-									<select id="" name="" style="width:100%;">
-										<option>COR[1]</option>
-										<option>COR[2]</option>
+									<select th:field="*{businessPartnerType}" style="width:100%;">
+										<option th:each="type : *{businessPartnerType.values}"
+												th:value="${type.name}"
+												th:text="${type.type}">
+										</option>
 									</select>
 								</td>
 								<td></td>
@@ -169,21 +199,23 @@
 								<th>거래처명</th>
 								<td colspan="5">
 									<div class="search">
-										<input class="inputArea readonly" style="width: 100%;" type="text" value="" placeholder="거래처명" readonly>
+										<input th:field="*{businessPartnerName}" class="inputArea readonly" style="width: 100%;" type="text" value="" placeholder="거래처명" readonly>
 										<a class="btn_s mL5">검색 </a>
 									</div>
 								</td>
 
 							</tr>
 							<tr>
-								<th>계약금액</th>
+								<th>계약 금액</th>
 								<td colspan="2">
 									<div class="search">
-										<select id="" name="" style="width:100%;">
-											<option>COR[1]</option>
-											<option>COR[2]</option>
+										<select th:field="*{currencyUnit}" style="width:100%;">
+											<option th:each="type : *{currencyUnit.values}"
+													th:value="${type.name}"
+													th:text="${type.name}">
+											</option>
 										</select>
-										<input class="inputArea mL5" style="width: 100%;" type="text" value="" placeholder="금액">
+										<input th:field="*{totalContractAmount}" class="inputArea mL5" style="width: 100%;" type="text" value="" placeholder="금액">
 									</div>
 								</td>
 								<td></td>
@@ -191,12 +223,12 @@
 								<td></td>
 							</tr>
 							<tr>
-								<th>계약기간</th>
+								<th>계약 기간</th>
 								<td colspan="2">
 									<div class="search">
-										<input class="inputDate" style="width: 100%;" type="text" value="2022-07-18"  id="datepicker" data-mindate="today"/>
+										<input class="inputDate" style="width: 100%;" type="text" id="datePickerStart" data-mindate="today" />
 										<p class="mL10 mR10">~</p>
-										<input class="inputDate" style="width: 100%;" type="text" value="2022-07-18"  id="datepicker" data-mindate="today"/>
+										<input class="inputDate" style="width: 100%;" type="text" id="datePickerEnd" data-mindate="today" />
 									</div>
 								</td>
 								<td></td>
@@ -207,14 +239,14 @@
 								<th>계약팀 담당자</th>
 								<td>
 									<div class="search">
-										<input class="inputArea" style="width: 100%;" type="text" value="" placeholder="거래처명" readonly>
+										<input class="inputArea" style="width: 100%;" type="text" value="" placeholder="계약팀 담당자" readonly th:field="*{contractor}">
 										<a class="btn_s mL5">검색</a>
 									</div>
 								</td>
 								<th>세일즈 담당자</th>
 								<td>
 									<div class="search">
-										<input class="inputArea" style="width: 100%;" type="text" value="" placeholder="거래처명" readonly>
+										<input class="inputArea" style="width: 100%;" type="text" value="" placeholder="세일즈 담당자" readonly th:field="*{salesPersonName}">
 										<a class="btn_s mL5">검색</a>
 									</div>
 								</td>
@@ -234,7 +266,7 @@
 							<tr>
 								<th>특이사항</th>
 								<td colspan="5">
-									<textarea style="width: 100%; height:100px;"></textarea>
+									<textarea style="width: 100%; height:100px;" th:field="*{contents}"></textarea>
 								</td>
 
 							</tr>
@@ -245,16 +277,18 @@
 					<!-- 입력 4 -->
 					<div class="section">
 						<div class="subTitle02">
-							<h3>계약정보</h3>
-							<div><a href="#" class="btn btn-add">행추가</a></div>
+							<h3>계약 정보</h3>
+							<div>
+								<button type="button" class="btn btn-add" onclick="addRow()">행 추가</button>
+							</div>
 						</div>
 						<div class="tbl_type02">
-							<table>
+							<table id="forList">
 							<colgroup>
 								<col width="10%">
 								<col width="20%">
 								<col width="20%">
-								<col >
+								<col>
 								<col width="20%">
 							</colgroup>
 							<tr>
@@ -264,12 +298,20 @@
 								<th class="center">이메일</th>
 								<th class="center">비고</th>
 							</tr>
-							<tr>
-								<td class="center">1</td>
-								<td><input class="inputArea" style="width: 100%;" type="text" value="" placeholder="담당자 구분"></td>
-								<td><input class="inputArea" style="width: 100%;" type="text" value="" placeholder="이름"></td>
-								<td><input class="inputArea" style="width: 100%;" type="text" value="" placeholder="이메일"></td>
-								<td><input class="inputArea" style="width: 100%;" type="text" value="" placeholder="비고"></td>
+							<tr th:each="clientInfo, stat : *{clientInfos}">
+								<td class="center" th:text="${stat.index} + 1"></td>
+								<td>
+									<input th:field="*{clientInfos[${stat.index}].type}" class="inputArea" style="width: 100%;" type="text" th:value="${clientInfo.type}" placeholder="담당자 구분" />
+								</td>
+								<td>
+									<input th:field="*{clientInfos[${stat.index}].name}" class="inputArea" style="width: 100%;" type="text" th:value="${clientInfo.name}" placeholder="이름" />
+								</td>
+								<td>
+									<input th:field="*{clientInfos[${stat.index}].email}" class="inputArea" style="width: 100%;" type="text" th:value="${clientInfo.email}" placeholder="이메일" />
+								</td>
+								<td>
+									<input th:field="*{clientInfos[${stat.index}].etc}" class="inputArea" style="width: 100%;" type="text" th:value="${clientInfo.etc}" placeholder="비고" />
+								</td>
 							</tr>
 							</table>
 						</div>
@@ -286,17 +328,76 @@
 					<!-- 버튼 -->
 				</form>
 			</div>
-		<!-- content end -->
+			<!-- content end -->
+		</div>
+		<script>
+          let rowIndex = 1;
+
+          function addRow() {
+            const table = document.getElementById('forList');
+            const newRow = table.insertRow(-1);
+
+            const cell1 = newRow.insertCell(0);
+            cell1.classList.add('center');
+            cell1.textContent = rowIndex;
+
+            for (let i = 1; i <= 4; i++) {
+              const cell = newRow.insertCell(i);
+              const input = document.createElement('input');
+              input.classList.add('inputArea');
+              input.style.width = '100%';
+              input.type = 'text';
+              input.value = '';
+              input.placeholder = getPlaceholder(i);
+              input.id = `clientInfos${rowIndex}.${getFieldName(i)}`;
+              input.name = `clientInfos[${rowIndex}].${getFieldName(i)}`;
+              cell.appendChild(input);
+            }
+
+            rowIndex++;
+          }
+
+          function getPlaceholder(index) {
+            switch (index) {
+              case 1:
+                return '담당자 구분';
+              case 2:
+                return '이름';
+              case 3:
+                return '이메일';
+              case 4:
+                return '비고';
+              default:
+                return '';
+            }
+          }
+
+          function getFieldName(index) {
+            switch (index) {
+              case 1:
+                return 'type';
+              case 2:
+                return 'name';
+              case 3:
+                return 'email';
+              case 4:
+                return 'etc';
+              default:
+                return '';
+            }
+          }
+		</script>
+
+		<script>
+          $(function () {
+            $('#datePickerStart, #datePickerEnd')
+              .datepicker();
+          });
+
+          function createContract() {
+            return confirm("계약을 등록하시겠습니까?");
+          }
+		</script>
 	</div>
-
-	<script>
-      $(function () {
-        //$('#datePickerFr, #datePickerTo').datepicker();
-      });
-
-      function createContract() {
-        return confirm("계약을 등록하시겠습니까?");
-      }
-	</script>
 </body>
 </html>

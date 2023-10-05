@@ -2,6 +2,7 @@ package com.megazone.act.cms.application;
 
 import java.util.List;
 
+import com.megazone.act.cms.application.dto.type.ContractType;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,10 +24,10 @@ public class ContractService {
 
     @Transactional
     public void createContract(ContractCreateRequest request) {
-        Contractor contractor = contractorRepository.findByName(request.contractor())
-            .orElseGet(() -> new Contractor(request.contractor()));
+        Contractor contractor = contractorRepository.findByName(request.getContractor())
+            .orElseGet(() -> new Contractor(request.getContractor()));
 
-        Contract contract = new Contract(request.name(), request.contents(), contractor);
+        Contract contract = new Contract(request.getName(), request.getContents(), contractor);
         contractRepository.save(contract);
     }
 

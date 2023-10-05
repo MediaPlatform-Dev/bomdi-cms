@@ -3,6 +3,7 @@ package com.megazone.act.cms.web.ui;
 import jakarta.validation.Valid;
 import java.util.List;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -12,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import com.megazone.act.cms.application.ContractService;
 import com.megazone.act.cms.application.dto.*;
 
+@Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/contracts")
 @Controller
@@ -31,7 +33,8 @@ public class ContractController {
     }
 
     @GetMapping("/form")
-    public String createForm(@ModelAttribute(FORM) ContractCreateRequest emptyForm) {
+    public String createForm(Model model) {
+        model.addAttribute(FORM, ContractCreateRequest.empty());
         return "contracts/create-form";
     }
 
@@ -40,6 +43,7 @@ public class ContractController {
         @Valid @ModelAttribute(FORM) ContractCreateRequest createForm,
         BindingResult bindingResult
     ) {
+        log.info(">>> 요청 Form: {}", createForm);
         if (bindingResult.hasErrors()) {
             return "contracts/create-form";
         }
