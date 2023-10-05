@@ -12,4 +12,8 @@ public final class ClientInfo {
     private String name;
     private String email;
     private String etc;
+
+    public static ClientInfo empty() {
+        return new ClientInfo(ClientType.NONE, "", "", "");
+    }
 }

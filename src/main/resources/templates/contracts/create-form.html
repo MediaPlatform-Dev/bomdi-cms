@@ -301,7 +301,12 @@
 							<tr th:each="clientInfo, stat : *{clientInfos}">
 								<td class="center" th:text="${stat.index} + 1"></td>
 								<td>
-									<input th:field="*{clientInfos[__${stat.index}__].type}" class="inputArea" style="width: 100%;" type="text" th:value="${clientInfo.type}" placeholder="담당자 구분" />
+									<select th:field="*{clientInfos[__${stat.index}__].type}" style="width:100%;">
+										<option th:each="type : *{clientInfos[__${stat.index}__].type.values}"
+												th:value="${type.name}"
+												th:text="${type.type}">
+										</option>
+									</select>
 								</td>
 								<td>
 									<input th:field="*{clientInfos[__${stat.index}__].name}" class="inputArea" style="width: 100%;" type="text" th:value="${clientInfo.name}" placeholder="이름" />
@@ -368,59 +373,44 @@
 		</div>
 		<script>
           let rowIndex = 1;
+          const fields = {
+            type: "담당자 구분",
+            name: "이름",
+            email: "이메일",
+            etc: "비고"
+          }
 
           function addClient() {
+            const clonedSelect = document.getElementById("clientInfos0.type").cloneNode(true);
             const table = document.getElementById('forList');
             const newRow = table.insertRow(-1);
 
-            const cell1 = newRow.insertCell(0);
-            cell1.classList.add('center');
-            cell1.textContent = rowIndex;
+            const indexCell = newRow.insertCell(0);
+            indexCell.classList.add('center');
+            indexCell.textContent = rowIndex + 1;
 
-            for (let i = 1; i <= 4; i++) {
-              const cell = newRow.insertCell(i);
+            Object.keys(fields).forEach((fieldKey, index) => {
+              const cell = newRow.insertCell(index + 1);
               const input = document.createElement('input');
+
+              if (fieldKey === 'type') {
+                clonedSelect.id =`clientInfos${rowIndex}.${fieldKey}`;
+                clonedSelect.name = `clientInfos[${rowIndex}].${fieldKey}`;
+                cell.appendChild(clonedSelect);
+                return;
+              }
+
               input.classList.add('inputArea');
               input.style.width = '100%';
               input.type = 'text';
               input.value = '';
-              input.placeholder = getPlaceholder(i);
-              input.id = `clientInfos${rowIndex}.${getFieldName(i)}`;
-              input.name = `clientInfos[${rowIndex}].${getFieldName(i)}`;
+              input.placeholder = fields[fieldKey];
+              input.id = `clientInfos${rowIndex}.${fieldKey}`;
+              input.name = `clientInfos[${rowIndex}].${fieldKey}`;
               cell.appendChild(input);
-            }
+            });
 
             rowIndex++;
-          }
-
-          function getPlaceholder(index) {
-            switch (index) {
-              case 1:
-                return '담당자 구분';
-              case 2:
-                return '이름';
-              case 3:
-                return '이메일';
-              case 4:
-                return '비고';
-              default:
-                return '';
-            }
-          }
-
-          function getFieldName(index) {
-            switch (index) {
-              case 1:
-                return 'type';
-              case 2:
-                return 'name';
-              case 3:
-                return 'email';
-              case 4:
-                return 'etc';
-              default:
-                return '';
-            }
           }
 		</script>
 

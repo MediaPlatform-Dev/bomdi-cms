@@ -151,7 +151,7 @@ public final class ContractCreateRequest {
             null,
             null,
             null,
-            List.of(new ClientInfo(ClientType.NONE, "", "", "")),
+            List.of(ClientInfo.empty()),
             null,
             null,
             null
