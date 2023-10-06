@@ -6,7 +6,7 @@ import com.megazone.act.cms.domain.Contract;
 public record ContractResponse(
     Long id,
     String name,
-    String contents,
+    String description,
     String contractor
 ) {
 
@@ -14,7 +14,7 @@ public record ContractResponse(
         return new ContractResponse(
             entity.getId(),
             entity.getName(),
-            entity.getContents(),
-            entity.getContractor().getName());
+            entity.getDescription(),
+            entity.getContractorName());
     }
 }

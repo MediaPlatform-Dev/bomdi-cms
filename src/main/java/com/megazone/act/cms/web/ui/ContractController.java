@@ -1,5 +1,6 @@
 package com.megazone.act.cms.web.ui;
 
+import com.megazone.act.cms.application.dto.ContractCreateTypes;
 import jakarta.validation.Valid;
 
 import java.util.List;
@@ -38,10 +39,6 @@ public class ContractController {
     ) {
         model.addAttribute(FORM, ContractCreateRequest.from(types));
         model.addAttribute("isSales", types.isSales());
-        if (types.isSales()) {
-            return "contracts/create-form";
-        }
-
         return "contracts/create-form";
     }
 

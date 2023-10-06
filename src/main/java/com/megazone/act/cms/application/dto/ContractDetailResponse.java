@@ -17,8 +17,8 @@ public record ContractDetailResponse(
         return new ContractDetailResponse(
             entity.getId(),
             entity.getName(),
-            entity.getContents(),
-            entity.getContractor().getName(),
+            entity.getDescription(),
+            entity.getContractorName(),
             Optional.ofNullable(entity.getCreatedBy()).orElse(""),
             Optional.ofNullable(entity.getModifiedBy()).orElse("")
         );

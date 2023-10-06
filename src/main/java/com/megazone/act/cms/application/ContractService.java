@@ -2,16 +2,14 @@ package com.megazone.act.cms.application;
 
 import java.util.List;
 
+import com.megazone.act.cms.domain.*;
+import com.megazone.act.cms.domain.repository.*;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 
 import com.megazone.act.cms.application.dto.*;
-import com.megazone.act.cms.domain.Contract;
-import com.megazone.act.cms.domain.Contractor;
-import com.megazone.act.cms.repository.ContractRepository;
-import com.megazone.act.cms.repository.ContractorRepository;
 
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -19,15 +17,53 @@ import com.megazone.act.cms.repository.ContractorRepository;
 public class ContractService {
 
     private final ContractRepository contractRepository;
-    private final ContractorRepository contractorRepository;
+    private final CorporationRepository corporationRepository;
+    private final BusinessPartnerRepository businessPartnerRepository;
 
     @Transactional
     public void createContract(ContractCreateRequest request) {
-        Contractor contractor = contractorRepository.findByName(request.getContractor())
-            .orElseGet(() -> new Contractor(request.getContractor()));
+        // TODO: 자사, 고객사 데이터 초기 적재 필요
+        String corporationName = request.getOwnCorporationType().name();
+        Corporation corporation = getCorporationOrElseNew(corporationName);
+        String businessPartnerName = request.getBusinessPartnerName();
+        BusinessPartner businessPartner = getBusinessPartnerOrElseNew(businessPartnerName);
 
-        Contract contract = new Contract(request.getName(), request.getContents(), contractor);
+        ContractTypes contractTypes = new ContractTypes(request.getContractDepth1Type(),
+            request.getContractDepth2Type(),
+            request.getContractDepth3Type(),
+            request.getDealType(),
+            request.getServiceType(),
+            request.getSubmissionType()
+        );
+        ContractMoney contractMoney = new ContractMoney(request.getCurrencyUnit(), request.getTotalContractAmount());
+
+        Contract contract = Contract.builder()
+            .corporation(corporation)
+            .corporationName(corporationName)
+            .businessPartner(businessPartner)
+            .businessPartnerName(businessPartnerName)
+            .contractTypes(contractTypes)
+            .salesForceContractId(request.getSalesForceContractId())
+            .name(request.getName())
+            .number(request.getBeforeUpdateId())
+            .contractMoney(contractMoney)
+            .contractorName(request.getContractor())
+            .salesPersonName(request.getSalesPersonName())
+            .description(request.getDescription())
+            .period(new ContractPeriod(request.getContractStartDate(), request.getContractEndDate()))
+            .build();
+        contract.copyContractDetails();
         contractRepository.save(contract);
+    }
+
+    private Corporation getCorporationOrElseNew(String corporationName) {
+        return corporationRepository.findByName(corporationName)
+            .orElseGet(() -> new Corporation(corporationName));
+    }
+
+    private BusinessPartner getBusinessPartnerOrElseNew(String businessPartnerName) {
+        return businessPartnerRepository.findByName(businessPartnerName)
+            .orElseGet(() -> new BusinessPartner(businessPartnerName));
     }
 
     public List<ContractResponse> getContractList() {

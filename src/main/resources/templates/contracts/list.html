@@ -163,7 +163,7 @@
 								<tr th:each="contract, stat : ${contracts}">
 									<td th:text="${contracts.size() - stat.index}" class="index"></td>
 									<td th:text="${contract.name}" class="clickable">계약 이름</td>
-									<td th:text="${contract.contents}">계약 내용</td>
+									<td th:text="${contract.description}">계약 내용</td>
 									<td th:text="${contract.contractor}">담당자</td>
 									<td>
 										<a th:href="@{/contracts/{id}/form (id=${contract.id})}" class="btn_U">수정</a>

@@ -1,4 +1,4 @@
-package com.megazone.act.cms.repository;
+package com.megazone.act.cms.domain.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

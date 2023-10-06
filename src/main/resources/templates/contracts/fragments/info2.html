@@ -18,7 +18,7 @@
         <select th:field="*{submissionType}" style="width:100%;">
           <option th:each="type : *{submissionType.values}"
                   th:value="${type.name}"
-                  th:text="${type.name}">
+                  th:text="${type.type}">
           </option>
         </select>
       </td>
@@ -95,9 +95,9 @@
       <th>계약 기간</th>
       <td colspan="2">
         <div class="search">
-          <input class="inputDate" style="width: 100%;" type="text" id="datePickerStart" data-mindate="today" />
+          <input class="inputDate" th:field="*{contractStartDate}" style="width: 100%;" type="text" id="datePickerStart" data-mindate="today" />
           <p class="mL10 mR10">~</p>
-          <input class="inputDate" style="width: 100%;" type="text" id="datePickerEnd" data-mindate="today" />
+          <input class="inputDate" th:field="*{contractEndDate}" style="width: 100%;" type="text" id="datePickerEnd" data-mindate="today" />
         </div>
       </td>
       <td></td>
@@ -125,8 +125,8 @@
     <tr>
       <th>청구 방법</th>
       <td>
-        <select th:field="*{submissionType}" style="width:100%;">
-          <option th:each="type : *{submissionType.values}"
+        <select th:field="*{invoiceType}" style="width:100%;">
+          <option th:each="type : *{invoiceType.values}"
                   th:value="${type.name}"
                   th:text="${type.type}">
           </option>
@@ -146,7 +146,7 @@
     <tr>
       <th>특이사항</th>
       <td colspan="5">
-        <textarea style="width: 100%; height:100px;" th:field="*{contents}"></textarea>
+        <textarea style="width: 100%; height:100px;" th:field="*{description}"></textarea>
       </td>
     </tr>
     </table>

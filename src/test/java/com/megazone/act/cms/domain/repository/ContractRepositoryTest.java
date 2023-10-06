@@ -1,7 +1,7 @@
-package com.megazone.act.cms.repository;
+package com.megazone.act.cms.domain.repository;
 
 import com.megazone.act.cms.domain.Contract;
-import com.megazone.act.cms.domain.Contractor;
+import com.megazone.act.cms.domain.repository.ContractRepository;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -44,7 +44,7 @@ class ContractRepositoryTest {
     }
 
     private Contract saveFixture() {
-        Contract contract = new Contract("테스트", "테스트", new Contractor("성준혁"));
+        Contract contract = new Contract("테스트", "테스트", "성준혁");
         contractRepository.save(contract);
         return contract;
     }

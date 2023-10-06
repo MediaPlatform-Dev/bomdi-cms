@@ -13,17 +13,19 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @MappedSuperclass
 public abstract class AuditingFields {
 
+    @Column(name = "reg_dttm", updatable = false)
     @CreatedDate
-    @Column(updatable = false)
     private LocalDateTime createdAt;
 
+    @Column(name = "regr_id", updatable = false)
     @CreatedBy
-    @Column(updatable = false)
     protected String createdBy;
 
+    @Column(name = "mod_dttm")
     @LastModifiedDate
     private LocalDateTime updatedAt;
 
+    @Column(name = "modr_id")
     @LastModifiedBy
     private String modifiedBy;
 }

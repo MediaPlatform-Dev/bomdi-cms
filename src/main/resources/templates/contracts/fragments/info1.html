@@ -16,15 +16,15 @@
 			<th th:if="${isSales}">매출 계약 번호</th>
 			<th th:unless="${isSales}">매입 계약 번호</th>
 			<td>
-				<input class="inputArea" th:field="*{salesContractId}" style="width: 100%;" type="text" value="" placeholder="계약 번호">
+				<input class="inputArea" th:field="*{contractId}" style="width: 100%;" type="text" value="" placeholder="계약 번호">
 			</td>
-			<th th:if="${isSales}" th:for="beforeUpdateSalesId">갱신전 매출 계약 번호</th>
-			<th th:unless="${isSales}" th:for="beforeUpdateSalesId">갱신전 매입 계약 번호</th>
+			<th th:if="${isSales}" th:for="beforeUpdateId">갱신전 매출 계약 번호</th>
+			<th th:unless="${isSales}" th:for="beforeUpdateId">갱신전 매입 계약 번호</th>
 			<td>
-				<input th:field="*{beforeUpdateSalesId}" required
+				<input th:field="*{beforeUpdateId}" required
 						class="inputArea" style="width: 100%;" type="text" value="" placeholder="갱신전 계약 번호">
 				<div class="invalid-feedback">
-					<p th:if="${#fields.hasErrors('beforeUpdateSalesId')}" th:errors="*{beforeUpdateSalesId}">Invalid value</p>
+					<p th:if="${#fields.hasErrors('beforeUpdateId')}" th:errors="*{beforeUpdateId}">Invalid value</p>
 				</div>
 			</td>
 		</tr>
@@ -57,16 +57,16 @@
 			<th th:unless="${isSales}">매입 승인</th>
 			<td>
 				<div class="chkbx">
-					<input type="checkbox" th:field="*{isSalesApproved}">
-					<label th:for="isSalesApproved">승인</label>
+					<input type="checkbox" th:field="*{isApproved}">
+					<label th:for="isApproved">승인</label>
 				</div>
 			</td>
 			<th th:if="${isSales}">매출 갱신</th>
 			<th th:unless="${isSales}">매입 갱신</th>
 			<td>
 				<div class="chkbx">
-					<input type="checkbox" th:field="*{isSalesUpdated}">
-					<label th:for="isSalesUpdated">승인</label>
+					<input type="checkbox" th:field="*{isUpdated}">
+					<label th:for="isUpdated">승인</label>
 				</div>
 			</td>
 		</tr>
