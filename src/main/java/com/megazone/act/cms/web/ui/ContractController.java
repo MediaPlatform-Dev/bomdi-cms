@@ -26,13 +26,6 @@ public class ContractController {
 
     private final ContractService contractService;
 
-    @GetMapping
-    public String list(Model model) {
-        List<ContractResponse> contracts = contractService.getContractList();
-        model.addAttribute("contracts", contracts);
-        return "contracts/list";
-    }
-
     @GetMapping("/type-form")
     public String createTypeForm(Model model) {
         model.addAttribute(FORM, ContractCreateTypes.DEFAULT);
@@ -52,7 +45,6 @@ public class ContractController {
         return "contracts/create-form";
     }
 
-
     @GetMapping("/form")
     public String createForm(Model model) {
         model.addAttribute(FORM, ContractCreateRequest.empty());
@@ -71,6 +63,13 @@ public class ContractController {
 
         contractService.createContract(createForm);
         return REDIRECT_CONTRACTS;
+    }
+
+    @GetMapping
+    public String list(Model model) {
+        List<ContractResponse> contracts = contractService.getContractList();
+        model.addAttribute("contracts", contracts);
+        return "contracts/list";
     }
 
     @GetMapping("/{contractId}/form")
@@ -96,12 +95,6 @@ public class ContractController {
         }
 
         contractService.updateContract(contractId, updateForm);
-        return REDIRECT_CONTRACTS;
-    }
-
-    @DeleteMapping("/{contractId}")
-    public String delete(@PathVariable Long contractId) {
-        contractService.deleteContract(contractId);
         return REDIRECT_CONTRACTS;
     }
 }

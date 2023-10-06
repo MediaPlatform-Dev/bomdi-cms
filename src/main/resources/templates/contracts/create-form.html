@@ -162,7 +162,12 @@
           });
 
           function createContract() {
-            return confirm("계약을 등록하시겠습니까?");
+            const isCreated = confirm("계약을 등록하시겠습니까?");
+            if (isCreated) {
+              $("input[type='radio']").attr("disabled", false);
+              $("select").attr("disabled", false);
+            }
+            return isCreated;
           }
 		</script>
 	</div>

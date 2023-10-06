@@ -23,7 +23,8 @@ public final class ContractCreateRequest {
     private final Boolean isSalesUpdated;
     private final String salesContractId;
     private final String beforeUpdateSalesId;
-    private final @NotBlank @Length(min = 3, max = 10) String name;
+    @NotBlank @Length(min = 3, max = 10)
+    private final String name;
     private final String salesForceContractId;
     private final SubmissionType submissionType;
     private final OwnCorporationType ownCorporationType;
@@ -59,7 +60,6 @@ public final class ContractCreateRequest {
         Boolean isUpdated,
         String salesContractId,
         String beforeUpdateSalesId,
-        @NotBlank @Length(min = 3, max = 10)
         String name,
         String salesForceContractId,
 
@@ -139,12 +139,12 @@ public final class ContractCreateRequest {
             null,
             null,
             null,
-            SubmissionType.NONE,
+            SubmissionType.SFDC,
             OwnCorporationType.CLOUD,
             ServiceType.SW,
             DealType.BILL,
             null,
-            BusinessPartnerType.NONE,
+            BusinessPartnerType.EXISTING,
             CurrencyUnit.KRW,
             0L,
             null,
