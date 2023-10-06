@@ -1,0 +1,46 @@
+<div class="section" th:fragment="type(isActive)" th:object="${form}">
+	<div class="subTitle02">
+		<h3>계약유형</h3>
+	</div>
+	<div class="tbl_type02">
+		<table>
+		<colgroup>
+			<col style="width: 15%;">
+			<col style="width: 18%;">
+			<col style="width: 15%;">
+			<col style="width: 18%;">
+			<col style="width: 15%;">
+			<col>
+		</colgroup>
+		<tr>
+			<th>계약 구분 1</th>
+			<td>
+				<div class="mz-radioset">
+					<div th:each="type : *{contractDepth1Type.values}" class="mz-radio">
+						<input type="radio" th:field="*{contractDepth1Type}" th:value="${type.name}" checked="" th:disabled="${!isActive}">
+						<label th:text="${type.type}"></label>
+					</div>
+				</div>
+			</td>
+			<th>계약 구분 2</th>
+			<td>
+				<select th:field="*{contractDepth2Type}" style="width:100%;" th:disabled="${!isActive}">
+					<option th:each="type : *{contractDepth2Type.values}"
+							th:value="${type.name}"
+							th:text="${type.type}">
+					</option>
+				</select>
+			</td>
+			<th>계약 구분 3</th>
+			<td>
+				<select th:field="*{contractDepth3Type}" style="width:100%;" th:disabled="${!isActive}">
+					<option th:each="type : *{contractDepth3Type.values}"
+							th:value="${type.name}"
+							th:text="${type.type}">
+					</option>
+				</select>
+			</td>
+		</tr>
+		</table>
+	</div>
+</div>

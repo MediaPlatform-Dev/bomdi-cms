@@ -1,4 +1,4 @@
-package com.megazone.act.cms.application.dto.type;
+package com.megazone.act.cms.domain.type;
 
 import lombok.Getter;
 

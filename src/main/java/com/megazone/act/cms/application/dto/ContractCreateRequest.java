@@ -1,6 +1,6 @@
 package com.megazone.act.cms.application.dto;
 
-import com.megazone.act.cms.application.dto.type.*;
+import com.megazone.act.cms.domain.type.*;
 import jakarta.validation.constraints.NotBlank;
 
 import lombok.*;
@@ -14,10 +14,11 @@ import java.util.*;
 @EqualsAndHashCode
 @ToString
 public final class ContractCreateRequest {
+    // 계약 유형
+    private final ContractDepth1Type contractDepth1Type;
+    private final ContractDepth2Type contractDepth2Type;
+    private final ContractDepth3Type contractDepth3Type;
 
-    private final ContractType contractType;
-    private final ContractType2 contractType2;
-    private final ContractType3 contractType3;
     private final Boolean isSalesApproved;
     private final Boolean isSalesUpdated;
     private final String salesContractId;
@@ -49,13 +50,13 @@ public final class ContractCreateRequest {
 
     public ContractCreateRequest(
         // 계약 유형
-        ContractType contractType,
-        ContractType2 contractType2,
-        ContractType3 contractType3,
+        ContractDepth1Type contractDepth1Type,
+        ContractDepth2Type contractDepth2Type,
+        ContractDepth3Type contractDepth3Type,
 
         // 계약 기본 정보 1
-        Boolean isSalesApproved,
-        Boolean isSalesUpdated,
+        Boolean isApproved,
+        Boolean isUpdated,
         String salesContractId,
         String beforeUpdateSalesId,
         @NotBlank @Length(min = 3, max = 10)
@@ -91,11 +92,11 @@ public final class ContractCreateRequest {
 
         // 매출 계약 매핑 매입 계약 정보
     ) {
-        this.contractType = contractType;
-        this.contractType2 = contractType2;
-        this.contractType3 = contractType3;
-        this.isSalesApproved = isSalesApproved;
-        this.isSalesUpdated = isSalesUpdated;
+        this.contractDepth1Type = contractDepth1Type;
+        this.contractDepth2Type = contractDepth2Type;
+        this.contractDepth3Type = contractDepth3Type;
+        this.isSalesApproved = isApproved;
+        this.isSalesUpdated = isUpdated;
         this.salesContractId = salesContractId;
         this.beforeUpdateSalesId = beforeUpdateSalesId;
         this.name = name;
@@ -124,10 +125,14 @@ public final class ContractCreateRequest {
     }
 
     public static ContractCreateRequest empty() {
+        return from(ContractCreateTypes.DEFAULT);
+    }
+
+    public static ContractCreateRequest from(ContractCreateTypes contractCreateTypes) {
         return new ContractCreateRequest(
-            ContractType.SALES,
-            ContractType2.INFRA_AWS,
-            ContractType3.NONE,
+            contractCreateTypes.getContractDepth1Type(),
+            contractCreateTypes.getContractDepth2Type(),
+            contractCreateTypes.getContractDepth3Type(),
             false,
             false,
             null,

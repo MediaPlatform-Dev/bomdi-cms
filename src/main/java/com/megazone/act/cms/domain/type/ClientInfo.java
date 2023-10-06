@@ -1,4 +1,4 @@
-package com.megazone.act.cms.application.dto.type;
+package com.megazone.act.cms.domain.type;
 
 import lombok.*;
 
@@ -14,6 +14,6 @@ public final class ClientInfo {
     private String etc;
 
     public static ClientInfo empty() {
-        return new ClientInfo(ClientType.NONE, "", "", "");
+        return new ClientInfo(ClientType.TYPE_1, "", "", "");
     }
 }

@@ -1,6 +1,7 @@
 package com.megazone.act.cms.web.ui;
 
 import jakarta.validation.Valid;
+
 import java.util.List;
 
 import lombok.extern.slf4j.Slf4j;
@@ -32,6 +33,26 @@ public class ContractController {
         return "contracts/list";
     }
 
+    @GetMapping("/type-form")
+    public String createTypeForm(Model model) {
+        model.addAttribute(FORM, ContractCreateTypes.DEFAULT);
+        return "contracts/create-type-form";
+    }
+
+    @PostMapping("/type-form")
+    public String createType(
+        @Valid @ModelAttribute(FORM) ContractCreateTypes types, Model model
+    ) {
+        model.addAttribute(FORM, ContractCreateRequest.from(types));
+        model.addAttribute("isSales", types.isSales());
+        if (types.isSales()) {
+            return "contracts/create-form";
+        }
+
+        return "contracts/create-form";
+    }
+
+
     @GetMapping("/form")
     public String createForm(Model model) {
         model.addAttribute(FORM, ContractCreateRequest.empty());
@@ -43,7 +64,6 @@ public class ContractController {
         @Valid @ModelAttribute(FORM) ContractCreateRequest createForm,
         BindingResult bindingResult, Model model
     ) {
-        log.info(">>> 요청 Form: {}", createForm);
         if (bindingResult.hasErrors()) {
             model.addAttribute(FORM, createForm);
             return "contracts/create-form";
