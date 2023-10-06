@@ -10,7 +10,7 @@ import lombok.*;
 public class Corporation extends AuditingFields {
 
     @Id @GeneratedValue
-    @Column(name = "crprtn_sq")
+    @Column(name = "crprtn_id")
     private Long id;
 
     @Column(name = "crprtn_nm")

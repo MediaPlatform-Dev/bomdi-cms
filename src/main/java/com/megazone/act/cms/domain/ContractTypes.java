@@ -33,8 +33,4 @@ public class ContractTypes {
     @Column(name = "src_system_cd")
     @Enumerated(EnumType.STRING)
     private SubmissionType submissionType;
-
-    public boolean isSales() {
-        return contractDepth1Type == ContractDepth1Type.SALES;
-    }
 }
