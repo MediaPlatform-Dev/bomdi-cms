@@ -33,6 +33,7 @@ public class Contract extends AuditingFields {
 
     @Column(name = "cntrct_nm")
     private String name;
+
     @Column(name = "rmrk")
     private String description;
 
@@ -68,7 +69,6 @@ public class Contract extends AuditingFields {
     @Builder.Default
     @Enumerated(EnumType.STRING)
     private ContractStatus status = ContractStatus.SAVED;
-
 
     @Column(name = "src_system_ref_id")
     private String salesForceContractId;
