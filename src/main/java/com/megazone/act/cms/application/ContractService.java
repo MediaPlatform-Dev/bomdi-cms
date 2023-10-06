@@ -1,15 +1,14 @@
 package com.megazone.act.cms.application;
 
-import java.util.List;
-
+import com.megazone.act.cms.application.dto.*;
 import com.megazone.act.cms.domain.*;
 import com.megazone.act.cms.domain.repository.*;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import lombok.RequiredArgsConstructor;
 
-import com.megazone.act.cms.application.dto.*;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -86,10 +85,5 @@ public class ContractService {
     private Contract getContractById(Long contractId) {
         return contractRepository.findById(contractId)
             .orElseThrow(() -> new IllegalArgumentException(contractId + "를 찾을 수 없습니다."));
-    }
-
-    @Transactional
-    public void deleteContract(Long contractId) {
-        contractRepository.deleteById(contractId);
     }
 }

@@ -6,9 +6,6 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.envers.Audited;
 
-import java.time.LocalDate;
-
-import static org.hibernate.envers.RelationTargetAuditMode.NOT_AUDITED;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter

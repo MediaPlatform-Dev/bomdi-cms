@@ -13,9 +13,11 @@ public class ContractTypes {
     @Column(name = "cntrct_gb1_cd")
     @Enumerated(EnumType.STRING)
     private ContractDepth1Type contractDepth1Type;
+
     @Column(name = "cntrct_gb2_cd")
     @Enumerated(EnumType.STRING)
     private ContractDepth2Type contractDepth2Type;
+
     @Column(name = "cntrct_gb3_cd")
     @Enumerated(EnumType.STRING)
     private ContractDepth3Type contractDepth3Type;
