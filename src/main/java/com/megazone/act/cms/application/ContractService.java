@@ -38,9 +38,7 @@ public class ContractService {
 
         Contract contract = Contract.builder()
             .corporation(corporation)
-            .corporationName(corporationName)
             .businessPartner(businessPartner)
-            .businessPartnerName(businessPartnerName)
             .contractTypes(contractTypes)
             .salesForceContractId(request.getSalesForceContractId())
             .name(request.getName())

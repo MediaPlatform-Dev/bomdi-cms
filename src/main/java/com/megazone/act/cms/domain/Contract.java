@@ -2,14 +2,11 @@ package com.megazone.act.cms.domain;
 
 import com.megazone.act.cms.domain.type.ContractStatus;
 import jakarta.persistence.*;
-
 import lombok.*;
 import org.hibernate.envers.Audited;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.hibernate.envers.RelationTargetAuditMode.NOT_AUDITED;
 
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -37,19 +34,13 @@ public class Contract extends AuditingFields {
     @Column(name = "rmrk")
     private String description;
 
-    @Audited(targetAuditMode = NOT_AUDITED)
     @JoinColumn(name = "crprtn_id")
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Corporation corporation;
-    @Column(name = "crprtn_nm")
-    private String corporationName;
 
-    @Audited(targetAuditMode = NOT_AUDITED)
     @JoinColumn(name = "cstmr_id")
     @ManyToOne(cascade = CascadeType.PERSIST)
     private BusinessPartner businessPartner;
-    @Column(name = "cstmr_nm")
-    private String businessPartnerName;
 
     @Embedded
     private ContractTypes contractTypes;

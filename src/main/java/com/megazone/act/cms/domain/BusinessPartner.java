@@ -2,9 +2,11 @@ package com.megazone.act.cms.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.envers.Audited;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
+@Audited
 @Table(name = "customer_employee")
 @Entity
 public class BusinessPartner extends AuditingFields {
