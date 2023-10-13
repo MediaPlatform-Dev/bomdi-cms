@@ -79,7 +79,8 @@ public class Contract extends AuditingFields {
         this.description = contents;
     }
 
-    public void copyContractDetails() {
-        contractDetails.add(ContractDetail.from(this));
+    public void addContractDetail(ContractDetail contractDetail) {
+        contractDetail.setContract(this);
+        contractDetails.add(contractDetail);
     }
 }

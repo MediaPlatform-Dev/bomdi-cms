@@ -41,24 +41,20 @@ public class ContractDetail extends AuditingFields {
     @ManyToOne
     private Contract contract;
 
-    public ContractDetail(String name, Double version, String number, ServiceType serviceType, ContractPeriod period, Contract contract) {
+    public ContractDetail(ServiceType serviceType) {
+        this("", 0.0, "", serviceType, null);
+    }
+
+    public ContractDetail(String name, Double version, String number, ServiceType serviceType, ContractPeriod period) {
         this.name = name;
         this.version = version;
         this.number = number;
         this.serviceType = serviceType;
         this.period = period;
         this.status = ContractStatus.SAVED;
-        this.contract = contract;
     }
 
-    public static ContractDetail from(Contract contract) {
-        return new ContractDetail(
-            contract.getName(),
-            contract.getVersion(),
-            contract.getNumber(),
-            contract.getContractTypes().getServiceType(),
-            contract.getPeriod(),
-            contract
-        );
+    public void setContract(Contract contract) {
+        this.contract = contract;
     }
 }

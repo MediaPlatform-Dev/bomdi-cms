@@ -2,22 +2,29 @@ package com.megazone.act.cms.application.dto;
 
 import com.megazone.act.cms.domain.type.*;
 import jakarta.validation.constraints.NotBlank;
-
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.List;
 
 @Getter
 @EqualsAndHashCode
 @ToString
 public final class ContractCreateRequest {
     // 계약 유형
-    private final ContractDepth1Type contractDepth1Type;
-    private final ContractDepth2Type contractDepth2Type;
-    private final ContractDepth3Type contractDepth3Type;
+    private final ContractType contractType;
+    @Setter
+    private ContractAwsDetail awsDetail;
+    @Setter
+    private ContractPsDetail psDetail;
+    @Setter
+    private ContractMsDetail msDetail;
+    @Setter
+    private ContractDpDetail dpDetail;
+    @Setter
+    private ContractOutSourcingDetail outSourcingDetail;
 
     private final Boolean isApproved;
     private final Boolean isUpdated;
@@ -51,9 +58,11 @@ public final class ContractCreateRequest {
 
     public ContractCreateRequest(
         // 계약 유형
-        ContractDepth1Type contractDepth1Type,
-        ContractDepth2Type contractDepth2Type,
-        ContractDepth3Type contractDepth3Type,
+        ContractType contractType,
+        ContractAwsDetail awsDetail,
+        ContractPsDetail psDetail,
+        ContractMsDetail msDetail,
+        ContractDpDetail dpDetail,
 
         // 계약 기본 정보 1
         Boolean isApproved,
@@ -92,9 +101,11 @@ public final class ContractCreateRequest {
 
         // 매출 계약 매핑 매입 계약 정보
     ) {
-        this.contractDepth1Type = contractDepth1Type;
-        this.contractDepth2Type = contractDepth2Type;
-        this.contractDepth3Type = contractDepth3Type;
+        this.contractType = contractType;
+        this.awsDetail = awsDetail;
+        this.psDetail = psDetail;
+        this.msDetail = msDetail;
+        this.dpDetail = dpDetail;
         this.isApproved = isApproved;
         this.isUpdated = isUpdated;
         this.contractId = contractId;
@@ -130,9 +141,15 @@ public final class ContractCreateRequest {
 
     public static ContractCreateRequest from(ContractCreateTypes contractCreateTypes) {
         return new ContractCreateRequest(
-            contractCreateTypes.getContractDepth1Type(),
-            contractCreateTypes.getContractDepth2Type(),
-            contractCreateTypes.getContractDepth3Type(),
+            contractCreateTypes.getContractType(),
+            //new ContractAwsDetail(),
+            //new ContractPsDetail(),
+            //new ContractMsDetail(),
+            //new ContractDpDetail(),
+            null,
+            null,
+            null,
+            null,
             false,
             false,
             null,

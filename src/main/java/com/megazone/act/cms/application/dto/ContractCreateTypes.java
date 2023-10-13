@@ -7,13 +7,12 @@ import lombok.*;
 @Getter
 @EqualsAndHashCode
 public class ContractCreateTypes {
-    public static final ContractCreateTypes DEFAULT = new ContractCreateTypes(ContractDepth1Type.SALES, ContractDepth2Type.INFRA, ContractDepth3Type.PS);
+    public static final ContractCreateTypes DEFAULT = new ContractCreateTypes(ContractType.SALES, ContractDetailType.PS);
 
-    private ContractDepth1Type contractDepth1Type;
-    private ContractDepth2Type contractDepth2Type;
-    private ContractDepth3Type contractDepth3Type;
+    private ContractType contractType;
+    private ContractDetailType contractDetailType;
 
     public boolean isSales() {
-        return contractDepth1Type == ContractDepth1Type.SALES;
+        return contractType == ContractType.SALES;
     }
 }

@@ -1,5 +1,10 @@
 package com.megazone.act.cms.application.dto;
 
-public class ContractAWSDetail extends AbstractContractDetail {
+import com.megazone.act.cms.domain.type.ContractDetailType;
 
+public class ContractPsDetail extends AbstractContractDetail {
+
+    public ContractPsDetail() {
+        super(ContractDetailType.PS);
+    }
 }

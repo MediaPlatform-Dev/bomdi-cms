@@ -7,9 +7,12 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class ContractDetailDto {
+public abstract class AbstractContractDetail {
     private ContractDetailType type;
     private ServiceType serviceType;
     private String name;
 
+    public AbstractContractDetail(ContractDetailType type) {
+        this.type = type;
+    }
 }

@@ -3,6 +3,7 @@ package com.megazone.act.cms.application;
 import com.megazone.act.cms.application.dto.*;
 import com.megazone.act.cms.domain.*;
 import com.megazone.act.cms.domain.repository.*;
+import com.megazone.act.cms.domain.type.ContractDetailType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -27,11 +28,10 @@ public class ContractService {
         String businessPartnerName = request.getBusinessPartnerName();
         BusinessPartner businessPartner = getBusinessPartnerOrElseNew(businessPartnerName);
 
-        ContractTypes contractTypes = new ContractTypes(request.getContractDepth1Type(),
-            request.getContractDepth2Type(),
-            request.getContractDepth3Type(),
+        ContractTypes contractTypes = new ContractTypes(
+            request.getContractType(),
+            ContractDetailType.AWS,
             request.getDealType(),
-            request.getServiceType(),
             request.getSubmissionType()
         );
         ContractMoney contractMoney = new ContractMoney(request.getCurrencyUnit(), request.getTotalContractAmount());
@@ -49,7 +49,10 @@ public class ContractService {
             .description(request.getDescription())
             .period(new ContractPeriod(request.getContractStartDate(), request.getContractEndDate()))
             .build();
-        contract.copyContractDetails();
+
+        contract.addContractDetail(new ContractDetail(request.getServiceType()));
+
+        // TODO: 계약 상세 저장하기
         contractRepository.save(contract);
     }
 

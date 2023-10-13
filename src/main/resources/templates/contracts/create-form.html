@@ -10,7 +10,11 @@
 		<div class="container">
 			<header th:replace="~{fragments/header}"></header>
 			<div class="header">
-				<h2>매입 계약서 등록</h2>
+				<h2>
+					<th th:if="${isSales}">매출</th>
+					<th th:unless="${isSales}">매입</th>
+					계약서 등록
+				</h2>
 			</div>
 			<div class="content">
 				<form method="post" th:action="@{/contracts/form}" onsubmit="return createContract()" th:object="${form}" enctype="multipart/form-data">
@@ -97,6 +101,43 @@
 						</div>
 					</div>
 
+					<div class="section" id="aws-section">
+						<div class="subTitle02">
+							<h3>AWS</h3>
+							<input th:field="*{awsDetail.name}" class="inputArea" type="text" placeholder="이름"/>
+						</div>
+					</div>
+
+					<div class="section" id="ps-section">
+						<div class="subTitle02">
+							<h3>PS</h3>
+							<input th:field="*{psDetail.name}" class="inputArea" type="text" placeholder="이름"/>
+						</div>
+					</div>
+
+					<div class="section" id="ms-section">
+						<div class="subTitle02">
+							<h3>MS</h3>
+							<input th:field="*{msDetail.name}" class="inputArea" type="text" placeholder="이름"/>
+						</div>
+					</div>
+
+					<div class="section" id="dp-section">
+						<div class="subTitle02">
+							<h3>DP</h3>
+							<input th:field="*{dpDetail.name}" class="inputArea" type="text" placeholder="이름"/>
+						</div>
+					</div>
+
+					<div class="section" id="outsourcing-section">
+						<div class="subTitle02">
+							<h3>외주</h3>
+							<input th:field="*{outSourcingDetail.name}" class="inputArea" type="text" placeholder="이름"/>
+						</div>
+					</div>
+
+
+
 					<!-- 등록 버튼 -->
 					<div class="btn-wrap">
 						<!--<button type="button" class="btn btn-blue">저장</button>-->
@@ -164,8 +205,10 @@
           function createContract() {
             const isCreated = confirm("계약을 등록하시겠습니까?");
             if (isCreated) {
-              $("input[type='radio']").attr("disabled", false);
-              $("select").attr("disabled", false);
+              $("input[type='radio']")
+                .attr("disabled", false);
+              $("select")
+                .attr("disabled", false);
             }
             return isCreated;
           }

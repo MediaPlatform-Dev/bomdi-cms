@@ -1,19 +1,16 @@
 package com.megazone.act.cms.web.ui;
 
-import com.megazone.act.cms.application.dto.ContractCreateTypes;
+import com.megazone.act.cms.application.ContractService;
+import com.megazone.act.cms.application.dto.*;
 import jakarta.validation.Valid;
-
-import java.util.List;
-
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import lombok.RequiredArgsConstructor;
 
-import com.megazone.act.cms.application.ContractService;
-import com.megazone.act.cms.application.dto.*;
+import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -27,23 +24,11 @@ public class ContractController {
 
     private final ContractService contractService;
 
-    @GetMapping("/type-form")
-    public String createTypeForm(Model model) {
-        model.addAttribute(FORM, ContractCreateTypes.DEFAULT);
-        return "contracts/create-type-form";
-    }
-
-    @PostMapping("/type-form")
-    public String createType(
-        @Valid @ModelAttribute(FORM) ContractCreateTypes types, Model model
-    ) {
-        model.addAttribute(FORM, ContractCreateRequest.from(types));
-        model.addAttribute("isSales", types.isSales());
-        return "contracts/create-form";
-    }
-
     @GetMapping("/form")
-    public String createForm(Model model) {
+    public String createTypeForm(@RequestParam String type, Model model) {
+        if ("sales".equals(type)) {
+            model.addAttribute("isSales", true);
+        }
         model.addAttribute(FORM, ContractCreateRequest.empty());
         return "contracts/create-form";
     }
