@@ -5,11 +5,11 @@
 	<div class="tbl_type02">
 		<table>
 		<colgroup>
-			<col style="width: 25%;">
-			<col style="width: 25%;">
-			<col style="width: 25%;">
-			<col style="width: 25%;">
-			<!--<col style="width: 15%;">-->
+			<col style="width: 15%;">
+			<col style="width: 18%;">
+			<col style="width: 15%;">
+			<col style="width: 18%;">
+			<col style="width: 15%;">
 			<col>
 		</colgroup>
 		<tr>
@@ -27,19 +27,7 @@
 					<p th:if="${#fields.hasErrors('beforeUpdateId')}" th:errors="*{beforeUpdateId}">Invalid value</p>
 				</div>
 			</td>
-		</tr>
-		<tr>
-			<th th:for="name">계약명</th>
-			<!--<td colspan="5"><input class="inputArea" style="width: 100%;" type="text" value="" placeholder="계약명"></td>-->
-			<td colspan="5">
-				<input th:field="*{name}" required
-						class="inputArea" style="width: 50%;" type="text" value="" placeholder="계약명">
-				<div class="invalid-feedback">
-					<p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Invalid value</p>
-				</div>
-			</td>
-		</tr>
-		<tr>
+
 			<th th:for="salesForceContractId">Sales Force 계약 번호</th>
 			<td>
 				<input th:field="*{salesForceContractId}" required
@@ -48,9 +36,17 @@
 					<p th:if="${#fields.hasErrors('salesForceContractId')}" th:errors="*{salesForceContractId}">Invalid value</p>
 				</div>
 			</td>
-
-			<td></td>
-			<td></td>
+		</tr>
+		<tr>
+			<th th:for="name">계약명</th>
+			<!--<td colspan="5"><input class="inputArea" style="width: 100%;" type="text" value="" placeholder="계약명"></td>-->
+			<td colspan="5">
+				<input th:field="*{name}" required
+						class="inputArea" style="width: 100%;" type="text" value="" placeholder="계약명">
+				<div class="invalid-feedback">
+					<p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Invalid value</p>
+				</div>
+			</td>
 		</tr>
 		<tr>
 			<th th:if="${isSales}">매출 승인</th>
@@ -69,6 +65,9 @@
 					<label th:for="isUpdated">승인</label>
 				</div>
 			</td>
+			<td></td>
+			<td></td>
+
 		</tr>
 		</table>
 	</div>

@@ -474,8 +474,8 @@ body {
 .tbl_type02 table td select::-ms-expand {display: none;}
 .tbl_type02 table td select {-webkit-appearance: none;
 	-moz-appearance: none;}
-
-.chkbx {position: relative;min-height: 24px;margin-right: 27px;vertical-align: top;}
+.mz-chkbxset {display: flex;}
+.chkbx {position: relative;min-height: 24px;margin-right: 15px;vertical-align: top;}
 .chkbx input[type=checkbox] {position: absolute;top: 2px;left: 0;width: 18px;height: 18px;background-image: url("../img/chkbx.png");background-position: center center;background-size: 24px;background-repeat: no-repeat;}
 .chkbx input[type=checkbox]:checked:disabled {background-image: url("../img/chkbx_on_dis.png");}
 .chkbx input[type=checkbox]::-ms-check {border: 1px solid #a0a0a0;}
