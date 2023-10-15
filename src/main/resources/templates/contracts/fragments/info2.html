@@ -109,14 +109,14 @@
       <td>
         <div class="search">
           <input class="inputArea" style="width: 100%;" type="text" value="" placeholder="계약팀 담당자" th:field="*{contractor}">
-          <a class="btn_s mL5">검색</a>
+          <a onclick="openPopup();" class="btn_s mL5">검색</a>
         </div>
       </td>
       <th>세일즈 담당자</th>
       <td>
         <div class="search">
           <input class="inputArea" style="width: 100%;" type="text" value="" placeholder="세일즈 담당자" th:field="*{salesPersonName}">
-          <a class="btn_s mL5">검색</a>
+          <a onclick="openPopup();" class="btn_s mL5">검색</a>
         </div>
       </td>
       <td></td>
@@ -156,3 +156,12 @@
     </table>
   </div>
 </div>
+
+<!--계약담당자 레이어팝업-->
+<div th:replace="~{fragments/contract-charger-popup}"></div>
+
+<script>
+  function openPopup() {
+    document.body.querySelector('#contract-charger-popup').style.display = "block";
+  }
+</script>
