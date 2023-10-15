@@ -69,7 +69,7 @@
       <td colspan="5">
         <div class="search">
           <input th:field="*{businessPartnerName}" class="inputArea" style="width: 100%;" type="text" value="" placeholder="거래처명">
-          <a class="btn_s mL5">검색 </a>
+          <a onclick="openCustomerPopup();" class="btn_s mL5">검색 </a>
         </div>
       </td>
 
@@ -109,14 +109,14 @@
       <td>
         <div class="search">
           <input class="inputArea" style="width: 100%;" type="text" value="" placeholder="계약팀 담당자" th:field="*{contractor}">
-          <a onclick="openPopup();" class="btn_s mL5">검색</a>
+          <a onclick="openChargerPopup();" class="btn_s mL5">검색</a>
         </div>
       </td>
       <th>세일즈 담당자</th>
       <td>
         <div class="search">
           <input class="inputArea" style="width: 100%;" type="text" value="" placeholder="세일즈 담당자" th:field="*{salesPersonName}">
-          <a onclick="openPopup();" class="btn_s mL5">검색</a>
+          <a onclick="openChargerPopup();" class="btn_s mL5">검색</a>
         </div>
       </td>
       <td></td>
@@ -157,11 +157,17 @@
   </div>
 </div>
 
+
+<!--거래처 레이어팝업-->
+<div th:replace="~{fragments/customer-popup}"></div>
 <!--계약담당자 레이어팝업-->
 <div th:replace="~{fragments/contract-charger-popup}"></div>
 
 <script>
-  function openPopup() {
+  function openCustomerPopup() {
+    document.body.querySelector('#customer-popup').style.display = "block";
+  }
+  function openChargerPopup() {
     document.body.querySelector('#contract-charger-popup').style.display = "block";
   }
 </script>

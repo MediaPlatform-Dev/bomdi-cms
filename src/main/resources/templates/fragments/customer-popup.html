@@ -1,0 +1,103 @@
+
+<div id="customer-popup" class="layout-popup popup-sm" style="display:none;"> <!-- style="display:block;" -->
+  <!--.popup-lg {min-width:1300px;}
+		.popup-md{min-width:1030px;}
+		.popup-sm{min-width:830px;}
+		.popup-sm-x{min-width:650px;}-->
+  <div class="popup-layer">
+    <div class="popup-close"> <a href="#" onclick="closeCustomerPopup();" class="btn-popup-close">Close</a> </div>
+    <div class="popup-header">
+      <h2 class="popup-title">거래처</h2>
+    </div>
+    <div class="popup-container">
+      <div class="popup-contents">
+        <!-- 검색 Start -->
+        <div class="contentsRow content-bottom">
+          <div class="contentsCell contentsCellFlex">
+            <div class="writeForm search-writeForm row01">
+              <!-- row04 : 4item, row03 : 3item, row02 : 2item, row01 : 1item -->
+              <ul>
+                <!--<li class="">-->
+                <!--  <div class="writeForm-wrap">-->
+                <!--    <dl>-->
+                <!--      <dt>-->
+                <!--        <label for="구분">구분</label>-->
+                <!--      </dt>-->
+                <!--      <dd>-->
+                <!--        <div class="mz-select">-->
+                <!--          <select id="구분" name="" style="width:100%;">-->
+                <!--            <option value="">구분</option>-->
+                <!--          </select>-->
+                <!--        </div>-->
+                <!--      </dd>-->
+                <!--    </dl>-->
+                <!--  </div>-->
+                <!--</li>-->
+                <li class="">
+                  <div class="writeForm-wrap">
+                    <dl>
+                      <dt>
+                        <label for="거래처">거래처</label>
+                      </dt>
+                      <dd>
+                        <div class="mz-textfld">
+                          <input class="inputArea" style="width: 100%;" type="text" value="" placeholder="거래처명">
+                        </div>
+                      </dd>
+                    </dl>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="contentsCell contentsCellAuto">
+            <div class="btnArea"> <a href="#" class="btn btnType04">검색</a> </div>
+          </div>
+        </div>
+        <!-- 검색 End -->
+        <!-- 검색 결과 Start -->
+        <div class="tbl_type01 yScroll">
+          <table>
+          <colgroup>
+            <col style="width:20%;">
+            <col style="width:50%;">
+            <col >
+          </colgroup>
+          <tr>
+            <th>구분</th>
+            <th>거래처명</th>
+            <th>선택</th>
+          </tr>
+          <tr>
+            <td>구분</td>
+            <td class="center"><a class="clickable">삼성전자</a></td>
+            <td class="center"><a onclick="selectCustomerRow('삼성전자');" class="btn_U">선택</a></td>
+          </tr>
+          <tr>
+            <td>구분</td>
+            <td class="center"><a class="clickable">LG전자</a></td>
+            <td class="center"><a onclick="selectCustomerRow('LG전자');" class="btn_U">선택</a></td>
+          </tr>
+          </table>
+        </div>
+        <!-- 검색 결과 End -->
+        <!-- 버튼 -->
+        <div class="pop-btn-wrap">
+          <button type="button" onclick="closeCustomerPopup();" class="btn btn-blue">취소</button>
+        </div>
+        <!-- 버튼 -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function selectCustomerRow(name) {
+    alert(name);
+    document.body.querySelector('#customer-popup').style.display = "none";
+  }
+
+  function closeCustomerPopup() {
+    document.body.querySelector('#customer-popup').style.display = "none";
+  }
+</script>

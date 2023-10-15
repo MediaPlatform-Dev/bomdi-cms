@@ -5,7 +5,7 @@
 		.popup-sm{min-width:830px;}
 		.popup-sm-x{min-width:650px;}-->
   <div class="popup-layer">
-    <div class="popup-close"> <a href="#" onclick="closePopup();" class="btn-popup-close">Close</a> </div>
+    <div class="popup-close"> <a href="#" onclick="closeChargerPopup();" class="btn-popup-close">Close</a> </div>
     <div class="popup-header">
       <h2 class="popup-title">계약담당자</h2>
     </div>
@@ -71,34 +71,34 @@
           <tr>
             <td>부서</td>
             <td class="center"><a class="clickable">홍길동1</a></td>
-            <td class="center"><a onclick="selectRow('홍길동1');" class="btn_U">선택</a></td>
+            <td class="center"><a onclick="selectChargerRow('홍길동1');" class="btn_U">선택</a></td>
           </tr>
           <tr>
             <td>부서</td>
             <td class="center"><a class="clickable">홍길동2</a></td>
-            <td class="center"><a onclick="selectRow('홍길동2');" class="btn_U">선택</a></td>
+            <td class="center"><a onclick="selectChargerRow('홍길동2');" class="btn_U">선택</a></td>
           </tr>
           <tr>
             <td>부서</td>
             <td class="center"><a class="clickable">홍길동3</a></td>
-            <td class="center"><a onclick="selectRow('홍길동3');" class="btn_U">선택</a></td>
+            <td class="center"><a onclick="selectChargerRow('홍길동3');" class="btn_U">선택</a></td>
           </tr>
           <tr>
             <td>부서</td>
             <td class="center"><a class="clickable">홍길동4</a></td>
-            <td class="center"><a onclick="selectRow('홍길동4');" class="btn_U">선택</a></td>
+            <td class="center"><a onclick="selectChargerRow('홍길동4');" class="btn_U">선택</a></td>
           </tr>
           <tr>
             <td>부서</td>
             <td class="center"><a class="clickable">홍길동5</a></td>
-            <td class="center"><a onclick="selectRow('홍길동5');" class="btn_U">선택</a></td>
+            <td class="center"><a onclick="selectChargerRow('홍길동5');" class="btn_U">선택</a></td>
           </tr>
           </table>
         </div>
         <!-- 검색 결과 End -->
         <!-- 버튼 -->
         <div class="pop-btn-wrap">
-          <button type="button" onclick="closePopup();" class="btn btn-blue">취소</button>
+          <button type="button" onclick="closeChargerPopup();" class="btn btn-blue">취소</button>
         </div>
         <!-- 버튼 -->
       </div>
@@ -107,12 +107,12 @@
 </div>
 
 <script>
-  function selectRow(name) {
+  function selectChargerRow(name) {
     alert(name);
     document.body.querySelector('#contract-charger-popup').style.display = "none";
   }
 
-  function closePopup() {
+  function closeChargerPopup() {
     document.body.querySelector('#contract-charger-popup').style.display = "none";
   }
 </script>
