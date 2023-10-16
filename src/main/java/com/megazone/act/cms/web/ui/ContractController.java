@@ -32,14 +32,13 @@ public class ContractController {
         if ("sales".equals(type)) {
             model.addAttribute("isSales", true);
         }
-        model.addAttribute(FORM, ContractCreateRequest.empty());
+        model.addAttribute(FORM, ContractCreateRequest.EMPTY);
         return "contracts/create-form";
     }
 
     @PostMapping("/form")
     public String create(
         @Valid @ModelAttribute(FORM) ContractCreateRequest createForm,
-        @RequestParam("action") String action,
         BindingResult bindingResult, Model model
     ) {
         if (bindingResult.hasErrors()) {

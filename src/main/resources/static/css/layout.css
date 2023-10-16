@@ -468,6 +468,11 @@ body {
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;}
+.tbl_type02 table td input[type=text].inputDateError {border: 1px solid #bebebe; color: #333333; font-weight: 600; border-radius: 5px; padding-left: 10px; height: 30px; background: #fff url(../img/ico_calendar.png) no-repeat top 5px right 0;
+	border-color: red;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;}
 .tbl_type02 table td input[type=text].readonly {background: #f0f0f0;}
 .tbl_type02 table td button.calendar {background: url(../img/ico_calendar.png) no-repeat; width: 20px; height: 20px; margin: 4px 0 4px 10px;}
 .tbl_type02 table td textarea {border: 1px solid #c0c6cd; padding: 5px; font-size: 14px; color: #333333; font-weight: 600; margin-top: 5px;}

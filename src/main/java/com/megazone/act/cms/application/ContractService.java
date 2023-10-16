@@ -43,7 +43,7 @@ public class ContractService {
             .contractTypes(contractTypes)
             .salesForceContractId(request.getSalesForceContractId())
             .name(request.getName())
-            .number(request.getBeforeUpdateId())
+            .number("")
             .contractMoney(contractMoney)
             .contractorName(request.getContractor())
             .salesPersonName(request.getSalesPersonName())

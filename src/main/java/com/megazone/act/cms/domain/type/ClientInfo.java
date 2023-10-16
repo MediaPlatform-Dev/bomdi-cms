@@ -8,12 +8,10 @@ import lombok.*;
 @Data
 public final class ClientInfo {
 
+    public static final ClientInfo EMPTY = new ClientInfo(ClientType.TYPE_1, "", "", "");
+
     private ClientType type;
     private String name;
     private String email;
     private String etc;
-
-    public static ClientInfo empty() {
-        return new ClientInfo(ClientType.TYPE_1, "", "", "");
-    }
 }

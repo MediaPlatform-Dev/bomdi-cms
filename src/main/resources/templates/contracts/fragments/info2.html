@@ -44,8 +44,8 @@
     <tr>
       <th>체결 분류</th>
       <td>
-        <select style="width:100%;">
-          <option th:each="type : *{dealType.values}"
+        <select th:field="*{dealType}" style="width:100%;">
+        <option th:each="type : *{dealType.values}"
                   th:value="${type.name}"
                   th:text="${type.type}">
           </option>
@@ -95,9 +95,11 @@
       <th>계약 기간</th>
       <td colspan="2">
         <div class="search">
-          <input class="inputDate" th:field="*{contractStartDate}" style="width: 100%;" type="text" id="datePickerStart" data-mindate="today" />
+          <input th:class="${#fields.hasErrors('contractStartDate')} ? 'inputDateError' : 'inputDate'" th:field="*{contractStartDate}" style="width: 100%;" type="text" id="datePickerStart" data-mindate="today" />
+          <span th:if="${#fields.hasErrors('contractStartDate')}" th:errors="*{contractStartDate}">Incorrect Data</span>
           <p class="mL10 mR10">~</p>
-          <input class="inputDate" th:field="*{contractEndDate}" style="width: 100%;" type="text" id="datePickerEnd" data-mindate="today" />
+          <input th:class="${#fields.hasErrors('contractEndDate')} ? 'inputDateError' : 'inputDate'" th:field="*{contractEndDate}" style="width: 100%;" type="text" id="datePickerEnd" data-mindate="today" />
+          <span th:if="${#fields.hasErrors('contractEndDate')}" th:errors="*{contractEndDate}">Incorrect Data</span>
         </div>
       </td>
       <td></td>
@@ -136,16 +138,6 @@
       <td></td>
       <td></td>
       <td></td>
-    </tr>
-    <tr>
-      <th>AWS 통합 빌링(신규)</th>
-      <td colspan="5">
-        <div class="chkbx">
-          <input type="checkbox" name="" id="">
-          <label for="">확인</label>
-        </div>
-      </td>
-
     </tr>
     <tr>
       <th>특이사항</th>
