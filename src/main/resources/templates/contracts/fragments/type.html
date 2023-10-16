@@ -13,23 +13,23 @@
 			<td>
 				<div class="mz-chkbxset">
 					<div class="chkbx">
-						<input type="checkbox" id="AWS" name="AWS" value="AWS" />
+						<input type="checkbox" id="AWS" name="AWS" value="AWS" onchange="toggleSectionVisibility('AWS', 'aws-section');" />
 						<label for="AWS">AWS</label>
 					</div>
 					<div class="chkbx">
-					<input type="checkbox" id="PS" name="PS" value="PS" />
+						<input type="checkbox" id="PS" name="PS" value="PS" onchange="toggleSectionVisibility('PS', 'ps-section');" />
 						<label for="PS">PS</label>
 					</div>
 					<div class="chkbx">
-						<input type="checkbox" id="MS" name="MS" value="MS" />
+						<input type="checkbox" id="MS" name="MS" value="MS" onchange="toggleSectionVisibility('MS', 'ms-section');" />
 						<label for="MS">MS</label>
 					</div>
 					<div class="chkbx">
-						<input type="checkbox" id="DP" name="DP" value="DP" />
+						<input type="checkbox" id="DP" name="DP" value="DP" onchange="toggleSectionVisibility('DP', 'dp-section');" />
 						<label for="DP">DP</label>
 					</div>
 					<div class="chkbx">
-						<input type="checkbox" id="OUTSOURCING" name="OUTSOURCING" value="OUTSOURCING" />
+						<input type="checkbox" id="OUTSOURCING" name="OUTSOURCING" value="OUTSOURCING" onchange="toggleSectionVisibility('OUTSOURCING', 'outsourcing-section');" />
 						<label for="OUTSOURCING">외주</label>
 					</div>
 				</div>
@@ -37,4 +37,28 @@
 		</tr>
 		</table>
 	</div>
+
+	<script>
+      function toggleSectionVisibility(checkboxId, sectionId) {
+        const checkbox = document.getElementById(checkboxId);
+        const section = document.getElementById(sectionId);
+
+        if (!checkbox.checked) {
+          section.style.display = 'none';
+          changeInputState(section, false);
+          return;
+        }
+
+        section.style.display = 'block';
+        changeInputState(section, true);
+      }
+
+      function changeInputState(section, isEnabled) {
+        const inputElements = section.querySelectorAll('input');
+
+        inputElements.forEach((input) => {
+          input.disabled = !isEnabled;
+        });
+      }
+	</script>
 </div>
