@@ -103,43 +103,43 @@
 					<div class="section" id="aws-section" style="display: none">
 						<div class="subTitle02">
 							<h3>AWS</h3>
-							<input th:field="*{awsDetail.name}" class="inputArea" type="text" placeholder="이름"/>
+							<input th:field="*{awsDetail.name}" th:disabled="true" class="inputArea" type="text" placeholder="이름"/>
 						</div>
 					</div>
 
 					<div class="section" id="ps-section" style="display: none">
 						<div class="subTitle02">
 							<h3>PS</h3>
-							<input th:field="*{psDetail.name}" class="inputArea" type="text" placeholder="이름"/>
+							<input th:field="*{psDetail.name}" th:disabled="true" class="inputArea" type="text" placeholder="이름"/>
 						</div>
 					</div>
 
 					<div class="section" id="ms-section" style="display: none">
 						<div class="subTitle02">
 							<h3>MS</h3>
-							<input th:field="*{msDetail.name}" class="inputArea" type="text" placeholder="이름"/>
+							<input th:field="*{msDetail.name}" th:disabled="true" class="inputArea" type="text" placeholder="이름"/>
 						</div>
 					</div>
 
 					<div class="section" id="dp-section" style="display: none">
 						<div class="subTitle02">
 							<h3>DP</h3>
-							<input th:field="*{dpDetail.name}" class="inputArea" type="text" placeholder="이름"/>
+							<input th:field="*{dpDetail.name}" th:disabled="true" class="inputArea" type="text" placeholder="이름"/>
 						</div>
 					</div>
 
 					<div class="section" id="outsourcing-section" style="display: none">
 						<div class="subTitle02">
 							<h3>외주</h3>
-							<input th:field="*{outSourcingDetail.name}" class="inputArea" type="text" placeholder="이름"/>
+							<input th:field="*{outSourcingDetail.name}" th:disabled="true" class="inputArea" type="text" placeholder="이름"/>
 						</div>
 					</div>
 
 
 					<!-- 등록 버튼 -->
 					<div class="btn-wrap">
-						<button type="button" class="btn btn-blue">저장</button>
-						<button type="submit" class="btn btn-navy">등록</button>
+						<button type="submit" class="btn btn-blue" name="action" value="temporary">저장</button>
+						<button type="submit" class="btn btn-navy" name="action" value="saved">등록</button>
 						<a th:href="@{/contracts}" class="btn btn-wt">취소</a>
 					</div>
 					<!-- 버튼 -->

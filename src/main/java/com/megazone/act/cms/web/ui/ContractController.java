@@ -39,6 +39,7 @@ public class ContractController {
     @PostMapping("/form")
     public String create(
         @Valid @ModelAttribute(FORM) ContractCreateRequest createForm,
+        @RequestParam("action") String action,
         BindingResult bindingResult, Model model
     ) {
         if (bindingResult.hasErrors()) {
