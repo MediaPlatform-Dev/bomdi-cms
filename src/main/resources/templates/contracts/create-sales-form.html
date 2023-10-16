@@ -10,15 +10,54 @@
 			<header th:replace="~{fragments/header}"></header>
 			<div class="header">
 				<h2>
-					<th th:if="${isSales}">매출</th>
-					<th th:unless="${isSales}">매입</th>
-					계약서 등록
+					매출 계약서 등록
 				</h2>
 			</div>
 			<div class="content">
-				<form method="post" th:action="@{/contracts/form}" onsubmit="return createContract()" th:object="${form}" enctype="multipart/form-data">
+				<form method="post" th:action="@{/contracts/sales-form}" onsubmit="return createContract()" th:object="${form}" enctype="multipart/form-data">
 					<div th:replace="~{contracts/fragments/type.html}"></div>
-					<div th:replace="~{contracts/fragments/info1.html}"></div>
+
+					<div class="section">
+						<div class="subTitle02">
+							<h3>계약 기본정보 1</h3>
+						</div>
+						<div class="tbl_type02">
+							<table>
+							<colgroup>
+								<col style="width: 25%;">
+								<col style="width: 25%;">
+								<col style="width: 25%;">
+								<col>
+							</colgroup>
+							<tr>
+								<th>매출 계약 번호</th>
+								<td>
+									<input class="inputArea" th:field="*{contractId}" style="width: 100%;" type="text" value="" placeholder="계약 번호">
+								</td>
+
+								<th th:for="salesForceContractId">Sales Force 계약 번호</th>
+								<td>
+									<input th:field="*{salesForceContractId}" required
+											class="inputArea" style="width: 100%;" type="text" value="" placeholder="Sales Force 계약 번호">
+									<div class="invalid-feedback">
+										<p th:if="${#fields.hasErrors('salesForceContractId')}" th:errors="*{salesForceContractId}">Invalid value</p>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<th th:for="name">계약명</th>
+								<td colspan="5">
+									<input th:field="*{name}" required
+											class="inputArea" style="width: 100%;" type="text" value="" placeholder="계약명">
+									<div class="invalid-feedback">
+										<p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Invalid value</p>
+									</div>
+								</td>
+							</tr>
+							</table>
+						</div>
+					</div>
+
 					<div th:replace="~{contracts/fragments/info2.html}"></div>
 
 					<div class="section">

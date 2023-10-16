@@ -27,23 +27,40 @@ public class ContractController {
 
     private final ContractService contractService;
 
-    @GetMapping("/form")
-    public String createTypeForm(@RequestParam String type, Model model) {
-        if ("sales".equals(type)) {
-            model.addAttribute("isSales", true);
-        }
+    @GetMapping("/sales-form")
+    public String createSalesForm(Model model) {
         model.addAttribute(FORM, ContractCreateRequest.EMPTY);
-        return "contracts/create-form";
+        return "contracts/create-sales-form";
     }
 
-    @PostMapping("/form")
-    public String create(
+    @PostMapping("/sales-form")
+    public String createSales(
         @Valid @ModelAttribute(FORM) ContractCreateRequest createForm,
         BindingResult bindingResult, Model model
     ) {
         if (bindingResult.hasErrors()) {
             model.addAttribute(FORM, createForm);
-            return "contracts/create-form";
+            return "contracts/create-sales-form";
+        }
+
+        contractService.createContract(createForm);
+        return REDIRECT_CONTRACTS;
+    }
+
+    @GetMapping("/purchase-form")
+    public String createPurchaseForm(Model model) {
+        model.addAttribute(FORM, ContractCreateRequest.EMPTY);
+        return "contracts/create-purchase-form";
+    }
+
+    @PostMapping("/purchase-form")
+    public String createPurchase(
+        @Valid @ModelAttribute(FORM) ContractCreateRequest createForm,
+        BindingResult bindingResult, Model model
+    ) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute(FORM, createForm);
+            return "contracts/create-purchase-form";
         }
 
         contractService.createContract(createForm);
