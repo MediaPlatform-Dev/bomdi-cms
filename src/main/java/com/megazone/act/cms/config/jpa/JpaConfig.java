@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Optional;
 
 @EnableJpaAuditing
-@Configuration
+@Configuration(proxyBeanMethods = false)
 public class JpaConfig {
 
     @Bean
