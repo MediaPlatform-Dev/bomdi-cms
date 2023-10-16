@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragments/head}">
-	<title>제목</title>
-</head>
+<div th:replace="~{fragments/head}">
+</div>
 <body>
 	<div class="wrap">
 		<nav th:replace="~{fragments/side-navigation-bar}"></nav>
@@ -139,9 +138,7 @@
 
 					<!-- 등록 버튼 -->
 					<div class="btn-wrap">
-						<!--<button type="button" class="btn btn-blue">저장</button>-->
-						<!--<button type="button" class="btn btn-navy">등록</button>-->
-						<!--<button type="button" class="btn btn-wt">취소</button>-->
+						<button type="button" class="btn btn-blue">저장</button>
 						<button type="submit" class="btn btn-navy">등록</button>
 						<a th:href="@{/contracts}" class="btn btn-wt">취소</a>
 					</div>

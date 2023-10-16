@@ -1,4 +1,4 @@
-package com.megazone.act.cms.application.dto;
+package com.megazone.act.cms.application.dto.response;
 
 import com.megazone.act.cms.domain.Contract;
 

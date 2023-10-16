@@ -1,7 +1,10 @@
 package com.megazone.act.cms.web.ui;
 
 import com.megazone.act.cms.application.ContractService;
-import com.megazone.act.cms.application.dto.*;
+import com.megazone.act.cms.application.dto.request.ContractCreateRequest;
+import com.megazone.act.cms.application.dto.request.ContractUpdateRequest;
+import com.megazone.act.cms.application.dto.response.ContractDetailResponse;
+import com.megazone.act.cms.application.dto.response.ContractResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

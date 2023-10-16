@@ -1,4 +1,4 @@
-package com.megazone.act.cms.application.dto;
+package com.megazone.act.cms.application.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
 

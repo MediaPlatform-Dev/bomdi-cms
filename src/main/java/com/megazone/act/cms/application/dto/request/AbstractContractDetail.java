@@ -1,4 +1,4 @@
-package com.megazone.act.cms.application.dto;
+package com.megazone.act.cms.application.dto.request;
 
 import com.megazone.act.cms.domain.type.ContractDetailType;
 import com.megazone.act.cms.domain.type.ServiceType;

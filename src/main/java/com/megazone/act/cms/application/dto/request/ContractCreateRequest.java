@@ -1,4 +1,4 @@
-package com.megazone.act.cms.application.dto;
+package com.megazone.act.cms.application.dto.request;
 
 import com.megazone.act.cms.domain.type.*;
 import jakarta.validation.constraints.NotBlank;
@@ -138,16 +138,8 @@ public final class ContractCreateRequest {
     }
 
     public static ContractCreateRequest empty() {
-        return from(ContractCreateTypes.DEFAULT);
-    }
-
-    public static ContractCreateRequest from(ContractCreateTypes contractCreateTypes) {
         return new ContractCreateRequest(
-            contractCreateTypes.getContractType(),
-            //new ContractAwsDetail(),
-            //new ContractPsDetail(),
-            //new ContractMsDetail(),
-            //new ContractDpDetail(),
+            ContractType.SALES,
             null,
             null,
             null,
