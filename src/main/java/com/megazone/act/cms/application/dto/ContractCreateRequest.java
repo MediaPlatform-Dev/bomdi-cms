@@ -8,6 +8,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Stream;
 
 @Getter
 @EqualsAndHashCode
@@ -178,5 +180,11 @@ public final class ContractCreateRequest {
             null,
             null
         );
+    }
+
+    public List<AbstractContractDetail> getContractDetails() {
+        return Stream.of(awsDetail, psDetail, msDetail, dpDetail, outSourcingDetail)
+            .filter(Objects::nonNull)
+            .toList();
     }
 }

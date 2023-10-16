@@ -1,7 +1,6 @@
 package com.megazone.act.cms.domain;
 
-import com.megazone.act.cms.domain.type.ContractStatus;
-import com.megazone.act.cms.domain.type.ServiceType;
+import com.megazone.act.cms.domain.type.*;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.envers.Audited;
@@ -27,6 +26,10 @@ public class ContractDetail extends AuditingFields {
     @Column(name = "cntrct_no")
     private String number;
 
+    @Column(name = "cntrct_gb2_cd")
+    @Enumerated(EnumType.STRING)
+    private ContractDetailType contractDetailType;
+
     @Column(name = "svc_type_cd")
     @Enumerated(EnumType.STRING)
     private ServiceType serviceType;
@@ -41,14 +44,15 @@ public class ContractDetail extends AuditingFields {
     @ManyToOne
     private Contract contract;
 
-    public ContractDetail(ServiceType serviceType) {
-        this("", 0.0, "", serviceType, null);
+    public ContractDetail(ContractDetailType type) {
+        this("", 0.0, "", type, null, null);
     }
 
-    public ContractDetail(String name, Double version, String number, ServiceType serviceType, ContractPeriod period) {
+    public ContractDetail(String name, Double version, String number, ContractDetailType type, ServiceType serviceType, ContractPeriod period) {
         this.name = name;
         this.version = version;
         this.number = number;
+        this.contractDetailType = type;
         this.serviceType = serviceType;
         this.period = period;
         this.status = ContractStatus.SAVED;

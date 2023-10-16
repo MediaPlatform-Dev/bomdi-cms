@@ -14,10 +14,6 @@ public class ContractTypes {
     @Enumerated(EnumType.STRING)
     private ContractType contractType;
 
-    @Column(name = "cntrct_gb2_cd")
-    @Enumerated(EnumType.STRING)
-    private ContractDetailType contractDetailType;
-
     @Column(name = "cntrct_clas_cd")
     @Enumerated(EnumType.STRING)
     private DealType dealType;

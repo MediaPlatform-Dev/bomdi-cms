@@ -3,7 +3,6 @@ package com.megazone.act.cms.application;
 import com.megazone.act.cms.application.dto.*;
 import com.megazone.act.cms.domain.*;
 import com.megazone.act.cms.domain.repository.*;
-import com.megazone.act.cms.domain.type.ContractDetailType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -30,7 +29,6 @@ public class ContractService {
 
         ContractTypes contractTypes = new ContractTypes(
             request.getContractType(),
-            ContractDetailType.AWS,
             request.getDealType(),
             request.getSubmissionType()
         );
@@ -50,9 +48,12 @@ public class ContractService {
             .period(new ContractPeriod(request.getContractStartDate(), request.getContractEndDate()))
             .build();
 
-        contract.addContractDetail(new ContractDetail(request.getServiceType()));
+        List<ContractDetail> contractDetails = request.getContractDetails()
+            .stream()
+            .map(it -> new ContractDetail(it.getType()))
+            .toList();
 
-        // TODO: 계약 상세 저장하기
+        contract.addContractDetails(contractDetails);
         contractRepository.save(contract);
     }
 

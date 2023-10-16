@@ -79,7 +79,11 @@ public class Contract extends AuditingFields {
         this.description = contents;
     }
 
-    public void addContractDetail(ContractDetail contractDetail) {
+    public void addContractDetails(List<ContractDetail> contractDetails) {
+        contractDetails.forEach(this::addContractDetail);
+    }
+
+    private void addContractDetail(ContractDetail contractDetail) {
         contractDetail.setContract(this);
         contractDetails.add(contractDetail);
     }
