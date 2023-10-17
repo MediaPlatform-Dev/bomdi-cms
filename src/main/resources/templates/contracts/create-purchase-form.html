@@ -15,7 +15,47 @@
 			</div>
 			<div class="content">
 				<form method="post" th:action="@{/contracts/purchase-form}" onsubmit="return createContract()" th:object="${form}" enctype="multipart/form-data">
-					<div th:replace="~{contracts/fragments/type.html}"></div>
+					<div class="section">
+						<div class="subTitle02">
+							<h3>계약 유형</h3>
+						</div>
+						<div class="tbl_type02">
+							<table>
+							<colgroup>
+								<col style="width: 15%;">
+								<col style="width: 85%">
+							</colgroup>
+							<tr>
+								<th>계약 구분</th>
+								<td>
+									<div class="mz-chkbxset">
+										<div class="chkbx">
+											<input type="checkbox" id="AWS" name="AWS" value="AWS" onchange="toggleSectionVisibility('AWS', 'aws-section');" />
+											<label for="AWS">AWS</label>
+										</div>
+										<div class="chkbx">
+											<input type="checkbox" id="PS" name="PS" value="PS" onchange="toggleSectionVisibility('PS', 'ps-section');" />
+											<label for="PS">PS</label>
+										</div>
+										<div class="chkbx">
+											<input type="checkbox" id="MS" name="MS" value="MS" onchange="toggleSectionVisibility('MS', 'ms-section');" />
+											<label for="MS">MS</label>
+										</div>
+										<div class="chkbx">
+											<input type="checkbox" id="DP" name="DP" value="DP" onchange="toggleSectionVisibility('DP', 'dp-section');" />
+											<label for="DP">DP</label>
+										</div>
+										<div class="chkbx">
+											<input type="checkbox" id="OUTSOURCING" name="OUTSOURCING" value="OUTSOURCING" onchange="toggleSectionVisibility('OUTSOURCING', 'outsourcing-section');" />
+											<label for="OUTSOURCING">외주</label>
+										</div>
+									</div>
+								</td>
+							</tr>
+							</table>
+						</div>
+					</div>
+
 
 					<div class="section">
 						<div class="subTitle02">
@@ -247,6 +287,30 @@
                 .attr("disabled", false);
             }
             return isCreated;
+          }
+		</script>
+
+		<script>
+          function toggleSectionVisibility(checkboxId, sectionId) {
+            const checkbox = document.getElementById(checkboxId);
+            const section = document.getElementById(sectionId);
+
+            if (!checkbox.checked) {
+              section.style.display = 'none';
+              changeInputState(section, false);
+              return;
+            }
+
+            section.style.display = 'block';
+            changeInputState(section, true);
+          }
+
+          function changeInputState(section, isEnabled) {
+            const inputElements = section.querySelectorAll('input');
+
+            inputElements.forEach((input) => {
+              input.disabled = !isEnabled;
+            });
           }
 		</script>
 	</div>
