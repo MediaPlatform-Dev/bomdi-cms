@@ -74,6 +74,12 @@ public class ContractController {
         return "contracts/list";
     }
 
+    @GetMapping("/{contractId}")
+    public String detail(@PathVariable long contractId, Model model) {
+        //todo 상세조회 로직
+        return "contracts/detail-view";
+    }
+
     @GetMapping("/{contractId}/form")
     public String updateForm(
         @PathVariable Long contractId,
