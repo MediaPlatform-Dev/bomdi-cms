@@ -8,9 +8,7 @@ import org.hibernate.envers.Audited;
 import java.util.ArrayList;
 import java.util.List;
 
-@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Builder
 @Getter
 @Audited
 @Table(name = "tb_cntrct_m")
@@ -24,7 +22,6 @@ public class Contract extends AuditingFields {
     @Column(name = "cntrct_no")
     private String number;
 
-    @Builder.Default
     @Column(name = "cntrct_ver")
     private Double version = 1.0;
 
@@ -57,21 +54,42 @@ public class Contract extends AuditingFields {
     @Column(name = "sales_chrgr_nm")
     private String salesPersonName;
 
-    @Builder.Default
     @Enumerated(EnumType.STRING)
     private ContractStatus status = ContractStatus.SAVED;
 
     @Column(name = "src_system_ref_id")
     private String salesForceContractId;
 
-    @Builder.Default
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "contract")
     private List<ContractDetail> contractDetails = new ArrayList<>();
 
     public Contract(String name, String description, String contractorName) {
+        this(name, description, null, null, null, null, null, contractorName, null, null);
+    }
+
+    @Builder
+    public Contract(
+        String name,
+        String description,
+        Corporation corporation,
+        BusinessPartner businessPartner,
+        ContractTypes contractTypes,
+        ContractPeriod period,
+        ContractMoney contractMoney,
+        String contractorName,
+        String salesPersonName,
+        String salesForceContractId
+    ) {
         this.name = name;
         this.description = description;
+        this.corporation = corporation;
+        this.businessPartner = businessPartner;
+        this.contractTypes = contractTypes;
+        this.period = period;
+        this.contractMoney = contractMoney;
         this.contractorName = contractorName;
+        this.salesPersonName = salesPersonName;
+        this.salesForceContractId = salesForceContractId;
     }
 
     public void update(String name, String contents) {

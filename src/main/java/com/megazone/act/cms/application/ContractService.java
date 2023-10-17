@@ -30,32 +30,12 @@ public class ContractService {
         String businessPartnerName = request.getBusinessPartnerName();
         BusinessPartner businessPartner = getBusinessPartnerOrElseNew(businessPartnerName);
 
-        ContractTypes contractTypes = new ContractTypes(
-            request.getContractType(),
-            request.getDealType(),
-            request.getSubmissionType()
-        );
-        ContractMoney contractMoney = new ContractMoney(request.getCurrencyUnit(), request.getTotalContractAmount());
-
-        Contract contract = Contract.builder()
-            .corporation(corporation)
-            .businessPartner(businessPartner)
-            .contractTypes(contractTypes)
-            .salesForceContractId(request.getSalesForceContractId())
-            .name(request.getName())
-            .number("")
-            .contractMoney(contractMoney)
-            .contractorName(request.getContractor())
-            .salesPersonName(request.getSalesPersonName())
-            .description(request.getDescription())
-            .period(new ContractPeriod(request.getContractStartDate(), request.getContractEndDate()))
-            .build();
+        Contract contract = ContractMapper.INSTANCE.toEntity(corporation, businessPartner, request);
 
         List<ContractDetail> contractDetails = request.getContractDetails()
             .stream()
             .map(it -> new ContractDetail(it.getType()))
             .toList();
-
         contract.addContractDetails(contractDetails);
         contractRepository.save(contract);
     }
