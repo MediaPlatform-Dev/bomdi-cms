@@ -98,7 +98,7 @@ public class ContractController {
             Model model
     ) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute(CONTRACT, null);
+            model.addAttribute(CONTRACT, updateForm);
             return "contracts/update-form";
         }
 
