@@ -2,7 +2,6 @@ package com.megazone.act.cms.application;
 
 import com.megazone.act.cms.application.dto.request.ContractCreateRequest;
 import com.megazone.act.cms.application.dto.request.ContractUpdateRequest;
-import com.megazone.act.cms.application.dto.response.ContractDetailResponse;
 import com.megazone.act.cms.application.dto.response.ContractResponse;
 import com.megazone.act.cms.domain.*;
 import com.megazone.act.cms.domain.repository.*;
@@ -34,7 +33,7 @@ public class ContractService {
 
         List<ContractDetail> contractDetails = request.getContractDetails()
             .stream()
-            .map(it -> new ContractDetail(it.getType()))
+            .map(it -> new ContractDetail(it.getName(), it.getType()))
             .toList();
         contract.addContractDetails(contractDetails);
         contractRepository.save(contract);
@@ -57,8 +56,8 @@ public class ContractService {
             .toList();
     }
 
-    public ContractDetailResponse getContract(Long contractId) {
-        return ContractDetailResponse.from(getContractById(contractId));
+    public ContractResponse getContract(long contractId) {
+        return ContractResponse.from(getContractById(contractId));
     }
 
     @Transactional
@@ -67,7 +66,7 @@ public class ContractService {
         contract.update(request.name(), request.contents());
     }
 
-    private Contract getContractById(Long contractId) {
+    private Contract getContractById(long contractId) {
         return contractRepository.findById(contractId)
             .orElseThrow(() -> new IllegalArgumentException(contractId + "를 찾을 수 없습니다."));
     }

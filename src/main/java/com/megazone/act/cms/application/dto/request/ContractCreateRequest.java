@@ -77,7 +77,7 @@ public final class ContractCreateRequest {
             null,
             SubmissionType.SFDC,
             OwnCorporationType.CLOUD,
-            ServiceType.SW,
+            ServiceType.MSP,
             DealType.BILL,
             null,
             BusinessPartnerType.EXISTING,

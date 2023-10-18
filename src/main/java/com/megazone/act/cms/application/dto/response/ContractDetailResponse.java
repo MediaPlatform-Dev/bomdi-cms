@@ -1,38 +1,19 @@
 package com.megazone.act.cms.application.dto.response;
 
-import com.megazone.act.cms.application.dto.request.ContractUpdateRequest;
-import com.megazone.act.cms.domain.Contract;
-
-import java.util.Optional;
+import com.megazone.act.cms.domain.ContractDetail;
+import com.megazone.act.cms.domain.type.ContractDetailType;
 
 public record ContractDetailResponse(
     Long id,
     String name,
-    String contents,
-    String contractor,
-    String createdBy,
-    String modifiedBy
+    ContractDetailType type
 ) {
 
-    public static ContractDetailResponse from(Contract entity) {
+    public static ContractDetailResponse from(ContractDetail entity) {
         return new ContractDetailResponse(
             entity.getId(),
             entity.getName(),
-            entity.getDescription(),
-            entity.getContractorName(),
-            Optional.ofNullable(entity.getCreatedBy()).orElse(""),
-            Optional.ofNullable(entity.getModifiedBy()).orElse("")
-        );
-    }
-
-    public static ContractDetailResponse of(Long contractId, ContractUpdateRequest form) {
-        return new ContractDetailResponse(
-            contractId,
-            form.name(),
-            form.contents(),
-            form.contractor(),
-            "",
-            ""
+            entity.getContractDetailType()
         );
     }
 }

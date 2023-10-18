@@ -162,18 +162,14 @@
 							<tbody>
 								<tr th:each="contract, stat : ${contracts}">
 									<td th:text="${contracts.size() - stat.index}" class="index"></td>
-									<td th:text="${contract.name}" class="clickable">계약 이름</td>
-									<td th:text="${contract.description}">계약 내용</td>
-									<td th:text="${contract.contractor}">담당자</td>
+									<td>
+										<a class="clickable" th:href="@{/contracts/{id} (id=${contract.id})}" th:text="${contract.name}">계약 내용</a>
+									</td>
+									<td th:text="${contract.name()}" >계약 이름</td>
+									<td th:text="${contract.contractorName()}">담당자</td>
 									<td>
 										<a th:href="@{/contracts/{id}/form (id=${contract.id})}" class="btn_U">수정</a>
 									</td>
-									<!--<td>-->
-									<!--	<form method="post" th:action="@{/contracts/{id} (id=${contract.id})}" onsubmit="return deleteContract()">-->
-									<!--		<input type="hidden" name="_method" value="delete">-->
-									<!--		<button type="submit" class="btn_D">삭제</button>-->
-									<!--	</form>-->
-									<!--</td>-->
 								</tr>
 							</tbody>
 						</table>

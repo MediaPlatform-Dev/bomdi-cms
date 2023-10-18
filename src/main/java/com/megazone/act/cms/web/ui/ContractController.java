@@ -3,7 +3,6 @@ package com.megazone.act.cms.web.ui;
 import com.megazone.act.cms.application.ContractService;
 import com.megazone.act.cms.application.dto.request.ContractCreateRequest;
 import com.megazone.act.cms.application.dto.request.ContractUpdateRequest;
-import com.megazone.act.cms.application.dto.response.ContractDetailResponse;
 import com.megazone.act.cms.application.dto.response.ContractResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -76,8 +75,8 @@ public class ContractController {
 
     @GetMapping("/{contractId}")
     public String detail(@PathVariable long contractId, Model model) {
-        //todo 상세조회 로직
-        return "contracts/detail-view";
+        model.addAttribute(CONTRACT, contractService.getContract(contractId));
+        return "contracts/detail";
     }
 
     @GetMapping("/{contractId}/form")
@@ -98,7 +97,7 @@ public class ContractController {
         Model model
     ) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute(CONTRACT, ContractDetailResponse.of(contractId, updateForm));
+            model.addAttribute(CONTRACT, null);
             return "contracts/update-form";
         }
 

@@ -44,8 +44,8 @@ public class ContractDetail extends AuditingFields {
     @ManyToOne
     private Contract contract;
 
-    public ContractDetail(ContractDetailType type) {
-        this("", 0.0, "", type, null, null);
+    public ContractDetail(String name, ContractDetailType type) {
+        this(name, 0.0, "", type, null, null);
     }
 
     public ContractDetail(String name, Double version, String number, ContractDetailType type, ServiceType serviceType, ContractPeriod period) {

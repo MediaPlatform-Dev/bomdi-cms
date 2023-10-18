@@ -14,9 +14,6 @@
             </h2>
         </div>
         <div class="content">
-            <form method="post" th:action="@{/contracts/sales-form}" onsubmit="return createContract()"
-                  th:object="${form}" enctype="multipart/form-data">
-
                 <div class="subTitle02">
                     <h3>계약 유형</h3>
                 </div>
@@ -31,24 +28,24 @@
                             <td>
                                 <div class="mz-chkbxset">
                                     <div class="chkbx">
-                                        <input type="checkbox" id="AWS" name="AWS" value="AWS"
-                                               onchange="toggleSectionVisibility('AWS', 'aws-section');"/>
+                                        <input type="checkbox" th:disabled="true" th:checked="${contract.getContractDetailTypes().contains('AWS')}" id="AWS" name="AWS" value="AWS">
                                         <label for="AWS">AWS</label>
                                     </div>
                                     <div class="chkbx">
-                                        <input type="checkbox" id="PS" name="PS" value="PS"
-                                               onchange="toggleSectionVisibility('PS', 'ps-section');"/>
+                                        <input type="checkbox" th:disabled="true" th:checked="${contract.getContractDetailTypes().contains('PS')}" id="PS" name="PS" value="PS" />
                                         <label for="PS">PS</label>
                                     </div>
                                     <div class="chkbx">
-                                        <input type="checkbox" id="MS" name="MS" value="MS"
-                                               onchange="toggleSectionVisibility('MS', 'ms-section');"/>
+                                        <input type="checkbox" th:disabled="true" th:checked="${contract.getContractDetailTypes().contains('MS')}" id="MS" name="MS" value="MS"/>
                                         <label for="MS">MS</label>
                                     </div>
                                     <div class="chkbx">
-                                        <input type="checkbox" id="DP" name="DP" value="DP"
-                                               onchange="toggleSectionVisibility('DP', 'dp-section');"/>
+                                        <input type="checkbox" th:disabled="true" th:checked="${contract.getContractDetailTypes().contains('DP')}" id="DP" name="DP" value="DP" />
                                         <label for="DP">DP</label>
+                                    </div>
+                                    <div class="chkbx">
+                                        <input type="checkbox" th:disabled="true" th:checked="${contract.getContractDetailTypes().contains('OUTSOURCING')}" id="OUTSOURCING" name="OUTSOURCING" value="OUTSOURCING" />
+                                        <label for="OUTSOURCING">외주</label>
                                     </div>
                                 </div>
                             </td>
@@ -71,18 +68,18 @@
                             <tr>
                                 <th>매출 계약 번호</th>
                                 <td>
-                                    <p class="inputArea" style="width: 100%;" th:text="'계약번호'"></p>
+                                    <p class="inputArea" th:text="${contract.number}" style="width: 100%;"></p>
                                 </td>
 
                                 <th th:for="salesForceContractId">Sales Force 계약 번호</th>
                                 <td>
-                                    <p class="inputArea" style="width: 100%;" th:text="'Sales Force 계약 번호'"></p>
+                                    <p class="inputArea" th:text="${contract.salesForceContractNumber}" style="width: 100%;"></p>
                                 </td>
                             </tr>
                             <tr>
                                 <th th:for="name">계약명</th>
                                 <td colspan="5">
-                                    <p class="inputArea" style="width: 100%;" th:text="'계약명'"></p>
+                                    <p class="inputArea" th:text="${contract.name}" style="width: 100%;"></p>
                                 </td>
                             </tr>
                         </table>
@@ -106,26 +103,26 @@
                         <tr>
                             <th>접수 방법 구분</th>
                             <td>
-                                <p class="inputArea" style="width: 100%;" th:text="'접수 방법 구분'"></p>
+                                <p class="inputArea" th:text="${contract.submissionType}" style="width: 100%;"></p>
                             </td>
                             <th>자사 법인</th>
                             <td>
-                                <p class="inputArea" style="width: 100%;" th:text="'자사 법인'"></p>
+                                <p class="inputArea" th:text="${contract.corporationName()}" style="width: 100%;"></p>
                             </td>
                             <th>서비스 분류</th>
                             <td>
-                                <p class="inputArea" style="width: 100%;" th:text="'서비스 분류'"></p>
+                                <p class="inputArea" th:text="${contract.serviceType}" style="width: 100%;"></p>
                             </td>
                         </tr>
                         <tr>
                             <th>체결 분류</th>
                             <td>
-                                <p class="inputArea" style="width: 100%;" th:text="'체결 분류'"></p>
+                                <p class="inputArea" th:text="${contract.dealType()}" style="width: 100%;"></p>
                                 <!--<input class="inputArea" style="width: 100%;" type="text" value="" placeholder="체결분류">-->
                             </td>
                             <th>거래처 구분</th>
                             <td>
-                                <p class="inputArea" style="width: 100%;" th:text="'거래처 구분'"></p>
+                                <p class="inputArea" th:text="'거래처 구분'" style="width: 100%;"></p>
                             </td>
                             <td></td>
                             <td></td>
@@ -133,7 +130,7 @@
                         <tr>
                             <th>거래처명</th>
                             <td colspan="5">
-                                <p class="inputArea" style="width: 100%;" th:text="'거래처명'"></p>
+                                <p class="inputArea" th:text="${contract.businessPartnerName()}" style="width: 100%;"></p>
                             </td>
 
                         </tr>
@@ -141,7 +138,7 @@
                             <th>계약 금액</th>
                             <td colspan="2">
                                 <div class="search">
-                                    <p class="inputArea mL5" style="width: 100%;" th:text="'금액'">
+                                    <p class="inputArea" th:text="${contract.amount()}" style="width: 100%;">
                                 </div>
                             </td>
                             <td></td>
@@ -150,17 +147,9 @@
                         </tr>
                         <tr>
                             <th>계약 기간</th>
-                            <td colspan="2">
+                            <td colspan="1">
                                 <div class="search">
-                                    <p
-                                            style="width: 100%;" th:text="'기간시작'"
-                                            id="datePickerStart" data-mindate="today"/>
-
-                                    <p class="mL10 mR10">~</p>
-                                    <p
-                                            th:text="'기간끝'" style="width: 100%;"
-                                            id="datePickerEnd" data-mindate="today"/>
-
+                                    <p th:text="${contract.contractStartDate() + ' ~ ' + contract.contractEndDate()}" style="width: 100%;"/>
                                 </div>
                             </td>
                             <td></td>
@@ -172,13 +161,13 @@
                             <th>계약팀 담당자</th>
                             <td>
                                 <div class="search">
-                                    <p class="inputArea" style="width: 100%;" th:text="'계약팀 담당자'"></p>
+                                    <p class="inputArea" th:text="${contract.contractorName()}" style="width: 100%;"></p>
                                 </div>
                             </td>
                             <th>세일즈 담당자</th>
                             <td>
                                 <div class="search">
-                                    <p class="inputArea" style="width: 100%;" th:text="'세일즈 담당자'"></p>
+                                    <p class="inputArea"  th:text="${contract.salesPersonName()}" style="width: 100%;"></p>
                                 </div>
                             </td>
                             <td></td>
@@ -187,7 +176,7 @@
                         <tr>
                             <th>청구 방법</th>
                             <td>
-                                <p class="inputArea" style="width: 100%;" th:text="'청구 방법'"></p>
+                                <p class="inputArea" th:text="${contract.dealType()}" style="width: 100%;"></p>
                             </td>
                             <td></td>
                             <td></td>
@@ -197,7 +186,7 @@
                         <tr>
                             <th>특이사항</th>
                             <td colspan="5">
-                                <p style="width: 100%; height:100px;" th:text="'특이사항'"></p>
+                                <p th:text="${contract.description()}"></p>
                             </td>
                         </tr>
                     </table>
@@ -226,24 +215,19 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <p class="inputArea" style="width: 100%;" th:text="'NO'"
-                                       th:style="'text-align: center;'"></p>
+                                    <p class="inputArea" style="width: 100%; text-align: center" th:text="'NO'"></p>
                                 </td>
                                 <td>
-                                    <p class="inputArea" style="width: 100%;" th:text="'담당자 구분'"
-                                       th:style="'text-align: center;'"></p>
+                                    <p class="inputArea" style="width: 100%; text-align: center" th:text="'담당자 구분'"></p>
                                 </td>
                                 <td>
-                                    <p class="inputArea" style="width: 100%;" th:text="'이름'"
-                                       th:style="'text-align: center;'"></p>
+                                    <p class="inputArea" style="width: 100%; text-align: center" th:text="'이름'"></p>
                                 </td>
                                 <td>
-                                    <p class="inputArea" style="width: 100%;" th:text="'이메일'"
-                                       th:style="'text-align: center;'"></p>
+                                    <p class="inputArea" style="width: 100%; text-align: center" th:text="'이메일'"></p>
                                 </td>
                                 <td>
-                                    <p class="inputArea" style="width: 100%;" th:text="'비고'"
-                                       th:style="'text-align: center;'"></p>
+                                    <p class="inputArea" style="width: 100%; text-align: center" th:text="'비고'"></p>
                                 </td>
                             </tr>
                         </table>
@@ -282,121 +266,24 @@
                     </div>
                 </div>
 
-                <!--<div class="section" id="aws-section" style="display: none">
-                    <div class="subTitle02">
-                        <h3>AWS</h3>
-                        <input th:field="*{awsDetail.name}" th:disabled="true" class="inputArea" type="text"
-                               placeholder="이름"/>
+                <div th:each="contractDetail : ${contract.contractDetails()}">
+                    <div class="section">
+                        <div class="subTitle02">
+                            <h3 th:text="${contractDetail.type()}">Type</h3>
+                            <p class="inputArea" th:text="${contractDetail.name()}" type="text">text</p>
+                        </div>
                     </div>
                 </div>
-
-                <div class="section" id="ps-section" style="display: none">
-                    <div class="subTitle02">
-                        <h3>PS</h3>
-                        <input th:field="*{psDetail.name}" th:disabled="true" class="inputArea" type="text"
-                               placeholder="이름"/>
-                    </div>
-                </div>
-
-                <div class="section" id="ms-section" style="display: none">
-                    <div class="subTitle02">
-                        <h3>MS</h3>
-                        <input th:field="*{msDetail.name}" th:disabled="true" class="inputArea" type="text"
-                               placeholder="이름"/>
-                    </div>
-                </div>
-
-                <div class="section" id="dp-section" style="display: none">
-                    <div class="subTitle02">
-                        <h3>DP</h3>
-                        <input th:field="*{dpDetail.name}" th:disabled="true" class="inputArea" type="text"
-                               placeholder="이름"/>
-                    </div>
-                </div>
-
-                <div class="section" id="outsourcing-section" style="display: none">
-                    <div class="subTitle02">
-                        <h3>외주</h3>
-                        <input th:field="*{outSourcingDetail.name}" th:disabled="true" class="inputArea" type="text"
-                               placeholder="이름"/>
-                    </div>
-                </div>-->
-
 
                 <!-- 등록 버튼 -->
                 <div class="btn-wrap">
-                    <button type="submit" class="btn btn-blue" name="action" value="temporary">뒤로가기</button>
-                    <button type="submit" class="btn btn-navy" name="action" value="saved">수정</button>
+                    <a th:href="@{/contracts}" class="btn btn-wt">목록</a>
                     <!--<a th:href="@{/contracts}" class="btn btn-wt">취소</a>-->
                 </div>
                 <!-- 버튼 -->
-
-            </form>
         </div>
         <!-- content end -->
     </div>
-
-    <script>
-        let rowIndex = 1;
-        const fields = {
-            type: "담당자 구분",
-            name: "이름",
-            email: "이메일",
-            etc: "비고"
-        }
-
-        function addClient() {
-            const clonedSelect = document.getElementById("clientInfos0.type")
-                .cloneNode(true);
-            const table = document.getElementById('forList');
-            const newRow = table.insertRow(-1);
-
-            const indexCell = newRow.insertCell(0);
-            indexCell.classList.add('center');
-            indexCell.textContent = rowIndex + 1;
-
-            Object.keys(fields)
-                .forEach((fieldKey, index) => {
-                    const cell = newRow.insertCell(index + 1);
-                    if (fieldKey === 'type') {
-                        clonedSelect.id = `clientInfos${rowIndex}.${fieldKey}`;
-                        clonedSelect.name = `clientInfos[${rowIndex}].${fieldKey}`;
-                        cell.appendChild(clonedSelect);
-                        return;
-                    }
-
-                    const input = document.createElement('input');
-                    input.classList.add('inputArea');
-                    input.style.width = '100%';
-                    input.type = 'text';
-                    input.value = '';
-                    input.placeholder = fields[fieldKey];
-                    input.id = `clientInfos${rowIndex}.${fieldKey}`;
-                    input.name = `clientInfos[${rowIndex}].${fieldKey}`;
-                    cell.appendChild(input);
-                });
-
-            rowIndex++;
-        }
-    </script>
-
-    <script>
-        $(function () {
-            $('#datePickerStart, #datePickerEnd')
-                .datepicker();
-        });
-
-        function createContract() {
-            const isCreated = confirm("계약을 등록하시겠습니까?");
-            if (isCreated) {
-                $("input[type='radio']")
-                    .attr("disabled", false);
-                $("select")
-                    .attr("disabled", false);
-            }
-            return isCreated;
-        }
-    </script>
 </div>
 </body>
 </html>

@@ -12,7 +12,7 @@ public abstract class AbstractContractDetail {
     private ServiceType serviceType;
     private String name;
 
-    public AbstractContractDetail(ContractDetailType type) {
+    AbstractContractDetail(ContractDetailType type) {
         this.type = type;
     }
 }
