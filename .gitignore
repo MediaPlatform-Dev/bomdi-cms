@@ -36,3 +36,5 @@ generated/
 
 ### VS Code ###
 .vscode/
+
+**/.DS_Store
