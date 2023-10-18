@@ -34,8 +34,8 @@ public class ContractController {
 
     @PostMapping("/sales-form")
     public String createSales(
-        @Valid @ModelAttribute(FORM) ContractCreateRequest createForm,
-        BindingResult bindingResult, Model model
+            @Valid @ModelAttribute(FORM) ContractCreateRequest createForm,
+            BindingResult bindingResult, Model model
     ) {
         if (bindingResult.hasErrors()) {
             model.addAttribute(FORM, createForm);
@@ -54,8 +54,8 @@ public class ContractController {
 
     @PostMapping("/purchase-form")
     public String createPurchase(
-        @Valid @ModelAttribute(FORM) ContractCreateRequest createForm,
-        BindingResult bindingResult, Model model
+            @Valid @ModelAttribute(FORM) ContractCreateRequest createForm,
+            BindingResult bindingResult, Model model
     ) {
         if (bindingResult.hasErrors()) {
             model.addAttribute(FORM, createForm);
@@ -81,20 +81,21 @@ public class ContractController {
 
     @GetMapping("/{contractId}/form")
     public String updateForm(
-        @PathVariable Long contractId,
-        @ModelAttribute(FORM) ContractUpdateRequest emptyForm,
-        Model model
+            @PathVariable long contractId,
+            @ModelAttribute(FORM) ContractUpdateRequest emptyForm,
+            Model model
     ) {
         model.addAttribute(CONTRACT, contractService.getContract(contractId));
+        model.addAttribute(FORM, emptyForm);
         return "contracts/update-form";
     }
 
-    @PutMapping("/{contractId}/form")
+    @PutMapping("/{contractId}/formUpdate")
     public String update(
-        @PathVariable Long contractId,
-        @Valid @ModelAttribute(FORM) ContractUpdateRequest updateForm,
-        BindingResult bindingResult,
-        Model model
+            @PathVariable Long contractId,
+            @Valid @ModelAttribute(FORM) ContractUpdateRequest updateForm,
+            BindingResult bindingResult,
+            Model model
     ) {
         if (bindingResult.hasErrors()) {
             model.addAttribute(CONTRACT, null);
