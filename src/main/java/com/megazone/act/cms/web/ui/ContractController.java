@@ -1,9 +1,9 @@
 package com.megazone.act.cms.web.ui;
 
 import com.megazone.act.cms.application.ContractService;
-import com.megazone.act.cms.application.dto.request.ContractCreateRequest;
-import com.megazone.act.cms.application.dto.request.ContractUpdateRequest;
+import com.megazone.act.cms.application.dto.request.*;
 import com.megazone.act.cms.application.dto.response.ContractResponse;
+import com.megazone.act.cms.domain.type.ContractType;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -79,30 +79,53 @@ public class ContractController {
         return "contracts/detail";
     }
 
-    @GetMapping("/{contractId}/form")
+    @GetMapping("/{contractId}/update-form")
     public String updateForm(
             @PathVariable long contractId,
-            @ModelAttribute(FORM) ContractUpdateRequest emptyForm,
             Model model
     ) {
-        model.addAttribute(CONTRACT, contractService.getContract(contractId));
-        model.addAttribute(FORM, emptyForm);
-        return "contracts/update-form";
+        ContractResponse contract = contractService.getContract(contractId);
+
+        model.addAttribute(CONTRACT, contract);
+        if (contract.type() == ContractType.SALES) {
+            model.addAttribute(FORM, new ContractSalesUpdateRequest());
+            return "contracts/update-sales-form";
+        }
+
+        model.addAttribute(FORM, new ContractPurchaseUpdateRequest());
+        return "contracts/update-purchase-form";
     }
 
-    @PutMapping("/{contractId}/formUpdate")
-    public String update(
+    @PutMapping("/{contractId}/update-sales-form")
+    public String updateSales(
             @PathVariable Long contractId,
-            @Valid @ModelAttribute(FORM) ContractUpdateRequest updateForm,
+            @Valid @ModelAttribute(FORM) ContractSalesUpdateRequest updateForm,
             BindingResult bindingResult,
             Model model
     ) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute(CONTRACT, updateForm);
-            return "contracts/update-form";
+            // id // name
+            model.addAttribute(FORM, updateForm);
+            return "contracts/update-sales-form";
         }
 
         contractService.updateContract(contractId, updateForm);
         return REDIRECT_CONTRACTS;
     }
+
+    //@PutMapping("/{contractId}/update-purchase-form")
+    //public String updatePurchase(
+    //    @PathVariable Long contractId,
+    //    @Valid @ModelAttribute(FORM) ContractUpdateRequest updateForm,
+    //    BindingResult bindingResult,
+    //    Model model
+    //) {
+    //    if (bindingResult.hasErrors()) {
+    //        model.addAttribute(CONTRACT, updateForm);
+    //        return "contracts/update-purchase-form";
+    //    }
+    //
+    //    contractService.updateContract(contractId, updateForm);
+    //    return REDIRECT_CONTRACTS;
+    //}
 }

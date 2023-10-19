@@ -1,7 +1,7 @@
 package com.megazone.act.cms.application.dto.response;
 
 import com.megazone.act.cms.domain.Contract;
-import com.megazone.act.cms.domain.type.ClientInfo;
+import com.megazone.act.cms.domain.type.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
@@ -10,17 +10,19 @@ import java.util.List;
 
 public record ContractResponse(
     Long id,
-    String number,
+    ContractType type,
+    String no,
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     LocalDate contractDate,
     String name,
-    String salesForceContractNumber,
+    String salesForceContractNo,
+    String beforeRenewalContractNo, // TODO: 네이밍 수정 예정
     boolean isApproved,
     boolean isUpdated,
-    String submissionType,
+    SubmissionType submissionType,
     String corporationName,
     String serviceType,
-    String dealType,
+    DealType dealType,
     String businessPartnerName,
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     LocalDate contractStartDate,
@@ -28,13 +30,14 @@ public record ContractResponse(
     LocalDate contractEndDate,
     String contractorName,
     String salesPersonName,
-    String invoiceType,
+    InvoiceType invoiceType,
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     LocalDate taxesCreatedDate,
     String taxesReceivedEmail,
     String description,
+    CurrencyUnitType currencyUnitType,
     int amount,
-    List<ClientInfo> clients,
+    List<ClientInfo> clientInfos,
     List<ContractDetailResponse> contractDetails
 
 ) {
@@ -42,27 +45,30 @@ public record ContractResponse(
     public static ContractResponse from(Contract entity) {
         return new ContractResponse(
             entity.getId(),
+            entity.getContractTypes().getContractType(),
             entity.getNumber(),
             LocalDate.now(),
             entity.getName(),
-            entity.getSalesForceContractId(),
+            entity.getSalesForceContractId()
+            ,"",
             false,
             false,
-            entity.getContractTypes().getSubmissionType().getType(),
+            entity.getContractTypes().getSubmissionType(),
             entity.getCorporation().getName(),
             "",
-            entity.getContractTypes().getDealType().getType(),
+            entity.getContractTypes().getDealType(),
             entity.getBusinessPartner().getName(),
             entity.getPeriod().getStartDate(),
             entity.getPeriod().getEndDate(),
             entity.getContractorName(),
             entity.getSalesPersonName(),
-            "",
+            InvoiceType.TAX,
             LocalDate.now(),
             "",
             entity.getDescription(),
+            entity.getContractMoney().getCurrencyUnitType(),
             entity.getContractMoney().getAmount(),
-            List.of(),
+            List.of(ClientInfo.EMPTY, ClientInfo.EMPTY, ClientInfo.EMPTY),
             entity.getContractDetails()
                 .stream()
                 .map(ContractDetailResponse::from)
@@ -71,6 +77,6 @@ public record ContractResponse(
     }
 
     public List<String> getContractDetailTypes() {
-        return contractDetails.stream().map(it -> it.type().getType()).toList();
+        return contractDetails.stream().map(it -> it.type().getDescription()).toList();
     }
 }

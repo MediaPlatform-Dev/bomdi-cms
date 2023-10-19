@@ -68,12 +68,12 @@
                             <tr>
                                 <th>매출 계약 번호</th>
                                 <td>
-                                    <p class="inputArea" th:text="${contract.number}" style="width: 100%;"></p>
+                                    <p class="inputArea" th:text="${contract.no}" style="width: 100%;"></p>
                                 </td>
 
                                 <th th:for="salesForceContractId">Sales Force 계약 번호</th>
                                 <td>
-                                    <p class="inputArea" th:text="${contract.salesForceContractNumber}" style="width: 100%;"></p>
+                                    <p class="inputArea" th:text="${contract.salesForceContractNo}" style="width: 100%;"></p>
                                 </td>
                             </tr>
                             <tr>
@@ -118,7 +118,6 @@
                             <th>체결 분류</th>
                             <td>
                                 <p class="inputArea" th:text="${contract.dealType()}" style="width: 100%;"></p>
-                                <!--<input class="inputArea" style="width: 100%;" type="text" value="" placeholder="체결분류">-->
                             </td>
                             <th>거래처 구분</th>
                             <td>
@@ -167,7 +166,7 @@
                             <th>세일즈 담당자</th>
                             <td>
                                 <div class="search">
-                                    <p class="inputArea"  th:text="${contract.salesPersonName()}" style="width: 100%;"></p>
+                                    <p class="inputArea" th:text="${contract.salesPersonName()}" style="width: 100%;"></p>
                                 </div>
                             </td>
                             <td></td>

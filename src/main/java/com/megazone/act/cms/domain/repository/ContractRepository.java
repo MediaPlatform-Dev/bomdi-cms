@@ -12,8 +12,7 @@ public interface ContractRepository extends JpaRepository<Contract, Long>, Revis
 
     @Override
     @Query("""
-        select distinct contract from Contract contract  
-        join fetch contract.contractDetails
+        select contract from Contract contract
         join fetch contract.businessPartner
         join fetch contract.corporation
         where contract.id = :contractId

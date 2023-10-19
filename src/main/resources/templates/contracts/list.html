@@ -168,7 +168,7 @@
 									<td th:text="${contract.name()}" >계약 이름</td>
 									<td th:text="${contract.contractorName()}">담당자</td>
 									<td>
-										<a th:href="@{/contracts/{id}/form (id=${contract.id})}" class="btn_U">수정</a>
+										<a th:href="@{/contracts/{id}/update-form (id=${contract.id})}" class="btn_U">수정</a>
 									</td>
 								</tr>
 							</tbody>

@@ -32,7 +32,7 @@ public class ContractDetail extends AuditingFields {
 
     @Column(name = "svc_type_cd")
     @Enumerated(EnumType.STRING)
-    private ServiceType serviceType;
+    private CloudServiceType cloudServiceType;
 
     @Embedded
     private ContractPeriod period;
@@ -48,12 +48,12 @@ public class ContractDetail extends AuditingFields {
         this(name, 0.0, "", type, null, null);
     }
 
-    public ContractDetail(String name, Double version, String number, ContractDetailType type, ServiceType serviceType, ContractPeriod period) {
+    public ContractDetail(String name, Double version, String number, ContractDetailType type, CloudServiceType cloudServiceType, ContractPeriod period) {
         this.name = name;
         this.version = version;
         this.number = number;
         this.contractDetailType = type;
-        this.serviceType = serviceType;
+        this.cloudServiceType = cloudServiceType;
         this.period = period;
         this.status = ContractStatus.SAVED;
     }

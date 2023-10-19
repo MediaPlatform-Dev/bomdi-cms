@@ -4,11 +4,14 @@ import lombok.Getter;
 
 @Getter
 public enum SubmissionType {
-    SFDC("SFDC"), NONE("-");
+    SALESFORCE("SFDC", "SFDC"),
+    G_MAIL("GMAIL", "G-MAIL");
 
-    private final String type;
+    private final String code;
+    private final String description;
 
-    SubmissionType(String type) {
-        this.type = type;
+    SubmissionType(String code, String description) {
+        this.code = code;
+        this.description = description;
     }
 }

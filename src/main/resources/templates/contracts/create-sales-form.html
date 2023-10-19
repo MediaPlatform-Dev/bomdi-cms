@@ -234,8 +234,6 @@
           }
 
           function addClient() {
-            const clonedSelect = document.getElementById("clientInfos0.type")
-              .cloneNode(true);
             const table = document.getElementById('forList');
             const newRow = table.insertRow(-1);
 
@@ -246,13 +244,6 @@
             Object.keys(fields)
               .forEach((fieldKey, index) => {
                 const cell = newRow.insertCell(index + 1);
-                if (fieldKey === 'type') {
-                  clonedSelect.id = `clientInfos${rowIndex}.${fieldKey}`;
-                  clonedSelect.name = `clientInfos[${rowIndex}].${fieldKey}`;
-                  cell.appendChild(clonedSelect);
-                  return;
-                }
-
                 const input = document.createElement('input');
                 input.classList.add('inputArea');
                 input.style.width = '100%';

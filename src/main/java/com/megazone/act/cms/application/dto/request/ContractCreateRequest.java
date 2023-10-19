@@ -1,10 +1,8 @@
 package com.megazone.act.cms.application.dto.request;
 
 import com.megazone.act.cms.domain.type.*;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
-import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -34,16 +32,15 @@ public final class ContractCreateRequest {
     private ContractOutSourcingDetail outSourcingDetail;
 
     private final String contractId;
-    @NotBlank @Length(min = 3, max = 10)
     private final String name;
     private final String salesForceContractId;
     private final SubmissionType submissionType;
     private final OwnCorporationType ownCorporationType;
-    private final ServiceType serviceType;
+    private final CloudServiceType cloudServiceType;
     private final DealType dealType;
     private final String businessPartnerName;
     private final BusinessPartnerType businessPartnerType;
-    private final CurrencyUnit currencyUnit;
+    private final CurrencyUnitType currencyUnitType;
     private final Integer totalContractAmount;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull(message = "계약 시작일을 선택해 주세요.")
@@ -75,20 +72,20 @@ public final class ContractCreateRequest {
             null,
             null,
             null,
-            SubmissionType.SFDC,
-            OwnCorporationType.CLOUD,
-            ServiceType.MSP,
-            DealType.BILL,
+            SubmissionType.SALESFORCE,
+            OwnCorporationType.MEGAZONE_CLOUD,
+            CloudServiceType.AWS,
+            DealType.CONTRACT,
             null,
             BusinessPartnerType.EXISTING,
-            CurrencyUnit.KRW,
+            CurrencyUnitType.KRW,
             0,
             null,
             null,
             null,
             null,
             null,
-            InvoiceType.TAXES,
+            InvoiceType.TAX,
             null,
             null,
             null,

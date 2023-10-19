@@ -17,7 +17,7 @@ public interface ContractMapper {
     @Mapping(source = "request.contractType", target = "contractTypes.contractType")
     @Mapping(source = "request.dealType", target = "contractTypes.dealType")
     @Mapping(source = "request.submissionType", target = "contractTypes.submissionType")
-    @Mapping(source = "request.currencyUnit", target = "contractMoney.currencyUnit")
+    @Mapping(source = "request.currencyUnitType", target = "contractMoney.currencyUnitType")
     @Mapping(source = "request.totalContractAmount", target = "contractMoney.totalAmount")
     @Mapping(source = "request.contractStartDate", target = "period.startDate")
     @Mapping(source = "request.contractEndDate", target = "period.endDate")

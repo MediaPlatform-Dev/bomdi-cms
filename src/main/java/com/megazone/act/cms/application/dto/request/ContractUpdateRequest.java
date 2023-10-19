@@ -1,17 +1,19 @@
 package com.megazone.act.cms.application.dto.request;
 
-import jakarta.validation.constraints.NotBlank;
+import com.megazone.act.cms.domain.type.ContractType;
+import lombok.AllArgsConstructor;
+import lombok.Setter;
 
-import org.hibernate.validator.constraints.Length;
+@AllArgsConstructor
+public class ContractUpdateRequest {
 
-public record ContractUpdateRequest(
-    @NotBlank @Length(min = 3, max = 10)
-    String name,
-
-    @NotBlank
-    String contents,
-
-    //Optional
-    String contractor
-) {
+    protected ContractType contractType;
+    @Setter
+    protected ContractAwsDetail awsDetail;
+    @Setter
+    protected ContractPsDetail psDetail;
+    @Setter
+    protected ContractMsDetail msDetail;
+    @Setter
+    protected ContractDpDetail dpDetail;
 }

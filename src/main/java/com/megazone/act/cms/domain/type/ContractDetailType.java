@@ -4,11 +4,17 @@ import lombok.Getter;
 
 @Getter
 public enum ContractDetailType {
-    AWS("AWS"), PS("PS"), MS("MS"), DP("DP"), OUTSOURCING("외주");
+    INFRA("INFRA", "Infra"),
+    PROFESSIONAL_SERVICE("PS", "PS"),
+    MANAGED_SERVICE("MS", "MS"),
+    DIGITAL_PRODUCT("DP", "DP"),
+    OUTSOURCING("OUTSOURCE", "외주");
 
-    private final String type;
+    private final String code;
+    private final String description;
 
-    ContractDetailType(String type) {
-        this.type = type;
+    ContractDetailType(String code, String description) {
+        this.code = code;
+        this.description = description;
     }
 }

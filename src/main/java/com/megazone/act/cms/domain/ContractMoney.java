@@ -1,6 +1,6 @@
 package com.megazone.act.cms.domain;
 
-import com.megazone.act.cms.domain.type.CurrencyUnit;
+import com.megazone.act.cms.domain.type.CurrencyUnitType;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -10,7 +10,7 @@ import lombok.*;
 public class ContractMoney {
 
     @Enumerated(value = EnumType.STRING)
-    private CurrencyUnit currencyUnit;
+    private CurrencyUnitType currencyUnitType;
 
     @Column(name = "amt")
     private int amount;
@@ -18,8 +18,8 @@ public class ContractMoney {
     @Column(name = "tot_amt")
     private int totalAmount;
 
-    public ContractMoney(CurrencyUnit currencyUnit, int totalAmount) {
-        this.currencyUnit = currencyUnit;
+    public ContractMoney(CurrencyUnitType currencyUnitType, int totalAmount) {
+        this.currencyUnitType = currencyUnitType;
         this.totalAmount = totalAmount;
         this.amount = totalAmount;
     }

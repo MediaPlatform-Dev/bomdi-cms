@@ -4,11 +4,16 @@ import lombok.Getter;
 
 @Getter
 public enum InvoiceType {
-    TAXES("세금계산서"), NONE("-");
+    TAX("TAX", "세금계산서"),
+    CARD_TAX("CARD", "카드 결제 세금 계산서"),
+    DEPOSIT("DEPOSIT", "예치금"),
+    POA("POA", "POA");
 
-    private final String type;
+    private final String code;
+    private final String description;
 
-    InvoiceType(String type) {
-        this.type = type;
+    InvoiceType(String code, String description) {
+        this.code = code;
+        this.description = description;
     }
 }

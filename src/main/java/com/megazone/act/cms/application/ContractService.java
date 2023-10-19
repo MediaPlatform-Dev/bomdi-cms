@@ -1,7 +1,6 @@
 package com.megazone.act.cms.application;
 
-import com.megazone.act.cms.application.dto.request.ContractCreateRequest;
-import com.megazone.act.cms.application.dto.request.ContractUpdateRequest;
+import com.megazone.act.cms.application.dto.request.*;
 import com.megazone.act.cms.application.dto.response.ContractResponse;
 import com.megazone.act.cms.domain.*;
 import com.megazone.act.cms.domain.repository.*;
@@ -61,13 +60,20 @@ public class ContractService {
     }
 
     @Transactional
-    public void updateContract(Long contractId, ContractUpdateRequest request) {
+    public void updateContract(Long contractId, ContractSalesUpdateRequest request) {
         Contract contract = getContractById(contractId);
-        contract.update(request.name(), request.contents());
+        //contract.update(request.name(), request.contents());
     }
+
+    @Transactional
+    public void updateContract(Long contractId, ContractPurchaseUpdateRequest request) {
+        Contract contract = getContractById(contractId);
+        //contract.update(request.name(), request.contents());
+    }
+
 
     private Contract getContractById(long contractId) {
         return contractRepository.findById(contractId)
-            .orElseThrow(() -> new IllegalArgumentException(contractId + "를 찾을 수 없습니다."));
+            .orElseThrow(() -> new IllegalArgumentException(contractId + " 계약서를 찾을 수 없습니다."));
     }
 }
