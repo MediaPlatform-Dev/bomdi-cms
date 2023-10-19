@@ -403,7 +403,7 @@
 							</div>
 						</div>
 						<div class="tbl_type02">
-							<table id="forList">
+							<table id="clients">
 							<colgroup>
 								<col width="10%">
 								<col width="20%">
@@ -527,7 +527,7 @@
 		</div>
 
 		<script>
-          const rowCount = document.getElementById("forList")
+          const rowCount = document.getElementById("clients")
             .getElementsByTagName("tr")
             .length;
           let rowIndex = rowCount - 1;
@@ -539,7 +539,7 @@
           }
 
           function addClient() {
-            const table = document.getElementById('forList');
+            const table = document.getElementById('clients');
             const newRow = table.insertRow(-1);
 
             const indexCell = newRow.insertCell(0);
