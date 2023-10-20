@@ -36,7 +36,7 @@ public class Contract extends AuditingFields {
 
     @JoinColumn(name = "cstmr_id")
     @ManyToOne(cascade = CascadeType.PERSIST)
-    private BusinessPartner businessPartner;
+    private Customer customer;
 
     @Embedded
     private ContractTypes contractTypes;
@@ -71,7 +71,7 @@ public class Contract extends AuditingFields {
         String name,
         String description,
         Corporation corporation,
-        BusinessPartner businessPartner,
+        Customer customer,
         ContractTypes contractTypes,
         ContractPeriod period,
         ContractMoney contractMoney,
@@ -82,7 +82,7 @@ public class Contract extends AuditingFields {
         this.name = name;
         this.description = description;
         this.corporation = corporation;
-        this.businessPartner = businessPartner;
+        this.customer = customer;
         this.contractTypes = contractTypes;
         this.period = period;
         this.contractMoney = contractMoney;

@@ -1,7 +1,9 @@
 package com.megazone.act.cms.domain.type;
 
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 @Getter
 public enum CloudServiceType {
     AWS("AWS","AWS"),
@@ -11,9 +13,4 @@ public enum CloudServiceType {
 
     private final String code;
     private final String description;
-
-    CloudServiceType(String code, String description) {
-        this.code = code;
-        this.description = description;
-    }
 }

@@ -1,5 +1,6 @@
 package com.megazone.act.cms.application.dto.response;
 
+import com.megazone.act.cms.application.dto.request.ClientInfo;
 import com.megazone.act.cms.domain.Contract;
 import com.megazone.act.cms.domain.type.*;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -57,7 +58,7 @@ public record ContractResponse(
             entity.getCorporation().getName(),
             "",
             entity.getContractTypes().getDealType(),
-            entity.getBusinessPartner().getName(),
+            entity.getCustomer().getName(),
             entity.getPeriod().getStartDate(),
             entity.getPeriod().getEndDate(),
             entity.getContractorName(),

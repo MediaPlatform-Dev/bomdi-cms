@@ -28,13 +28,13 @@ public class ContractController {
 
     @GetMapping("/sales-form")
     public String createSalesForm(Model model) {
-        model.addAttribute(FORM, ContractCreateRequest.EMPTY);
+        model.addAttribute(FORM, ContractSalesCreateRequest.EMPTY);
         return "contracts/create-sales-form";
     }
 
     @PostMapping("/sales-form")
     public String createSales(
-            @Valid @ModelAttribute(FORM) ContractCreateRequest createForm,
+            @Valid @ModelAttribute(FORM) ContractSalesCreateRequest createForm,
             BindingResult bindingResult, Model model
     ) {
         if (bindingResult.hasErrors()) {
@@ -42,29 +42,29 @@ public class ContractController {
             return "contracts/create-sales-form";
         }
 
-        contractService.createContract(createForm);
+        contractService.createContract();
         return REDIRECT_CONTRACTS;
     }
 
-    @GetMapping("/purchase-form")
-    public String createPurchaseForm(Model model) {
-        model.addAttribute(FORM, ContractCreateRequest.EMPTY);
-        return "contracts/create-purchase-form";
-    }
-
-    @PostMapping("/purchase-form")
-    public String createPurchase(
-            @Valid @ModelAttribute(FORM) ContractCreateRequest createForm,
-            BindingResult bindingResult, Model model
-    ) {
-        if (bindingResult.hasErrors()) {
-            model.addAttribute(FORM, createForm);
-            return "contracts/create-purchase-form";
-        }
-
-        contractService.createContract(createForm);
-        return REDIRECT_CONTRACTS;
-    }
+    //@GetMapping("/purchase-form")
+    //public String createPurchaseForm(Model model) {
+    //    model.addAttribute(FORM, ContractCreateRequest.EMPTY);
+    //    return "contracts/create-purchase-form";
+    //}
+    //
+    //@PostMapping("/purchase-form")
+    //public String createPurchase(
+    //        @Valid @ModelAttribute(FORM) ContractCreateRequest createForm,
+    //        BindingResult bindingResult, Model model
+    //) {
+    //    if (bindingResult.hasErrors()) {
+    //        model.addAttribute(FORM, createForm);
+    //        return "contracts/create-purchase-form";
+    //    }
+    //
+    //    contractService.createContract(createForm);
+    //    return REDIRECT_CONTRACTS;
+    //}
 
     @GetMapping
     public String list(Model model) {

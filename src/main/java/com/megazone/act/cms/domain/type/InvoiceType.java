@@ -1,7 +1,9 @@
 package com.megazone.act.cms.domain.type;
 
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 @Getter
 public enum InvoiceType {
     TAX("TAX", "세금계산서"),
@@ -11,9 +13,4 @@ public enum InvoiceType {
 
     private final String code;
     private final String description;
-
-    InvoiceType(String code, String description) {
-        this.code = code;
-        this.description = description;
-    }
 }

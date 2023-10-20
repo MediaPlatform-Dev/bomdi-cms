@@ -6,14 +6,15 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Stream;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class ContractSalesUpdateRequest {
+public class ContractSalesCreateRequest {
+
+    public static final ContractSalesCreateRequest EMPTY = new ContractSalesCreateRequest();
 
     private final ContractType contractType = ContractType.SALES;
     private UpdateAction action;
@@ -41,10 +42,10 @@ public class ContractSalesUpdateRequest {
 
     // 계약 금액
     private PaymentType paymentType = PaymentType.SUM;
-    //private Long amount;
+    private long amount;
     private CurrencyUnitType currencyUnitType = CurrencyUnitType.KRW;
-    //private Long vat;
-    //private Long advancePaymentAmount;
+    private long vat;
+    private long advancePaymentAmount;
     private PaymentType advancePaymentType = PaymentType.SUM;
     private CurrencyUnitType advancePaymentCurrencyUnitType = CurrencyUnitType.KRW;
     private String contractAmountRemark;
@@ -70,7 +71,7 @@ public class ContractSalesUpdateRequest {
     private String remark;
 
     // 고객사 담당자
-    private List<ClientInfo> clientInfos;
+    private List<ClientInfo> clientInfos = new ArrayList<>();
 
     // 증빙 서류
     private MultipartFile contractFile;

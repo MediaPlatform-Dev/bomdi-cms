@@ -21,21 +21,21 @@ public class ContractService {
     private final BusinessPartnerRepository businessPartnerRepository;
 
     @Transactional
-    public void createContract(ContractCreateRequest request) {
+    public void createContract() {
         // TODO: 자사, 고객사 데이터 초기 적재 필요
-        String corporationName = request.getOwnCorporationType().name();
-        Corporation corporation = getCorporationOrElseNew(corporationName);
-        String businessPartnerName = request.getBusinessPartnerName();
-        BusinessPartner businessPartner = getBusinessPartnerOrElseNew(businessPartnerName);
-
-        Contract contract = ContractMapper.INSTANCE.toEntity(corporation, businessPartner, request);
-
-        List<ContractDetail> contractDetails = request.getContractDetails()
-            .stream()
-            .map(it -> new ContractDetail(it.getName(), it.getType()))
-            .toList();
-        contract.addContractDetails(contractDetails);
-        contractRepository.save(contract);
+        //String corporationName = request.getOwnCorporationType().name();
+        //Corporation corporation = getCorporationOrElseNew(corporationName);
+        //String businessPartnerName = request.getBusinessPartnerName();
+        //Customer customer = getBusinessPartnerOrElseNew(businessPartnerName);
+        //
+        //Contract contract = ContractMapper.INSTANCE.toEntity(corporation, customer, request);
+        //
+        //List<ContractDetail> contractDetails = request.getContractDetails()
+        //    .stream()
+        //    .map(it -> new ContractDetail(it.getName(), it.getType()))
+        //    .toList();
+        //contract.addContractDetails(contractDetails);
+        //contractRepository.save(contract);
     }
 
     private Corporation getCorporationOrElseNew(String corporationName) {
@@ -43,9 +43,9 @@ public class ContractService {
             .orElseGet(() -> new Corporation(corporationName));
     }
 
-    private BusinessPartner getBusinessPartnerOrElseNew(String businessPartnerName) {
+    private Customer getBusinessPartnerOrElseNew(String businessPartnerName) {
         return businessPartnerRepository.findByName(businessPartnerName)
-            .orElseGet(() -> new BusinessPartner(businessPartnerName));
+            .orElseGet(() -> new Customer(businessPartnerName));
     }
 
     public List<ContractResponse> getContractList() {

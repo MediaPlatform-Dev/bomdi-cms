@@ -1,10 +1,13 @@
 package com.megazone.act.cms.domain.type;
 
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+
 
 /**
  * 체결 분류 타입
  */
+@RequiredArgsConstructor
 @Getter
 public enum DealType {
     CONTRACT("CNTRCT", "계약서"),
@@ -14,9 +17,4 @@ public enum DealType {
 
     private final String code;
     private final String description;
-
-    DealType(String code, String description) {
-        this.code = code;
-        this.description = description;
-    }
 }

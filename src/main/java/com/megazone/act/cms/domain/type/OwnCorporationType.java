@@ -1,7 +1,9 @@
 package com.megazone.act.cms.domain.type;
 
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 @Getter
 public enum OwnCorporationType {
     MEGAZONE_CLOUD("MZC", "메가존 클라우드"),
@@ -9,9 +11,4 @@ public enum OwnCorporationType {
 
     private final String code;
     private final String description;
-
-    OwnCorporationType(String code, String description) {
-        this.code = code;
-        this.description = description;
-    }
 }

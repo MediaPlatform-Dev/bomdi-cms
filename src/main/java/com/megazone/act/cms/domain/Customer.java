@@ -9,7 +9,7 @@ import org.hibernate.envers.Audited;
 @Audited
 @Table(name = "customer_employee")
 @Entity
-public class BusinessPartner extends AuditingFields {
+public class Customer extends AuditingFields {
 
     @Id @GeneratedValue
     @Column(name = "cstmr_id")
@@ -18,7 +18,7 @@ public class BusinessPartner extends AuditingFields {
     @Column(name = "cstmr_nm")
     private String name;
 
-    public BusinessPartner(String name) {
+    public Customer(String name) {
         this.name = name;
     }
 }

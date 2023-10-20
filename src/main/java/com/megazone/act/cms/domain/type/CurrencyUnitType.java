@@ -1,7 +1,9 @@
 package com.megazone.act.cms.domain.type;
 
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 @Getter
 public enum CurrencyUnitType {
     KRW("KRW", "KRW"),
@@ -10,9 +12,4 @@ public enum CurrencyUnitType {
     private final String code;
 
     private final String description;
-
-    CurrencyUnitType(String code, String description) {
-        this.code = code;
-        this.description = description;
-    }
 }

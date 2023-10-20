@@ -1,7 +1,9 @@
 package com.megazone.act.cms.domain.type;
 
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 @Getter
 public enum ContractDetailType {
     INFRA("INFRA", "Infra"),
@@ -12,9 +14,4 @@ public enum ContractDetailType {
 
     private final String code;
     private final String description;
-
-    ContractDetailType(String code, String description) {
-        this.code = code;
-        this.description = description;
-    }
 }
