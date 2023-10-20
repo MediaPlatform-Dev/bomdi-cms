@@ -23,6 +23,7 @@ repositories {
 
 ext {
     mapStructVersion = '1.5.5.Final'
+    applicationName = 'cms'
 }
 
 dependencies {
@@ -53,4 +54,13 @@ tasks.named('test') {
 
 bootJar {
     archiveFileName = 'application.jar'
+}
+
+tasks.named("bootBuildImage") {
+    docker {
+        host = "unix://${System.properties['user.home']}/.colima/docker.sock"
+    }
+
+    def dateTime = new Date().format('yyyyMMdd-HHmm')
+    imageName = "${applicationName}:${dateTime}"
 }
