@@ -3,6 +3,8 @@ package com.megazone.act.cms.domain.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 /**
  * 임직원
  */
@@ -11,13 +13,12 @@ import lombok.*;
 @Entity
 public class Employee {
 
-    @Column(name = "employee_id")
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String name;
 
-    @JoinColumn(name = "department_id")
-    @ManyToOne
-    private Department department;
+    @JoinColumn(name = "contract_employee_id")
+    @OneToMany
+    private List<ContractEmployee> contractEmployees;
 }

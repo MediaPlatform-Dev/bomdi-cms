@@ -24,6 +24,7 @@ public class ContractService {
 
     @Transactional
     public void createContract(ContractSalesCreateRequest request) {
+        Corporation corporation = corporationRepository.getReferenceById(1L);
         List<Employee> employees = Stream.of(request.getContractManagerId(), request.getSalesManagerId())
             .map(employeeRepository::getReferenceById)
             .toList();
@@ -32,7 +33,7 @@ public class ContractService {
             .map(customerEmployeeRepository::getReferenceById)
             .toList();
 
-        Contract contract = request.toEntity(null, employees, customer, customerEmployees);
+        Contract contract = request.toEntity(corporation, employees, customer, customerEmployees);
         contractRepository.save(contract);
     }
 

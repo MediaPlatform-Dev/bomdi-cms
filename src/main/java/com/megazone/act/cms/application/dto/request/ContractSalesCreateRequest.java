@@ -94,9 +94,9 @@ public class ContractSalesCreateRequest {
             corporation, new ContractTypes(contractType, dealType, submissionType),
             new ContractPeriod(contractStartDate, contractEndDate),
             new ContractMoney(currencyUnitType, amount),
+            employees.stream().map(ContractEmployee::new).toList(),
             customer,
-            employees,
-            customerEmployees,
+            customerEmployees.stream().map(ContractCustomerEmployee::new).toList(),
             getContractDetails()
         );
     }

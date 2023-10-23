@@ -57,12 +57,12 @@ public class Contract extends AuditingFields {
     private List<ContractDetail> contractDetails = new ArrayList<>();
 
     @JoinColumn(name = "employee_id")
-    @OneToMany
-    private List<Employee> employees = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<ContractEmployee> contractEmployees = new ArrayList<>();
 
     @JoinColumn(name = "customer_employee_id")
-    @OneToMany
-    private List<CustomerEmployee> customerEmployees = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<ContractCustomerEmployee> contractCustomerEmployees = new ArrayList<>();
 
     public Contract(String name, String remark) {
         this.name = name;
@@ -77,9 +77,9 @@ public class Contract extends AuditingFields {
         ContractTypes contractTypes,
         ContractPeriod period,
         ContractMoney contractMoney,
+        List<ContractEmployee> contractEmployees,
         Customer customer,
-        List<Employee> employees,
-        List<CustomerEmployee> customerEmployees,
+        List<ContractCustomerEmployee> contractCustomerEmployees,
         List<ContractDetail> contractDetails
     ) {
         this.name = name;
@@ -89,10 +89,20 @@ public class Contract extends AuditingFields {
         this.contractTypes = contractTypes;
         this.period = period;
         this.contractMoney = contractMoney;
+        contractEmployees.forEach(this::addContractEmployee);
         this.customer = customer;
-        this.employees.addAll(employees);
-        this.customerEmployees.addAll(customerEmployees);
+        contractCustomerEmployees.forEach(this::addContractCustomerEmployee);
         this.contractDetails.addAll(contractDetails);
+    }
+
+    private void addContractEmployee(ContractEmployee contractEmployee) {
+        contractEmployee.setContract(this);
+        this.contractEmployees.add(contractEmployee);
+    }
+
+    private void addContractCustomerEmployee(ContractCustomerEmployee contractCustomerEmployee) {
+        contractCustomerEmployee.setContract(this);
+        this.contractCustomerEmployees.add(contractCustomerEmployee);
     }
 
     public void update(String name, String contents) {

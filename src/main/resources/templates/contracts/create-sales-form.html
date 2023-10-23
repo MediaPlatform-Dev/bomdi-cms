@@ -10,7 +10,7 @@
 			<header th:replace="~{fragments/header}"></header>
 			<div class="header">
 				<h2>
-					매출 계약서 수정
+					매출 계약서 등록
 				</h2>
 			</div>
 			<!--계약 유형-->
@@ -398,7 +398,7 @@
 							</div>
 						</div>
 						<div class="tbl_type02">
-							<table id="clients">
+							<table id="customers">
 							<colgroup>
 								<col width="10%">
 								<col width="20%">
@@ -419,7 +419,7 @@
 									<input type="text" class="inputArea" th:value="'구분'" style="width: 100%;" placeholder="구분" />
 								</td>
 								<td>
-									<input type="text" class="inputArea" th:id="'customerEmployeeIds[' + __${stat.index}__ + ']'" th:name="'customerEmployeeIds[' + __${stat.index}__ + ']'" th:value="${id}" style="width: 100%;" placeholder="이름" />
+									<input type="text" class="inputArea" th:field="'customerEmployeeIds[' + __${stat.index}__ + ']'" th:name="'customerEmployeeIds[' + __${stat.index}__ + ']'" th:value="${id}" style="width: 100%;" placeholder="이름" />
 								</td>
 								<td>
 									<!--<input type="text" class="inputArea" th:id="'clientInfos[' + __${stat.index}__ + '].email'" th:name="'clientInfos[' + __${stat.index}__ + '].email'" th:value="${clientInfo.email}" style="width: 100%;" placeholder="이메일" />-->
@@ -532,7 +532,7 @@
           }
 
           function addClient() {
-            const table = document.getElementById('clients');
+            const table = document.getElementById('customers');
             const newRow = table.insertRow(-1);
 
             const indexCell = newRow.insertCell(0);
@@ -548,8 +548,8 @@
                 input.type = 'text';
                 input.value = '';
                 input.placeholder = fields[fieldKey];
-                input.id = `clientInfos${rowIndex}.${fieldKey}`;
-                input.name = `clientInfos[${rowIndex}].${fieldKey}`;
+                input.id = `customerEmployeeIds${rowIndex}`;
+                input.name = `customerEmployeeIds[${rowIndex}]`;
                 cell.appendChild(input);
               });
             rowIndex++;

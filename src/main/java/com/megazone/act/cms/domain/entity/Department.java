@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Department {
 
-    @Column(name = "department_id")
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
