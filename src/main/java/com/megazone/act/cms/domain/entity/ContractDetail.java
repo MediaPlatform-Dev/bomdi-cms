@@ -1,5 +1,7 @@
-package com.megazone.act.cms.domain;
+package com.megazone.act.cms.domain.entity;
 
+import com.megazone.act.cms.domain.AuditingFields;
+import com.megazone.act.cms.domain.ContractPeriod;
 import com.megazone.act.cms.domain.type.*;
 import jakarta.persistence.*;
 import lombok.*;

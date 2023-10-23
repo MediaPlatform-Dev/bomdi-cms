@@ -1,5 +1,6 @@
-package com.megazone.act.cms.domain;
+package com.megazone.act.cms.domain.entity;
 
+import com.megazone.act.cms.domain.AuditingFields;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -9,8 +10,8 @@ import lombok.*;
 @Entity
 public class Corporation extends AuditingFields {
 
-    @Id @GeneratedValue
     @Column(name = "crprtn_id")
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "crprtn_nm")

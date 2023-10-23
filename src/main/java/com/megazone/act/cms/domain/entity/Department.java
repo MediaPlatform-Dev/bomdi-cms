@@ -1,4 +1,4 @@
-package com.megazone.act.cms.domain;
+package com.megazone.act.cms.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 public class Department {
 
     @Column(name = "department_id")
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String name;

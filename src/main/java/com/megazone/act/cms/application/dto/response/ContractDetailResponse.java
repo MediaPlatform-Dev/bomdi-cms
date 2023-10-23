@@ -1,6 +1,6 @@
 package com.megazone.act.cms.application.dto.response;
 
-import com.megazone.act.cms.domain.ContractDetail;
+import com.megazone.act.cms.domain.entity.ContractDetail;
 import com.megazone.act.cms.domain.type.ContractDetailType;
 
 public record ContractDetailResponse(

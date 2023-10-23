@@ -2,7 +2,7 @@ package com.megazone.act.cms.application;
 
 import com.megazone.act.cms.application.dto.request.*;
 import com.megazone.act.cms.application.dto.response.ContractResponse;
-import com.megazone.act.cms.domain.*;
+import com.megazone.act.cms.domain.entity.*;
 import com.megazone.act.cms.domain.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
@@ -62,6 +62,6 @@ public class ContractService {
 
     private Contract getContractById(long contractId) {
         return contractRepository.findById(contractId)
-            .orElseThrow(() -> new IllegalArgumentException(contractId + " 계약서를 찾을 수 없습니다."));
+            .orElseThrow(() -> new IllegalArgumentException("계약서를 찾을 수 없습니다. - " + contractId));
     }
 }

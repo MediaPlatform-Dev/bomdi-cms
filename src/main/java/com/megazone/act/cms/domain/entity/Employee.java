@@ -1,4 +1,4 @@
-package com.megazone.act.cms.domain;
+package com.megazone.act.cms.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -11,7 +11,8 @@ import lombok.*;
 @Entity
 public class Employee {
 
-    @Id @GeneratedValue
+    @Column(name = "employee_id")
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String name;

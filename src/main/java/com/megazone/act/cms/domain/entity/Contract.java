@@ -1,5 +1,6 @@
-package com.megazone.act.cms.domain;
+package com.megazone.act.cms.domain.entity;
 
+import com.megazone.act.cms.domain.*;
 import com.megazone.act.cms.domain.type.ContractStatus;
 import jakarta.persistence.*;
 import lombok.*;
@@ -30,11 +31,11 @@ public class Contract extends AuditingFields {
     private String remark;
 
     @JoinColumn(name = "crprtn_id")
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     private Corporation corporation;
 
-    @JoinColumn(name = "cstmr_id")
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "customer_id")
+    @ManyToOne
     private Customer customer;
 
     @Embedded
@@ -55,9 +56,11 @@ public class Contract extends AuditingFields {
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "contract")
     private List<ContractDetail> contractDetails = new ArrayList<>();
 
+    @JoinColumn(name = "employee_id")
     @OneToMany
     private List<Employee> employees = new ArrayList<>();
 
+    @JoinColumn(name = "customer_employee_id")
     @OneToMany
     private List<CustomerEmployee> customerEmployees = new ArrayList<>();
 
@@ -87,9 +90,9 @@ public class Contract extends AuditingFields {
         this.period = period;
         this.contractMoney = contractMoney;
         this.customer = customer;
-        this.employees = employees;
-        this.customerEmployees = customerEmployees;
-        this.contractDetails = contractDetails;
+        this.employees.addAll(employees);
+        this.customerEmployees.addAll(customerEmployees);
+        this.contractDetails.addAll(contractDetails);
     }
 
     public void update(String name, String contents) {

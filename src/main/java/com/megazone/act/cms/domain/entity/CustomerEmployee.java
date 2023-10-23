@@ -1,5 +1,6 @@
-package com.megazone.act.cms.domain;
+package com.megazone.act.cms.domain.entity;
 
+import com.megazone.act.cms.domain.AuditingFields;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -11,7 +12,7 @@ import lombok.*;
 @Entity
 public class CustomerEmployee extends AuditingFields {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String name;

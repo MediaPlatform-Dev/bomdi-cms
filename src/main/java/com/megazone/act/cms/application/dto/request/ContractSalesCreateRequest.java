@@ -1,6 +1,7 @@
 package com.megazone.act.cms.application.dto.request;
 
 import com.megazone.act.cms.domain.*;
+import com.megazone.act.cms.domain.entity.*;
 import com.megazone.act.cms.domain.type.*;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;

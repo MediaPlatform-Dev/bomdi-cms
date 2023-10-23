@@ -1,7 +1,6 @@
 package com.megazone.act.cms.domain.repository;
 
-import com.megazone.act.cms.domain.Contract;
-import com.megazone.act.cms.domain.repository.ContractRepository;
+import com.megazone.act.cms.domain.entity.Contract;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
