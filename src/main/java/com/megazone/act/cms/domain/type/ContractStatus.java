@@ -6,7 +6,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Getter
 public enum ContractStatus {
-    SAVED("저장"), APPLIED("신청"), APPROVED("승인"), REJECTED("반려");
+    SAVED("SAVED", "임시 저장"),
+    APPLIED("APPLIED", "등록"),
+    APPROVED("APPROVED", "승인"),
+    REJECTED("REJECTED", "반려");
 
+    private final String code;
     private final String description;
 }

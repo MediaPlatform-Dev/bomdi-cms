@@ -3,12 +3,10 @@ package com.megazone.act.cms.domain;
 import com.megazone.act.cms.domain.type.*;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.envers.Audited;
 
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-@Audited
 @Table(name = "TB_CNTRCT_D")
 @Entity
 public class ContractDetail extends AuditingFields {

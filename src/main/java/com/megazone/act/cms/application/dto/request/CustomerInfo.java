@@ -6,9 +6,9 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public final class ClientInfo {
+public final class CustomerInfo {
 
-    public static final ClientInfo EMPTY = new ClientInfo("", "", "");
+    public static final CustomerInfo EMPTY = new CustomerInfo("", "", "");
 
     private String name;
     private String email;

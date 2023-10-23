@@ -1,6 +1,6 @@
 package com.megazone.act.cms.application.dto.response;
 
-import com.megazone.act.cms.application.dto.request.ClientInfo;
+import com.megazone.act.cms.application.dto.request.CustomerInfo;
 import com.megazone.act.cms.domain.Contract;
 import com.megazone.act.cms.domain.type.*;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -37,8 +37,8 @@ public record ContractResponse(
     String taxesReceivedEmail,
     String description,
     CurrencyUnitType currencyUnitType,
-    int amount,
-    List<ClientInfo> clientInfos,
+    long amount,
+    List<CustomerInfo> customerInfos,
     List<ContractDetailResponse> contractDetails
 
 ) {
@@ -47,10 +47,10 @@ public record ContractResponse(
         return new ContractResponse(
             entity.getId(),
             entity.getContractTypes().getContractType(),
-            entity.getNumber(),
+            entity.getNo(),
             LocalDate.now(),
             entity.getName(),
-            entity.getSalesForceContractId()
+            entity.getSalesForceContractNo()
             ,"",
             false,
             false,
@@ -61,12 +61,12 @@ public record ContractResponse(
             entity.getCustomer().getName(),
             entity.getPeriod().getStartDate(),
             entity.getPeriod().getEndDate(),
-            entity.getContractorName(),
-            entity.getSalesPersonName(),
+            "",
+            "",
             InvoiceType.TAX,
             LocalDate.now(),
             "",
-            entity.getDescription(),
+            entity.getRemark(),
             entity.getContractMoney().getCurrencyUnitType(),
             entity.getContractMoney().getAmount(),
             List.of(),

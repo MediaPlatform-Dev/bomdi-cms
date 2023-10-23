@@ -66,7 +66,7 @@ public class ContractPurchaseUpdateRequest {
     private String remark;
 
     // 고객사 담당자
-    private List<ClientInfo> clientInfos;
+    private List<CustomerInfo> customerInfos;
 
     // 증빙 서류
     private MultipartFile contractFile;

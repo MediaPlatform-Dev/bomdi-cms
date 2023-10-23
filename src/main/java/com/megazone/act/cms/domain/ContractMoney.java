@@ -13,12 +13,12 @@ public class ContractMoney {
     private CurrencyUnitType currencyUnitType;
 
     @Column(name = "amt")
-    private int amount;
+    private long amount;
 
     @Column(name = "tot_amt")
-    private int totalAmount;
+    private long totalAmount;
 
-    public ContractMoney(CurrencyUnitType currencyUnitType, int totalAmount) {
+    public ContractMoney(CurrencyUnitType currencyUnitType, long totalAmount) {
         this.currencyUnitType = currencyUnitType;
         this.totalAmount = totalAmount;
         this.amount = totalAmount;

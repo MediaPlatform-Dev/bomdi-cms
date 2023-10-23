@@ -3,13 +3,12 @@ package com.megazone.act.cms.domain;
 import com.megazone.act.cms.domain.type.ContractStatus;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.envers.Audited;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-@Audited
 @Table(name = "tb_cntrct_m")
 @Entity
 public class Contract extends AuditingFields {
@@ -19,7 +18,7 @@ public class Contract extends AuditingFields {
     private Long id;
 
     @Column(name = "cntrct_no")
-    private String number;
+    private String no;
 
     @Column(name = "cntrct_ver")
     private Double version = 1.0;
@@ -28,7 +27,7 @@ public class Contract extends AuditingFields {
     private String name;
 
     @Column(name = "rmrk")
-    private String description;
+    private String remark;
 
     @JoinColumn(name = "crprtn_id")
     @ManyToOne(cascade = CascadeType.PERSIST)
@@ -47,53 +46,55 @@ public class Contract extends AuditingFields {
     @Embedded
     private ContractMoney contractMoney;
 
-    @Column(name = "cntrct_chrgr_nm")
-    private String contractorName;
-
-    @Column(name = "sales_chrgr_nm")
-    private String salesPersonName;
-
     @Enumerated(EnumType.STRING)
     private ContractStatus status = ContractStatus.SAVED;
 
     @Column(name = "src_system_ref_id")
-    private String salesForceContractId;
+    private String salesForceContractNo;
 
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "contract")
     private List<ContractDetail> contractDetails = new ArrayList<>();
 
-    public Contract(String name, String description, String contractorName) {
-        this(name, description, null, null, null, null, null, contractorName, null, null);
+    @OneToMany
+    private List<Employee> employees = new ArrayList<>();
+
+    @OneToMany
+    private List<CustomerEmployee> customerEmployees = new ArrayList<>();
+
+    public Contract(String name, String remark) {
+        this.name = name;
+        this.remark = remark;
     }
 
-    @Builder
     public Contract(
         String name,
-        String description,
+        String remark,
+        String salesForceContractNo,
         Corporation corporation,
-        Customer customer,
         ContractTypes contractTypes,
         ContractPeriod period,
         ContractMoney contractMoney,
-        String contractorName,
-        String salesPersonName,
-        String salesForceContractId
+        Customer customer,
+        List<Employee> employees,
+        List<CustomerEmployee> customerEmployees,
+        List<ContractDetail> contractDetails
     ) {
         this.name = name;
-        this.description = description;
+        this.remark = remark;
+        this.salesForceContractNo = salesForceContractNo;
         this.corporation = corporation;
-        this.customer = customer;
         this.contractTypes = contractTypes;
         this.period = period;
         this.contractMoney = contractMoney;
-        this.contractorName = contractorName;
-        this.salesPersonName = salesPersonName;
-        this.salesForceContractId = salesForceContractId;
+        this.customer = customer;
+        this.employees = employees;
+        this.customerEmployees = customerEmployees;
+        this.contractDetails = contractDetails;
     }
 
     public void update(String name, String contents) {
         this.name = name;
-        this.description = contents;
+        this.remark = contents;
     }
 
     public void addContractDetails(List<ContractDetail> contractDetails) {

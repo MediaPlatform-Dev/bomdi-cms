@@ -44,7 +44,7 @@ class ContractRepositoryTest {
     }
 
     private Contract saveFixture() {
-        Contract contract = new Contract("테스트", "테스트", "성준혁");
+        Contract contract = new Contract("테스트", "테스트");
         contractRepository.save(contract);
         return contract;
     }

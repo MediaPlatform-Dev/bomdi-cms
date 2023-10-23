@@ -10,42 +10,30 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 @Service
 public class ContractService {
-
     private final ContractRepository contractRepository;
     private final CorporationRepository corporationRepository;
-    private final BusinessPartnerRepository businessPartnerRepository;
+    private final EmployeeRepository employeeRepository;
+    private final CustomerRepository customerRepository;
+    private final CustomerEmployeeRepository customerEmployeeRepository;
 
     @Transactional
-    public void createContract() {
-        // TODO: 자사, 고객사 데이터 초기 적재 필요
-        //String corporationName = request.getOwnCorporationType().name();
-        //Corporation corporation = getCorporationOrElseNew(corporationName);
-        //String businessPartnerName = request.getBusinessPartnerName();
-        //Customer customer = getBusinessPartnerOrElseNew(businessPartnerName);
-        //
-        //Contract contract = ContractMapper.INSTANCE.toEntity(corporation, customer, request);
-        //
-        //List<ContractDetail> contractDetails = request.getContractDetails()
-        //    .stream()
-        //    .map(it -> new ContractDetail(it.getName(), it.getType()))
-        //    .toList();
-        //contract.addContractDetails(contractDetails);
-        //contractRepository.save(contract);
-    }
+    public void createContract(ContractSalesCreateRequest request) {
+        List<Employee> employees = Stream.of(request.getContractManagerId(), request.getSalesManagerId())
+            .map(employeeRepository::getReferenceById)
+            .toList();
+        Customer customer = customerRepository.getReferenceById(request.getCustomerId());
+        List<CustomerEmployee> customerEmployees = request.getCustomerEmployeeIds().stream()
+            .map(customerEmployeeRepository::getReferenceById)
+            .toList();
 
-    private Corporation getCorporationOrElseNew(String corporationName) {
-        return corporationRepository.findByName(corporationName)
-            .orElseGet(() -> new Corporation(corporationName));
-    }
-
-    private Customer getBusinessPartnerOrElseNew(String businessPartnerName) {
-        return businessPartnerRepository.findByName(businessPartnerName)
-            .orElseGet(() -> new Customer(businessPartnerName));
+        Contract contract = request.toEntity(null, employees, customer, customerEmployees);
+        contractRepository.save(contract);
     }
 
     public List<ContractResponse> getContractList() {

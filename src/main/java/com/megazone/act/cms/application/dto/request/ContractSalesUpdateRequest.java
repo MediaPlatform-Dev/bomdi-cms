@@ -59,8 +59,6 @@ public class ContractSalesUpdateRequest {
     private LocalDate invoiceEndDate;
 
     // TODO: 지불 조건 필드
-    private String contractManagerName; // TODO: 자사 담당자 테이블 생성 시 ID로 변경이 필요함
-    private String salesManagerName; // TODO: 자사 담당자 테이블 생성 시 ID로 변경이 필요함
     // TODO: EDM Link URL 무엇인지..
     private InvoiceType invoiceType = InvoiceType.TAX;
     // TODO: 세금계산서 작성일 기타 부분이 애매함
@@ -70,7 +68,7 @@ public class ContractSalesUpdateRequest {
     private String remark;
 
     // 고객사 담당자
-    private List<ClientInfo> clientInfos;
+    private List<CustomerInfo> customerInfos;
 
     // 증빙 서류
     private MultipartFile contractFile;

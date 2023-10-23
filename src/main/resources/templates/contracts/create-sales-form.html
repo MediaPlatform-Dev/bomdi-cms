@@ -413,7 +413,7 @@
 								<th class="center">이메일</th>
 								<th class="center">비고</th>
 							</tr>
-							<tr th:each="clientInfo, stat : *{clientInfos}">
+							<tr th:each="clientInfo, stat : *{getCustomerInfos}">
 								<td class="center" th:text="${stat.index} + 1"></td>
 								<td>
 									<input type="text" class="inputArea" th:value="'구분'" style="width: 100%;" placeholder="구분" />
@@ -523,7 +523,7 @@
 		</div>
 
 		<script>
-          let rowIndex = 1;
+          let rowIndex = 0;
           const fields = {
             type: "담당자 구분",
             name: "이름",

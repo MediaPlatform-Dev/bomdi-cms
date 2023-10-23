@@ -1,5 +1,6 @@
 package com.megazone.act.cms.application.dto.request;
 
+import com.megazone.act.cms.domain.*;
 import com.megazone.act.cms.domain.type.*;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -38,7 +39,7 @@ public class ContractSalesCreateRequest {
     private CloudServiceType cloudServiceType = CloudServiceType.AZURE;
     private DealType dealType = DealType.CONTRACT;
 
-    private String customerName; // TODO: 고객사 테이블 생성 시 ID로 변경이 필요함
+    private int customerId;
 
     // 계약 금액
     private PaymentType paymentType = PaymentType.SUM;
@@ -60,8 +61,8 @@ public class ContractSalesCreateRequest {
     private LocalDate invoiceEndDate;
 
     // TODO: 지불 조건 필드
-    private String contractManagerName; // TODO: 자사 담당자 테이블 생성 시 ID로 변경이 필요함
-    private String salesManagerName; // TODO: 자사 담당자 테이블 생성 시 ID로 변경이 필요함
+    private int contractManagerId;
+    private int salesManagerId;
     // TODO: EDM Link URL 무엇인지..
     private InvoiceType invoiceType = InvoiceType.TAX;
     // TODO: 세금계산서 작성일 기타 부분이 애매함
@@ -71,7 +72,7 @@ public class ContractSalesCreateRequest {
     private String remark;
 
     // 고객사 담당자
-    private List<ClientInfo> clientInfos = new ArrayList<>();
+    private List<Integer> customerEmployeeIds = new ArrayList<>();
 
     // 증빙 서류
     private MultipartFile contractFile;
@@ -81,9 +82,28 @@ public class ContractSalesCreateRequest {
 
     private String documentRemark;
 
-    public List<AbstractContractDetail> getContractDetails() {
+    public Contract toEntity(
+        Corporation corporation,
+        List<Employee> employees,
+        Customer customer,
+        List<CustomerEmployee> customerEmployees
+    ) {
+
+        return new Contract(name, remark, salesForceContractNo,
+            corporation, new ContractTypes(contractType, dealType, submissionType),
+            new ContractPeriod(contractStartDate, contractEndDate),
+            new ContractMoney(currencyUnitType, amount),
+            customer,
+            employees,
+            customerEmployees,
+            getContractDetails()
+        );
+    }
+
+    private List<ContractDetail> getContractDetails() {
         return Stream.of(awsDetail, psDetail, msDetail, dpDetail)
             .filter(Objects::nonNull)
+            .map(it -> new ContractDetail(it.getName(), it.getType()))
             .toList();
     }
 }

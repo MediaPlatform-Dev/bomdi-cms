@@ -4,20 +4,23 @@ import jakarta.persistence.*;
 import lombok.*;
 
 /**
- * 거래처
+ * 거래처 직원
  */
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
-public class Customer extends AuditingFields {
+public class CustomerEmployee extends AuditingFields {
 
-    @Column(name = "customer_id")
     @Id @GeneratedValue
     private Integer id;
 
     private String name;
 
-    public Customer(String name) {
+    @JoinColumn(name = "customer_id")
+    @ManyToOne
+    private Customer customer;
+
+    public CustomerEmployee(String name) {
         this.name = name;
     }
 }

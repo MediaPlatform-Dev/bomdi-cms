@@ -418,7 +418,7 @@
 								<th class="center">이메일</th>
 								<th class="center">비고</th>
 							</tr>
-							<tr th:each="clientInfo, stat : ${contract.clientInfos}">
+							<tr th:each="clientInfo, stat : ${contract.customerInfos}">
 								<td class="center" th:text="${stat.index} + 1"></td>
 								<td>
 									<input type="text" class="inputArea" th:value="'구분'" style="width: 100%;" placeholder="구분" />

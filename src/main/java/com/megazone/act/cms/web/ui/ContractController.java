@@ -42,7 +42,7 @@ public class ContractController {
             return "contracts/create-sales-form";
         }
 
-        contractService.createContract();
+        contractService.createContract(createForm);
         return REDIRECT_CONTRACTS;
     }
 
@@ -104,7 +104,6 @@ public class ContractController {
             Model model
     ) {
         if (bindingResult.hasErrors()) {
-            // id // name
             model.addAttribute(FORM, updateForm);
             return "contracts/update-sales-form";
         }
