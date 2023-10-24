@@ -127,15 +127,10 @@
 								</select>
 							</td>
 
-							<th>자사법인</th>
+							<th>자사 법인</th>
 							<td>
 								<!--TODO: ENUM 타입으로 변환 후 응답-->
-								<select style="width:100%;" readonly>
-									<option>메가존 클라우드
-									</option>
-									<option>메가존 디지털
-									</option>
-								</select>
+								<input readonly type="text" class="inputArea" value="메가존 클라우드" style="width: 100%;">
 							</td>
 						</tr>
 						<tr>
@@ -172,10 +167,10 @@
 							</td>
 						</tr>
 						<tr>
-							<th>계약금액</th>
+							<th>계약 금액</th>
 							<td colspan="5">
 								<div>
-									총금액 <input type="text" class="inputArea" th:field="*{amount}" style="width: 50%;">
+									금액 <input type="text" class="inputArea" th:field="*{amount}" style="width: 50%;">
 
 									<select th:field="*{currencyUnitType}" style="width:10%;">
 										<option th:each="type : *{currencyUnitType.values}"
@@ -184,7 +179,7 @@
 										</option>
 									</select>
 
-									<input type="checkbox" /> 부가세 포함
+									<input type="checkbox" th:field="*{hasVat}"/> 부가세 포함
 								</div>
 
 

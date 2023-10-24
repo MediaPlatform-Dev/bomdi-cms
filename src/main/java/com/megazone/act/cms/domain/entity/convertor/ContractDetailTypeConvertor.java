@@ -1,16 +1,16 @@
 package com.megazone.act.cms.domain.entity.convertor;
 
-import com.megazone.act.cms.domain.type.ContractDetail;
+import com.megazone.act.cms.domain.type.DealType;
 
-public class ContractDetailTypeConvertor extends CodeEnumConvertor<ContractDetail> {
+public class ContractDetailTypeConvertor extends CodeEnumConvertor<DealType> {
 
     @Override
-    Class<ContractDetail> supprotClass() {
-        return ContractDetail.class;
+    Class<DealType> supprotClass() {
+        return DealType.class;
     }
 
     @Override
-    ContractDetail defaultType() {
-        return ContractDetail.CONTRACT;
+    DealType defaultType() {
+        return DealType.CONTRACT;
     }
 }

@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
  */
 @RequiredArgsConstructor
 @Getter
-public enum ContractDetail implements CodeEnum {
+public enum DealType implements CodeEnum {
     CONTRACT("CNTRCT", "계약서"),
     NON_CONTRACT("N-CNTRCT", "기타 비계약서"),
     SALES_ESTIMATE("ESTMT", "매출 견적서"),

@@ -23,7 +23,7 @@ public record ContractResponse(
     SubmissionType submissionType,
     String corporationName,
     String serviceType,
-    ContractDetail dealType,
+    DealType dealType,
     String businessPartnerName,
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     LocalDate contractStartDate,
@@ -68,7 +68,7 @@ public record ContractResponse(
             "",
             entity.getRemark(),
             entity.getContractMoney().getCurrencyUnitType(),
-            entity.getContractMoney().getAmount(),
+            entity.getContractMoney().getTotalAmount(),
             List.of(),
             entity.getContractDetails()
                 .stream()

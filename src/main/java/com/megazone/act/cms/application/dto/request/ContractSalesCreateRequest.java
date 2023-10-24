@@ -2,7 +2,7 @@ package com.megazone.act.cms.application.dto.request;
 
 import com.megazone.act.cms.domain.entity.*;
 import com.megazone.act.cms.domain.type.*;
-import com.megazone.act.cms.domain.type.ContractDetail;
+import com.megazone.act.cms.domain.type.DealType;
 import com.megazone.act.cms.domain.vo.*;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -16,10 +16,9 @@ import java.util.stream.Stream;
 @NoArgsConstructor
 @Data
 public class ContractSalesCreateRequest {
-
     public static final ContractSalesCreateRequest EMPTY = new ContractSalesCreateRequest();
 
-    private final ContractType contractType = ContractType.SALES;
+    private static final ContractType contractType = ContractType.SALES;
     private UpdateAction action;
     private ContractAwsDetail awsDetail;
     private ContractPsDetail psDetail;
@@ -30,27 +29,18 @@ public class ContractSalesCreateRequest {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate contractDate;
     private String name;
-    private boolean isRenewal;
     private String salesForceContractNo;
-    private String beforeRenewalContractNo; // TODO: 네이밍 수정 예정
-
+    // TODO: 계약 관계 ID
 
     // 계약 기본 정보2
     private SubmissionType submissionType = SubmissionType.SALESFORCE;
-    private OwnCorporationType ownCorporationType = OwnCorporationType.MEGAZONE_DIGITAL;
     private CloudServiceType cloudServiceType = CloudServiceType.AZURE;
-    private ContractDetail dealType = ContractDetail.CONTRACT;
-
+    private DealType dealType = DealType.CONTRACT;
     private int customerId;
 
-    // 계약 금액
-    private PaymentType paymentType = PaymentType.SUM;
     private long amount;
     private CurrencyUnitType currencyUnitType = CurrencyUnitType.KRW;
-    private long vat;
-    private long advancePaymentAmount;
-    private PaymentType advancePaymentType = PaymentType.SUM;
-    private CurrencyUnitType advancePaymentCurrencyUnitType = CurrencyUnitType.KRW;
+    private boolean hasVat;
     private String contractAmountRemark;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -62,27 +52,35 @@ public class ContractSalesCreateRequest {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate invoiceEndDate;
 
-    // TODO: 지불 조건 필드
-    private int contractManagerId;
-    private int salesManagerId;
-    // TODO: EDM Link URL 무엇인지..
+    // TODO: 통합 빌링 위치 애매함
     private InvoiceType invoiceType = InvoiceType.TAX;
-    // TODO: 세금계산서 작성일 기타 부분이 애매함
+    // TODO: 세금계산서 작성일
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate taxCreatedDate;
     private String taxReceivedEmail;
 
-    // TODO: AWS 통합 빌링(신규) 위치 애매함
+    private int contractManagerId;
+    private int salesManagerId;
+    // TODO: EDM Link URL 무엇인지
+    private String edmLinkUrl;
     private String remark;
 
-    // 고객사 담당자
     private List<Integer> customerEmployeeIds = new ArrayList<>();
+
+    // TODO: 사업 수행 담당자 Id
+    private List<Integer> pmIds = new ArrayList<>();
 
     // 증빙 서류
     private MultipartFile contractFile;
     private MultipartFile businessRegistrationFile;
     private MultipartFile secretContractFile;
-    // TODO: 첨부 문서 리스트 여러개인지..
-
+    // TODO: 파일 변수 네이밍 정의
+    private MultipartFile file1;
+    private MultipartFile file2;
+    private MultipartFile file3;
     private String documentRemark;
+
+    // TODO: 추가 사항
 
     public Contract toEntity(
         Corporation corporation,
@@ -90,11 +88,10 @@ public class ContractSalesCreateRequest {
         Customer customer,
         List<CustomerEmployee> customerEmployees
     ) {
-
         return new Contract(name, remark, salesForceContractNo,
-            corporation, new ContractTypes(contractType, dealType, submissionType),
+            corporation, new ContractTypes(contractType, dealType, submissionType, invoiceType),
             new ContractPeriod(contractStartDate, contractEndDate),
-            new ContractMoney(currencyUnitType, amount),
+            new ContractMoney(currencyUnitType, amount, hasVat),
             employees.stream().map(ContractEmployee::new).toList(),
             customer,
             customerEmployees.stream().map(ContractCustomerEmployee::new).toList(),

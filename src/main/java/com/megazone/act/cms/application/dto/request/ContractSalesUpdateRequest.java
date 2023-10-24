@@ -35,7 +35,7 @@ public class ContractSalesUpdateRequest {
     private SubmissionType submissionType = SubmissionType.SALESFORCE;
     private OwnCorporationType ownCorporationType = OwnCorporationType.MEGAZONE_DIGITAL;
     private CloudServiceType cloudServiceType = CloudServiceType.AZURE;
-    private ContractDetail dealType = ContractDetail.CONTRACT;
+    private DealType dealType = DealType.CONTRACT;
 
     private String customerName; // TODO: 고객사 테이블 생성 시 ID로 변경이 필요함
 
