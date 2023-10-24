@@ -1,7 +1,6 @@
 package com.megazone.act.cms.domain.entity;
 
-import com.megazone.act.cms.domain.entity.convertor.ContractDetailTypeConvertor;
-import com.megazone.act.cms.domain.entity.convertor.ContractStatusConvertor;
+import com.megazone.act.cms.domain.entity.convertor.*;
 import com.megazone.act.cms.domain.vo.ContractPeriod;
 import com.megazone.act.cms.domain.type.*;
 import jakarta.persistence.*;
@@ -32,7 +31,7 @@ public class ContractDetail extends AuditingFields {
     private ContractDetailType contractDetailType;
 
     @Column(name = "svc_type_cd")
-    @Convert(converter = CloudServiceType.class)
+    @Convert(converter = CloudServiceTypeConvertor.class)
     private CloudServiceType cloudServiceType;
 
     @Embedded
