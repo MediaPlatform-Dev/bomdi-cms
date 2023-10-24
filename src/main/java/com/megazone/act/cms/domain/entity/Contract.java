@@ -42,7 +42,12 @@ public class Contract extends AuditingFields {
     private ContractTypes contractTypes;
 
     @Embedded
-    private ContractPeriod period;
+    private Period contractPeriod;
+
+    @AttributeOverride(name = "startDate", column = @Column(name = "invoice_strt_ymd"))
+    @AttributeOverride(name = "endDate", column = @Column(name = "invoice_end_ymd"))
+    @Embedded
+    private Period invoicePeriod;
 
     @Embedded
     private ContractMoney contractMoney;
@@ -73,7 +78,8 @@ public class Contract extends AuditingFields {
         String salesForceContractNo,
         Corporation corporation,
         ContractTypes contractTypes,
-        ContractPeriod period,
+        Period contractPeriod,
+        Period invoicePeriod,
         ContractMoney contractMoney,
         List<ContractEmployee> contractEmployees,
         Customer customer,
@@ -86,7 +92,8 @@ public class Contract extends AuditingFields {
         this.salesForceContractNo = salesForceContractNo;
         this.corporation = corporation;
         this.contractTypes = contractTypes;
-        this.period = period;
+        this.contractPeriod = contractPeriod;
+        this.invoicePeriod = invoicePeriod;
         this.contractMoney = contractMoney;
         contractEmployees.forEach(this::addContractEmployee);
         this.customer = customer;

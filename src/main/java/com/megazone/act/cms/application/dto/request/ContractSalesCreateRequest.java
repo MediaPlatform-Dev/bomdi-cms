@@ -90,7 +90,8 @@ public class ContractSalesCreateRequest {
     ) {
         return new Contract(name, remark, salesForceContractNo,
             corporation, new ContractTypes(contractType, dealType, submissionType, invoiceType),
-            new ContractPeriod(contractStartDate, contractEndDate),
+            new Period(contractStartDate, contractEndDate),
+            new Period(invoiceStartDate, invoiceEndDate),
             new ContractMoney(currencyUnitType, amount, hasVat),
             employees.stream().map(ContractEmployee::new).toList(),
             customer,

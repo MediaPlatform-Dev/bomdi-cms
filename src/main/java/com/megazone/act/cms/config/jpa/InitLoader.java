@@ -37,10 +37,11 @@ public class InitLoader implements ApplicationListener<ApplicationStartedEvent> 
         customerEmployeeRepository.save(customerEmployee);
 
         ContractTypes types = new ContractTypes(ContractType.SALES, DealType.CONTRACT, SubmissionType.SALESFORCE, InvoiceType.TAX);
-        ContractPeriod period = new ContractPeriod(LocalDate.now(), LocalDate.now().plusDays(7));
+        Period period = new Period(LocalDate.now(), LocalDate.now().plusDays(7));
+        Period invoicePeriod = new Period(LocalDate.now(), LocalDate.now().plusDays(30));
         ContractMoney money = new ContractMoney(CurrencyUnitType.KRW, 3000, true);
         Contract contract = new Contract("테스트 계약", "테스트 계약 특이사항", "SF 계약번호",
-            corporation, types, period, money,
+            corporation, types, period, invoicePeriod, money,
             employees,
             customer,
             List.of(new ContractCustomerEmployee(customerEmployee)),

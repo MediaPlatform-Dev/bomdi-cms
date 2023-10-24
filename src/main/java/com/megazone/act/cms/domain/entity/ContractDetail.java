@@ -1,7 +1,7 @@
 package com.megazone.act.cms.domain.entity;
 
 import com.megazone.act.cms.domain.entity.convertor.*;
-import com.megazone.act.cms.domain.vo.ContractPeriod;
+import com.megazone.act.cms.domain.vo.Period;
 import com.megazone.act.cms.domain.type.*;
 import jakarta.persistence.*;
 import lombok.*;
@@ -35,7 +35,7 @@ public class ContractDetail extends AuditingFields {
     private CloudServiceType cloudServiceType;
 
     @Embedded
-    private ContractPeriod period;
+    private Period period;
 
     @Convert(converter = ContractStatusConvertor.class)
     private ContractStatus status;
@@ -48,7 +48,7 @@ public class ContractDetail extends AuditingFields {
         this(name, 0.0, "", type, CloudServiceType.AWS, null);
     }
 
-    public ContractDetail(String name, Double version, String number, ContractDetailType type, CloudServiceType cloudServiceType, ContractPeriod period) {
+    public ContractDetail(String name, Double version, String number, ContractDetailType type, CloudServiceType cloudServiceType, Period period) {
         this.name = name;
         this.version = version;
         this.number = number;
