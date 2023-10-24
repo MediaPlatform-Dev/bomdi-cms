@@ -56,7 +56,7 @@
 				<!-- 검색 End -->
 				<!-- 검색 결과 Start -->
 				<div class="tbl_type01 yScroll">
-					<table id="customers-api">
+					<table id="contract-customers">
 					<colgroup>
 						<col style="width:20%;">
 						<col style="width:50%;">
@@ -67,16 +67,7 @@
 						<th>거래처명</th>
 						<th>선택</th>
 					</tr>
-					<!--<tr>-->
-					<!--  <td>구분</td>-->
-					<!--  <td class="center"><a class="clickable">삼성전자</a></td>-->
-					<!--  <td class="center"><a onclick="selectCustomerRow('삼성전자');" class="btn_U">선택</a></td>-->
-					<!--</tr>-->
-					<!--<tr>-->
-					<!--  <td>구분</td>-->
-					<!--  <td class="center"><a class="clickable">LG전자</a></td>-->
-					<!--  <td class="center"><a onclick="selectCustomerRow('LG전자');" class="btn_U">선택</a></td>-->
-					<!--</tr>-->
+
 					</table>
 				</div>
 				<!-- 검색 결과 End -->
@@ -88,11 +79,10 @@
 			</div>
 		</div>
 	</div>
-</div>
 
-<script>
-  const table = document.querySelector('#customers-api');
-  const base = `
+	<script>
+      const customertable = document.querySelector('#contract-customers');
+      const customerbase = `
 		        <colgroup>
                     <col style="width:20%;">
                     <col style="width:50%;">
@@ -105,32 +95,39 @@
                 </tr>
 			`;
 
-  function openCustomerPopup() {
-    fetchAndRender('/customers', renderCustomers)
-  }
+      function openCustomerPopup() {
+        fetchAndRender('/customers', renderCustomers)
+      }
 
-  function renderCustomers(data) {
-    table.innerHTML = data.map(item => `
+
+      function renderCustomers(data) {
+        customertable.innerHTML = customerbase + data.map(item => `
 	<tr>
         <td>구분</td>
         <td class="center">
             <a class="clickable">${item.name}</a>
         </td>
         <td class="center">
-            <a class="btn_U" onclick="selectCustomerRow('${item.name}')">선택</a>
+            <a class="btn_U" onclick="selectCustomerRow(${item.id} , '${item.name}')">선택</a>
         </td>
     </tr>`
-    )
-      .join('');
-    document.body.querySelector('#customer-popup').style.display = "block";
-  }
+        )
+          .join('');
+        document.body.querySelector('#customer-popup').style.display = "block";
+      }
 
-  function selectCustomerRow(name) {
-    alert(name);
-    document.body.querySelector('#customer-popup').style.display = "none";
-  }
+      function selectCustomerRow(id, name) {
+        const customerId = document.getElementById("customerId");
+        const customerName = document.getElementById("customerName");
+        customerId.value = id;
+        customerName.value = name;
 
-  function closeCustomerPopup() {
-    document.body.querySelector('#customer-popup').style.display = "none";
-  }
-</script>
+        document.body.querySelector('#customer-popup').style.display = "none";
+      }
+
+      function closeCustomerPopup() {
+        document.body.querySelector('#customer-popup').style.display = "none";
+      }
+	</script>
+</div>
+

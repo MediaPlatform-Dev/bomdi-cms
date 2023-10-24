@@ -36,17 +36,17 @@
 									</div>
 									<div class="chkbx">
 										<input type="checkbox" id="PS" name="PS" value="PS"
-												onchange="toggleSectionVisibility('PS', 'ps-section');"/>
+												onchange="toggleSectionVisibility('PS', 'ps-section');" />
 										<label for="PS">PS</label>
 									</div>
 									<div class="chkbx">
 										<input type="checkbox" id="MS" name="MS" value="MS"
-												onchange="toggleSectionVisibility('MS', 'ms-section');"/>
+												onchange="toggleSectionVisibility('MS', 'ms-section');" />
 										<label for="MS">MS</label>
 									</div>
 									<div class="chkbx">
 										<input type="checkbox" id="DP" name="DP" value="DP"
-												onchange="toggleSectionVisibility('DP', 'dp-section');"/>
+												onchange="toggleSectionVisibility('DP', 'dp-section');" />
 										<label for="DP">DP</label>
 									</div>
 								</div>
@@ -165,7 +165,8 @@
 							<th>거래처</th>
 							<td colspan="5">
 								<div class="search">
-									<input type="text" class="inputArea" th:field="*{customerId}" style="width: 40%;">
+									<input disabled type="text" class="inputArea" id="customerName" value="" style="width: 40%;">
+									<input type="hidden" th:field="*{customerId}">
 									<a onclick="openCustomerPopup();" class="btn_s mL5">검색 </a>
 								</div>
 							</td>
@@ -254,16 +255,16 @@
 							<th>세금계산서 작성일</th>
 							<td colspan="1">
 								<div class="search">
-								<select style="width:50%;">
-									<option>당월(말일)
-									</option>
-									<option>익월(1일)
-									</option>
-									<option>기타
-									</option>
-								</select>
+									<select style="width:50%;">
+										<option>당월(말일)
+										</option>
+										<option>익월(1일)
+										</option>
+										<option>기타
+										</option>
+									</select>
 
-									<input type="text" class="inputDate" data-mindate="today" style="width: 50%;"/>
+									<input type="text" class="inputDate" data-mindate="today" style="width: 50%;" />
 								</div>
 							</td>
 
@@ -277,7 +278,8 @@
 							<th>세일즈 담당자/부서</th>
 							<td>
 								<div class="search">
-									<input type="text" class="inputArea" th:field="*{salesManagerId}" placeholder="세일즈 담당자" style="width: 100%;">
+									<input disabled type="text" class="inputArea" id="salesManagerName" value="" placeholder="세일즈 담당자" style="width: 100%;">
+									<input type="hidden" th:field="*{salesManagerId}">
 									<a onclick="openChargerPopup();" class="btn_s mL5">검색</a>
 								</div>
 							</td>
@@ -285,7 +287,8 @@
 							<th>계약팀 담당자</th>
 							<td>
 								<div class="search">
-									<input type="text" class="inputArea" th:field="*{contractManagerId}" placeholder="계약팀 담당자" style="width: 100%;">
+									<input disabled type="text" class="inputArea" id="ContractManagerName" value="" placeholder="계약팀 담당자" style="width: 100%;">
+									<input type="hidden" th:field="*{salesManagerId}">
 									<a onclick="openChargerPopup();" class="btn_s mL5">검색</a>
 								</div>
 							</td>
@@ -357,7 +360,7 @@
 							</div>
 						</div>
 						<div class="tbl_type02">
-							<table id="">
+							<table>
 							<colgroup>
 								<col width="10%">
 								<col width="25%">
@@ -498,28 +501,28 @@
 					<div class="section" id="infra-section" style="display: none">
 						<div class="subTitle02">
 							<h3>AWS</h3>
-							<input type="text" class="inputArea" th:field="*{awsDetail.name}" placeholder="이름" th:disabled="true"/>
+							<input type="text" class="inputArea" th:field="*{awsDetail.name}" placeholder="이름" th:disabled="true" />
 						</div>
 					</div>
 
 					<div class="section" id="ps-section" style="display: none">
 						<div class="subTitle02">
 							<h3>PS</h3>
-							<input type="text" class="inputArea" th:field="*{psDetail.name}" placeholder="이름" th:disabled="true"/>
+							<input type="text" class="inputArea" th:field="*{psDetail.name}" placeholder="이름" th:disabled="true" />
 						</div>
 					</div>
 
 					<div class="section" id="ms-section" style="display: none">
 						<div class="subTitle02">
 							<h3>MS</h3>
-							<input type="text" class="inputArea" th:field="*{msDetail.name}" placeholder="이름" th:disabled="true"/>
+							<input type="text" class="inputArea" th:field="*{msDetail.name}" placeholder="이름" th:disabled="true" />
 						</div>
 					</div>
 
 					<div class="section" id="dp-section" style="display: none">
 						<div class="subTitle02">
 							<h3>DP</h3>
-							<input type="text" class="inputArea" th:field="*{dpDetail.name}" placeholder="이름" th:disabled="true"/>
+							<input type="text" class="inputArea" th:field="*{dpDetail.name}" placeholder="이름" th:disabled="true" />
 						</div>
 					</div>
 
@@ -611,9 +614,9 @@
 		</script>
 
 		<!--거래처 레이어팝업-->
-		<div th:replace="~{fragments/customer-popup}"></div>
+		<div th:replace="~{fragments/contract-customer-popup}"></div>
 		<!--계약담당자 레이어팝업-->
-		<div th:replace="~{fragments/contract-charger-popup}"></div>
+		<div th:replace="~{fragments/contract-employees-popup}"></div>
 	</div>
 </body>
 </html>
