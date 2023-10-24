@@ -8,4 +8,9 @@ public class ContractDetailTypeConvertor extends CodeEnumConvertor<ContractDetai
     Class<ContractDetail> supprotClass() {
         return ContractDetail.class;
     }
+
+    @Override
+    ContractDetail defaultType() {
+        return ContractDetail.CONTRACT;
+    }
 }

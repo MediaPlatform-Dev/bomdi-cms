@@ -12,8 +12,10 @@ abstract class CodeEnumConvertor<T extends Enum<T> & CodeEnum> implements Attrib
 
     @Override
     public T convertToEntityAttribute(String dbData) {
-        return CodeEnum.of(supprotClass(), dbData);
+        return CodeEnum.of(supprotClass(), dbData).orElseGet(this::defaultType);
     }
 
     abstract Class<T> supprotClass();
+
+    abstract T defaultType();
 }

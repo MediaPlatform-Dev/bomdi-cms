@@ -8,4 +8,9 @@ public class CloudServiceTypeConvertor extends CodeEnumConvertor<CloudServiceTyp
     Class<CloudServiceType> supprotClass() {
         return CloudServiceType.class;
     }
+
+    @Override
+    CloudServiceType defaultType() {
+        return CloudServiceType.AWS;
+    }
 }

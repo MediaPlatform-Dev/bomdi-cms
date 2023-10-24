@@ -8,4 +8,9 @@ public class CurrencyUnitTypeConvertor extends CodeEnumConvertor<CurrencyUnitTyp
     Class<CurrencyUnitType> supprotClass() {
         return CurrencyUnitType.class;
     }
+
+    @Override
+    CurrencyUnitType defaultType() {
+        return CurrencyUnitType.KRW;
+    }
 }

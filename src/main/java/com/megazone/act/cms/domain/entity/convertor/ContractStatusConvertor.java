@@ -8,4 +8,9 @@ public class ContractStatusConvertor extends CodeEnumConvertor<ContractStatus> {
     Class<ContractStatus> supprotClass() {
         return ContractStatus.class;
     }
+
+    @Override
+    ContractStatus defaultType() {
+        return ContractStatus.SAVED;
+    }
 }

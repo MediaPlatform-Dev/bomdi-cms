@@ -8,4 +8,9 @@ public class SubmissionTypeConvertor extends CodeEnumConvertor<SubmissionType> {
     Class<SubmissionType> supprotClass() {
         return SubmissionType.class;
     }
+
+    @Override
+    SubmissionType defaultType() {
+        return SubmissionType.SALESFORCE;
+    }
 }
