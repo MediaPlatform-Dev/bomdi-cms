@@ -197,9 +197,9 @@
 							<th>계약기간</th>
 							<td colspan="2">
 								<div class="search">
-									<input type="text" class="inputDate" th:field="*{contractStartDate}" data-mindate="today" style="width: 100%;"/>
+									<input type="text" class="inputDate" th:field="*{contractStartDate}" data-mindate="today" style="width: 100%;" />
 									<p class="mL10 mR10">~</p>
-									<input type="text" class="inputDate" th:field="*{contractEndDate}" data-mindate="today" style="width: 100%;"/>
+									<input type="text" class="inputDate" th:field="*{contractEndDate}" data-mindate="today" style="width: 100%;" />
 								</div>
 							</td>
 							<td>
@@ -614,16 +614,6 @@
 		<div th:replace="~{fragments/customer-popup}"></div>
 		<!--계약담당자 레이어팝업-->
 		<div th:replace="~{fragments/contract-charger-popup}"></div>
-
-		<script>
-          function openCustomerPopup() {
-            document.body.querySelector('#customer-popup').style.display = "block";
-          }
-
-          function openChargerPopup() {
-            document.body.querySelector('#contract-charger-popup').style.display = "block";
-          }
-		</script>
 	</div>
 </body>
 </html>
