@@ -14,7 +14,7 @@ spring:
           envers:
             audit_table_suffix: _history
             store_data_at_delete: true
-    open-in-view: true
+    open-in-view: false
     defer-datasource-initialization: true
 
   h2:
