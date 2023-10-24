@@ -33,25 +33,25 @@
 									<div class="chkbx">
 										<input type="checkbox" id="Infra" name="Infra" value="Infra"
 												onchange="toggleSectionVisibility('Infra', 'infra-section');"
-												th:checked="${contract.getContractDetailTypes().contains('Infra')}"/>
+												th:checked="${contract.getContractDetailTypes().contains('Infra')}" />
 										<label for="Infra">Infra</label>
 									</div>
 									<div class="chkbx">
 										<input type="checkbox" id="PS" name="PS" value="PS"
 												onchange="toggleSectionVisibility('PS', 'ps-section');"
-												th:checked="${contract.getContractDetailTypes().contains('PS')}"/>
+												th:checked="${contract.getContractDetailTypes().contains('PS')}" />
 										<label for="PS">PS</label>
 									</div>
 									<div class="chkbx">
 										<input type="checkbox" id="MS" name="MS" value="MS"
 												onchange="toggleSectionVisibility('MS', 'ms-section');"
-												th:checked="${contract.getContractDetailTypes().contains('MS')}"/>
+												th:checked="${contract.getContractDetailTypes().contains('MS')}" />
 										<label for="MS">MS</label>
 									</div>
 									<div class="chkbx">
 										<input type="checkbox" id="DP" name="DP" value="DP"
 												onchange="toggleSectionVisibility('DP', 'dp-section');"
-												th:checked="${contract.getContractDetailTypes().contains('DP')}"/>
+												th:checked="${contract.getContractDetailTypes().contains('DP')}" />
 										<label for="DP">DP</label>
 									</div>
 								</div>
@@ -216,9 +216,9 @@
 							<th>계약기간</th>
 							<td colspan="2">
 								<div class="search">
-									<input type="text" class="inputDate" th:id="contractStartDate" th:name="contractStartDate" th:value="${contract.contractStartDate}" data-mindate="today" style="width: 100%;"/>
+									<input type="text" class="inputDate" th:id="contractStartDate" th:name="contractStartDate" th:value="${contract.contractStartDate}" data-mindate="today" style="width: 100%;" />
 									<p class="mL10 mR10">~</p>
-									<input type="text" class="inputDate" th:id="contractEndDate" th:name="contractEndDate" th:value="${contract.contractEndDate}" data-mindate="today" style="width: 100%;"/>
+									<input type="text" class="inputDate" th:id="contractEndDate" th:name="contractEndDate" th:value="${contract.contractEndDate}" data-mindate="today" style="width: 100%;" />
 								</div>
 							</td>
 							<td>
@@ -540,28 +540,28 @@
 					<div class="section" id="infra-section" style="display: none">
 						<div class="subTitle02">
 							<h3>AWS</h3>
-							<input type="text" class="inputArea" th:id="awsDetail.name" th:name="awsDetail.name" th:value="'임시'" placeholder="이름" th:disabled="true"/>
+							<input type="text" class="inputArea" th:id="awsDetail.name" th:name="awsDetail.name" th:value="'임시'" placeholder="이름" th:disabled="true" />
 						</div>
 					</div>
 
 					<div class="section" id="ps-section" style="display: none">
 						<div class="subTitle02">
 							<h3>PS</h3>
-							<input type="text" class="inputArea" th:id="psDetail.name" th:name="psDetail.name" th:value="'임시'" placeholder="이름" th:disabled="true"/>
+							<input type="text" class="inputArea" th:id="psDetail.name" th:name="psDetail.name" th:value="'임시'" placeholder="이름" th:disabled="true" />
 						</div>
 					</div>
 
 					<div class="section" id="ms-section" style="display: none">
 						<div class="subTitle02">
 							<h3>MS</h3>
-							<input type="text" class="inputArea" th:id="msDetail.name" th:name="msDetail.name" th:value="'임시'" placeholder="이름" th:disabled="true"/>
+							<input type="text" class="inputArea" th:id="msDetail.name" th:name="msDetail.name" th:value="'임시'" placeholder="이름" th:disabled="true" />
 						</div>
 					</div>
 
 					<div class="section" id="dp-section" style="display: none">
 						<div class="subTitle02">
 							<h3>DP</h3>
-							<input type="text" class="inputArea" th:id="dpDetail.name" th:name="dpDetail.name" th:value="'임시'" placeholder="이름" th:disabled="true"/>
+							<input type="text" class="inputArea" th:id="dpDetail.name" th:name="dpDetail.name" th:value="'임시'" placeholder="이름" th:disabled="true" />
 						</div>
 					</div>
 
@@ -656,9 +656,9 @@
 		</script>
 
 		<!--거래처 레이어팝업-->
-		<div th:replace="~{fragments/customer-popup}"></div>
+		<div th:replace="~{fragments/contract-customer-popup}"></div>
 		<!--계약담당자 레이어팝업-->
-		<div th:replace="~{fragments/contract-charger-popup}"></div>
+		<div th:replace="~{fragments/contract-employees-popup}"></div>
 
 		<script>
           function openCustomerPopup() {

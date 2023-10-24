@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Getter
-public enum ContractStatus {
+public enum ContractStatus implements CodeEnum {
     SAVED("SAVED", "임시 저장"),
     APPLIED("APPLIED", "등록"),
     APPROVED("APPROVED", "승인"),

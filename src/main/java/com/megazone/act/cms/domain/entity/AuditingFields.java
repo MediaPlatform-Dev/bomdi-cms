@@ -1,17 +1,16 @@
-package com.megazone.act.cms.domain;
+package com.megazone.act.cms.domain.entity;
 
 import jakarta.persistence.*;
-
-import java.time.LocalDateTime;
-
 import lombok.Getter;
 import org.springframework.data.annotation.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.time.LocalDateTime;
+
 @Getter
 @EntityListeners(AuditingEntityListener.class)
 @MappedSuperclass
-public abstract class AuditingFields {
+abstract class AuditingFields {
 
     @Column(name = "reg_dttm", updatable = false)
     @CreatedDate

@@ -1,0 +1,157 @@
+<div id="employee-popup" class="layout-popup popup-sm-x" style="display:none;"> <!-- style="display:block;" -->
+	<!--.popup-lg {min-width:1300px;}
+		  .popup-md{min-width:1030px;}
+		  .popup-sm{min-width:830px;}
+		  .popup-sm-x{min-width:650px;}-->
+	<div class="popup-layer">
+		<div class="popup-close"><a href="#" onclick="closeEmployeePopup();" class="btn-popup-close">Close</a></div>
+		<div class="popup-header">
+			<h2 class="popup-title">계약담당자</h2>
+		</div>
+		<div class="popup-container">
+			<div class="popup-contents">
+				<!-- 검색 Start -->
+				<div class="contentsRow content-bottom">
+					<div class="contentsCell contentsCellFlex">
+						<div class="writeForm search-writeForm row02">
+							<!-- row04 : 4item, row03 : 3item, row02 : 2item, row01 : 1item -->
+							<ul>
+								<li class="">
+									<div class="writeForm-wrap">
+										<dl>
+											<dt>
+												<label for="부서">부서</label>
+											</dt>
+											<dd>
+												<div class="mz-select">
+													<select id="부서" name="" style="width:100%;">
+														<option value="">부서명</option>
+													</select>
+												</div>
+											</dd>
+										</dl>
+									</div>
+								</li>
+								<li class="">
+									<div class="writeForm-wrap">
+										<dl>
+											<dt>
+												<label for="담당자">담당자</label>
+											</dt>
+											<dd>
+												<div class="mz-textfld">
+													<input class="inputArea" style="width: 100%;" type="text" value="" placeholder="이름">
+												</div>
+											</dd>
+										</dl>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="contentsCell contentsCellAuto">
+						<div class="btnArea"><a href="#" class="btn btnType04">검색</a></div>
+					</div>
+				</div>
+				<!-- 검색 End -->
+				<!-- 검색 결과 Start -->
+				<div class="tbl_type01 yScroll">
+					<table id="contract-employees">
+					<colgroup>
+						<col style="width:40%;">
+						<col style="width:30%;">
+						<col>
+					</colgroup>
+					<tr>
+						<th>부서</th>
+						<th>이름</th>
+						<th>선택</th>
+					</tr>
+					</table>
+				</div>
+				<!-- 검색 결과 End -->
+				<!-- 버튼 -->
+				<div class="pop-btn-wrap">
+					<button type="button" onclick="closeEmployeePopup();" class="btn btn-blue">취소</button>
+				</div>
+				<!-- 버튼 -->
+			</div>
+		</div>
+	</div>
+
+	<script>
+      const employeesTable = document.querySelector('#contract-employees');
+      const employeesBase = `
+           <colgroup>
+            <col style="width:40%;">
+            <col style="width:30%;">
+            <col >
+          </colgroup>
+          <tr>
+            <th>부서</th>
+            <th>이름</th>
+            <th>선택</th>
+          </tr>
+        `;
+
+      function openContractChargerPopup() {
+        fetchAndRender("/employees", renderContractEmployees)
+      }
+
+      function openSalesChargerPopup() {
+        fetchAndRender("/employees", renderSalesEmployees)
+      }
+
+      function renderContractEmployees(data) {
+        employeesTable.innerHTML = employeesBase + data.map(item => `
+          <tr>
+            <td>부서</td>
+            <td class="center">
+                <a class="clickable">${item.name}</a>
+            </td>
+            <td class="center">
+              <a class="btn_U" onclick="selectContractEmployeeRow( ${item.id}, '${item.name}');" >선택</a>
+            </td>
+          </tr>`
+        )
+          .join("");
+        document.body.querySelector('#employee-popup').style.display = "block";
+      }
+
+      function renderSalesEmployees(data) {
+        employeesTable.innerHTML = employeesBase + data.map(item => `
+          <tr>
+            <td>부서</td>
+            <td class="center">
+                <a class="clickable">${item.name}</a>
+            </td>
+            <td class="center">
+              <a class="btn_U" onclick="selectSalesEmployeeRow( ${item.id}, '${item.name}');" >선택</a>
+            </td>
+          </tr>`
+        )
+          .join("");
+        document.body.querySelector('#employee-popup').style.display = "block";
+      }
+
+      function selectContractEmployeeRow(id, name) {
+        const employeeId = document.getElementById("contractManagerId");
+        const employeeName = document.getElementById("contractManagerName")
+        employeeId.value = id;
+        employeeName.value = name;
+        document.body.querySelector('#employee-popup').style.display = "none";
+      }
+
+      function selectSalesEmployeeRow(id, name) {
+        const employeeId = document.getElementById("salesManagerId");
+        const employeeName = document.getElementById("salesManagerName")
+        employeeId.value = id;
+        employeeName.value = name;
+        document.body.querySelector('#employee-popup').style.display = "none";
+      }
+
+      function closeEmployeePopup() {
+        document.body.querySelector('#employee-popup').style.display = "none";
+      }
+	</script>
+</div>

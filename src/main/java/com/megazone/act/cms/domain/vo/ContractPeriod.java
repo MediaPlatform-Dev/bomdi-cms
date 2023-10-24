@@ -1,4 +1,4 @@
-package com.megazone.act.cms.domain;
+package com.megazone.act.cms.domain.vo;
 
 import jakarta.persistence.*;
 import lombok.*;

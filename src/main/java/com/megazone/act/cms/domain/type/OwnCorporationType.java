@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Getter
-public enum OwnCorporationType {
+public enum OwnCorporationType implements CodeEnum {
     MEGAZONE_CLOUD("MZC", "메가존 클라우드"),
     MEGAZONE_DIGITAL("MZD", "메가존 디지털");
 

@@ -1,6 +1,5 @@
 package com.megazone.act.cms.domain.entity;
 
-import com.megazone.act.cms.domain.AuditingFields;
 import jakarta.persistence.*;
 import lombok.*;
 

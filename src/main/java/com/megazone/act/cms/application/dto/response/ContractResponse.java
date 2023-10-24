@@ -68,7 +68,7 @@ public record ContractResponse(
             "",
             entity.getRemark(),
             entity.getContractMoney().getCurrencyUnitType(),
-            entity.getContractMoney().getAmount(),
+            entity.getContractMoney().getTotalAmount(),
             List.of(),
             entity.getContractDetails()
                 .stream()

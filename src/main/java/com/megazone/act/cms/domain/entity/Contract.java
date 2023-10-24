@@ -1,7 +1,8 @@
 package com.megazone.act.cms.domain.entity;
 
-import com.megazone.act.cms.domain.*;
+import com.megazone.act.cms.domain.entity.convertor.ContractStatusConvertor;
 import com.megazone.act.cms.domain.type.ContractStatus;
+import com.megazone.act.cms.domain.vo.*;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -47,7 +48,7 @@ public class Contract extends AuditingFields {
     @Embedded
     private ContractMoney contractMoney;
 
-    @Enumerated(EnumType.STRING)
+    @Convert(converter = ContractStatusConvertor.class)
     private ContractStatus status = ContractStatus.SAVED;
 
     @Column(name = "src_system_ref_id")
@@ -56,12 +57,10 @@ public class Contract extends AuditingFields {
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "contract")
     private List<ContractDetail> contractDetails = new ArrayList<>();
 
-    @JoinColumn(name = "employee_id")
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "contract")
     private List<ContractEmployee> contractEmployees = new ArrayList<>();
 
-    @JoinColumn(name = "customer_employee_id")
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "contract")
     private List<ContractCustomerEmployee> contractCustomerEmployees = new ArrayList<>();
 
     public Contract(String name, String remark) {
