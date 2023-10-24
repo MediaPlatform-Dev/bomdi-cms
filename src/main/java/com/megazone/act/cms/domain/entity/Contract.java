@@ -91,7 +91,7 @@ public class Contract extends AuditingFields {
         contractEmployees.forEach(this::addContractEmployee);
         this.customer = customer;
         contractCustomerEmployees.forEach(this::addContractCustomerEmployee);
-        this.contractDetails.addAll(contractDetails);
+        contractDetails.forEach(this::addContractDetail);
     }
 
     private void addContractEmployee(ContractEmployee contractEmployee) {
@@ -104,17 +104,13 @@ public class Contract extends AuditingFields {
         this.contractCustomerEmployees.add(contractCustomerEmployee);
     }
 
-    public void update(String name, String contents) {
-        this.name = name;
-        this.remark = contents;
-    }
-
-    public void addContractDetails(List<ContractDetail> contractDetails) {
-        contractDetails.forEach(this::addContractDetail);
-    }
-
     private void addContractDetail(ContractDetail contractDetail) {
         contractDetail.setContract(this);
         contractDetails.add(contractDetail);
+    }
+
+    public void update(String name, String contents) {
+        this.name = name;
+        this.remark = contents;
     }
 }

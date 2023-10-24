@@ -20,4 +20,8 @@ public class Employee {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee")
     private List<ContractEmployee> contractEmployees;
+
+    public Employee(String name) {
+        this.name = name;
+    }
 }
