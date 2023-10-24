@@ -149,7 +149,7 @@
 							<th>체결 분류</th>
 							<td>
 								<select th:field="*{dealType}" style="width:100%;">
-									<option th:each="type : *{dealType}"
+									<option th:each="type : *{dealType.values()}"
 											th:value="${type.name}"
 											th:text="${type.description}">
 									</option>

@@ -18,7 +18,6 @@ public class Employee {
 
     private String name;
 
-    @JoinColumn(name = "contract_employee_id")
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee")
     private List<ContractEmployee> contractEmployees;
 }

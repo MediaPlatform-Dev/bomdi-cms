@@ -16,7 +16,7 @@ public class ContractTypes {
     private ContractType contractType;
 
     @Column(name = "cntrct_clas_cd")
-    @Convert(converter = ContractDetailTypeConvertor.class)
+    @Convert(converter = DealTypeConvertor.class)
     private DealType dealType;
 
     @Column(name = "src_system_cd")

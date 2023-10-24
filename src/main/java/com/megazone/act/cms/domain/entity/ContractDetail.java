@@ -45,7 +45,7 @@ public class ContractDetail extends AuditingFields {
     private Contract contract;
 
     public ContractDetail(String name, ContractDetailType type) {
-        this(name, 0.0, "", type, null, null);
+        this(name, 0.0, "", type, CloudServiceType.AWS, null);
     }
 
     public ContractDetail(String name, Double version, String number, ContractDetailType type, CloudServiceType cloudServiceType, ContractPeriod period) {
