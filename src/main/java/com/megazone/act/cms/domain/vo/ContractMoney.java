@@ -1,5 +1,6 @@
-package com.megazone.act.cms.domain;
+package com.megazone.act.cms.domain.vo;
 
+import com.megazone.act.cms.domain.entity.convertor.CurrencyUnitTypeConvertor;
 import com.megazone.act.cms.domain.type.CurrencyUnitType;
 import jakarta.persistence.*;
 import lombok.*;
@@ -9,7 +10,7 @@ import lombok.*;
 @Embeddable
 public class ContractMoney {
 
-    @Enumerated(value = EnumType.STRING)
+    @Convert(converter = CurrencyUnitTypeConvertor.class)
     private CurrencyUnitType currencyUnitType;
 
     @Column(name = "amt")

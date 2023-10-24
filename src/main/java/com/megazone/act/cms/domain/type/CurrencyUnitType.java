@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Getter
-public enum CurrencyUnitType {
+public enum CurrencyUnitType implements CodeEnum {
     KRW("KRW", "KRW"),
     USD("USD", "USD");
 

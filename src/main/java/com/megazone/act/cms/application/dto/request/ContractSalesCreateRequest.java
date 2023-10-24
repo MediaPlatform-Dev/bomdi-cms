@@ -1,8 +1,9 @@
 package com.megazone.act.cms.application.dto.request;
 
-import com.megazone.act.cms.domain.*;
 import com.megazone.act.cms.domain.entity.*;
 import com.megazone.act.cms.domain.type.*;
+import com.megazone.act.cms.domain.type.ContractDetail;
+import com.megazone.act.cms.domain.vo.*;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
@@ -38,7 +39,7 @@ public class ContractSalesCreateRequest {
     private SubmissionType submissionType = SubmissionType.SALESFORCE;
     private OwnCorporationType ownCorporationType = OwnCorporationType.MEGAZONE_DIGITAL;
     private CloudServiceType cloudServiceType = CloudServiceType.AZURE;
-    private DealType dealType = DealType.CONTRACT;
+    private ContractDetail dealType = ContractDetail.CONTRACT;
 
     private int customerId;
 
@@ -101,10 +102,10 @@ public class ContractSalesCreateRequest {
         );
     }
 
-    private List<ContractDetail> getContractDetails() {
+    private List<com.megazone.act.cms.domain.entity.ContractDetail> getContractDetails() {
         return Stream.of(awsDetail, psDetail, msDetail, dpDetail)
             .filter(Objects::nonNull)
-            .map(it -> new ContractDetail(it.getName(), it.getType()))
+            .map(it -> new com.megazone.act.cms.domain.entity.ContractDetail(it.getName(), it.getType()))
             .toList();
     }
 }

@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Getter
-public enum SubmissionType {
+public enum SubmissionType implements CodeEnum {
     SALESFORCE("SFDC", "SFDC"),
     G_MAIL("GMAIL", "G-MAIL");
 
