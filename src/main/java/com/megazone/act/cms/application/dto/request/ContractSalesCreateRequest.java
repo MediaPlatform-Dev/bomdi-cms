@@ -20,7 +20,7 @@ public class ContractSalesCreateRequest {
 
     private static final ContractType contractType = ContractType.SALES;
     private UpdateAction action;
-    private ContractAwsDetail awsDetail;
+    private ContractInfraDetail infraDetail;
     private ContractPsDetail psDetail;
     private ContractMsDetail msDetail;
     private ContractDpDetail dpDetail;
@@ -100,7 +100,7 @@ public class ContractSalesCreateRequest {
     }
 
     private List<com.megazone.act.cms.domain.entity.ContractDetail> getContractDetails() {
-        return Stream.of(awsDetail, psDetail, msDetail, dpDetail)
+        return Stream.of(infraDetail, psDetail, msDetail, dpDetail)
             .filter(Objects::nonNull)
             .map(it -> new com.megazone.act.cms.domain.entity.ContractDetail(it.getName(), it.getType()))
             .toList();

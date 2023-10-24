@@ -14,7 +14,7 @@ public class ContractPurchaseUpdateRequest {
 
     private final ContractType contractType = ContractType.PURCHASE;
     @Setter
-    private ContractAwsDetail awsDetail;
+    private ContractInfraDetail infraDetail;
     @Setter
     private ContractPsDetail psDetail;
     @Setter
