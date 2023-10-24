@@ -6,9 +6,10 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Getter
 public enum ContractType implements CodeEnum {
-    SALES("SALES", "매출"),
-    PURCHASE("PURCHASE", "매입");
+    SALES("SALES", "S", "매출"),
+    PURCHASE("PURCHASE", "P", "매입");
 
     private final String code;
+    private final String codeForNo;
     private final String description;
 }

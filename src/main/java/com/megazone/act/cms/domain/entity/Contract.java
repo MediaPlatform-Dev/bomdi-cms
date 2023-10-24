@@ -6,8 +6,7 @@ import com.megazone.act.cms.domain.vo.*;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
@@ -82,6 +81,7 @@ public class Contract extends AuditingFields {
         List<ContractDetail> contractDetails
     ) {
         this.name = name;
+        this.no = randomNo(contractTypes);
         this.remark = remark;
         this.salesForceContractNo = salesForceContractNo;
         this.corporation = corporation;
@@ -92,6 +92,11 @@ public class Contract extends AuditingFields {
         this.customer = customer;
         contractCustomerEmployees.forEach(this::addContractCustomerEmployee);
         contractDetails.forEach(this::addContractDetail);
+    }
+
+    private static String randomNo(ContractTypes contractTypes) {
+        return String.format("%s-%s-%s",
+            "MZC", contractTypes.codeForNo(), UUID.randomUUID().toString().substring(0, 6).toUpperCase());
     }
 
     private void addContractEmployee(ContractEmployee contractEmployee) {

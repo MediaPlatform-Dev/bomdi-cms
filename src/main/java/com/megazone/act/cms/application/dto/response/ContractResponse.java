@@ -78,6 +78,6 @@ public record ContractResponse(
     }
 
     public List<String> getContractDetailTypes() {
-        return contractDetails.stream().map(it -> it.type().getDescription()).toList();
+        return contractDetails.stream().map(it -> it.type().getCode()).toList();
     }
 }
