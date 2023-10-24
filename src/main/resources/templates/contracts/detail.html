@@ -15,7 +15,7 @@
         </div>
         <div class="content">
                 <div class="subTitle02">
-                    <h3>계약 유형</h3>
+                    <h3>계약유형</h3>
                 </div>
                 <div class="tbl_type02">
                     <table>
@@ -71,17 +71,35 @@
                                     <p class="inputArea" th:text="${contract.no}" style="width: 100%;"></p>
                                 </td>
 
+                                <th>계약일</th>
+                                <td>
+                                    <p class="inputArea" th:text="${contract.contractDate()}" style="width: 100%"></p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th th:for="name">계약명</th>
+                                <td>
+                                    <p class="inputArea" th:text="${contract.name}" style="width: 100%;"></p>
+                                </td>
+
                                 <th th:for="salesForceContractId">Sales Force 계약 번호</th>
                                 <td>
                                     <p class="inputArea" th:text="${contract.salesForceContractNo}" style="width: 100%;"></p>
                                 </td>
                             </tr>
-                            <tr>
-                                <th th:for="name">계약명</th>
-                                <td colspan="5">
-                                    <p class="inputArea" th:text="${contract.name}" style="width: 100%;"></p>
-                                </td>
-                            </tr>
+
+                        <tr>
+                            <th>매출 갱신 여부</th>
+                            <td>
+                                <p class="inputArea" style="width: 100%"></p>
+                            </td>
+
+                            <th>갱신전 매출 계약번호</th>
+                            <td>
+                                <p class="inputArea" style="width: 100%"></p>
+                            </td>
+                        </tr>
                         </table>
                     </div>
                 </div>
@@ -93,13 +111,12 @@
                 <div class="tbl_type02">
                     <table>
                         <colgroup>
-                            <col style="width: 15%;">
-                            <col style="width: 18%;">
-                            <col style="width: 15%;">
-                            <col style="width: 18%;">
-                            <col style="width: 15%;">
+                            <col style="width: 25%;">
+                            <col style="width: 25%;">
+                            <col style="width: 25%;">
                             <col>
                         </colgroup>
+
                         <tr>
                             <th>접수 방법 구분</th>
                             <td>
@@ -109,30 +126,26 @@
                             <td>
                                 <p class="inputArea" th:text="${contract.corporationName()}" style="width: 100%;"></p>
                             </td>
+                        </tr>
+
+                        <tr>
                             <th>서비스 분류</th>
                             <td>
                                 <p class="inputArea" th:text="${contract.serviceType}" style="width: 100%;"></p>
                             </td>
-                        </tr>
-                        <tr>
                             <th>체결 분류</th>
                             <td>
                                 <p class="inputArea" th:text="${contract.dealType()}" style="width: 100%;"></p>
                             </td>
-                            <th>거래처 구분</th>
-                            <td>
-                                <p class="inputArea" th:text="'거래처 구분'" style="width: 100%;"></p>
-                            </td>
-                            <td></td>
-                            <td></td>
                         </tr>
+
                         <tr>
-                            <th>거래처명</th>
+                            <th>거래처</th>
                             <td colspan="5">
                                 <p class="inputArea" th:text="${contract.businessPartnerName()}" style="width: 100%;"></p>
                             </td>
-
                         </tr>
+
                         <tr>
                             <th>계약 금액</th>
                             <td colspan="2">
@@ -151,9 +164,26 @@
                                     <p th:text="${contract.contractStartDate() + ' ~ ' + contract.contractEndDate()}" style="width: 100%;"/>
                                 </div>
                             </td>
+                            <th>청구기간</th>
+                            <td>
+                                <div class="search">
+                                    <p style="width: 100%" />
+                                </div>
+                            </td>
                             <td></td>
                             <td></td>
                             <td></td>
+                        </tr>
+
+                        <tr>
+                            <th>통합 빌링(신규)</th>
+                            <td>
+                                <p class="inputArea" style="width: 100%" />
+                            </td>
+                            <th>청구방법</th>
+                            <td>
+                                <p class="inputArea" style="width: 100%;" />
+                            </td>
                         </tr>
 
                         <tr>
