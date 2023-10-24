@@ -94,11 +94,15 @@
           </tr>
         `;
 
-      function openChargerPopup() {
-        fetchAndRender("/employees", renderEmployees)
+      function openContractChargerPopup() {
+        fetchAndRender("/employees", renderContractEmployees)
       }
 
-      function renderEmployees(data) {
+      function openSalesChargerPopup() {
+        fetchAndRender("/employees", renderSalesEmployees)
+      }
+
+      function renderContractEmployees(data) {
         employeesTable.innerHTML = employeesBase + data.map(item => `
           <tr>
             <td>부서</td>
@@ -106,7 +110,7 @@
                 <a class="clickable">${item.name}</a>
             </td>
             <td class="center">
-              <a class="btn_U" onclick="selectEmployeeRow( ${item.id}, '${item.name}');" >선택</a>
+              <a class="btn_U" onclick="selectContractEmployeeRow( ${item.id}, '${item.name}');" >선택</a>
             </td>
           </tr>`
         )
@@ -114,18 +118,37 @@
         document.body.querySelector('#employee-popup').style.display = "block";
       }
 
-      function selectEmployeeRow(id, name) {
-        const employeeId = document.getElementById("salesManagerId");
-        const employeeName = document.getElementById("salesManagerName")
-        const contractName = document.getElementById("ContractManagerName")
+      function renderSalesEmployees(data) {
+        employeesTable.innerHTML = employeesBase + data.map(item => `
+          <tr>
+            <td>부서</td>
+            <td class="center">
+                <a class="clickable">${item.name}</a>
+            </td>
+            <td class="center">
+              <a class="btn_U" onclick="selectSalesEmployeeRow( ${item.id}, '${item.name}');" >선택</a>
+            </td>
+          </tr>`
+        )
+          .join("");
+        document.body.querySelector('#employee-popup').style.display = "block";
+      }
+
+      function selectContractEmployeeRow(id, name) {
+        const employeeId = document.getElementById("contractManagerId");
+        const employeeName = document.getElementById("contractManagerName")
         employeeId.value = id;
         employeeName.value = name;
-        contractName.value = name;
-
-
         document.body.querySelector('#employee-popup').style.display = "none";
       }
 
+      function selectSalesEmployeeRow(id, name) {
+        const employeeId = document.getElementById("salesManagerId");
+        const employeeName = document.getElementById("salesManagerName")
+        employeeId.value = id;
+        employeeName.value = name;
+        document.body.querySelector('#employee-popup').style.display = "none";
+      }
 
       function closeEmployeePopup() {
         document.body.querySelector('#employee-popup').style.display = "none";

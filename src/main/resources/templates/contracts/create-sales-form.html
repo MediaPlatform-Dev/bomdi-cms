@@ -275,16 +275,16 @@
 								<div class="search">
 									<input disabled type="text" class="inputArea" id="salesManagerName" value="" placeholder="세일즈 담당자" style="width: 100%;">
 									<input type="hidden" th:field="*{salesManagerId}">
-									<a onclick="openChargerPopup();" class="btn_s mL5">검색</a>
+									<a onclick="openSalesChargerPopup();" class="btn_s mL5">검색</a>
 								</div>
 							</td>
 
 							<th>계약팀 담당자</th>
 							<td>
 								<div class="search">
-									<input disabled type="text" class="inputArea" id="ContractManagerName" value="" placeholder="계약팀 담당자" style="width: 100%;">
-									<input type="hidden" th:field="*{salesManagerId}">
-									<a onclick="openChargerPopup();" class="btn_s mL5">검색</a>
+									<input disabled type="text" class="inputArea" id="contractManagerName" value="" placeholder="계약팀 담당자" style="width: 100%;">
+									<input type="hidden" th:field="*{contractManagerId}">
+									<a onclick="openContractChargerPopup();" class="btn_s mL5">검색</a>
 								</div>
 							</td>
 						</tr>
@@ -297,7 +297,7 @@
 						<tr>
 							<th>특이사항</th>
 							<td colspan="5">
-								<textarea th:field="*{contractAmountRemark}" style="width: 100%; height:100px;"></textarea>
+								<textarea th:field="*{remark}" style="width: 100%; height:100px;"></textarea>
 							</td>
 						</tr>
 						</table>
