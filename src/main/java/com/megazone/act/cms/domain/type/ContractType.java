@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Getter
-public enum ContractType {
+public enum ContractType implements CodeEnum {
     SALES("SALES", "매출"),
     PURCHASE("PURCHASE", "매입");
 

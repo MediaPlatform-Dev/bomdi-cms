@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Getter
-public enum ContractDetailType {
+public enum ContractDetailType implements CodeEnum {
     INFRA("INFRA", "Infra"),
     PROFESSIONAL_SERVICE("PS", "PS"),
     MANAGED_SERVICE("MS", "MS"),

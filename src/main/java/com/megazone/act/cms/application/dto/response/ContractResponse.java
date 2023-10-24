@@ -23,7 +23,7 @@ public record ContractResponse(
     SubmissionType submissionType,
     String corporationName,
     String serviceType,
-    DealType dealType,
+    ContractDetail dealType,
     String businessPartnerName,
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     LocalDate contractStartDate,

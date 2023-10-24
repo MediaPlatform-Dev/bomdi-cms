@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
  */
 @RequiredArgsConstructor
 @Getter
-public enum PaymentType {
+public enum PaymentType implements CodeEnum {
     SUM("SUM", "일괄 지급"),
     MONTHLY("MONTH", "매월 분할 지급"),
     YEARLY("YEAR", "매년 분할 지급");
