@@ -9,88 +9,131 @@
 		<div class="container">
 			<header th:replace="~{fragments/header}"></header>
 			<div class="content">
-
 				<div class="section">
 					<!-- Search Filter -->
 					<div class="searchTable1 mB15">
 						<table>
 						<colgroup>
-							<col style="width:25%">
-							<col style="width:25%">
-							<col style="width:25%">
+							<col style="width:10%">
+							<col style="width:30%">
+							<col style="width:10%">
+							<col style="width:30%">
 							<col />
 						</colgroup>
 						<tr>
 							<td>
 								<p>계약유형</p>
-								<select id="" name="" style="width:100%;">
-									<option>COR[1]</option>
-									<option>COR[2]</option>
-								</select>
+							</td>
+							<td>
+								<div class="mz-radioset mT10">
+									<div class="mz-radio">
+										<input type="radio" name="" id="" value="" checked="">
+										<label>매출</label>
+									</div>
+									<div class="mz-radio">
+										<input type="radio" name="" id="" value="">
+										<label>매입</label>
+									</div>
+									<div class="mz-chkbxset">
+										<div class="chkbx">
+											<input type="checkbox" />
+											<label>AWS</label>
+										</div>
+										<div class="chkbx">
+											<input type="checkbox" />
+											<label>PS</label>
+										</div>
+										<div class="chkbx">
+											<input type="checkbox" />
+											<label>MS</label>
+										</div>
+										<div class="chkbx">
+											<input type="checkbox" />
+											<label>DP</label>
+										</div>
+										<div class="chkbx">
+											<input type="checkbox" />
+											<label>외주</label>
+										</div>
+									</div>
+								</div>
 							</td>
 							<td>
 								<p>서비스분류</p>
+							</td>
+							<td>
 								<select id="" name="" style="width:100%;">
 									<option>FMS</option>
 									<option>FMS</option>
 								</select>
 							</td>
+							<td rowspan="5">
+								<div class="btnArea">
+									<button class="btn btnType01">검색</button>
+									<!--<a href="#" class="btn btnType01">검색</a>-->
+								</div>
+							</td>
+						</tr>
+
+						<tr>
 							<td>
-								<p>체결분류</p>
-								<select id="" name="" style="width:100%;">
-									<option>XPO</option>
-									<option>XPO</option>
-								</select>
+								<p>계약기간</p>
 							</td>
 							<td>
-								<p>거래처구분</p>
-								<select id="" name="" style="width:100%;">
-									<option>Y</option>
-									<option>N</option>
+								<input class="inputDate" style="width: 40%;" type="text" id="datePickerFr" data-mindate="today" />
+								<span>-</span>
+								<input class="inputDate" style="width: 40%;" type="text" id="datePickerFr" data-mindate="today" />
+							</td>
+							<td>
+								<p>등록기간</p>
+							</td>
+							<td>
+								<input class="inputDate" style="width: 40%;" type="text" id="datePickerTo" data-mindate="today" />
+								<span>-</span>
+								<input class="inputDate" style="width: 40%;" type="text" id="datePickerTo" data-mindate="today" />
+							</td>
+						</tr>
+
+						<tr>
+							<td>
+								<p>계약담당자</p>
+							</td>
+							<td>
+								<input class="inputArea" style="width: 100%" type="text" value="">
+							</td>
+							<td>
+								<p>사업수행 담당자</p>
+							</td>
+							<td>
+								<input class="inputArea" style="width: 100%;" type="text" value="">
 								</select>
 							</td>
 						</tr>
+
 						<tr>
-							<td>
-								<p>계약시작</p>
-								<input class="inputDate" style="width: 100%;" type="text" id="datePickerFr" data-mindate="today" />
-							</td>
-							<td>
-								<p>계약종료</p>
-								<input class="inputDate" style="width: 100%;" type="text" id="datePickerTo" data-mindate="today" />
-							</td>
-							<td>
-								<p>서비스분류</p>
-								<select id="" name="" style="width:100%;">
-									<option>XPO</option>
-									<option>XPO</option>
-								</select>
-							</td>
-							<td>
-								<p>거래처구분</p>
-								<select id="" name="" style="width:100%;">
-									<option>Y</option>
-									<option>N</option>
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<p>거래처명</p>
-								<input class="inputArea" style="width: 100%;" type="text" value="" placeholder="거래처명을 입력하세요.">
-								</select>
-							</td>
-							<td>
-								<p>계약팀 담당자</p>
-								<input class="inputArea" style="width: 100%;" type="text" value="" placeholder="담당자를 입력하세요.">
-								</select>
-							</td>
 							<td>
 								<p>세일즈 담당자</p>
-								<input class="inputArea" style="width: 100%;" type="text" value="" placeholder="담당자를 입력하세요.">
 							</td>
 							<td>
+								<input class="inputArea" style="width: 100%;" type="text" value="">
+								</select>
+							</td>
+							<td>
+								<p>부서</p>
+							</td>
+							<td>
+								<select id="" name="" style="width:100%;">
+									<option>XPO</option>
+									<option>XPO</option>
+								</select>
+							</td>
+						</tr>
+
+						<tr>
+							<td>
 								<p>진행상태</p>
+							</td>
+							<td>
 								<div class="mz-radioset mT10">
 									<div class="mz-radio">
 										<input type="radio" name="status" id="status01" value="" checked="">
@@ -102,29 +145,34 @@
 									</div>
 									<div class="mz-radio">
 										<input type="radio" name="status" id="status03" value="">
-										<label for="status03">신청</label>
-									</div>
-									<div class="mz-radio">
-										<input type="radio" name="status" id="status04" value="">
-										<label for="status04">승인</label>
-									</div>
-									<div class="mz-radio">
-										<input type="radio" name="status" id="status05" value="">
-										<label for="status05">반려</label>
+										<label for="status03">등록완료</label>
 									</div>
 								</div>
 							</td>
-						</tr>
-						<tr>
-							<td colspan="4">
-								<p>검색어</p>
-								<input class="inputArea" style="width: 100%;" type="text" value="" placeholder="검색어를 입력하세요.">
+							<td>
+								<p>거래처명</p>
+							</td>
+							<td>
+								<input class="inputArea" style="width: 100%;" type="text" value="">
 							</td>
 						</tr>
+
 						<tr>
-							<td colspan="4">
+							<td>
+								<p>계약관계명/코드</p>
+							</td>
+							<td>
+								<input class="inputArea" style="width: 100%" type="text" value="">
+							</td>
+							<td>
+								<p>검색어</p>
+							</td>
+							<td>
+								<input class="inputArea" style="width: 100%;" type="text" value="">
+							</td>
+							<td>
 								<div class="btnArea">
-									<a href="#" class="btn btnType01">검색</a><a href="#" class="btn btnType02">초기화</a>
+									<a href="#" class="btn btnType02">초기화</a>
 								</div>
 							</td>
 						</tr>
@@ -143,50 +191,96 @@
 					</div>
 					<!-- Result Table -->
 					<div class="tbl_type01">
+						<div class="table-container">
 						<table>
-							<colgroup>
-								<col style="width:10%">
-								<col style="width:20%">
-								<col />
-								<col style="width:20%">
-								<col style="width:10%">
-								<!--<col style="width:10%">-->
-							</colgroup>
-							<thead>
+						<thead>
+							<tr>
+								<th>NO</th>
+								<th>진행상태</th>
+								<th>등록기간</th>
+								<th>계약유형</th>
+								<th>계약명</th>
+								<th>Salesforce계약번호</th>
+								<th>계약관계명</th>
+								<th>계약관계코드</th>
+								<th>계약금액</th>
+								<th>계약 기간</th>
+								<th>거래처명</th>
+								<th>계약팀 담당자</th>
+								<th>세일즈 담당자</th>
+								<th>사업수행 담당자</th>
+								<!--<th>삭제</th>-->
+							</tr>
+						</thead>
+						<tbody>
+							<div>
 								<tr>
-									<th>#</th>
-									<th>계약 이름</th>
-									<th>계약 내용</th>
-									<th>담당자</th>
-									<th>수정</th>
-									<!--<th>삭제</th>-->
-								</tr>
-							</thead>
-							<tbody>
-								<tr th:each="contract, stat : ${contracts}">
-									<td th:text="${contracts.size() - stat.index}" class="index"></td>
 									<td>
-										<a class="clickable" th:href="@{/contracts/{id} (id=${contract.id})}" th:text="${contract.name}">계약 내용</a>
+										NO
 									</td>
-									<td th:text="${contract.name()}" >계약 이름</td>
-									<td th:text="${contract.contractorName()}">담당자</td>
 									<td>
-										<a th:href="@{/contracts/{id}/update-form (id=${contract.id})}" class="btn_U">수정</a>
+										<a class="clickable" href="#">진행상태</a>
 									</td>
-								</tr>
-							</tbody>
+									<td>
+										<p class="inputArea" th:text="등록기간" style="width: 100%"></p>
+									</td>
+									<td>
+										<p class="inputArea" th:text="계약유형" style="width: 100%"></p>
+									</td>
+									<td>
+										<p class="inputArea" th:text="계약명" style="width: 100%;"></p>
+									</td>
+									<td>
+										<p class="inputArea" th:text="Salesforce계약번호" style="width: 100%"></p>
+									</td>
+									<td>
+										<p class="inputArea" th:text="계약관계명" style="width: 100%"></p>
+									</td>
+									<td>
+										<p class="inputArea" th:text="계약관계코드" style="width: 100%"></p>
+									</td>
+									<td>
+										<p class="inputArea" th:text="계약금액" style="width: 100%"></p>
+									</td>
+									<td>
+										<p class="inputArea" th:text="계약기간" style="width: 100%"></p>
+									</td>
+									<td>
+										<p class="inputArea" th:text="거래처명" style="width: 100%"></p>
+									</td>
+									<td>
+										<p class="inputArea" th:text="계약팀담당자" style="width: 100%"></p>
+									</td>
+									<td>
+										<p class="inputArea" th:text="세일즈담당자" style="width: 100%"></p>
+									</td>
+									<td>
+										<p class="inputArea" th:text="사업수행담당자" style="width: 100%"></p>
+									</td>
+									<!--<td>-->
+									<!--	<a class="clickable" th:href="@{/contracts/{id} (id=${contract.id})}" th:text="${contract.name}">계약 내용</a>-->
+									<!--</td>-->
+									<!--<td th:text="${contract.name()}" >계약 이름</td>-->
+									<!--<td th:text="${contract.contractorName()}">담당자</td>-->
+									<!--<td>-->
+									<!--	<a th:href="@{/contracts/{id}/update-form (id=${contract.id})}" class="btn_U">수정</a>-->
+									<!--</td>-->
+							</div>
+							</tr>
+						</tbody>
 						</table>
+						</div>
 					</div>
 					<!-- Result Table -->
 				</div>
-
 			</div>
 		</div>
 	</div>
 
 	<script>
       $(function () {
-        $('#datePickerFr, #datePickerTo').datepicker();
+        $('#datePickerFr, #datePickerTo')
+          .datepicker();
       });
 
       //function deleteContract() {
