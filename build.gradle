@@ -39,8 +39,6 @@ dependencies {
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
-    implementation "org.mapstruct:mapstruct:${mapStructVersion}"
-    annotationProcessor "org.mapstruct:mapstruct-processor:${mapStructVersion}"
 
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
@@ -54,13 +52,4 @@ tasks.named('test') {
 
 bootJar {
     archiveFileName = 'application.jar'
-}
-
-tasks.named("bootBuildImage") {
-    docker {
-        host = "unix://${System.properties['user.home']}/.colima/docker.sock"
-    }
-
-    def dateTime = new Date().format('yyyyMMdd-HHmm')
-    imageName = "${applicationName}:${dateTime}"
 }
