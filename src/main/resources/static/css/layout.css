@@ -435,7 +435,7 @@ body {
 .btnType04 {background-color: #000; color: #fff; padding: 0 40px; font-size: 14px; line-height: 32px; border-radius: 5px;}
 .btnType04:hover{background-color: #1a295c; }
 
-.btn-create {border-radius: 5px; height: 29px; line-height: 26px; background: #fff url(../img/ico_create.png) no-repeat 15px 4px; color: #1428a0; border-color: #1428a0; width: 80px; display: inline-block; padding-left: 25px; font-weight: 600; }
+.btn-create {border-radius: 5px; height: 29px; line-height: 26px; background: #fff url(../img/ico_create.png) no-repeat 15px 4px; color: #1428a0; border-color: #1428a0; width: 135px; display: inline-block; padding-left: 25px; font-weight: 600; }
 .btn-create:hover, .btn-create:focus, .btn-create:active {background: #1428a0 url(../img/ico_create_ov.png) no-repeat 15px 4px; border-color: #1428a0; color: #fff;}
 .btn-add {border-radius: 5px; height: 29px; line-height: 26px; background: #fff url(../img/icon_plus.png) no-repeat 11px 7px; color: #1428a0; border-color: #1428a0; width: 100px; display: inline-block; padding-left: 20px; font-weight: 600; }
 .btn-add:hover, .btn-create:focus, .btn-create:active {background: #1428a0 url(../img/icon_plus_ov.png) no-repeat 11px 7px; border-color: #1428a0; color: #fff;}
