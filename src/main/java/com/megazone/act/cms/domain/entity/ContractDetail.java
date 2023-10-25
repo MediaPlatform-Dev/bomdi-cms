@@ -1,10 +1,12 @@
 package com.megazone.act.cms.domain.entity;
 
-import com.megazone.act.cms.domain.entity.convertor.*;
-import com.megazone.act.cms.domain.vo.Period;
-import com.megazone.act.cms.domain.type.*;
 import jakarta.persistence.*;
+
 import lombok.*;
+
+import com.megazone.act.cms.domain.entity.convertor.*;
+import com.megazone.act.cms.domain.type.*;
+import com.megazone.act.cms.domain.vo.Period;
 
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

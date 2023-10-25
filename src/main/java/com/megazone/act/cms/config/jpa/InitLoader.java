@@ -1,16 +1,17 @@
 package com.megazone.act.cms.config.jpa;
 
+import java.time.LocalDate;
+import java.util.List;
+
+import org.springframework.boot.context.event.ApplicationStartedEvent;
+import org.springframework.context.ApplicationListener;
+import org.springframework.stereotype.Component;
+import lombok.RequiredArgsConstructor;
+
 import com.megazone.act.cms.domain.entity.*;
 import com.megazone.act.cms.domain.repository.*;
 import com.megazone.act.cms.domain.type.*;
 import com.megazone.act.cms.domain.vo.*;
-import lombok.RequiredArgsConstructor;
-import org.springframework.boot.context.event.ApplicationStartedEvent;
-import org.springframework.context.ApplicationListener;
-import org.springframework.stereotype.Component;
-
-import java.time.LocalDate;
-import java.util.List;
 
 @RequiredArgsConstructor
 @Component
@@ -33,7 +34,7 @@ public class InitLoader implements ApplicationListener<ApplicationStartedEvent> 
         Customer customer = new Customer("LG");
         customerRepository.save(customer);
 
-        CustomerEmployee customerEmployee = new CustomerEmployee("홍길동");
+        CustomerEmployee customerEmployee = new CustomerEmployee("홍길동", "megazon@mz.co.kr");
         customerEmployeeRepository.save(customerEmployee);
 
         ContractTypes types = new ContractTypes(ContractType.SALES, DealType.CONTRACT, SubmissionType.SALESFORCE, InvoiceType.TAX);

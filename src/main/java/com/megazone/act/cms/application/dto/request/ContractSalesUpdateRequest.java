@@ -1,14 +1,15 @@
 package com.megazone.act.cms.application.dto.request;
 
-import com.megazone.act.cms.domain.type.*;
-import lombok.*;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.multipart.MultipartFile;
-
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Stream;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
+import lombok.*;
+
+import com.megazone.act.cms.domain.type.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -68,7 +69,7 @@ public class ContractSalesUpdateRequest {
     private String remark;
 
     // 고객사 담당자
-    private List<CustomerInfo> customerInfos;
+    private List<ContractCustomerEmployeeResponse> customerInfos;
 
     // 증빙 서류
     private MultipartFile contractFile;
