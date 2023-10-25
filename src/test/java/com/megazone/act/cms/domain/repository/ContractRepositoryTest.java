@@ -1,10 +1,12 @@
 package com.megazone.act.cms.domain.repository;
 
-import com.megazone.act.cms.domain.entity.Contract;
-import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.history.RevisionMetadata.RevisionType;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import com.megazone.act.cms.domain.entity.Contract;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

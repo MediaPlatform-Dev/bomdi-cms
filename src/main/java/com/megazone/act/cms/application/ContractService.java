@@ -1,24 +1,26 @@
 package com.megazone.act.cms.application;
 
-import com.megazone.act.cms.application.dto.request.*;
-import com.megazone.act.cms.application.dto.response.ContractResponse;
-import com.megazone.act.cms.domain.entity.*;
-import com.megazone.act.cms.domain.repository.*;
 import jakarta.persistence.EntityNotFoundException;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import java.util.List;
+import java.util.stream.Stream;
+
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
-import java.util.List;
-import java.util.stream.Stream;
+import com.megazone.act.cms.application.dto.request.*;
+import com.megazone.act.cms.application.dto.response.ContractDetailResponse;
+import com.megazone.act.cms.domain.entity.*;
+import com.megazone.act.cms.domain.repository.*;
 
 @Slf4j
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 @Service
 public class ContractService {
+
     private final ContractRepository contractRepository;
     private final CorporationRepository corporationRepository;
     private final EmployeeRepository employeeRepository;
@@ -45,15 +47,15 @@ public class ContractService {
         }
     }
 
-    public List<ContractResponse> getContractList() {
+    public List<ContractDetailResponse> getContractList() {
         return contractRepository.findAll(Sort.by(Sort.Direction.DESC, "id"))
             .stream()
-            .map(ContractResponse::from)
+            .map(ContractDetailResponse::from)
             .toList();
     }
 
-    public ContractResponse getContract(long contractId) {
-        return ContractResponse.from(getContractById(contractId));
+    public ContractDetailResponse getContract(long contractId) {
+        return ContractDetailResponse.from(getContractById(contractId));
     }
 
     @Transactional

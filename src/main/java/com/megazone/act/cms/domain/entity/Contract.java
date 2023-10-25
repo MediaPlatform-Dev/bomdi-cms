@@ -31,6 +31,8 @@ public class Contract extends AuditingFields {
     @Column(name = "rmrk")
     private String remark;
 
+    private String edmLinkUrl;
+
     @JoinColumn(name = "crprtn_id")
     @ManyToOne
     private Corporation corporation;
@@ -83,6 +85,7 @@ public class Contract extends AuditingFields {
         Period invoicePeriod,
         ContractMoney contractMoney,
         List<ContractEmployee> contractEmployees,
+        String edmLinkUrl,
         Customer customer,
         List<ContractCustomerEmployee> contractCustomerEmployees,
         List<ContractDetail> contractDetails
@@ -90,6 +93,7 @@ public class Contract extends AuditingFields {
         this.name = name;
         this.no = randomNo(contractTypes);
         this.remark = remark;
+        this.edmLinkUrl = edmLinkUrl;
         this.salesForceContractNo = salesForceContractNo;
         this.corporation = corporation;
         this.contractTypes = contractTypes;

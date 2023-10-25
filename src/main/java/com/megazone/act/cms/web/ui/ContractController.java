@@ -1,18 +1,19 @@
 package com.megazone.act.cms.web.ui;
 
-import com.megazone.act.cms.application.ContractService;
-import com.megazone.act.cms.application.dto.request.*;
-import com.megazone.act.cms.application.dto.response.ContractResponse;
-import com.megazone.act.cms.domain.type.ContractType;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
-import java.util.List;
+import com.megazone.act.cms.application.ContractService;
+import com.megazone.act.cms.application.dto.request.*;
+import com.megazone.act.cms.application.dto.response.ContractDetailResponse;
+import com.megazone.act.cms.domain.type.ContractType;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -34,8 +35,8 @@ public class ContractController {
 
     @PostMapping("/sales-form")
     public String createSales(
-            @Valid @ModelAttribute(FORM) ContractSalesCreateRequest createForm,
-            BindingResult bindingResult, Model model
+        @Valid @ModelAttribute(FORM) ContractSalesCreateRequest createForm,
+        BindingResult bindingResult, Model model
     ) {
         if (bindingResult.hasErrors()) {
             model.addAttribute(FORM, createForm);
@@ -68,7 +69,7 @@ public class ContractController {
 
     @GetMapping
     public String list(Model model) {
-        List<ContractResponse> contracts = contractService.getContractList();
+        List<ContractDetailResponse> contracts = contractService.getContractList();
         model.addAttribute("contracts", contracts);
         return "contracts/list";
     }
@@ -81,10 +82,10 @@ public class ContractController {
 
     @GetMapping("/{contractId}/update-form")
     public String updateForm(
-            @PathVariable long contractId,
-            Model model
+        @PathVariable long contractId,
+        Model model
     ) {
-        ContractResponse contract = contractService.getContract(contractId);
+        ContractDetailResponse contract = contractService.getContract(contractId);
 
         model.addAttribute(CONTRACT, contract);
         if (contract.type() == ContractType.SALES) {
@@ -98,10 +99,10 @@ public class ContractController {
 
     @PutMapping("/{contractId}/update-sales-form")
     public String updateSales(
-            @PathVariable Long contractId,
-            @Valid @ModelAttribute(FORM) ContractSalesUpdateRequest updateForm,
-            BindingResult bindingResult,
-            Model model
+        @PathVariable Long contractId,
+        @Valid @ModelAttribute(FORM) ContractSalesUpdateRequest updateForm,
+        BindingResult bindingResult,
+        Model model
     ) {
         if (bindingResult.hasErrors()) {
             model.addAttribute(FORM, updateForm);

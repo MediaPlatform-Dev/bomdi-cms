@@ -154,7 +154,7 @@
 
 							<div>
 								• 특이사항
-								<p class="inputArea" style="width: 100%" />
+								<p class="inputArea" th:text="${contract.amountRemark()}" style="width: 100%" />
 							</div>
 						</td>
 					</tr>
@@ -185,7 +185,7 @@
 						<th>세일즈 담당자/부서</th>
 						<td colspan="5">
 							<div class="search">
-								<p class="inputArea" th:text="${contract.contractorName}" style="width: 100%;"></p>
+								<p class="inputArea" th:text="${contract.contractSalesManagerName()}" style="width: 100%;"></p>
 							</div>
 						</td>
 					</tr>
@@ -194,7 +194,7 @@
 						<th>계약팀 담당자</th>
 						<td>
 							<div class="search">
-								<p class="inputArea" th:text="${contract.contractorName()}" style="width: 100%;"></p>
+								<p class="inputArea" th:text="${contract.contractManagerName()}" style="width: 100%;"></p>
 							</div>
 						</td>
 						<th>딜리버리 담당자</th>
@@ -208,14 +208,14 @@
 					<tr>
 						<th>EDM Link URL</th>
 						<td colspan="5">
-							<p class="inputArea" style="width: 100%;"></p>
+							<p class="inputArea" th:text="${contract.EdmLinkUrl}" style="width: 100%;"></p>
 						</td>
 					</tr>
 
 					<tr>
 						<th>특이사항</th>
 						<td colspan="5">
-							<p th:text="${contract.description()}"></p>
+							<p th:text="${contract.remark()}"></p>
 						</td>
 					</tr>
 					</table>

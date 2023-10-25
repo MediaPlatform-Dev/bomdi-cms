@@ -42,7 +42,6 @@ public class ContractSalesCreateRequest {
     private long amount;
     private CurrencyUnitType currencyUnitType = CurrencyUnitType.KRW;
     private boolean hasVat;
-    private String contractAmountRemark;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate contractStartDate;
@@ -64,6 +63,8 @@ public class ContractSalesCreateRequest {
     private int salesManagerId;
     // TODO: EDM Link URL 무엇인지
     private String edmLinkUrl;
+
+    private String amountRemark;
     private String remark;
 
     private List<Integer> customerEmployeeIds = new ArrayList<>();
@@ -93,8 +94,9 @@ public class ContractSalesCreateRequest {
             corporation, new ContractTypes(contractType, dealType, submissionType, invoiceType),
             new Period(contractStartDate, contractEndDate),
             new Period(invoiceStartDate, invoiceEndDate),
-            new ContractMoney(currencyUnitType, amount, hasVat),
+            new ContractMoney(currencyUnitType, amount, hasVat, amountRemark),
             employees.stream().map(ContractEmployee::new).toList(),
+            edmLinkUrl,
             customer,
             customerEmployees.stream()
                 .map(ContractCustomerEmployee::new)

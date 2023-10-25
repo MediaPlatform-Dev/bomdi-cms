@@ -331,14 +331,14 @@
 							<th>세일즈 담당자/부서</th>
 							<td>
 								<div class="search">
-									<input type="text" class="inputArea" th:id="salesManagerName" th:name="salesManagerName" th:value="${contract.salesPersonName()}" placeholder="세일즈 담당자/부서" style="width: 100%;">
+									<input type="text" class="inputArea" th:id="salesManagerName" th:name="salesManagerName" th:value="${contract.contractSalesManagerName()}" placeholder="세일즈 담당자/부서" style="width: 100%;">
 									<a onclick="openChargerPopup();" class="btn_s mL5">검색</a>
 								</div>
 							</td>
 							<th>계약팀 담당자</th>
 							<td>
 								<div class="search">
-									<input type="text" class="inputArea" th:id="contractManagerName" th:name="contractManagerName" th:value="${contract.contractorName()}" placeholder="계약팀 담당자" style="width: 100%;">
+									<input type="text" class="inputArea" th:id="contractManagerName" th:name="contractManagerName" th:value="${contract.contractManagerName()}" placeholder="계약팀 담당자" style="width: 100%;">
 									<a onclick="openChargerPopup();" class="btn_s mL5">검색</a>
 								</div>
 							</td>
