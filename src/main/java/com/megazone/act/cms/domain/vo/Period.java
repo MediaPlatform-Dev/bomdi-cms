@@ -8,14 +8,14 @@ import java.time.LocalDate;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Embeddable
-public class ContractPeriod {
+public class Period {
 
     @Column(name = "strt_ymd")
     private LocalDate startDate;
     @Column(name = "end_ymd")
     private LocalDate endDate;
 
-    public ContractPeriod(LocalDate startDate, LocalDate endDate) {
+    public Period(LocalDate startDate, LocalDate endDate) {
         validate(startDate, endDate);
 
         this.startDate = startDate;

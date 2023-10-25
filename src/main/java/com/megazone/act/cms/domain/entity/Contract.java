@@ -6,8 +6,7 @@ import com.megazone.act.cms.domain.vo.*;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
@@ -43,7 +42,12 @@ public class Contract extends AuditingFields {
     private ContractTypes contractTypes;
 
     @Embedded
-    private ContractPeriod period;
+    private Period contractPeriod;
+
+    @AttributeOverride(name = "startDate", column = @Column(name = "invoice_strt_ymd"))
+    @AttributeOverride(name = "endDate", column = @Column(name = "invoice_end_ymd"))
+    @Embedded
+    private Period invoicePeriod;
 
     @Embedded
     private ContractMoney contractMoney;
@@ -74,7 +78,8 @@ public class Contract extends AuditingFields {
         String salesForceContractNo,
         Corporation corporation,
         ContractTypes contractTypes,
-        ContractPeriod period,
+        Period contractPeriod,
+        Period invoicePeriod,
         ContractMoney contractMoney,
         List<ContractEmployee> contractEmployees,
         Customer customer,
@@ -82,16 +87,23 @@ public class Contract extends AuditingFields {
         List<ContractDetail> contractDetails
     ) {
         this.name = name;
+        this.no = randomNo(contractTypes);
         this.remark = remark;
         this.salesForceContractNo = salesForceContractNo;
         this.corporation = corporation;
         this.contractTypes = contractTypes;
-        this.period = period;
+        this.contractPeriod = contractPeriod;
+        this.invoicePeriod = invoicePeriod;
         this.contractMoney = contractMoney;
         contractEmployees.forEach(this::addContractEmployee);
         this.customer = customer;
         contractCustomerEmployees.forEach(this::addContractCustomerEmployee);
-        this.contractDetails.addAll(contractDetails);
+        contractDetails.forEach(this::addContractDetail);
+    }
+
+    private static String randomNo(ContractTypes contractTypes) {
+        return String.format("%s-%s-%s",
+            "MZC", contractTypes.codeForNo(), UUID.randomUUID().toString().substring(0, 6).toUpperCase());
     }
 
     private void addContractEmployee(ContractEmployee contractEmployee) {
@@ -104,17 +116,13 @@ public class Contract extends AuditingFields {
         this.contractCustomerEmployees.add(contractCustomerEmployee);
     }
 
-    public void update(String name, String contents) {
-        this.name = name;
-        this.remark = contents;
-    }
-
-    public void addContractDetails(List<ContractDetail> contractDetails) {
-        contractDetails.forEach(this::addContractDetail);
-    }
-
     private void addContractDetail(ContractDetail contractDetail) {
         contractDetail.setContract(this);
         contractDetails.add(contractDetail);
+    }
+
+    public void update(String name, String contents) {
+        this.name = name;
+        this.remark = contents;
     }
 }

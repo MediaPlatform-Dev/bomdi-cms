@@ -25,4 +25,8 @@ public class ContractTypes {
 
     @Convert(converter = InvoiceTypeConvertor.class)
     private InvoiceType invoiceType;
+
+    public String codeForNo() {
+        return contractType.getCodeForNo();
+    }
 }

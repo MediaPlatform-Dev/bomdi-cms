@@ -29,8 +29,8 @@
                             <td>
                                 <div class="mz-chkbxset">
                                     <div class="chkbx">
-                                        <input type="checkbox" th:disabled="true" th:checked="${contract.getContractDetailTypes().contains('AWS')}" id="AWS" name="AWS" value="AWS">
-                                        <label for="AWS">AWS</label>
+                                        <input type="checkbox" th:disabled="true" th:checked="${contract.getContractDetailTypes().contains('INFRA')}" id="INFRA" name="INFRA" value="INFRA">
+                                        <label for="Infra">Infra</label>
                                     </div>
                                     <div class="chkbx">
                                         <input type="checkbox" th:disabled="true" th:checked="${contract.getContractDetailTypes().contains('PS')}" id="PS" name="PS" value="PS" />
@@ -45,7 +45,7 @@
                                         <label for="DP">DP</label>
                                     </div>
                                     <div class="chkbx">
-                                        <input type="checkbox" th:disabled="true" th:checked="${contract.getContractDetailTypes().contains('OUTSOURCING')}" id="OUTSOURCING" name="OUTSOURCING" value="OUTSOURCING" />
+                                        <input type="checkbox" th:disabled="true" th:checked="${contract.getContractDetailTypes().contains('OUTSOURCE')}" id="OUTSOURCING" name="OUTSOURCING" value="OUTSOURCING" />
                                         <label for="OUTSOURCING">외주</label>
                                     </div>
                                 </div>

@@ -10,7 +10,7 @@
 			<header th:replace="~{fragments/header}"></header>
 			<div class="header">
 				<h2>
-					계약서 등록
+					매출 계약서 등록
 				</h2>
 			</div>
 			<!--계약 유형-->
@@ -21,28 +21,32 @@
 					</div>
 					<div class="tbl_type02">
 						<table>
-							<colgroup>
-								<col style="width: 15%">
-								<col style="width: 85%">
-							</colgroup>
-							<tr>
-								<th>*매출 계약유형</th>
-								<td>
-									<div class="mz-chkbxset">
-										<div class="chkbx">
-											<input type="checkbox" id="Infra" name="Infra" value="Infra" onchange="toggleSectionVisibility('Infra', 'infra-section');" />
-											<label for="Infra">Infra</label>
-										</div>
-										<div class="chkbx">
-										<input type="checkbox" id="PS" name="PS" value="PS" onchange="toggleSectionVisibility('PS', 'ps-section');"/>
+						<colgroup>
+							<col style="width: 15%">
+							<col style="width: 85%">
+						</colgroup>
+						<tr>
+							<th>*매출 계약유형</th>
+							<td>
+								<div class="mz-chkbxset">
+									<div class="chkbx">
+										<input type="checkbox" id="Infra" name="Infra" value="Infra"
+												onchange="toggleSectionVisibility('Infra', 'infra-section');" />
+										<label for="Infra">Infra</label>
+									</div>
+									<div class="chkbx">
+										<input type="checkbox" id="PS" name="PS" value="PS"
+												onchange="toggleSectionVisibility('PS', 'ps-section');"/>
 										<label for="PS">PS</label>
 										</div>
 										<div class="chkbx">
-											<input type="checkbox" id="MS" name="MS" value="MS" onchange="toggleSectionVisibility('MS', 'ms-section');"/>
+											<input type="checkbox" id="MS" name="MS" value="MS"
+												onchange="toggleSectionVisibility('MS', 'ms-section');"/>
 											<label for="MS">MS</label>
 										</div>
 										<div class="chkbx">
-											<input type="checkbox" id="DP" name="DP" value="DP" onchange="toggleSectionVisibility('DP', 'dp-section');"/>
+											<input type="checkbox" id="DP" name="DP" value="DP"
+												onchange="toggleSectionVisibility('DP', 'dp-section');"/>
 											<label for="DP">DP</label>
 										</div>
 									</div>
@@ -258,18 +262,29 @@
 								<th>계약팀 담당자</th>
 								<td>
 									<div class="search">
-										<input type="text" class="inputArea" th:field="*{contractManagerId}" placeholder="계약팀 담당자" style="width: 100%;">
-										<a onclick="openChargerPopup();" class="btn_s mL5">검색</a>
+										<input disabled type="text" class="inputArea" id="contractManagerName" placeholder="계약팀 담당자" style="width: 100%;">
+										<input type="hidden" th:field="*{contractManagerId}">
+										<a onclick="openContractChargerPopup();" class="btn_s mL5">검색</a>
 									</div>
 								</td>
 								<th>세일즈 담당자/부서</th>
 								<td>
 									<div class="search">
-										<input type="text" class="inputArea" th:field="*{salesManagerId}" placeholder="세일즈 담당자" style="width: 100%;">
-										<a onclick="openChargerPopup();" class="btn_s mL5">검색</a>
+										<input disabled type="text" class="inputArea" id="salesManagerName" placeholder="세일즈 담당자" style="width: 100%;">
+										<input type="hidden" th:field="*{salesManagerId}">
+										<a onclick="openSalesChargerPopup();" class="btn_s mL5">검색</a>
 									</div>
 								</td>
 							</tr>
+						<tr>
+							<th>세일즈 담당자/부서</th>
+							<td>
+								<div class="search">
+									<input disabled type="text" class="inputArea" id="salesManagerName" placeholder="세일즈 담당자" style="width: 100%;">
+									<input type="hidden" th:field="*{salesManagerId}">
+									<a onclick="openSalesChargerPopup();" class="btn_s mL5">검색</a>
+								</div>
+							</td>
 
 							<tr>
 								<th>사업수행 담당자/부서</th>
@@ -294,6 +309,27 @@
 									<textarea th:field="*{contractAmountRemark}" style="width: 100%; height:100px;"></textarea>
 								</td>
 							</tr>
+							<th>계약팀 담당자</th>
+							<td>
+								<div class="search">
+									<input disabled type="text" class="inputArea" id="contractManagerName" placeholder="계약팀 담당자" style="width: 100%;">
+									<input type="hidden" th:field="*{contractManagerId}">
+									<a onclick="openContractChargerPopup();" class="btn_s mL5">검색</a>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<th>EDM Link URL</th>
+							<td colspan="5">
+								<input class="inputArea" style="width: 67%;" type="text" value="">
+							</td>
+						</tr>
+						<tr>
+							<th>특이사항</th>
+							<td colspan="5">
+								<textarea th:field="*{contractAmountRemark}" style="width: 100%; height:100px;"></textarea>
+							</td>
+						</tr>
 						</table>
 					</div>
 
@@ -339,6 +375,7 @@
 							</table>
 						</div>
 					</div>
+
 
 					<div class="tbl_type02">
 						<h3 th:style="'margin:30px 0px 0px 0px'">증빙 서류</h3>
@@ -387,6 +424,7 @@
 							</tr>
 						</table>
 					</div>
+
 
 					<div class="tbl_type02">
 						<h3 th:style="'margin:30px 0px 0px 0px'">추가사항</h3>
@@ -449,8 +487,8 @@
 
 					<div class="section" id="infra-section" style="display: none">
 						<div class="subTitle02">
-							<h3>AWS</h3>
-							<input type="text" class="inputArea" th:field="*{awsDetail.name}" placeholder="이름" th:disabled="true"/>
+							<h3>Infra</h3>
+							<input type="text" class="inputArea" th:field="*{infraDetail.name}" placeholder="이름" th:disabled="true"/>
 						</div>
 					</div>
 
@@ -559,16 +597,6 @@
             inputElements.forEach((input) => {
               input.disabled = !isEnabled;
             });
-          }
-		</script>
-
-		<script>
-          let rowIndex = 0;
-          const fields = {
-            type: "이름",
-            name: "부서",
-            email: "이메일",
-            etc: "행삭제"
           }
 		</script>
 

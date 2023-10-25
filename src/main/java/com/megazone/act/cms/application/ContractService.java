@@ -4,7 +4,9 @@ import com.megazone.act.cms.application.dto.request.*;
 import com.megazone.act.cms.application.dto.response.ContractResponse;
 import com.megazone.act.cms.domain.entity.*;
 import com.megazone.act.cms.domain.repository.*;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.stream.Stream;
 
+@Slf4j
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 @Service
@@ -34,7 +37,12 @@ public class ContractService {
             .toList();
 
         Contract contract = request.toEntity(corporation, employees, customer, customerEmployees);
-        contractRepository.save(contract);
+
+        try {
+            contractRepository.save(contract);
+        } catch (EntityNotFoundException e) {
+            log.error("데이터를 찾을 수 없습니다. - ", e);
+        }
     }
 
     public List<ContractResponse> getContractList() {
@@ -59,7 +67,6 @@ public class ContractService {
         Contract contract = getContractById(contractId);
         //contract.update(request.name(), request.contents());
     }
-
 
     private Contract getContractById(long contractId) {
         return contractRepository.findById(contractId)

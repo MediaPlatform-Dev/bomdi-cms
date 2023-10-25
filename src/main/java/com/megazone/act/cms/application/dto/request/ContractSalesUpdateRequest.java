@@ -17,7 +17,7 @@ public class ContractSalesUpdateRequest {
 
     private final ContractType contractType = ContractType.SALES;
     private UpdateAction action;
-    private ContractAwsDetail awsDetail;
+    private ContractInfraDetail awsDetail;
     private ContractPsDetail psDetail;
     private ContractMsDetail msDetail;
     private ContractDpDetail dpDetail;

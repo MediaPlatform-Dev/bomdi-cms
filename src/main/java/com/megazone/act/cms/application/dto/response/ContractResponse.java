@@ -59,8 +59,8 @@ public record ContractResponse(
             "",
             entity.getContractTypes().getDealType(),
             "",
-            entity.getPeriod().getStartDate(),
-            entity.getPeriod().getEndDate(),
+            entity.getContractPeriod().getStartDate(),
+            entity.getContractPeriod().getEndDate(),
             "",
             "",
             InvoiceType.TAX,
@@ -78,6 +78,6 @@ public record ContractResponse(
     }
 
     public List<String> getContractDetailTypes() {
-        return contractDetails.stream().map(it -> it.type().getDescription()).toList();
+        return contractDetails.stream().map(it -> it.type().getCode()).toList();
     }
 }
