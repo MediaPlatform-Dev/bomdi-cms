@@ -1,21 +1,22 @@
 package com.megazone.act.cms.application.dto.request;
 
-import com.megazone.act.cms.domain.entity.*;
-import com.megazone.act.cms.domain.type.*;
-import com.megazone.act.cms.domain.type.DealType;
-import com.megazone.act.cms.domain.vo.*;
-import lombok.*;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.multipart.MultipartFile;
-
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Stream;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
+import lombok.*;
+
+import com.megazone.act.cms.domain.entity.*;
+import com.megazone.act.cms.domain.type.*;
+import com.megazone.act.cms.domain.vo.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 public class ContractSalesCreateRequest {
+
     public static final ContractSalesCreateRequest EMPTY = new ContractSalesCreateRequest();
 
     private static final ContractType contractType = ContractType.SALES;
@@ -95,7 +96,9 @@ public class ContractSalesCreateRequest {
             new ContractMoney(currencyUnitType, amount, hasVat),
             employees.stream().map(ContractEmployee::new).toList(),
             customer,
-            customerEmployees.stream().map(ContractCustomerEmployee::new).toList(),
+            customerEmployees.stream()
+                .map(ContractCustomerEmployee::new)
+                .toList(),
             getContractDetails()
         );
     }

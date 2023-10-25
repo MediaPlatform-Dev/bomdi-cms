@@ -1,13 +1,14 @@
 package com.megazone.act.cms.application.dto.request;
 
-import com.megazone.act.cms.domain.type.*;
 import jakarta.validation.constraints.Email;
-import lombok.Getter;
-import lombok.Setter;
-import org.springframework.web.multipart.MultipartFile;
-
 import java.time.LocalDate;
 import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
+import lombok.Getter;
+import lombok.Setter;
+
+import com.megazone.act.cms.domain.type.*;
 
 @Getter
 public class ContractPurchaseUpdateRequest {
@@ -66,7 +67,7 @@ public class ContractPurchaseUpdateRequest {
     private String remark;
 
     // 고객사 담당자
-    private List<CustomerInfo> customerInfos;
+    private List<ContractCustomerEmployeeResponse> customerInfos;
 
     // 증빙 서류
     private MultipartFile contractFile;
