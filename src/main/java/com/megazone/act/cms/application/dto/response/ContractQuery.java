@@ -1,10 +1,12 @@
 package com.megazone.act.cms.application.dto.response;
 
 import com.megazone.act.cms.domain.entity.Contract;
+import com.megazone.act.cms.domain.entity.ContractEmployee;
 import com.megazone.act.cms.domain.type.ContractStatus;
 import com.megazone.act.cms.domain.type.ContractType;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public record ContractQuery(
     int id,
@@ -32,8 +34,23 @@ public record ContractQuery(
             entity.getContractPeriod().getStartDate(),
             entity.getContractPeriod().getEndDate(),
             entity.getCustomer().getName(),
-            entity.getContractEmployees().get(0).getEmployee().getName(),
-            entity.getContractEmployees().get(1).getEmployee().getName()
+            contractManagerName(entity.getContractEmployees()),
+            contractSalesManager(entity.getContractEmployees())
         );
+    }
+
+    // FIXME: 직원 구분값으로 가져오기
+    private static String contractManagerName(List<ContractEmployee> employees) {
+        if (employees.isEmpty()) {
+            return "";
+        }
+        return employees.get(0).getEmployee().getName();
+    }
+
+    private static String contractSalesManager(List<ContractEmployee> employees) {
+        if (employees.size() < 2) {
+            return "";
+        }
+        return employees.get(1).getEmployee().getName();
     }
 }

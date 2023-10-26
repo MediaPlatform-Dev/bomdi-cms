@@ -49,9 +49,13 @@ public class InitLoader implements ApplicationListener<ApplicationStartedEvent> 
         List<ContractEmployee> contractEmployeesC = Stream.of(savedEmployees.get(0), savedEmployees.get(1))
             .map(ContractEmployee::new)
             .toList();
+        List<ContractEmployee> contractEmployeesD = Stream.of(savedEmployees.get(0))
+            .map(ContractEmployee::new)
+            .toList();
         List<Contract> contracts = List.of(contractFixture(corporation, contractEmployeesA, customer, customerEmployee, "A"),
             contractFixture(corporation, contractEmployeesB, customer, customerEmployee, "B"),
-            contractFixture(corporation, contractEmployeesC, customer, customerEmployee, "C")
+            contractFixture(corporation, contractEmployeesC, customer, customerEmployee, "C"),
+            contractFixtureWithoutDetails(corporation, contractEmployeesD, customer, customerEmployee, "D")
         );
         contractRepository.saveAll(contracts);
     }
@@ -69,6 +73,22 @@ public class InitLoader implements ApplicationListener<ApplicationStartedEvent> 
             customer,
             List.of(new ContractCustomerEmployee(customerEmployee)),
             List.of(contractDetailFixture(suffix, INFRA), contractDetailFixture(suffix, MANAGED_SERVICE))
+        );
+    }
+
+    private Contract contractFixtureWithoutDetails(Corporation corporation, List<ContractEmployee> contractEmployees, Customer customer, CustomerEmployee customerEmployee, String suffix) {
+        ContractTypes types = new ContractTypes(ContractType.SALES, DealType.CONTRACT, SubmissionType.SALESFORCE, InvoiceType.TAX);
+        Period period = new Period(LocalDate.now(), LocalDate.now().plusDays(7));
+        Period invoicePeriod = new Period(LocalDate.now(), LocalDate.now().plusDays(30));
+        ContractMoney money = new ContractMoney(CurrencyUnitType.KRW, 3000, true, "금액 특이사항" + suffix);
+
+        return new Contract("테스트 계약" + suffix, "테스트 계약 특이사항" + suffix, "SF 계약번호" + suffix,
+            corporation, types, period, invoicePeriod, money,
+            contractEmployees,
+            "testLink" + suffix,
+            customer,
+            List.of(new ContractCustomerEmployee(customerEmployee)),
+            List.of()
         );
     }
 

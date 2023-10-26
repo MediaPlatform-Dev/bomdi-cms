@@ -28,8 +28,6 @@ public class ContractRepositoryImpl implements ContractRepositoryCustom {
     @Override
     public List<Contract> findAllQuery(ContractCondition condition) {
         return queryFactory.selectFrom(contract)
-            .innerJoin(contract.contractDetails)
-            .innerJoin(contract.contractEmployees)
             .where(contractTypeEq(condition.contractType()))
             .where(contractDetailTypeEq(condition.detailTypes()))
             .where(contractManagerNameEq(condition.contractManagerName()))

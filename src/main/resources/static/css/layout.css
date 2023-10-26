@@ -25,42 +25,6 @@ body {
 .colorWhite {color: white;}
 .wrap {min-width: 1600px; overflow: auto; display: flex; flex-flow: row wrap;}
 
-@media (max-width: 1500px) {
-	.wrap {
-		min-width: 95%;
-	}
-}
-
-@media (max-width: 1400px) {
-	.wrap {
-		min-width: 90%;
-	}
-}
-
-@media (max-width: 1300px) {
-	.wrap {
-		min-width: 85%;
-	}
-}
-
-@media (max-width: 1200px) {
-	.wrap {
-		min-width: 80%;
-	}
-}
-
-@media (max-width: 1100px) {
-	.wrap {
-		min-width: 75%;
-	}
-}
-
-@media (max-width: 1000px) {
-	.wrap {
-		min-width: 70%;
-	}
-}
-
 .flexColumn {display: flex; flex-direction: column;}
 .flexRow {display: flex; flex-direction: row;}
 .flexEnd {margin-top: auto; align-self: flex-end;}

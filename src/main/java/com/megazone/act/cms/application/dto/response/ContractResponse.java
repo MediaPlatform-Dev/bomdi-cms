@@ -76,9 +76,8 @@ public record ContractResponse(
             entity.getContractPeriod().getEndDate(),
             entity.getInvoicePeriod().getStartDate(),
             entity.getInvoicePeriod().getEndDate(),
-            //entity.getContractEmployees().get(0).getEmployee().getName(), // FIXME: 직원 구분값으로 가져오기
-            "", "",
-            //entity.getContractEmployees().get(1).getEmployee().getName(), // FIXME: 직원 구분값으로 가져오기
+            "", // FIXME: 직원 구분값으로 가져오기
+            "", // FIXME: 직원 구분값으로 가져오기
             entity.getEdmLinkUrl(),
             entity.getContractTypes().getInvoiceType(),
             LocalDate.now(),

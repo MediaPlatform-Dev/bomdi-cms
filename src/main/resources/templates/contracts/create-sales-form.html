@@ -214,7 +214,7 @@
 							<td>
 								<div class="mz-chkbxset">
 									<div class="chkbx">
-										<input type="checkbox" id="contractDateSame" onclick="setSameDate()"/> 계약기간과 동일
+										<input type="checkbox" id="contractDateSame" onclick="toggleSameDate()"/> 계약기간과 동일
 									</div>
 								</div>
 							</td>
@@ -510,7 +510,7 @@
               <td class="center">부서</td>
               <td class="center">이메일</td>
               <td class="center">
-                <button type="button" class="btn btn-wt" onclick="deleteCustomerEmployee(this)">행삭제</button>
+                <button type="button" class="btn btn-wt" onclick="deleteCustomerEmployee(this)">행 삭제</button>
               </td>
 			  <input type="hidden" id="customerEmployeeIds" name="customerEmployeeIds" value="1">
               </tr>`;
@@ -524,7 +524,7 @@
             row.remove();
           }
 
-          function setSameDate() {
+          function toggleSameDate() {
             if (document.getElementById('contractDateSame').checked) {
               const contractStartDate = document.getElementById('contractStartDate').value;
               const contractEndDate = document.getElementById('contractEndDate').value;
