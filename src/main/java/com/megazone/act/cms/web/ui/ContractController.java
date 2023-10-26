@@ -32,6 +32,7 @@ public class ContractController {
     @GetMapping("/sales-form")
     public String createSalesForm(Model model) {
         model.addAttribute(FORM, ContractSalesCreateRequest.EMPTY);
+        model.addAttribute("types", CommonTypes.TYPES);
         return "contracts/create-sales-form";
     }
 

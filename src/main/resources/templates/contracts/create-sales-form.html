@@ -120,7 +120,7 @@
 							<th>접수 방법 구분</th>
 							<td>
 								<select th:field="*{submissionType}" style="width:100%;">
-									<option th:each="type : *{submissionType.values()}"
+									<option th:each="type : ${types.submissionTypes}"
 											th:value="${type.name}"
 											th:text="${type.description}">
 									</option>
@@ -145,7 +145,7 @@
 							<th>체결 분류</th>
 							<td>
 								<select th:field="*{dealType}" style="width:100%;">
-									<option th:each="type : *{dealType.values()}"
+									<option th:each="type : ${types.dealTypes}"
 											th:value="${type.name}"
 											th:text="${type.description}">
 									</option>
@@ -170,7 +170,7 @@
 								<div>
 									금액 <input type="text" class="inputArea" th:field="*{amount}" style="width: 50%;">
 									<select th:field="*{currencyUnitType}" style="width:10%;">
-										<option th:each="type : *{currencyUnitType.values}"
+										<option th:each="type : ${types.currencyUnitTypes}"
 												th:value="${type.name}"
 												th:text="${type.description}">
 										</option>
@@ -250,7 +250,7 @@
 							<th>청구방법</th>
 							<td>
 								<select th:field="*{invoiceType}" style="width:100%;">
-									<option th:each="type : *{invoiceType.values}"
+									<option th:each="type : ${types.invoiceTypes}"
 											th:value="${type.name}"
 											th:text="${type.description}">
 									</option>
@@ -307,20 +307,18 @@
 						<div class="subTitle02">
 							<h3>고객사 담당자</h3>
 							<div>
-								<button type="button" class="btn btn-add" onclick="addClient()">담당자 추가</button>
+								<button type="button" class="btn btn-add" onclick="addCustomerEmployee()">담당자 추가</button>
 							</div>
 						</div>
 						<div class="tbl_type02">
 							<table id="customers">
 							<colgroup>
-								<col width="10%">
+								<col width="20%">
 								<col width="25%">
-								<col width="10%">
 								<col>
 								<col width="10%">
 							</colgroup>
 							<tr>
-								<th class="center">No</th>
 								<th class="center">이름</th>
 								<th class="center">부서</th>
 								<th class="center">이메일</th>
@@ -505,36 +503,25 @@
 		</div>
 
 		<script>
-          let rowIndex = 0;
-          const fields = {
-            type: "이름",
-            name: "부서",
-            email: "이메일",
-            etc: "행삭제"
+          function addCustomerEmployee() {
+            const customers = document.getElementById('customers');
+            const newRow = `<tr>
+              <td class="center">이름</td>
+              <td class="center">부서</td>
+              <td class="center">이메일</td>
+              <td class="center">
+                <button type="button" class="btn btn-wt" onclick="deleteCustomerEmployee(this)">행삭제</button>
+              </td>
+			  <input type="hidden" id="customerEmployeeIds" name="customerEmployeeIds" value="1">
+              </tr>`;
+            customers.innerHTML += newRow;
           }
 
-          function addClient() {
-            const table = document.getElementById('customers');
-            const newRow = table.insertRow(-1);
-
-            const indexCell = newRow.insertCell(0);
-            indexCell.classList.add('center');
-            indexCell.textContent = rowIndex + 1;
-
-            Object.keys(fields)
-              .forEach((fieldKey, index) => {
-                const cell = newRow.insertCell(index + 1);
-                const input = document.createElement('input');
-                input.classList.add('inputArea');
-                input.style.width = '100%';
-                input.type = 'text';
-                input.value = '';
-                input.placeholder = fields[fieldKey];
-                input.id = `customerEmployeeIds${rowIndex}`;
-                input.name = `customerEmployeeIds[${rowIndex}]`;
-                cell.appendChild(input);
-              });
-            rowIndex++;
+          function deleteCustomerEmployee(button) {
+            const row = button.parentElement.parentElement;
+            const customerEmployeeIdsInput = row.querySelector('input[name="customerEmployeeIds"]');
+            const id = customerEmployeeIdsInput.value;
+            row.remove();
           }
 		</script>
 

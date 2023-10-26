@@ -1,16 +1,15 @@
 package com.megazone.act.cms.application.dto.request;
 
-import java.time.LocalDate;
-import java.util.*;
-import java.util.stream.Stream;
-
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.multipart.MultipartFile;
-import lombok.*;
-
 import com.megazone.act.cms.domain.entity.*;
 import com.megazone.act.cms.domain.type.*;
 import com.megazone.act.cms.domain.vo.*;
+import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.time.LocalDate;
+import java.util.*;
+import java.util.stream.Stream;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -34,13 +33,13 @@ public class ContractSalesCreateRequest {
     // TODO: 계약 관계 ID
 
     // 계약 기본 정보2
-    private SubmissionType submissionType = SubmissionType.SALESFORCE;
-    private CloudServiceType cloudServiceType = CloudServiceType.AZURE;
-    private DealType dealType = DealType.CONTRACT;
+    private SubmissionType submissionType;
+    private CloudServiceType cloudServiceType;
+    private DealType dealType;
     private int customerId;
 
     private long amount;
-    private CurrencyUnitType currencyUnitType = CurrencyUnitType.KRW;
+    private CurrencyUnitType currencyUnitType;
     private boolean hasVat;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -53,7 +52,7 @@ public class ContractSalesCreateRequest {
     private LocalDate invoiceEndDate;
 
     // TODO: 통합 빌링 위치 애매함
-    private InvoiceType invoiceType = InvoiceType.TAX;
+    private InvoiceType invoiceType;
     // TODO: 세금계산서 작성일
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate taxCreatedDate;
@@ -67,10 +66,10 @@ public class ContractSalesCreateRequest {
     private String amountRemark;
     private String remark;
 
-    private List<Integer> customerEmployeeIds = new ArrayList<>();
+    private List<Integer> customerEmployeeIds;
 
     // TODO: 사업 수행 담당자 Id
-    private List<Integer> pmIds = new ArrayList<>();
+    private List<Integer> pmIds;
 
     // 증빙 서류
     private MultipartFile contractFile;
@@ -95,7 +94,9 @@ public class ContractSalesCreateRequest {
             new Period(contractStartDate, contractEndDate),
             new Period(invoiceStartDate, invoiceEndDate),
             new ContractMoney(currencyUnitType, amount, hasVat, amountRemark),
-            employees.stream().map(ContractEmployee::new).toList(),
+            employees.stream()
+                .map(ContractEmployee::new)
+                .toList(),
             edmLinkUrl,
             customer,
             customerEmployees.stream()
