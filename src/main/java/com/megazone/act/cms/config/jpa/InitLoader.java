@@ -35,8 +35,10 @@ public class InitLoader implements ApplicationListener<ApplicationStartedEvent> 
         List<Employee> savedEmployees = employeeRepository.saveAll(employees);
 
 
-        Customer customer = new Customer("LG");
-        customerRepository.save(customer);
+        Customer customerA = new Customer("LG");
+        Customer customerB = new Customer("삼성전자");
+        Customer customerC = new Customer("SKT");
+        customerRepository.saveAll(List.of(customerA, customerB, customerC));
         CustomerEmployee customerEmployee = new CustomerEmployee("홍길동", "megazon@mz.co.kr");
         customerEmployeeRepository.save(customerEmployee);
 
@@ -52,10 +54,10 @@ public class InitLoader implements ApplicationListener<ApplicationStartedEvent> 
         List<ContractEmployee> contractEmployeesD = Stream.of(savedEmployees.get(0))
             .map(ContractEmployee::new)
             .toList();
-        List<Contract> contracts = List.of(contractFixture(corporation, contractEmployeesA, customer, customerEmployee, "A"),
-            contractFixture(corporation, contractEmployeesB, customer, customerEmployee, "B"),
-            contractFixture(corporation, contractEmployeesC, customer, customerEmployee, "C"),
-            contractFixtureWithoutDetails(corporation, contractEmployeesD, customer, customerEmployee, "D")
+        List<Contract> contracts = List.of(contractFixture(corporation, contractEmployeesA, customerA, customerEmployee, "A"),
+            contractFixture(corporation, contractEmployeesB, customerB, customerEmployee, "B"),
+            contractFixture(corporation, contractEmployeesC, customerC, customerEmployee, "C"),
+            contractFixtureWithoutDetails(corporation, contractEmployeesD, customerA, customerEmployee, "D")
         );
         contractRepository.saveAll(contracts);
     }
