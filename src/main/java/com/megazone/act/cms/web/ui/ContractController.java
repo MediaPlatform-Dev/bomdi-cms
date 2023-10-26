@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import com.megazone.act.cms.application.ContractService;
+import com.megazone.act.cms.application.FileService;
 import com.megazone.act.cms.application.dto.request.*;
 import com.megazone.act.cms.application.dto.response.ContractDetailResponse;
 import com.megazone.act.cms.domain.type.ContractType;
@@ -26,6 +27,8 @@ public class ContractController {
     private static final String CONTRACT = "contract";
 
     private final ContractService contractService;
+
+    private final FileService fileService;
 
     @GetMapping("/sales-form")
     public String createSalesForm(Model model) {
@@ -44,6 +47,8 @@ public class ContractController {
         }
 
         contractService.createContract(createForm);
+        fileService.fileUpload(createForm.getContractFile());
+
         return REDIRECT_CONTRACTS;
     }
 

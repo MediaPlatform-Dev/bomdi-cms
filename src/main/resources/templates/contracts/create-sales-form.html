@@ -361,7 +361,7 @@
 								<th class="center">계약서</th>
 								<td>
 									<input type="text" class="inputArea" style="width: 100%" placeholder="전자 계약 URL 입력">
-									<input type="file" th:text="'최대 1개'" />
+									<input type="file" th:field="*{contractFile}" th:text="'최대 1개'" />
 								</td>
 							</tr>
 

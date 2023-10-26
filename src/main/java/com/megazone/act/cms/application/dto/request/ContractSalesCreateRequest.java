@@ -105,10 +105,10 @@ public class ContractSalesCreateRequest {
         );
     }
 
-    private List<com.megazone.act.cms.domain.entity.ContractDetail> getContractDetails() {
+    private List<ContractDetail> getContractDetails() {
         return Stream.of(infraDetail, psDetail, msDetail, dpDetail)
             .filter(Objects::nonNull)
-            .map(it -> new com.megazone.act.cms.domain.entity.ContractDetail(it.getName(), it.getType()))
+            .map(it -> new ContractDetail(it.getName(), it.getType()))
             .toList();
     }
 }
