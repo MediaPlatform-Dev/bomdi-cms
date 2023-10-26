@@ -214,7 +214,7 @@
 							<td>
 								<div class="mz-chkbxset">
 									<div class="chkbx">
-										<input type="checkbox" /> 계약기간과 동일
+										<input type="checkbox" id="contractDateSame" onclick="setSameDate()"/> 계약기간과 동일
 									</div>
 								</div>
 							</td>
@@ -522,6 +522,19 @@
             const customerEmployeeIdsInput = row.querySelector('input[name="customerEmployeeIds"]');
             const id = customerEmployeeIdsInput.value;
             row.remove();
+          }
+
+          function setSameDate() {
+            if (document.getElementById('contractDateSame').checked) {
+              const contractStartDate = document.getElementById('contractStartDate').value;
+              const contractEndDate = document.getElementById('contractEndDate').value;
+
+              document.getElementById('invoiceStartDate').value = contractStartDate;
+              document.getElementById('invoiceEndDate').value = contractEndDate;
+            } else {
+              document.getElementById('invoiceStartDate').value = '';
+              document.getElementById('invoiceEndDate').value = '';
+            }
           }
 		</script>
 
