@@ -10,7 +10,7 @@
 			<header th:replace="~{fragments/header}"></header>
 			<div class="header">
 				<h2>
-					계약서 조회
+					매출 계약서 조회
 				</h2>
 			</div>
 
@@ -71,7 +71,7 @@
 							<td>
 								<p class="inputArea" th:text="${contract.no}" style="width: 100%;"></p>
 							</td>
-							<th>계약일</th>
+							<th>계약날인일</th>
 							<td>
 								<p class="inputArea" th:text="${contract.contractDate()}" style="width: 100%"></p>
 							</td>
@@ -85,6 +85,13 @@
 							<th th:for="salesForceContractId">Salesforce 계약번호</th>
 							<td>
 								<p class="inputArea" th:text="${contract.salesForceContractNo}" style="width: 100%;"></p>
+							</td>
+						</tr>
+
+						<tr>
+							<th>계약관계</th>
+							<td colspan="5">
+								<p class="inputArea" th:text="계약관계" style="width: 100%" />
 							</td>
 						</tr>
 
@@ -126,6 +133,10 @@
 					</tr>
 
 					<tr>
+						<th>Offering Name</th>
+						<td>
+							<p class="inputArea" th:text="'Offering Name'" style="width: 100%" />
+						</td>
 						<!--<th>서비스 분류</th>-->
 						<!--<td>-->
 						<!--	<p class="inputArea" th:text="${contract.serviceType}" style="width: 100%;"></p>-->
@@ -147,27 +158,29 @@
 						<th>계약금액</th>
 						<td colspan="5">
 							<div>
-								• 총 금액&nbsp;&nbsp;<span class="inputArea" th:text="${contract.amount()}" style="width: 100%" />&nbsp;&nbsp;
+								금액&nbsp;&nbsp;<span class="inputArea" th:text="${contract.amount()}" style="width: 100%" />&nbsp;&nbsp;
 								<span class="inputArea" th:text="${contract.currencyUnitType().description}" style="width: 100%" />
 								&nbsp;&nbsp; (부가세 별도)
 							</div>
 
 							<div>
-								• 특이사항
-								<p class="inputArea" th:text="${contract.amountRemark()}" style="width: 100%" />
+								특이사항 <span class="inputArea" th:text="${contract.amountRemark()}" style="width: 100%" />
 							</div>
 						</td>
 					</tr>
 
 					<tr>
 						<th>계약 기간</th>
-						<td colspan="1">
+						<td colspan="5">
 							<div class="search">
 								<p th:text="${contract.contractStartDate() + ' ~ ' + contract.contractEndDate()}" style="width: 100%;" />
 							</div>
 						</td>
+					</tr>
+
+					<tr>
 						<th>청구기간</th>
-						<td>
+						<td colspan="5">
 							<div class="search">
 								<p th:text="${contract.invoiceStartDate() + ' ~ ' + contract.invoiceEndDate()}" style="width: 100%" />
 							</div>
@@ -175,18 +188,24 @@
 					</tr>
 
 					<tr>
-						<th>청구방법</th>
-						<td colspan="5">
-							<p class="inputArea" th:text="${contract.invoiceType().description}" style="width: 100%;" />
+						<th>세금계산서 작성일</th>
+						<td>
+							<p th:text="'세금계산서 작성일'" style="width: 100%" />
+						</td>
+						<th>세금계산서 수신 메일</th>
+						<td>
+							<p th:text="'세금계산서 수신 메일'" style="width: 100%" />
 						</td>
 					</tr>
 
 					<tr>
-						<th>세일즈 담당자/부서</th>
+						<th>청구조건</th>
+						<td>
+							<p th:text="'청구조건'" style="width: 100%" />
+						</td>
+						<th>청구방법</th>
 						<td colspan="5">
-							<div class="search">
-								<p class="inputArea" th:text="${contract.contractSalesManagerName()}" style="width: 100%;"></p>
-							</div>
+							<p class="inputArea" th:text="${contract.invoiceType().description}" style="width: 100%;" />
 						</td>
 					</tr>
 
@@ -197,11 +216,18 @@
 								<p class="inputArea" th:text="${contract.contractManagerName()}" style="width: 100%;"></p>
 							</div>
 						</td>
-						<th>딜리버리 담당자</th>
-						<td>
+						<th>세일즈 담당자/부서</th>
+						<td colspan="5">
 							<div class="search">
-								<p class="inputArea" style="width: 100%;"></p>
+								<p class="inputArea" th:text="${contract.contractSalesManagerName()}" style="width: 100%;"></p>
 							</div>
+						</td>
+					</tr>
+
+					<tr>
+						<th>사업수행 담당자/부서</th>
+						<td colspan="5">
+							<p class="inputArea" th:text="'사업수행 담당자/부서'" style="width: 100%" />
 						</td>
 					</tr>
 
@@ -238,6 +264,7 @@
 							<th class="center">이름</th>
 							<th class="center">부서</th>
 							<th class="center">이메일</th>
+							<th class="center">행삭제</th>
 						</tr>
 
 						<tr th:each="customerEmployee : ${contract.customerEmployees()}">
@@ -252,6 +279,9 @@
 							</td>
 							<td>
 								<p class="inputArea" style="width: 100%; text-align: center" th:text="${customerEmployee.email()}"></p>
+							</td>
+							<td>
+								<p class="inputArea" style="width: 100%; text-align: center"></p>
 							</td>
 						</tr>
 						</table>
@@ -269,37 +299,37 @@
 							<col>
 						</colgroup>
 						<tr>
-							<th class="center">계약서</th>
+							<th>계약서</th>
 							<td>
 								<p type="file" th:text="'선택된 파일 없음'"></p>
 							</td>
 						</tr>
 
 						<tr>
-							<th class="center">사업자 등록증</th>
+							<th>사업자 등록증</th>
 							<td>
 								<p type="file" th:text="'선택된 파일 없음'"></p>
 							</td>
 						</tr>
 
 						<tr>
-							<th class="center">비밀유지계약서</th>
+							<th>비밀유지계약서</th>
 							<td>
 								<p type="file" th:text="'선택된 파일 없음'"></p>
 							</td>
 						</tr>
 
 						<tr>
-							<th class="center">첨부문서</th>
+							<th>기타 첨부문서</th>
 							<td>
 								<p type="file" th:text="'선택된 파일 없음'"></p>
 							</td>
 						</tr>
 
 						<tr>
-							<th class="center">특이사항</th>
+							<th>특이사항</th>
 							<td>
-								<p type="file" th:text="'선택된 파일 없음'"></p>
+								<p type="text" style="width: 100%"></p>
 							</td>
 						</tr>
 						</table>
@@ -308,61 +338,108 @@
 
 				<div class="section">
 					<div class="subTitle02">
-						<h3>기타</h3>
+						<h3>추가사항</h3>
 					</div>
 					<div class="tbl_type02">
 						<table>
 						<colgroup>
-							<col style="width: 25%;">
-							<col style="width: 25%;">
-							<col style="width: 25%;">
+							<col style="width:15%;">
 							<col>
 						</colgroup>
 						<tr>
 							<th>지체상금율</th>
 							<td>
-								<p class="inputArea" style="width: 100%;"></p>
-							</td>
-							<th>무상하자 보수기간</th>
-							<td>
-								<div>
-									<span class="inputArea" style="width: 100%" />&nbsp;&nbsp;년
-									<span class="inputArea" style="width: 100%" />&nbsp;&nbsp; 개월
-								</div>
-
-								<div>
-									• 특이사항
-									<p class="inputArea" style="width: 100%" />
-								</div>
+								<p></p>
 							</td>
 						</tr>
 
 						<tr>
-							<th th:for="name">계약이행보증금</th>
+							<th>계약이행보증금</th>
 							<td>
-								<div>
-									<span class="inputArea" style="width: 100%" />&nbsp;&nbsp;• 계약금액의
-									<span class="inputArea" style="width: 100%" />&nbsp;&nbsp;• 부가세포함
-								</div>
-								<div>
-									<span class="inputArea" style="width: 100%" />&nbsp;&nbsp;• 보증보험 제출
-								</div>
+								<p></p>
 							</td>
-							<th th:for="salesForceContractId">하자이행보증금</th>
+						</tr>
+
+						<tr>
+							<th>하자이행보증금</th>
 							<td>
-								<div>
-									<span class="inputArea" style="width: 100%" />&nbsp;&nbsp;• 계약금액의
-									<span class="inputArea" style="width: 100%" />&nbsp;&nbsp;• 부가세포함
-								</div>
-								<div>
-									<span class="inputArea" style="width: 100%" />&nbsp;&nbsp;• 보증보험 제출
-								</div>
+								<p></p>
+							</td>
+						</tr>
+
+						<tr>
+							<th>무상하자 보수기간</th>
+							<td>
+								<p></p>
+							</td>
+						</tr>
+
+						<tr>
+							<th>특이사항</th>
+							<td>
+								<p></p>
 							</td>
 						</tr>
 						</table>
 					</div>
 				</div>
 
+				<!--<div class="section">-->
+				<!--	<div class="subTitle02">-->
+				<!--		<h3>기타</h3>-->
+				<!--	</div>-->
+				<!--	<div class="tbl_type02">-->
+				<!--		<table>-->
+				<!--		<colgroup>-->
+				<!--			<col style="width: 25%;">-->
+				<!--			<col style="width: 25%;">-->
+				<!--			<col style="width: 25%;">-->
+				<!--			<col>-->
+				<!--		</colgroup>-->
+				<!--		<tr>-->
+				<!--			<th>지체상금율</th>-->
+				<!--			<td>-->
+				<!--				<p class="inputArea" style="width: 100%;"></p>-->
+				<!--			</td>-->
+				<!--			<th>무상하자 보수기간</th>-->
+				<!--			<td>-->
+				<!--				<div>-->
+				<!--					<span class="inputArea" style="width: 100%" />&nbsp;&nbsp;년-->
+				<!--					<span class="inputArea" style="width: 100%" />&nbsp;&nbsp; 개월-->
+				<!--				</div>-->
+
+				<!--				<div>-->
+				<!--					• 특이사항-->
+				<!--					<p class="inputArea" style="width: 100%" />-->
+				<!--				</div>-->
+				<!--			</td>-->
+				<!--		</tr>-->
+
+				<!--		<tr>-->
+				<!--			<th th:for="name">계약이행보증금</th>-->
+				<!--			<td>-->
+				<!--				<div>-->
+				<!--					<span class="inputArea" style="width: 100%" />&nbsp;&nbsp;• 계약금액의-->
+				<!--					<span class="inputArea" style="width: 100%" />&nbsp;&nbsp;• 부가세포함-->
+				<!--				</div>-->
+				<!--				<div>-->
+				<!--					<span class="inputArea" style="width: 100%" />&nbsp;&nbsp;• 보증보험 제출-->
+				<!--				</div>-->
+				<!--			</td>-->
+				<!--			<th th:for="salesForceContractId">하자이행보증금</th>-->
+				<!--			<td>-->
+				<!--				<div>-->
+				<!--					<span class="inputArea" style="width: 100%" />&nbsp;&nbsp;• 계약금액의-->
+				<!--					<span class="inputArea" style="width: 100%" />&nbsp;&nbsp;• 부가세포함-->
+				<!--				</div>-->
+				<!--				<div>-->
+				<!--					<span class="inputArea" style="width: 100%" />&nbsp;&nbsp;• 보증보험 제출-->
+				<!--				</div>-->
+				<!--			</td>-->
+				<!--		</tr>-->
+				<!--		</table>-->
+				<!--	</div>-->
+				<!--</div>-->
 
 				<div th:each="contractDetail : ${contract.contractDetails()}">
 					<div class="section">
