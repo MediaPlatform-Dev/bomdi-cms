@@ -131,7 +131,7 @@
 						<!--	<p class="inputArea" th:text="${contract.serviceType}" style="width: 100%;"></p>-->
 						<!--</td>-->
 						<th>체결 분류</th>
-						<td>
+						<td colspan="5">
 							<p class="inputArea" th:text="${contract.dealType().description}" style="width: 100%;"></p>
 						</td>
 					</tr>
@@ -176,7 +176,7 @@
 
 					<tr>
 						<th>청구방법</th>
-						<td>
+						<td colspan="5">
 							<p class="inputArea" th:text="${contract.invoiceType().description}" style="width: 100%;" />
 						</td>
 					</tr>
@@ -367,7 +367,7 @@
 				<div th:each="contractDetail : ${contract.contractDetails()}">
 					<div class="section">
 						<div class="subTitle02">
-							<h3 th:text="${contractDetail.type()}">Type</h3>
+							<h3 th:text="${contractDetail.type().description}">Type</h3>
 							<p class="inputArea" th:text="${contractDetail.name()}" type="text">text</p>
 						</div>
 					</div>

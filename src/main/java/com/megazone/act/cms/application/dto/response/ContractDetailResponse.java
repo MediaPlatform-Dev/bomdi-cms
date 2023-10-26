@@ -65,7 +65,7 @@ public record ContractDetailResponse(
             entity.getNo(),
             LocalDate.now(),
             entity.getName(),
-            "",
+            entity.getSalesForceContractNo(),
             false,
             false,
             entity.getContractTypes().getSubmissionType(),
