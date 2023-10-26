@@ -9,177 +9,149 @@
 		<div class="container">
 			<header th:replace="~{fragments/header}"></header>
 			<div class="content">
-				<div class="section">
-					<!-- Search Filter -->
-					<div class="searchTable1 mB15">
-						<table>
-						<colgroup>
-							<col style="width:10%">
-							<col style="width:30%">
-							<col style="width:10%">
-							<col style="width:30%">
-							<col />
-						</colgroup>
-						<tr>
-							<td>
-								<p>계약유형</p>
-							</td>
-							<td>
-								<div class="mz-radioset mT10">
-									<div class="mz-radio">
-										<input type="radio" name="" id="" value="" checked="">
-										<label>매출</label>
-									</div>
-									<div class="mz-radio">
-										<input type="radio" name="" id="" value="">
-										<label>매입</label>
+				<form method="get" th:action="@{/contracts}" th:object="${condition}">
+					<div class="section">
+						<!-- Search Filter -->
+						<div class="searchTable1 mB15">
+							<table>
+							<colgroup>
+								<col style="width:10%">
+								<col style="width:30%">
+								<col style="width:10%">
+								<col style="width:30%">
+								<col />
+							</colgroup>
+							<tr>
+								<td>
+									<p>계약유형</p>
+								</td>
+								<td>
+									<div class="mz-radioset mT10">
+										<div class="mz-radio" th:each="type : ${types.getContractTypes()}">
+											<input type="radio" th:field="*{contractType}" th:value="${type.name}">
+											<label th:for="${#ids.prev('contractType')}" th:text="${type.description}"></label>
+										</div>
 									</div>
 									<div class="mz-chkbxset">
-										<div class="chkbx">
-											<input type="checkbox" />
-											<label>AWS</label>
-										</div>
-										<div class="chkbx">
-											<input type="checkbox" />
-											<label>PS</label>
-										</div>
-										<div class="chkbx">
-											<input type="checkbox" />
-											<label>MS</label>
-										</div>
-										<div class="chkbx">
-											<input type="checkbox" />
-											<label>DP</label>
-										</div>
-										<div class="chkbx">
-											<input type="checkbox" />
-											<label>외주</label>
+										<div class="chkbx" th:each="detailType : ${types.getContractDetailTypes()}">
+											<input type="checkbox" th:field="*{detailTypes}" th:value="${detailType.name}"/>
+											<label th:for="${#ids.prev('detailTypes')}" th:text="${detailType.description}"></label>
 										</div>
 									</div>
-								</div>
-							</td>
-							<td>
-								<p>서비스분류</p>
-							</td>
-							<td>
-								<select id="" name="" style="width:100%;">
-									<option>FMS</option>
-									<option>FMS</option>
-								</select>
-							</td>
-							<td rowspan="5">
-								<div class="btnArea">
-									<button class="btn btnType01">검색</button>
-									<!--<a href="#" class="btn btnType01">검색</a>-->
-								</div>
-							</td>
-						</tr>
-
-						<tr>
-							<td>
-								<p>계약기간</p>
-							</td>
-							<td>
-								<input class="inputDate" style="width: 40%;" type="text" id="datePickerFr" data-mindate="today" />
-								<span>-</span>
-								<input class="inputDate" style="width: 40%;" type="text" id="datePickerFr" data-mindate="today" />
-							</td>
-							<td>
-								<p>등록기간</p>
-							</td>
-							<td>
-								<input class="inputDate" style="width: 40%;" type="text" id="datePickerTo" data-mindate="today" />
-								<span>-</span>
-								<input class="inputDate" style="width: 40%;" type="text" id="datePickerTo" data-mindate="today" />
-							</td>
-						</tr>
-
-						<tr>
-							<td>
-								<p>계약담당자</p>
-							</td>
-							<td>
-								<input class="inputArea" style="width: 100%" type="text" value="">
-							</td>
-							<td>
-								<p>사업수행 담당자</p>
-							</td>
-							<td>
-								<input class="inputArea" style="width: 100%;" type="text" value="">
-								</select>
-							</td>
-						</tr>
-
-						<tr>
-							<td>
-								<p>세일즈 담당자</p>
-							</td>
-							<td>
-								<input class="inputArea" style="width: 100%;" type="text" value="">
-								</select>
-							</td>
-							<td>
-								<p>부서</p>
-							</td>
-							<td>
-								<select id="" name="" style="width:100%;">
-									<option>XPO</option>
-									<option>XPO</option>
-								</select>
-							</td>
-						</tr>
-
-						<tr>
-							<td>
-								<p>진행상태</p>
-							</td>
-							<td>
-								<div class="mz-radioset mT10">
-									<div class="mz-radio">
-										<input type="radio" name="status" id="status01" value="" checked="">
-										<label for="status01">전체</label>
+								</td>
+								<td>
+									<p>서비스분류</p>
+								</td>
+								<td>
+									<select id="" name="" style="width:100%;">
+										<option>FMS</option>
+										<option>FMS</option>
+									</select>
+								</td>
+								<td rowspan="5">
+									<div class="btnArea">
+										<button class="btn btnType01" type="submit">검색</button>
 									</div>
-									<div class="mz-radio">
-										<input type="radio" name="status" id="status02" value="">
-										<label for="status02">저장</label>
-									</div>
-									<div class="mz-radio">
-										<input type="radio" name="status" id="status03" value="">
-										<label for="status03">등록완료</label>
-									</div>
-								</div>
-							</td>
-							<td>
-								<p>거래처명</p>
-							</td>
-							<td>
-								<input class="inputArea" style="width: 100%;" type="text" value="">
-							</td>
-						</tr>
+								</td>
+							</tr>
 
-						<tr>
-							<td>
-								<p>계약관계명/코드</p>
-							</td>
-							<td>
-								<input class="inputArea" style="width: 100%" type="text" value="">
-							</td>
-							<td>
-								<p>검색어</p>
-							</td>
-							<td>
-								<input class="inputArea" style="width: 100%;" type="text" value="">
-							</td>
-							<td>
-								<div class="btnArea">
-									<a href="#" class="btn btnType02">초기화</a>
-								</div>
-							</td>
-						</tr>
-						</table>
+							<tr>
+								<td>
+									<p>계약기간</p>
+								</td>
+								<td>
+									<input class="inputDate" style="width: 40%;" type="text" id="datePickerFr" data-mindate="today" />
+									<span>-</span>
+									<input class="inputDate" style="width: 40%;" type="text" id="datePickerFr" data-mindate="today" />
+								</td>
+								<td>
+									<p>등록기간</p>
+								</td>
+								<td>
+									<input class="inputDate" style="width: 40%;" type="text" id="datePickerTo" data-mindate="today" />
+									<span>-</span>
+									<input class="inputDate" style="width: 40%;" type="text" id="datePickerTo" data-mindate="today" />
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<p>계약담당자</p>
+								</td>
+								<td>
+									<input type="text" class="inputArea" th:field="*{contractManagerName}" style="width: 100%">
+								</td>
+								<td>
+									<p>사업수행 담당자</p>
+								</td>
+								<td>
+									<input class="inputArea" style="width: 100%;" type="text" value="">
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<p>세일즈 담당자</p>
+								</td>
+								<td>
+									<input type="text" class="inputArea" th:field="*{contractSalesManagerName}" style="width: 100%">
+								</td>
+								<td>
+									<p>부서</p>
+								</td>
+								<td>
+									<select id="" name="" style="width:100%;">
+										<option>XPO</option>
+										<option>XPO</option>
+									</select>
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<p>진행상태</p>
+								</td>
+								<td>
+									<div class="mz-radioset mT10">
+										<div class="mz-radio" th:each="type : ${types.getContractStatuses()}">
+											<input type="radio" th:field="*{status}" th:value="${type.name}">
+											<label th:for="${#ids.prev('status')}" th:text="${type.description}"></label>
+										</div>
+									</div>
+								</td>
+								<td>
+									<p>거래처명</p>
+								</td>
+								<td>
+									<input class="inputArea" style="width: 100%;" type="text" value="">
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<p>계약관계명/코드</p>
+								</td>
+								<td>
+									<input class="inputArea" style="width: 100%" type="text" value="">
+								</td>
+								<td>
+									<p>계약 이름</p>
+								</td>
+								<td>
+									<input type="text" class="inputArea" th:field="*{contractName}" style="width: 100%">
+								</td>
+								<td>
+									<div class="btnArea">
+										<a href="#" class="btn btnType02">초기화</a>
+									</div>
+								</td>
+							</tr>
+							</table>
+						</div>
+						<!-- Search Filter -->
 					</div>
-					<!-- Search Filter -->
-				</div>
+				</form>
+
 
 				<div class="section">
 					<div class="subTitle">
@@ -213,59 +185,34 @@
 								</tr>
 							</thead>
 							<tbody>
-								<div>
-									<tr>
-										<td>
-											NO
-										</td>
-										<td>
-											<a class="clickable" href="#">진행상태</a>
-										</td>
-										<td>
-											<p class="inputArea" th:text="등록기간" style="width: 100%"></p>
-										</td>
-										<td>
-											<p class="inputArea" th:text="계약유형" style="width: 100%"></p>
-										</td>
-										<td>
-											<p class="inputArea" th:text="계약명" style="width: 100%;"></p>
-										</td>
-										<td>
-											<p class="inputArea" th:text="Salesforce계약번호" style="width: 100%"></p>
-										</td>
-										<td>
-											<p class="inputArea" th:text="계약관계명" style="width: 100%"></p>
-										</td>
-										<td>
-											<p class="inputArea" th:text="계약관계코드" style="width: 100%"></p>
-										</td>
-										<td>
-											<p class="inputArea" th:text="계약금액" style="width: 100%"></p>
-										</td>
-										<td>
-											<p class="inputArea" th:text="계약기간" style="width: 100%"></p>
-										</td>
-										<td>
-											<p class="inputArea" th:text="거래처명" style="width: 100%"></p>
-										</td>
-										<td>
-											<p class="inputArea" th:text="계약팀담당자" style="width: 100%"></p>
-										</td>
-										<td>
-											<p class="inputArea" th:text="세일즈담당자" style="width: 100%"></p>
-										</td>
-										<td>
-											<p class="inputArea" th:text="사업수행담당자" style="width: 100%"></p>
-										</td>
-										<!--<td>-->
-										<!--	<a class="clickable" th:href="@{/contracts/{id} (id=${contract.id})}" th:text="${contract.name}">계약 내용</a>-->
-										<!--</td>-->
-										<!--<td th:text="${contract.name()}" >계약 이름</td>-->
-										<!--<td th:text="${contract.contractorName()}">담당자</td>-->
-										<!--<td>-->
-										<!--	<a th:href="@{/contracts/{id}/update-form (id=${contract.id})}" class="btn_U">수정</a>-->
-										<!--</td>-->
-								</div>
+								<tr th:each="contract : ${contracts}">
+									<td>
+										<a class="clickable" th:href="@{/contracts/{id} (id=${contract.id})}" th:text="${contract.id()}">ID</a>
+									</td>
+									<td th:text="${contract.status().description}"></td>
+									<td th:text="'등록기간'"></td>
+									<td th:text="${contract.contractType.description}"></td>
+									<td th:text="${contract.name()}"></td>
+									<td th:text="${contract.salesForceContractNo()}"></td>
+									<td th:text="'계약관계명'"></td>
+									<td th:text="'계약관계코드'"></td>
+									<td th:text="${contract.amount()}"></td>
+									<td th:text="${contract.contractStartDate() + '~' + contract.contractEndDate()}"></td>
+									<td th:text="${contract.customerName()}"></td>
+									<td th:text="${contract.contractManagerName()}"></td>
+									<td th:text="${contract.contractSalesManagerName()}"></td>
+									<td th:text="'사업수행담당자'"></td>
+								</tr>
+
+								<tr>
+									<!--<td>-->
+									<!--	<a class="clickable" th:href="@{/contracts/{id} (id=${contract.id})}" th:text="${contract.name}">계약 내용</a>-->
+									<!--</td>-->
+									<!--<td th:text="${contract.name()}" >계약 이름</td>-->
+									<!--<td th:text="${contract.contractorName()}">담당자</td>-->
+									<!--<td>-->
+									<!--	<a th:href="@{/contracts/{id}/update-form (id=${contract.id})}" class="btn_U">수정</a>-->
+									<!--</td>-->
 								</tr>
 							</tbody>
 							</table>

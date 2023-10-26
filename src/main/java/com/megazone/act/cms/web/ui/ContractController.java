@@ -1,20 +1,21 @@
 package com.megazone.act.cms.web.ui;
 
+import com.megazone.act.cms.application.ContractService;
+import com.megazone.act.cms.application.dto.request.*;
+import com.megazone.act.cms.application.dto.response.ContractQuery;
+import com.megazone.act.cms.application.dto.response.ContractResponse;
+import com.megazone.act.cms.domain.dto.ContractCondition;
+import com.megazone.act.cms.domain.type.ContractType;
+import com.megazone.act.cms.web.ui.dto.CommonTypes;
 import jakarta.validation.Valid;
-import java.util.List;
-
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
-import com.megazone.act.cms.application.ContractService;
-import com.megazone.act.cms.application.FileService;
-import com.megazone.act.cms.application.dto.request.*;
-import com.megazone.act.cms.application.dto.response.ContractDetailResponse;
-import com.megazone.act.cms.domain.type.ContractType;
+import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -27,8 +28,6 @@ public class ContractController {
     private static final String CONTRACT = "contract";
 
     private final ContractService contractService;
-
-    private final FileService fileService;
 
     @GetMapping("/sales-form")
     public String createSalesForm(Model model) {
@@ -47,8 +46,6 @@ public class ContractController {
         }
 
         contractService.createContract(createForm);
-        fileService.fileUpload(createForm.getContractFile());
-
         return REDIRECT_CONTRACTS;
     }
 
@@ -73,9 +70,11 @@ public class ContractController {
     //}
 
     @GetMapping
-    public String list(Model model) {
-        List<ContractDetailResponse> contracts = contractService.getContractList();
+    public String list(@ModelAttribute ContractCondition condition, Model model) {
+        List<ContractQuery> contracts = contractService.getContractList(condition);
         model.addAttribute("contracts", contracts);
+        model.addAttribute("condition", condition);
+        model.addAttribute("types", CommonTypes.TYPES);
         return "contracts/list";
     }
 
@@ -90,7 +89,7 @@ public class ContractController {
         @PathVariable long contractId,
         Model model
     ) {
-        ContractDetailResponse contract = contractService.getContract(contractId);
+        ContractResponse contract = contractService.getContract(contractId);
 
         model.addAttribute(CONTRACT, contract);
         if (contract.type() == ContractType.SALES) {

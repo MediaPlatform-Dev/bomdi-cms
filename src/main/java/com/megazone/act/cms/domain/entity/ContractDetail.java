@@ -17,7 +17,7 @@ public class ContractDetail extends AuditingFields {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "dcntrct_id")
-    private Long id;
+    private Integer id;
 
     @Column(name = "dcntrct_nm")
     private String name;

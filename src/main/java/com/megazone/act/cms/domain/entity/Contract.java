@@ -1,13 +1,12 @@
 package com.megazone.act.cms.domain.entity;
 
-import jakarta.persistence.*;
-import java.util.*;
-
-import lombok.*;
-
 import com.megazone.act.cms.domain.entity.convertor.ContractStatusConvertor;
 import com.megazone.act.cms.domain.type.ContractStatus;
 import com.megazone.act.cms.domain.vo.*;
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.util.*;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
@@ -17,7 +16,7 @@ public class Contract extends AuditingFields {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cntrct_id")
-    private Long id;
+    private Integer id;
 
     @Column(name = "cntrct_no")
     private String no;
