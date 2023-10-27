@@ -1,14 +1,13 @@
 package com.megazone.act.cms.application.dto.request;
 
+import com.megazone.act.cms.domain.type.*;
 import jakarta.validation.constraints.Email;
-import java.time.LocalDate;
-import java.util.List;
-
-import org.springframework.web.multipart.MultipartFile;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
-import com.megazone.act.cms.domain.type.*;
+import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 public class ContractPurchaseUpdateRequest {
@@ -33,7 +32,6 @@ public class ContractPurchaseUpdateRequest {
 
     // 계약 기본 정보2
     private SubmissionType submissionType = SubmissionType.SALESFORCE;
-    private OwnCorporationType ownCorporationType = OwnCorporationType.MEGAZONE_DIGITAL;
     private CloudServiceType cloudServiceType = CloudServiceType.AZURE;
     private DealType dealType = DealType.CONTRACT;
 

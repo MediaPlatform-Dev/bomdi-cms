@@ -1,15 +1,14 @@
 package com.megazone.act.cms.application.dto.request;
 
+import com.megazone.act.cms.domain.type.*;
+import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Stream;
-
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.multipart.MultipartFile;
-import lombok.*;
-
-import com.megazone.act.cms.domain.type.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -34,7 +33,6 @@ public class ContractSalesUpdateRequest {
 
     // 계약 기본 정보2
     private SubmissionType submissionType = SubmissionType.SALESFORCE;
-    private OwnCorporationType ownCorporationType = OwnCorporationType.MEGAZONE_DIGITAL;
     private CloudServiceType cloudServiceType = CloudServiceType.AZURE;
     private DealType dealType = DealType.CONTRACT;
 
