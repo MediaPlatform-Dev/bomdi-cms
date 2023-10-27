@@ -9,6 +9,8 @@ spring:
     properties:
       hibernate:
         format_sql: true
+        jdbc:
+          batch_size: 100
       org:
         hibernate:
           envers:

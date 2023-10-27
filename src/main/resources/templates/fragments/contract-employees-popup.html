@@ -112,7 +112,8 @@
             <td class="center">
               <a class="btn_U" onclick="selectContractEmployeeRow( ${item.id}, '${item.name}');" >선택</a>
             </td>
-          </tr>`
+          </tr>
+		`
         )
           .join("");
         document.body.querySelector('#employee-popup').style.display = "block";
@@ -128,14 +129,15 @@
             <td class="center">
               <a class="btn_U" onclick="selectSalesEmployeeRow( ${item.id}, '${item.name}');" >선택</a>
             </td>
-          </tr>`
+          </tr>
+		`
         )
           .join("");
         document.body.querySelector('#employee-popup').style.display = "block";
       }
 
       function selectContractEmployeeRow(id, name) {
-        const employeeId = document.getElementById("contractManagerId");
+        const employeeId = document.getElementById("contractEmployees[0].id");
         const employeeName = document.getElementById("contractManagerName")
         employeeId.value = id;
         employeeName.value = name;
@@ -143,7 +145,7 @@
       }
 
       function selectSalesEmployeeRow(id, name) {
-        const employeeId = document.getElementById("salesManagerId");
+        const employeeId = document.getElementById("contractEmployees[1].id");
         const employeeName = document.getElementById("salesManagerName")
         employeeId.value = id;
         employeeName.value = name;

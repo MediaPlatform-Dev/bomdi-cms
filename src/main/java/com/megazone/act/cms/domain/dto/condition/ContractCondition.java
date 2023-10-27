@@ -1,4 +1,4 @@
-package com.megazone.act.cms.domain.dto;
+package com.megazone.act.cms.domain.dto.condition;
 
 import com.megazone.act.cms.domain.type.*;
 

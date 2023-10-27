@@ -1,13 +1,12 @@
 package com.megazone.act.cms.domain.repository;
 
-import com.megazone.act.cms.domain.dto.ContractCondition;
-import com.megazone.act.cms.domain.entity.Contract;
+import com.megazone.act.cms.domain.dto.condition.ContractCondition;
+import com.megazone.act.cms.domain.dto.query.ContractSimpleQuery;
 
 import java.util.List;
 
 public interface ContractRepositoryCustom {
 
-    List<Contract> findAllQuery();
 
-    List<Contract> findAllQuery(ContractCondition condition);
+    List<ContractSimpleQuery> findAllQuery(ContractCondition condition);
 }

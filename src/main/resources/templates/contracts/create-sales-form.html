@@ -262,7 +262,9 @@
 							<td>
 								<div class="search">
 									<input readonly type="text" class="inputArea" id="contractManagerName" style="width: 100%;">
-									<input type="hidden" th:field="*{contractManagerId}">
+									<!--<input type="hidden" th:field="*{contractEmployees}" th:value="">-->
+									<input type="hidden" id="contractEmployees[0].id" name="contractEmployees[0].id" value="">
+									<input type="hidden" id="contractEmployees[0].type" name="contractEmployees[0].type" value="CONTRACT">
 									<a onclick="openContractChargerPopup();" class="btn_s mL5">검색</a>
 								</div>
 							</td>
@@ -270,7 +272,9 @@
 							<td>
 								<div class="search">
 									<input readonly type="text" class="inputArea" id="salesManagerName" style="width: 100%;">
-									<input type="hidden" th:field="*{salesManagerId}">
+									<!--<input type="hidden" th:field="*{salesManagerId}">-->
+									<input type="hidden" id="contractEmployees[1].id" name="contractEmployees[1].id" value="">
+									<input type="hidden" id="contractEmployees[1].type" name="contractEmployees[1].type" value="SALES">
 									<a onclick="openSalesChargerPopup();" class="btn_s mL5">검색</a>
 								</div>
 							</td>

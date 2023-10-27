@@ -187,20 +187,20 @@
 							<tbody>
 								<tr th:each="contract : ${contracts}">
 									<td>
-										<a class="clickable" th:href="@{/contracts/{id} (id=${contract.id})}" th:text="${contract.id()}">ID</a>
+										<a class="clickable" th:href="@{/contracts/{id} (id=${contract.id})}" th:text="${contract.getId()}">ID</a>
 									</td>
-									<td th:text="${contract.status().description}"></td>
+									<td th:text="${contract.getStatus().description}"></td>
 									<td th:text="'등록기간'"></td>
 									<td th:text="${contract.contractType.description}"></td>
-									<td th:text="${contract.name()}"></td>
-									<td th:text="${contract.salesForceContractNo()}"></td>
+									<td th:text="${contract.getName()}"></td>
+									<td th:text="${contract.getSalesForceContractNo()}"></td>
 									<td th:text="'계약관계명'"></td>
 									<td th:text="'계약관계코드'"></td>
-									<td th:text="${contract.amount()}"></td>
-									<td th:text="${contract.contractStartDate() + '~' + contract.contractEndDate()}"></td>
-									<td th:text="${contract.customerName()}"></td>
-									<td th:text="${contract.contractManagerName()}"></td>
-									<td th:text="${contract.contractSalesManagerName()}"></td>
+									<td th:text="${contract.getAmount()}"></td>
+									<td th:text="${contract.getStartDate() + '~' + contract.getEndDate()}"></td>
+									<td th:text="${contract.getCustomerName()}"></td>
+									<td th:text="${contract.getContractManagerName()}"></td>
+									<td th:text="${contract.getSalesManagerName()}"></td>
 									<td th:text="'사업수행담당자'"></td>
 								</tr>
 

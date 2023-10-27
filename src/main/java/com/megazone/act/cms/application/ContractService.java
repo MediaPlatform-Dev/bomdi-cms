@@ -1,20 +1,18 @@
 package com.megazone.act.cms.application;
 
-import jakarta.persistence.EntityNotFoundException;
-import java.util.List;
-import java.util.stream.Stream;
-
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-
 import com.megazone.act.cms.application.dto.request.*;
-import com.megazone.act.cms.application.dto.response.ContractQuery;
 import com.megazone.act.cms.application.dto.response.ContractResponse;
-import com.megazone.act.cms.domain.dto.ContractCondition;
+import com.megazone.act.cms.domain.dto.condition.ContractCondition;
+import com.megazone.act.cms.domain.dto.query.ContractSimpleQuery;
 import com.megazone.act.cms.domain.entity.*;
 import com.megazone.act.cms.domain.repository.*;
+import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -31,8 +29,9 @@ public class ContractService {
     @Transactional
     public void createContract(ContractSalesCreateRequest request) {
         Corporation corporation = corporationRepository.getReferenceById(1L);
-        List<Employee> employees = Stream.of(request.getContractManagerId(), request.getSalesManagerId())
-            .map(employeeRepository::getReferenceById)
+        List<Employee> employees = request.getContractEmployees()
+            .stream()
+            .map(it -> employeeRepository.getReferenceById(it.getId()))
             .toList();
         Customer customer = customerRepository.getReferenceById(request.getCustomerId());
         List<CustomerEmployee> customerEmployees = request.getCustomerEmployeeIds().stream()
@@ -48,11 +47,8 @@ public class ContractService {
         }
     }
 
-    public List<ContractQuery> getContracts(ContractCondition condition) {
-        return contractRepository.findAllQuery(condition)
-            .stream()
-            .map(ContractQuery::from)
-            .toList();
+    public List<ContractSimpleQuery> getContracts(ContractCondition condition) {
+        return contractRepository.findAllQuery(condition);
     }
 
     public ContractResponse getContract(long contractId) {

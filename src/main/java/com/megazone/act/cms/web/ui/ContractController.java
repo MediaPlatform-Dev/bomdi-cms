@@ -1,22 +1,21 @@
 package com.megazone.act.cms.web.ui;
 
+import com.megazone.act.cms.application.ContractService;
+import com.megazone.act.cms.application.dto.request.*;
+import com.megazone.act.cms.application.dto.response.ContractResponse;
+import com.megazone.act.cms.domain.dto.condition.ContractCondition;
+import com.megazone.act.cms.domain.dto.query.ContractSimpleQuery;
+import com.megazone.act.cms.domain.type.ContractType;
+import com.megazone.act.cms.web.ui.dto.CommonTypes;
 import jakarta.validation.Valid;
-import java.util.List;
-
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
-import com.megazone.act.cms.application.ContractService;
-import com.megazone.act.cms.application.dto.request.*;
-import com.megazone.act.cms.application.dto.response.ContractQuery;
-import com.megazone.act.cms.application.dto.response.ContractResponse;
-import com.megazone.act.cms.domain.dto.ContractCondition;
-import com.megazone.act.cms.domain.type.ContractType;
-import com.megazone.act.cms.web.ui.dto.CommonTypes;
+import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -73,7 +72,7 @@ public class ContractController {
 
     @GetMapping
     public String list(@ModelAttribute ContractCondition condition, Model model) {
-        List<ContractQuery> contracts = contractService.getContracts(condition);
+        List<ContractSimpleQuery> contracts = contractService.getContracts(condition);
         model.addAttribute("contracts", contracts);
         model.addAttribute("condition", condition);
         model.addAttribute("types", CommonTypes.TYPES);

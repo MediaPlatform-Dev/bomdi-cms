@@ -1,17 +1,15 @@
 package com.megazone.act.cms.application.dto.request;
 
-import java.time.LocalDate;
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.Stream;
-
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.multipart.MultipartFile;
-import lombok.*;
-
 import com.megazone.act.cms.domain.entity.*;
 import com.megazone.act.cms.domain.type.*;
 import com.megazone.act.cms.domain.vo.*;
+import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.time.LocalDate;
+import java.util.*;
+import java.util.stream.Stream;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -60,8 +58,7 @@ public class ContractSalesCreateRequest {
     private LocalDate taxCreatedDate;
     private String taxReceivedEmail;
 
-    private int contractManagerId;
-    private int salesManagerId;
+    private List<ContractEmployeeRequest> contractEmployees;
     private String edmLinkUrl;
     private String remark;
 
@@ -89,7 +86,7 @@ public class ContractSalesCreateRequest {
             new Period(invoiceStartDate, invoiceEndDate),
             new ContractMoney(currencyUnitType, amount, amountRemark),
             employees.stream()
-                .map(ContractEmployee::new)
+                .map(it -> new ContractEmployee(it, getEmployeeRoleTypeById(it.getId())))
                 .toList(),
             edmLinkUrl,
             customer,
@@ -100,11 +97,23 @@ public class ContractSalesCreateRequest {
         );
     }
 
+    private EmployeeRoleType getEmployeeRoleTypeById(int id) {
+        return contractEmployees.stream()
+            .filter(it -> it.getId() == id)
+            .map(ContractEmployeeRequest::getType)
+            .findAny()
+            .orElseThrow();
+    }
+
     private List<ContractDetail> getContractDetails() {
         return Stream.of(infraDetail, psDetail, msDetail, dpDetail)
             .filter(Objects::nonNull)
             .map(it -> new ContractDetail(it.getName(), it.getType()))
             .toList();
+    }
+
+    public List<ContractEmployeeRequest> getContractEmployees() {
+        return Objects.requireNonNullElse(contractEmployees, Collections.emptyList());
     }
 }
 
