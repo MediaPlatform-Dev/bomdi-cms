@@ -25,6 +25,7 @@ public class ContractService {
     private final EmployeeRepository employeeRepository;
     private final CustomerRepository customerRepository;
     private final CustomerEmployeeRepository customerEmployeeRepository;
+    private final FileService fileService;
 
     @Transactional
     public void createContract(ContractSalesCreateRequest request) {
@@ -39,6 +40,7 @@ public class ContractService {
             .toList();
 
         Contract contract = request.toEntity(corporation, employees, customer, customerEmployees);
+        fileService.upload(request.files());
 
         try {
             contractRepository.save(contract);

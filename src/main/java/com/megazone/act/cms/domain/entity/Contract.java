@@ -63,11 +63,14 @@ public class Contract extends AuditingFields {
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "contract")
     private List<ContractDetail> contractDetails = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "contract")
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "contract")
     private List<ContractEmployee> contractEmployees = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "contract")
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "contract")
     private List<ContractCustomerEmployee> contractCustomerEmployees = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "contract")
+    private List<AttachmentFile> files = new ArrayList<>();
 
     public Contract(String name, String remark) {
         this.name = name;

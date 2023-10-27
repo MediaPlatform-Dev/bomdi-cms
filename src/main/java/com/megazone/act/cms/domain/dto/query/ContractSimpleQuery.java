@@ -37,7 +37,7 @@ public class ContractSimpleQuery {
 
     public String getContractManagerName() {
         return contractEmployees.stream()
-            .filter(it -> it.getType() == EmployeeRoleType.CONTRACT)
+            .filter(it -> it.getType().isContract())
             .map(ContractEmployeeQuery::getName)
             .findAny()
             .orElse("");
@@ -45,7 +45,7 @@ public class ContractSimpleQuery {
 
     public String getSalesManagerName() {
         return contractEmployees.stream()
-            .filter(it -> it.getType() == EmployeeRoleType.SALES)
+            .filter(it -> it.getType().isSales())
             .map(ContractEmployeeQuery::getName)
             .findAny()
             .orElse("");

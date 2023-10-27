@@ -11,6 +11,8 @@ import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Stream;
 
+import static org.springframework.util.StringUtils.hasText;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -58,12 +60,12 @@ public class ContractSalesCreateRequest {
     private LocalDate taxCreatedDate;
     private String taxReceivedEmail;
 
-    private List<ContractEmployeeRequest> contractEmployees;
+    private List<ContractEmployeeRequest> contractEmployees = new ArrayList<>();
     private String edmLinkUrl;
     private String remark;
 
-    private List<Integer> customerEmployeeIds;
-    private List<Integer> pmIds;
+    private List<Integer> customerEmployeeIds = new ArrayList<>();
+    private List<Integer> pmIds = new ArrayList<>();
 
     // 증빙 서류
     private MultipartFile contractFile;
@@ -114,6 +116,13 @@ public class ContractSalesCreateRequest {
 
     public List<ContractEmployeeRequest> getContractEmployees() {
         return Objects.requireNonNullElse(contractEmployees, Collections.emptyList());
+    }
+
+    public List<MultipartFile> files() {
+        return Stream.concat(Stream.of(contractFile, businessRegistrationFile, secretContractFile), files.stream())
+                .filter(Objects::nonNull)
+                .filter(it -> hasText(it.getOriginalFilename()))
+                .toList();
     }
 }
 

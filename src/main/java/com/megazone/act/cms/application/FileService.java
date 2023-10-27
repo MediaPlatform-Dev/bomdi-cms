@@ -2,36 +2,34 @@ package com.megazone.act.cms.application;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.List;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import lombok.RequiredArgsConstructor;
 
-import com.megazone.act.cms.domain.entity.File;
-import com.megazone.act.cms.domain.repository.FileRepository;
+import static com.megazone.act.cms.utils.EnvironmentUtils.HOME_PATH;
 
+@Slf4j
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 @Service
 public class FileService {
 
-    private static final String PATH = "C:/Users/MZ01-HORANG/cms-app/src/main/resources/static/img/fileStorage";
+    public void upload(List<MultipartFile> files) {
+        files.forEach(this::upload);
+    }
 
-    private final FileRepository fileRepository;
-
-
-    public void fileUpload(MultipartFile file) {
+    public void upload(MultipartFile file) {
+        // TODO: 파일 확장자 확인
         String originalFilename = file.getOriginalFilename();
-        String contentType = file.getContentType();
-
         try {
-            file.transferTo(Path.of(PATH + "/" + originalFilename));
+            file.transferTo(Path.of(HOME_PATH + "/" + originalFilename));
         } catch (IOException e) {
+            log.error("파일 업로드 실패 - " + originalFilename);
             throw new RuntimeException(e);
         }
-
-        File files = new File(originalFilename, contentType, PATH);
-        fileRepository.save(files);
     }
 }

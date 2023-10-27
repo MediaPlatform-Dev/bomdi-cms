@@ -89,8 +89,8 @@ public class ContractRepositoryImpl implements ContractRepositoryCustom {
             .from(contract)
             .join(contract.customer)
             .where(
-                contractTypeEq(condition.contractType()),
-                contractNameContains(condition.contractName()),
+                typeEq(condition.contractType()),
+                nameContains(condition.contractName()),
                 statusEq(condition.status()),
                 customerNameStartWith(condition.customerName()),
                 detailTypesIn(condition),
@@ -99,11 +99,11 @@ public class ContractRepositoryImpl implements ContractRepositoryCustom {
             .fetch();
     }
 
-    private BooleanExpression contractTypeEq(ContractType type) {
+    private BooleanExpression typeEq(ContractType type) {
         return type != null ? contract.contractTypes.contractType.eq(type) : null;
     }
 
-    private BooleanExpression contractNameContains(String name) {
+    private BooleanExpression nameContains(String name) {
         return hasText(name) ? contract.name.contains(name) : null;
     }
 
@@ -145,8 +145,8 @@ public class ContractRepositoryImpl implements ContractRepositoryCustom {
     }
 
     private static BooleanExpression employeeNamesEq(ContractCondition condition) {
-        BooleanExpression contractManagerExpression = contractManagerNameEq(condition);
-        BooleanExpression salesManagerExpression = salesManagerNameEq(condition);
+        BooleanExpression contractManagerExpression = salesManagerNameEq(condition);
+        BooleanExpression salesManagerExpression = contractManagerNameEq(condition);
 
         if (contractManagerExpression == null && salesManagerExpression == null) {
             return null;
@@ -160,21 +160,21 @@ public class ContractRepositoryImpl implements ContractRepositoryCustom {
     }
 
     private static BooleanExpression contractManagerNameEq(ContractCondition condition) {
+        String contractManagerName = condition.contractManagerName();
+        if (!hasText(contractManagerName)) {
+            return null;
+        }
+        return contractEmployee.name.eq(contractManagerName)
+                .and(contractEmployee.type.eq(EmployeeRoleType.CONTRACT));
+    }
+
+    private static BooleanExpression salesManagerNameEq(ContractCondition condition) {
         String salesManagerName = condition.contractSalesManagerName();
         if (!hasText(salesManagerName)) {
             return null;
         }
         return contractEmployee.name.eq(salesManagerName)
             .and(contractEmployee.type.eq(EmployeeRoleType.SALES));
-    }
-
-    private static BooleanExpression salesManagerNameEq(ContractCondition condition) {
-        String contractManagerName = condition.contractManagerName();
-        if (!hasText(contractManagerName)) {
-            return null;
-        }
-        return contractEmployee.name.eq(contractManagerName)
-            .and(contractEmployee.type.eq(EmployeeRoleType.CONTRACT));
     }
 
 }

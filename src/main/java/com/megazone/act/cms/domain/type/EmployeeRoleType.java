@@ -12,4 +12,12 @@ public enum EmployeeRoleType implements CodeEnum {
 
     private final String code;
     private final String description;
+
+    public boolean isContract() {
+        return this == CONTRACT;
+    }
+
+    public boolean isSales() {
+        return this == SALES;
+    }
 }
