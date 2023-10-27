@@ -138,17 +138,21 @@
 
       function selectContractEmployeeRow(id, name) {
         const employeeId = document.getElementById("contractEmployees[0].id");
+        const employee = document.getElementById("contractEmployees[0].name");
         const employeeName = document.getElementById("contractManagerName")
         employeeId.value = id;
         employeeName.value = name;
+        employee.value = name;
         document.body.querySelector('#employee-popup').style.display = "none";
       }
 
       function selectSalesEmployeeRow(id, name) {
         const employeeId = document.getElementById("contractEmployees[1].id");
+        const employee = document.getElementById("contractEmployees[1].name");
         const employeeName = document.getElementById("salesManagerName")
         employeeId.value = id;
         employeeName.value = name;
+        employee.value = name;
         document.body.querySelector('#employee-popup').style.display = "none";
       }
 

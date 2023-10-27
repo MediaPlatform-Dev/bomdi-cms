@@ -23,6 +23,8 @@ public class ContractEmployee {
     @Setter @ManyToOne(fetch = FetchType.LAZY)
     private Contract contract;
 
+    private String name;
+
     @JoinColumn(name = "employee_id")
     @ManyToOne
     private Employee employee;
@@ -30,5 +32,6 @@ public class ContractEmployee {
     public ContractEmployee(Employee employee, EmployeeRoleType type) {
         this.employee = employee;
         this.type = type;
+        this.name = employee.getName();
     }
 }

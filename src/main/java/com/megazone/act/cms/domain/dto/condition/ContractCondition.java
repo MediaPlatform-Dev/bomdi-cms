@@ -15,6 +15,7 @@ public record ContractCondition(
     ContractStatus status,
     String contractManagerName,
     String contractSalesManagerName,
-    String contractName
+    String contractName,
+    String customerName
 ) {
 }

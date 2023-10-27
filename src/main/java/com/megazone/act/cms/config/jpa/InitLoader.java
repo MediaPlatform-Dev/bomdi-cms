@@ -38,19 +38,30 @@ public class InitLoader implements ApplicationListener<ApplicationStartedEvent> 
         CustomerEmployee customerEmployeeB = new CustomerEmployee("김영철", "megazon2@mz.co.kr");
         customerEmployeeRepository.saveAll(List.of(customerEmployeeA, customerEmployeeB));
 
-        List<ContractEmployee> contractEmployeesA = List.of(new ContractEmployee(savedEmployees.get(0), EmployeeRoleType.CONTRACT),
-            new ContractEmployee(savedEmployees.get(0), EmployeeRoleType.SALES));
-        List<ContractEmployee> contractEmployeesB = List.of(new ContractEmployee(savedEmployees.get(2), EmployeeRoleType.CONTRACT),
+        List<ContractEmployee> contractEmployeesA = List.of(
+            new ContractEmployee(savedEmployees.get(0), EmployeeRoleType.CONTRACT),
+            new ContractEmployee(savedEmployees.get(1), EmployeeRoleType.SALES));
+        List<ContractEmployee> contractEmployeesB = List.of(
+            new ContractEmployee(savedEmployees.get(2), EmployeeRoleType.CONTRACT),
             new ContractEmployee(savedEmployees.get(3), EmployeeRoleType.SALES));
-        List<ContractEmployee> contractEmployeesC = List.of(new ContractEmployee(savedEmployees.get(4), EmployeeRoleType.CONTRACT),
+        List<ContractEmployee> contractEmployeesC = List.of(
+            new ContractEmployee(savedEmployees.get(4), EmployeeRoleType.CONTRACT),
             new ContractEmployee(savedEmployees.get(5), EmployeeRoleType.SALES));
-        List<ContractEmployee> contractEmployeesD = List.of(new ContractEmployee(savedEmployees.get(6), EmployeeRoleType.CONTRACT));
+        List<ContractEmployee> contractEmployeesD = List.of(
+            new ContractEmployee(savedEmployees.get(0), EmployeeRoleType.CONTRACT),
+            new ContractEmployee(savedEmployees.get(3), EmployeeRoleType.SALES));
+        List<ContractEmployee> contractEmployeesE = List.of(
+            new ContractEmployee(savedEmployees.get(2), EmployeeRoleType.CONTRACT),
+            new ContractEmployee(savedEmployees.get(4), EmployeeRoleType.SALES));
+        List<ContractEmployee> contractEmployeesF = List.of(new ContractEmployee(savedEmployees.get(6), EmployeeRoleType.CONTRACT));
 
         List<Contract> contracts = List.of(
             contractFixture(corporation, contractEmployeesA, customerA, customerEmployeeA, "A"),
             contractFixture(corporation, contractEmployeesB, customerB, customerEmployeeA, "B"),
             contractFixture(corporation, contractEmployeesC, customerC, customerEmployeeB, "C"),
-            contractFixtureOtherDetails(corporation, contractEmployeesD, customerA, customerEmployeeB, "D")
+            contractFixture(corporation, contractEmployeesD, customerA, customerEmployeeB, "D"),
+            contractFixture(corporation, contractEmployeesE, customerC, customerEmployeeB, "E"),
+            contractFixtureOtherDetails(corporation, contractEmployeesF, customerB, customerEmployeeA, "F")
         );
         contractRepository.saveAll(contracts);
     }

@@ -12,8 +12,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static com.megazone.act.cms.domain.entity.QContract.contract;
@@ -51,6 +50,29 @@ public class ContractRepositoryImpl implements ContractRepositoryCustom {
         return contracts;
     }
 
+    private List<ContractEmployeeQuery> getContractEmployees(ContractCondition condition, List<Integer> contractIds) {
+        return queryFactory.select(Projections.fields(ContractEmployeeQuery.class,
+                    as(contractEmployee.contract.id, "contractId"),
+                    contractEmployee.name,
+                    contractEmployee.type
+                )
+            )
+            .from(contractEmployee)
+            .where(contractEmployee.contract.id.in(contractIds))
+            .fetch();
+    }
+
+    private List<ContractDetailQuery> getContractDetails(ContractCondition condition, List<Integer> contractIds) {
+        return queryFactory.select(Projections.fields(ContractDetailQuery.class,
+                    as(contract.id, "contractId"),
+                    as(contractDetail.contractDetailType, "type")
+                )
+            )
+            .from(contractDetail)
+            .where(contractDetail.contract.id.in(contractIds))
+            .fetch();
+    }
+
     private List<ContractSimpleQuery> getContracts(ContractCondition condition) {
         return queryFactory.select(Projections.fields(ContractSimpleQuery.class,
                     contract.id,
@@ -66,76 +88,14 @@ public class ContractRepositoryImpl implements ContractRepositoryCustom {
             )
             .from(contract)
             .join(contract.customer)
-            .where(contractTypeEq(condition.contractType()))
-            .where(contractNameContains(condition.contractName()))
-            .where(statusEq(condition.status()))
-            .where(detailTypeIn(condition))
-            .where(employeeNamesIn(condition))
-            .fetch();
-    }
-
-    private static BooleanExpression detailTypeIn(ContractCondition condition) {
-        List<ContractDetailType> detailTypes = condition.detailTypes();
-        if (detailTypes == null || detailTypes.isEmpty()) {
-            return null;
-        }
-
-        return contract.id.in(
-            JPAExpressions
-                .select(contractDetail.contract.id)
-                .from(contractDetail)
-                .where(contractDetail.contractDetailType.in(detailTypes))
-        );
-    }
-
-    private static BooleanExpression employeeNamesIn(ContractCondition condition) {
-        return contract.id.in(
-            JPAExpressions
-                .select(contractEmployee.contract.id)
-                .from(contractEmployee)
-                .join(contractEmployee.employee)
-                .where(contractManagerNameEq(condition))
-                .where(salesManagerNameEq(condition))
-        );
-    }
-
-    private static BooleanExpression contractManagerNameEq(ContractCondition condition) {
-        String salesManagerName = condition.contractSalesManagerName();
-        if (!hasText(salesManagerName)) {
-            return null;
-        }
-        return contractEmployee.employee.name.eq(salesManagerName).and(contractEmployee.type.eq(EmployeeRoleType.SALES));
-    }
-
-    private static BooleanExpression salesManagerNameEq(ContractCondition condition) {
-        String contractManagerName = condition.contractManagerName();
-        if (!hasText(contractManagerName)) {
-            return null;
-        }
-        return contractEmployee.employee.name.eq(contractManagerName).and(contractEmployee.type.eq(EmployeeRoleType.CONTRACT));
-    }
-
-    private List<ContractEmployeeQuery> getContractEmployees(ContractCondition condition, List<Integer> contractIds) {
-        return queryFactory.select(Projections.fields(ContractEmployeeQuery.class,
-                    as(contractEmployee.contract.id, "contractId"),
-                    contractEmployee.employee.name,
-                    contractEmployee.type
-                )
+            .where(
+                contractTypeEq(condition.contractType()),
+                contractNameContains(condition.contractName()),
+                statusEq(condition.status()),
+                customerNameStartWith(condition.customerName()),
+                detailTypesIn(condition),
+                employeeNamesIn(condition)
             )
-            .from(contractEmployee)
-            .join(contractEmployee.employee)
-            .where(contractEmployee.contract.id.in(contractIds))
-            .fetch();
-    }
-
-    private List<ContractDetailQuery> getContractDetails(ContractCondition condition, List<Integer> contractIds) {
-        return queryFactory.select(Projections.fields(ContractDetailQuery.class,
-                    as(contract.id, "contractId"),
-                    as(contractDetail.contractDetailType, "type")
-                )
-            )
-            .from(contractDetail)
-            .where(contractDetail.contract.id.in(contractIds))
             .fetch();
     }
 
@@ -155,11 +115,66 @@ public class ContractRepositoryImpl implements ContractRepositoryCustom {
         return status != null ? contract.status.eq(status) : null;
     }
 
-    private BooleanExpression contractManagerNameEq(String name) {
-        return hasText(name) ? contractEmployee.employee.name.eq(name) : null;
+    private BooleanExpression customerNameStartWith(String name) {
+        return hasText(name) ? contract.customer.name.like(name + "%") : null;
     }
 
-    private BooleanExpression contractSalesMangerNameEq(String name) {
-        return hasText(name) ? contractEmployee.employee.name.eq(name) : null;
+    private static BooleanExpression detailTypesIn(ContractCondition condition) {
+        List<ContractDetailType> detailTypes = condition.detailTypes();
+        if (detailTypes == null || detailTypes.isEmpty()) {
+            return null;
+        }
+
+        return JPAExpressions.selectOne()
+            .from(contractDetail)
+            .where(
+                contract.id.eq(contractDetail.contract.id),
+                contractDetail.contractDetailType.in(detailTypes)
+            )
+            .exists();
     }
+
+    private static BooleanExpression employeeNamesIn(ContractCondition condition) {
+        return JPAExpressions.selectOne()
+            .from(contractEmployee)
+            .where(
+                contract.id.eq(contractEmployee.contract.id),
+                employeeNamesEq(condition)
+            )
+            .exists();
+    }
+
+    private static BooleanExpression employeeNamesEq(ContractCondition condition) {
+        BooleanExpression contractManagerExpression = contractManagerNameEq(condition);
+        BooleanExpression salesManagerExpression = salesManagerNameEq(condition);
+
+        if (contractManagerExpression == null && salesManagerExpression == null) {
+            return null;
+        }
+
+        if (contractManagerExpression != null && salesManagerExpression != null) {
+            return contractManagerExpression.or(salesManagerExpression);
+        }
+
+        return Objects.requireNonNullElse(contractManagerExpression, salesManagerExpression);
+    }
+
+    private static BooleanExpression contractManagerNameEq(ContractCondition condition) {
+        String salesManagerName = condition.contractSalesManagerName();
+        if (!hasText(salesManagerName)) {
+            return null;
+        }
+        return contractEmployee.name.eq(salesManagerName)
+            .and(contractEmployee.type.eq(EmployeeRoleType.SALES));
+    }
+
+    private static BooleanExpression salesManagerNameEq(ContractCondition condition) {
+        String contractManagerName = condition.contractManagerName();
+        if (!hasText(contractManagerName)) {
+            return null;
+        }
+        return contractEmployee.name.eq(contractManagerName)
+            .and(contractEmployee.type.eq(EmployeeRoleType.CONTRACT));
+    }
+
 }
