@@ -1,15 +1,16 @@
 package com.megazone.act.cms.infrastructure.querydsl;
 
+import java.util.List;
+
+import org.springframework.stereotype.Repository;
+import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.jpa.impl.JPAQueryFactory;
+import lombok.RequiredArgsConstructor;
+
 import com.megazone.act.cms.domain.dto.ContractCondition;
 import com.megazone.act.cms.domain.entity.Contract;
 import com.megazone.act.cms.domain.repository.ContractRepositoryCustom;
 import com.megazone.act.cms.domain.type.*;
-import com.querydsl.core.types.dsl.BooleanExpression;
-import com.querydsl.jpa.impl.JPAQueryFactory;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 import static com.megazone.act.cms.domain.entity.QContract.contract;
 import static org.springframework.util.StringUtils.hasText;
@@ -28,13 +29,13 @@ public class ContractRepositoryImpl implements ContractRepositoryCustom {
     @Override
     public List<Contract> findAllQuery(ContractCondition condition) {
         return queryFactory.selectFrom(contract)
-            .where(contractTypeEq(condition.contractType()))
-            .where(contractDetailTypeEq(condition.detailTypes()))
-            .where(contractManagerNameEq(condition.contractManagerName()))
-            .where(contractSalesMangerNameEq(condition.contractSalesManagerName()))
-            .where(contractNameContains(condition.contractName()))
-            .where(statusEq(condition.status()))
-            .fetch();
+            .where(contractTypeEq(condition.contractType())
+                .and(contractDetailTypeEq(condition.detailTypes()))
+                .and(contractManagerNameEq(condition.contractManagerName()))
+                .and(contractSalesMangerNameEq(condition.contractSalesManagerName()))
+                .and(contractNameContains(condition.contractName()))
+                .and(statusEq(condition.status()))
+            ).fetch();
     }
 
     private BooleanExpression contractTypeEq(ContractType type) {

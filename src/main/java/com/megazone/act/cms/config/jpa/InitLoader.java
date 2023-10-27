@@ -1,17 +1,18 @@
 package com.megazone.act.cms.config.jpa;
 
+import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Stream;
+
+import org.springframework.boot.context.event.ApplicationStartedEvent;
+import org.springframework.context.ApplicationListener;
+import org.springframework.stereotype.Component;
+import lombok.RequiredArgsConstructor;
+
 import com.megazone.act.cms.domain.entity.*;
 import com.megazone.act.cms.domain.repository.*;
 import com.megazone.act.cms.domain.type.*;
 import com.megazone.act.cms.domain.vo.*;
-import lombok.RequiredArgsConstructor;
-import org.springframework.boot.context.event.ApplicationStartedEvent;
-import org.springframework.context.ApplicationListener;
-import org.springframework.stereotype.Component;
-
-import java.time.LocalDate;
-import java.util.List;
-import java.util.stream.Stream;
 
 import static com.megazone.act.cms.domain.type.ContractDetailType.INFRA;
 import static com.megazone.act.cms.domain.type.ContractDetailType.MANAGED_SERVICE;
@@ -66,7 +67,7 @@ public class InitLoader implements ApplicationListener<ApplicationStartedEvent> 
         ContractTypes types = new ContractTypes(ContractType.SALES, DealType.CONTRACT, SubmissionType.SALESFORCE, InvoiceType.TAX);
         Period period = new Period(LocalDate.now(), LocalDate.now().plusDays(7));
         Period invoicePeriod = new Period(LocalDate.now(), LocalDate.now().plusDays(30));
-        ContractMoney money = new ContractMoney(CurrencyUnitType.KRW, 3000, true, "금액 특이사항" + suffix);
+        ContractMoney money = new ContractMoney(CurrencyUnitType.KRW, 3000, "금액 특이사항" + suffix);
 
         return new Contract("테스트 계약" + suffix, "테스트 계약 특이사항" + suffix, "SF 계약번호" + suffix,
             corporation, types, period, invoicePeriod, money,
@@ -78,11 +79,17 @@ public class InitLoader implements ApplicationListener<ApplicationStartedEvent> 
         );
     }
 
-    private Contract contractFixtureWithoutDetails(Corporation corporation, List<ContractEmployee> contractEmployees, Customer customer, CustomerEmployee customerEmployee, String suffix) {
+    private Contract contractFixtureWithoutDetails(
+        Corporation corporation,
+        List<ContractEmployee> contractEmployees,
+        Customer customer,
+        CustomerEmployee customerEmployee,
+        String suffix
+    ) {
         ContractTypes types = new ContractTypes(ContractType.SALES, DealType.CONTRACT, SubmissionType.SALESFORCE, InvoiceType.TAX);
         Period period = new Period(LocalDate.now(), LocalDate.now().plusDays(7));
         Period invoicePeriod = new Period(LocalDate.now(), LocalDate.now().plusDays(30));
-        ContractMoney money = new ContractMoney(CurrencyUnitType.KRW, 3000, true, "금액 특이사항" + suffix);
+        ContractMoney money = new ContractMoney(CurrencyUnitType.KRW, 3000, "금액 특이사항" + suffix);
 
         return new Contract("테스트 계약" + suffix, "테스트 계약 특이사항" + suffix, "SF 계약번호" + suffix,
             corporation, types, period, invoicePeriod, money,

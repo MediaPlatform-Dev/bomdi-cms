@@ -175,7 +175,6 @@
 												th:text="${type.description}">
 										</option>
 									</select>
-									<input type="checkbox" th:field="*{hasVat}" /> 부가세 포함
 								</div>
 								<div>
 									특이사항
@@ -214,7 +213,7 @@
 							<td>
 								<div class="mz-chkbxset">
 									<div class="chkbx">
-										<input type="checkbox" id="contractDateSame" onclick="toggleSameDate()"/> 계약기간과 동일
+										<input type="checkbox" id="contractDateSame" onclick="toggleSameDate()" /> 계약기간과 동일
 									</div>
 								</div>
 							</td>
@@ -232,7 +231,7 @@
 										<option>기타
 										</option>
 									</select>
-									<input type="text" class="inputDate" data-mindate="today" style="width: 50%;" /> 이내
+									<input type="text" id="taxCreateDate" class="inputDate" data-mindate="today" style="width: 50%;" /> 이내
 								</div>
 							</td>
 							<th>세금계산서 수신 메일</th>
@@ -359,7 +358,7 @@
 								<th class="center">계약서</th>
 								<td>
 									<input type="text" class="inputArea" style="width: 100%" placeholder="전자 계약 URL 입력">
-									<input type="file" th:field="*{contractFile}" th:text="'최대 1개'" />
+									<input type="file" th:field="*{contractFile}" th:value="''" th:text="'최대 1개'" />
 								</td>
 							</tr>
 
@@ -382,7 +381,7 @@
 								<td>
 									<div>
 										<input type="text" class="inputArea" style="width: 20%;">
-										<input type="file" th:text="'최대 7개'" />
+										<input type="file" multiple th:field="*{files}" th:text="'최대 7개'" />
 									</div>
 								</td>
 							</tr>
@@ -390,7 +389,7 @@
 							<tr>
 								<th class="center">특이사항</th>
 								<td>
-									<textarea type="text" class="inputArea" th:field="*{documentRemark}"  style="width: 100%" />
+									<textarea type="text" class="inputArea" th:field="*{documentRemark}" style="width: 100%" />
 								</td>
 							</tr>
 							</table>
@@ -531,16 +530,17 @@
 
               document.getElementById('invoiceStartDate').value = contractStartDate;
               document.getElementById('invoiceEndDate').value = contractEndDate;
-            } else {
-              document.getElementById('invoiceStartDate').value = '';
-              document.getElementById('invoiceEndDate').value = '';
+              return;
             }
+
+            document.getElementById('invoiceStartDate').value = '';
+            document.getElementById('invoiceEndDate').value = '';
           }
 		</script>
 
 		<script>
           $(function () {
-            $('#contractDate, #contractStartDate, #contractEndDate, #invoiceStartDate, #invoiceEndDate')
+            $('#contractDate, #contractStartDate, #contractEndDate, #invoiceStartDate, #invoiceEndDate, #taxCreateDate')
               .datepicker();
           });
 

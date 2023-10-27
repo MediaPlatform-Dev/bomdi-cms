@@ -1,12 +1,13 @@
 package com.megazone.act.cms.application.dto.response;
 
+import java.time.LocalDate;
+import java.util.List;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.megazone.act.cms.application.dto.request.ContractCustomerEmployeeResponse;
 import com.megazone.act.cms.domain.entity.Contract;
 import com.megazone.act.cms.domain.type.*;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import java.time.LocalDate;
-import java.util.List;
 
 
 public record ContractResponse(
@@ -85,7 +86,7 @@ public record ContractResponse(
             entity.getContractMoney().getRemark(),
             entity.getRemark(),
             entity.getContractMoney().getCurrencyUnitType(),
-            entity.getContractMoney().getTotalAmount(),
+            entity.getContractMoney().getAmount(),
             entity.getContractCustomerEmployees()
                 .stream()
                 .map(ContractCustomerEmployeeResponse::from)

@@ -18,29 +18,12 @@ public class ContractMoney {
     @Column(name = "amt")
     private long amount;
 
-    private boolean hasVat;
-
-    @Column(name = "tot_amt")
-    private long totalAmount;
-
     private String remark;
 
-    public ContractMoney(CurrencyUnitType currencyUnitType, long amount, boolean hasVat, String remark) {
+    public ContractMoney(CurrencyUnitType currencyUnitType, long amount, String remark) {
         this.currencyUnitType = currencyUnitType;
         this.amount = amount;
-        this.hasVat = hasVat;
-        this.totalAmount = total(amount, hasVat);
         this.remark = remark;
     }
 
-    private long total(long amount, boolean hasVat) {
-        if (!hasVat) {
-            return amount + calculateVat(amount);
-        }
-        return amount;
-    }
-
-    private static long calculateVat(long amount) {
-        return (long) (amount * 0.1);
-    }
 }

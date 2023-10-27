@@ -1,15 +1,17 @@
 package com.megazone.act.cms.application.dto.request;
 
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Stream;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
+import lombok.*;
+
 import com.megazone.act.cms.domain.entity.*;
 import com.megazone.act.cms.domain.type.*;
 import com.megazone.act.cms.domain.vo.*;
-import lombok.*;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.time.LocalDate;
-import java.util.*;
-import java.util.stream.Stream;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -41,6 +43,7 @@ public class ContractSalesCreateRequest {
     private long amount;
     private CurrencyUnitType currencyUnitType;
     private boolean hasVat;
+    private String amountRemark;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate contractStartDate;
@@ -51,7 +54,6 @@ public class ContractSalesCreateRequest {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate invoiceEndDate;
 
-    // TODO: 통합 빌링 위치 애매함
     private InvoiceType invoiceType;
     // TODO: 세금계산서 작성일
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -60,25 +62,17 @@ public class ContractSalesCreateRequest {
 
     private int contractManagerId;
     private int salesManagerId;
-    // TODO: EDM Link URL 무엇인지
     private String edmLinkUrl;
-
-    private String amountRemark;
     private String remark;
 
     private List<Integer> customerEmployeeIds;
-
-    // TODO: 사업 수행 담당자 Id
     private List<Integer> pmIds;
 
     // 증빙 서류
     private MultipartFile contractFile;
     private MultipartFile businessRegistrationFile;
     private MultipartFile secretContractFile;
-    // TODO: 파일 변수 네이밍 정의
-    private MultipartFile file1;
-    private MultipartFile file2;
-    private MultipartFile file3;
+    private List<MultipartFile> files;
     private String documentRemark;
 
     // TODO: 추가 사항
@@ -93,7 +87,7 @@ public class ContractSalesCreateRequest {
             corporation, new ContractTypes(contractType, dealType, submissionType, invoiceType),
             new Period(contractStartDate, contractEndDate),
             new Period(invoiceStartDate, invoiceEndDate),
-            new ContractMoney(currencyUnitType, amount, hasVat, amountRemark),
+            new ContractMoney(currencyUnitType, amount, amountRemark),
             employees.stream()
                 .map(ContractEmployee::new)
                 .toList(),
