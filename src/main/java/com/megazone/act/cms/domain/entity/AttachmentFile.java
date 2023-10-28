@@ -13,15 +13,17 @@ public class AttachmentFile {
     private Integer id;
 
     private String fileName;
+    private String originalFileName;
     private String contentType;
     private String filePath;
 
     @JoinColumn(name = "cntrct_id")
-    @ManyToOne
+    @Setter @ManyToOne
     private Contract contract;
 
-    public AttachmentFile(String fileName, String contentType, String filePath) {
+    public AttachmentFile(String fileName, String originalFileName, String contentType, String filePath) {
         this.filePath = filePath;
+        this.originalFileName = originalFileName;
         this.contentType = contentType;
         this.fileName = fileName;
     }

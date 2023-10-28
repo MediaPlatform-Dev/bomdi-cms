@@ -2,6 +2,7 @@ package com.megazone.act.cms.application;
 
 import com.megazone.act.cms.application.dto.request.*;
 import com.megazone.act.cms.application.dto.response.ContractResponse;
+import com.megazone.act.cms.application.dto.response.FileResponse;
 import com.megazone.act.cms.domain.dto.condition.ContractCondition;
 import com.megazone.act.cms.domain.dto.query.ContractSimpleQuery;
 import com.megazone.act.cms.domain.entity.*;
@@ -29,6 +30,22 @@ public class ContractService {
 
     @Transactional
     public void createContract(ContractSalesCreateRequest request) {
+        Contract contract = entityFrom(request);
+        List<AttachmentFile> files = fileStorage.upload(request.files())
+                .stream()
+                .map(it -> (FileResponse) it)
+                .map(FileResponse::toEntity)
+                .toList();
+        contract.addAttachmentFiles(files);
+
+        try {
+            contractRepository.save(contract);
+        } catch (EntityNotFoundException e) {
+            log.error("데이터를 찾을 수 없습니다. - ", e);
+        }
+    }
+
+    private Contract entityFrom(ContractSalesCreateRequest request) {
         Corporation corporation = corporationRepository.getReferenceById(1L);
         List<Employee> employees = request.getContractEmployees()
             .stream()
@@ -40,14 +57,7 @@ public class ContractService {
             .map(customerEmployeeRepository::getReferenceById)
             .toList();
 
-        Contract contract = request.toEntity(corporation, employees, customer, customerEmployees);
-        List<FileInfo> fileInfos = fileStorage.upload(request.files());
-
-        try {
-            contractRepository.save(contract);
-        } catch (EntityNotFoundException e) {
-            log.error("데이터를 찾을 수 없습니다. - ", e);
-        }
+        return request.toEntity(corporation, employees, customer, customerEmployees);
     }
 
     private Customer getCustomer(Integer customerId) {

@@ -53,12 +53,12 @@ public record ContractResponse(
     CurrencyUnitType currencyUnitType,
     long amount,
     List<ContractCustomerEmployeeResponse> customerEmployees,
-    List<ContractDetailResponse> contractDetails
+    List<ContractDetailResponse> contractDetails,
+    List<FileResponse> fileResponses
 
 ) {
 
     public static ContractResponse from(Contract entity) {
-
         return new ContractResponse(
             entity.getId(),
             entity.getContractTypes().getContractType(),
@@ -94,7 +94,11 @@ public record ContractResponse(
             entity.getContractDetails()
                 .stream()
                 .map(ContractDetailResponse::from)
-                .toList()
+                .toList(),
+            entity.getFiles()
+                    .stream()
+                    .map(FileResponse::from)
+                    .toList()
         );
     }
 

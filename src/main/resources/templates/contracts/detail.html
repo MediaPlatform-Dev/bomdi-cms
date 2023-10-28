@@ -322,7 +322,9 @@
 						<tr>
 							<th>기타 첨부문서</th>
 							<td>
-								<p type="file" th:text="'선택된 파일 없음'"></p>
+								<div th:each="file : ${contract.fileResponses()}">
+									<a class="clickable" th:href="@{/files?name={name} (name=${file.name()})}" th:text="${file.originalName()}">파일</a>
+								</div>
 							</td>
 						</tr>
 

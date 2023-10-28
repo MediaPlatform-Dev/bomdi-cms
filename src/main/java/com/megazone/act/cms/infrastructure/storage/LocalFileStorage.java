@@ -1,9 +1,12 @@
 package com.megazone.act.cms.infrastructure.storage;
 
 
+import com.megazone.act.cms.application.dto.response.FileResponse;
 import com.megazone.act.cms.domain.repository.FileInfo;
 import com.megazone.act.cms.domain.repository.FileStorage;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -26,17 +29,30 @@ public class LocalFileStorage implements FileStorage {
 
     @Override
     public FileInfo upload(MultipartFile file) {
-        // TODO: 파일 확장자 확인
         String originalFilename = file.getOriginalFilename();
         String savedName = randomFileName(file);
+        upload(file, savedName, originalFilename);
 
+        return new FileResponse(savedName,
+                file.getOriginalFilename(),
+                HOME_PATH,
+                file.getContentType(),
+                null
+        );
+    }
+
+    private static void upload(MultipartFile file, String savedName, String originalFilename) {
         try {
             file.transferTo(Path.of(HOME_PATH + "/" + savedName));
         } catch (IOException e) {
             log.error("파일 업로드 실패 - " + originalFilename);
             throw new RuntimeException(e);
         }
+    }
 
-        return new FileInfo(savedName, file.getOriginalFilename(), HOME_PATH, file.getContentType());
+    @Override
+    public Resource download(String fileId) {
+        String filePath = HOME_PATH + "/" + fileId; // 파일 경로 설정
+        return new FileSystemResource(filePath);
     }
 }

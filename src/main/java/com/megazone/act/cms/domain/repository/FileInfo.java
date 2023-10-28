@@ -1,9 +1,16 @@
 package com.megazone.act.cms.domain.repository;
 
-public record FileInfo(
-        String name,
-        String originalName,
-        String relativePath,
-        String type
-) {
+import org.springframework.core.io.Resource;
+
+public interface FileInfo {
+
+    String name();
+
+    String originalName();
+
+    String relativePath();
+
+    String type();
+
+    Resource resource();
 }

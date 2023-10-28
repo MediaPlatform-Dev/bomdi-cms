@@ -110,7 +110,14 @@ public class Contract extends AuditingFields {
 
     private static String randomNo(ContractTypes contractTypes) {
         return String.format("%s-%s-%s",
-            "MZC", contractTypes.codeForNo(), UUID.randomUUID().toString().substring(0, 6).toUpperCase());
+                "MZC", contractTypes.codeForNo(), UUID.randomUUID().toString().substring(0, 6).toUpperCase());
+    }
+
+    public String getCustomerName() {
+        if (customer == null) {
+            return "";
+        }
+        return customer.getName();
     }
 
     private void addContractEmployee(ContractEmployee contractEmployee) {
@@ -133,10 +140,8 @@ public class Contract extends AuditingFields {
         this.remark = contents;
     }
 
-    public String getCustomerName() {
-        if (customer == null) {
-            return "";
-        }
-        return customer.getName();
+    public void addAttachmentFiles(List<AttachmentFile> attachmentFiles) {
+        attachmentFiles.forEach(it -> it.setContract(this));
+        this.files.addAll(attachmentFiles);
     }
 }
