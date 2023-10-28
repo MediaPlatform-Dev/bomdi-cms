@@ -78,11 +78,13 @@ public class ContractSalesCreateRequest {
 
     public Contract toEntity(
             Corporation corporation,
-            Customer customer,
             List<Employee> employees
     ) {
-        return new Contract(name, remark, salesForceContractNo,
-                corporation, new ContractTypes(contractType, dealType, submissionType, invoiceType),
+        return new Contract(name,
+                remark,
+                salesForceContractNo,
+                corporation,
+                new ContractTypes(contractType, dealType, submissionType, invoiceType),
                 new Period(contractStartDate, contractEndDate),
                 new Period(invoiceStartDate, invoiceEndDate),
                 new ContractMoney(currencyUnitType, amount, amountRemark),
@@ -90,7 +92,7 @@ public class ContractSalesCreateRequest {
                         .map(it -> new ContractEmployee(it, getEmployeeRoleTypeById(it.getId())))
                         .toList(),
                 edmLinkUrl,
-                customer,
+                getCustomer(customerId),
                 customerEmployeeIds.stream()
                         .map(CustomerEmployee::new)
                         .map(ContractCustomerEmployee::new)
@@ -101,11 +103,18 @@ public class ContractSalesCreateRequest {
 
     private EmployeeRoleType getEmployeeRoleTypeById(int id) {
         return contractEmployees.stream()
-            .filter(Objects::nonNull)
-            .filter(it -> it.getId() == id)
-            .map(ContractEmployeeRequest::getType)
-            .findAny()
-            .orElseThrow();
+                .filter(Objects::nonNull)
+                .filter(it -> it.getId() == id)
+                .map(ContractEmployeeRequest::getType)
+                .findAny()
+                .orElseThrow();
+    }
+
+    private Customer getCustomer(Integer customerId) {
+        if (customerId == null) {
+            return null;
+        }
+        return new Customer(customerId);
     }
 
     private List<ContractDetail> getContractDetails() {

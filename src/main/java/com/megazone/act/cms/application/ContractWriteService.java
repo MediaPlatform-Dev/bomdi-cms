@@ -1,11 +1,8 @@
 package com.megazone.act.cms.application;
 
 import com.megazone.act.cms.application.dto.request.*;
-import com.megazone.act.cms.application.dto.response.ContractResponse;
 import com.megazone.act.cms.domain.port.storage.FileStorage;
 import com.megazone.act.cms.infrastructure.storage.FileResponse;
-import com.megazone.act.cms.domain.dto.condition.ContractCondition;
-import com.megazone.act.cms.domain.dto.query.ContractSimpleQuery;
 import com.megazone.act.cms.domain.entity.*;
 import com.megazone.act.cms.domain.port.repository.*;
 import jakarta.persistence.EntityNotFoundException;
@@ -44,21 +41,13 @@ public class ContractWriteService {
 
     private Contract entityFrom(ContractSalesCreateRequest request) {
         Corporation corporation = new Corporation(1);
-        Customer customer = getCustomer(request.getCustomerId());
         List<Employee> employees = request.getContractEmployees()
                 .stream()
                 .filter(it -> it.getId() != null)
                 .map(it -> employeeRepository.getReferenceById(it.getId()))
                 .toList();
 
-        return request.toEntity(corporation, customer, employees);
-    }
-
-    private Customer getCustomer(Integer customerId) {
-        if (customerId == null) {
-            return null;
-        }
-        return customerRepository.getReferenceById(customerId);
+        return request.toEntity(corporation, employees);
     }
 
     public void updateContract(Long contractId, ContractSalesUpdateRequest request) {
