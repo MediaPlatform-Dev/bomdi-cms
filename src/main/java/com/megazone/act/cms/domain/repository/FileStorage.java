@@ -11,7 +11,7 @@ public interface FileStorage {
     FileInfo upload(MultipartFile file);
 
     default String randomFileName(MultipartFile file) {
-        String uuid = UUID.randomUUID().toString().substring(0, 7);
+        String uuid = UUID.randomUUID().toString().replace("-", "").substring(0, 16);
         String ext = extractExt(file.getOriginalFilename());
         return String.format("%s.%s", uuid, ext);
     }

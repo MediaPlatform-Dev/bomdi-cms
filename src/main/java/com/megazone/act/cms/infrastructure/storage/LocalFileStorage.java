@@ -28,14 +28,15 @@ public class LocalFileStorage implements FileStorage {
     public FileInfo upload(MultipartFile file) {
         // TODO: 파일 확장자 확인
         String originalFilename = file.getOriginalFilename();
+        String savedName = randomFileName(file);
 
         try {
-            file.transferTo(Path.of(HOME_PATH + "/" + originalFilename));
+            file.transferTo(Path.of(HOME_PATH + "/" + savedName));
         } catch (IOException e) {
             log.error("파일 업로드 실패 - " + originalFilename);
             throw new RuntimeException(e);
         }
 
-        return new FileInfo(randomFileName(file), file.getOriginalFilename(), HOME_PATH, file.getContentType());
+        return new FileInfo(savedName, file.getOriginalFilename(), HOME_PATH, file.getContentType());
     }
 }
