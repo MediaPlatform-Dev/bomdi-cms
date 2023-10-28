@@ -1,10 +1,10 @@
 package com.megazone.act.cms.application.dto;
 
-import com.megazone.act.cms.domain.repository.FileInfo;
+import com.megazone.act.cms.domain.port.storage.FileInfo;
 import com.megazone.act.cms.infrastructure.storage.FileResponse;
 import com.megazone.act.cms.domain.entity.AttachmentFile;
-import com.megazone.act.cms.domain.repository.AttachmentFileRepository;
-import com.megazone.act.cms.domain.repository.FileStorage;
+import com.megazone.act.cms.domain.port.repository.AttachmentFileRepository;
+import com.megazone.act.cms.domain.port.storage.FileStorage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package com.megazone.act.cms.domain.repository;
+package com.megazone.act.cms.domain.port.repository;
 
 import com.megazone.act.cms.domain.entity.CustomerEmployee;
 import org.springframework.data.jpa.repository.JpaRepository;

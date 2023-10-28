@@ -19,4 +19,8 @@ public class Customer extends AuditingFields {
     public Customer(String name) {
         this.name = name;
     }
+
+    public Customer(Integer customerId) {
+        this.id = customerId;
+    }
 }

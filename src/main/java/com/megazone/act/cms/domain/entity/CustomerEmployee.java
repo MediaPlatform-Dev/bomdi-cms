@@ -27,4 +27,8 @@ public class CustomerEmployee extends AuditingFields {
         this.name = name;
         this.email = email;
     }
+
+    public CustomerEmployee(Integer id) {
+        this.id = id;
+    }
 }

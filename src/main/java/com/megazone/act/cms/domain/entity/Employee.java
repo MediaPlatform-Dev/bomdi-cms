@@ -24,4 +24,8 @@ public class Employee {
     public Employee(String name) {
         this.name = name;
     }
+
+    public Employee(Integer id) {
+        this.id = id;
+    }
 }

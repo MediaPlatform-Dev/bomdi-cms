@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import com.megazone.act.cms.application.CustomerService;
+import com.megazone.act.cms.application.CustomerReadService;
 import com.megazone.act.cms.application.dto.response.CustomerResponse;
 
 @Slf4j
@@ -15,10 +15,10 @@ import com.megazone.act.cms.application.dto.response.CustomerResponse;
 @RestController
 public class CustomerRestController {
 
-    private final CustomerService customerService;
+    private final CustomerReadService customerReadService;
 
     @GetMapping("/customers")
     public List<CustomerResponse> customers() {
-        return customerService.getCustomers();
+        return customerReadService.getCustomers();
     }
 }

@@ -1,7 +1,7 @@
 package com.megazone.act.cms.config.jpa;
 
 import com.megazone.act.cms.domain.entity.*;
-import com.megazone.act.cms.domain.repository.*;
+import com.megazone.act.cms.domain.port.repository.*;
 import com.megazone.act.cms.domain.type.*;
 import com.megazone.act.cms.domain.vo.*;
 import lombok.RequiredArgsConstructor;

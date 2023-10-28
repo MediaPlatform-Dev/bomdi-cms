@@ -1,7 +1,7 @@
 package com.megazone.act.cms.infrastructure.storage;
 
 import com.megazone.act.cms.domain.entity.AttachmentFile;
-import com.megazone.act.cms.domain.repository.FileInfo;
+import com.megazone.act.cms.domain.port.storage.FileInfo;
 import org.springframework.core.io.Resource;
 
 public record FileResponse (

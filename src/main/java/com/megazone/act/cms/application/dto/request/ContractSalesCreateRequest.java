@@ -77,30 +77,31 @@ public class ContractSalesCreateRequest {
     // TODO: 추가 사항
 
     public Contract toEntity(
-        Corporation corporation,
-        List<Employee> employees,
-        Customer customer,
-        List<CustomerEmployee> customerEmployees
+            Corporation corporation,
+            Customer customer,
+            List<Employee> employees
     ) {
         return new Contract(name, remark, salesForceContractNo,
-            corporation, new ContractTypes(contractType, dealType, submissionType, invoiceType),
-            new Period(contractStartDate, contractEndDate),
-            new Period(invoiceStartDate, invoiceEndDate),
-            new ContractMoney(currencyUnitType, amount, amountRemark),
-            employees.stream()
-                .map(it -> new ContractEmployee(it, getEmployeeRoleTypeById(it.getId())))
-                .toList(),
-            edmLinkUrl,
-            customer,
-            customerEmployees.stream()
-                .map(ContractCustomerEmployee::new)
-                .toList(),
-            getContractDetails()
+                corporation, new ContractTypes(contractType, dealType, submissionType, invoiceType),
+                new Period(contractStartDate, contractEndDate),
+                new Period(invoiceStartDate, invoiceEndDate),
+                new ContractMoney(currencyUnitType, amount, amountRemark),
+                employees.stream()
+                        .map(it -> new ContractEmployee(it, getEmployeeRoleTypeById(it.getId())))
+                        .toList(),
+                edmLinkUrl,
+                customer,
+                customerEmployeeIds.stream()
+                        .map(CustomerEmployee::new)
+                        .map(ContractCustomerEmployee::new)
+                        .toList(),
+                getContractDetails()
         );
     }
 
     private EmployeeRoleType getEmployeeRoleTypeById(int id) {
         return contractEmployees.stream()
+            .filter(Objects::nonNull)
             .filter(it -> it.getId() == id)
             .map(ContractEmployeeRequest::getType)
             .findAny()
@@ -109,13 +110,9 @@ public class ContractSalesCreateRequest {
 
     private List<ContractDetail> getContractDetails() {
         return Stream.of(infraDetail, psDetail, msDetail, dpDetail)
-            .filter(Objects::nonNull)
-            .map(it -> new ContractDetail(it.getName(), it.getType()))
-            .toList();
-    }
-
-    public List<ContractEmployeeRequest> getContractEmployees() {
-        return Objects.requireNonNullElse(contractEmployees, Collections.emptyList());
+                .filter(Objects::nonNull)
+                .map(it -> new ContractDetail(it.getName(), it.getType()))
+                .toList();
     }
 
     public List<MultipartFile> files() {

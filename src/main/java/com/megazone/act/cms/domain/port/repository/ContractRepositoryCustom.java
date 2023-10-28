@@ -1,4 +1,4 @@
-package com.megazone.act.cms.domain.repository;
+package com.megazone.act.cms.domain.port.repository;
 
 import com.megazone.act.cms.domain.dto.condition.ContractCondition;
 import com.megazone.act.cms.domain.dto.query.ContractSimpleQuery;

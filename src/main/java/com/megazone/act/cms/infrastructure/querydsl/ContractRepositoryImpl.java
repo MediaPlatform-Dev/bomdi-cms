@@ -2,7 +2,7 @@ package com.megazone.act.cms.infrastructure.querydsl;
 
 import com.megazone.act.cms.domain.dto.condition.ContractCondition;
 import com.megazone.act.cms.domain.dto.query.*;
-import com.megazone.act.cms.domain.repository.ContractRepositoryCustom;
+import com.megazone.act.cms.domain.port.repository.ContractRepositoryCustom;
 import com.megazone.act.cms.domain.type.*;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;

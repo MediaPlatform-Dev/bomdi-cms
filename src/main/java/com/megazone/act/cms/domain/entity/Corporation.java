@@ -11,12 +11,16 @@ public class Corporation extends AuditingFields {
 
     @Column(name = "crprtn_id")
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Column(name = "crprtn_nm")
     private String name;
 
     public Corporation(String name) {
         this.name = name;
+    }
+
+    public Corporation(Integer id) {
+        this.id = id;
     }
 }

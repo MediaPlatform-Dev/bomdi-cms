@@ -1,7 +1,7 @@
 package com.megazone.act.cms.infrastructure.storage;
 
 
-import com.megazone.act.cms.domain.repository.FileStorage;
+import com.megazone.act.cms.domain.port.storage.FileStorage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;

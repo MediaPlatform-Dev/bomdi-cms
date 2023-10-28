@@ -8,12 +8,12 @@ import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 
 import com.megazone.act.cms.application.dto.response.EmployeeResponse;
-import com.megazone.act.cms.domain.repository.EmployeeRepository;
+import com.megazone.act.cms.domain.port.repository.EmployeeRepository;
 
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 @Service
-public class EmployeeService {
+public class EmployeeReadService {
 
     private final EmployeeRepository employeeRepository;
 

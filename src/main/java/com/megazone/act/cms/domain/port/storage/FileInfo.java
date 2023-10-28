@@ -1,4 +1,4 @@
-package com.megazone.act.cms.domain.repository;
+package com.megazone.act.cms.domain.port.storage;
 
 import org.springframework.core.io.Resource;
 
