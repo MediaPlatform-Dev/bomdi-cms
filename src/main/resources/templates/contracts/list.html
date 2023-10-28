@@ -27,13 +27,13 @@
 								</td>
 								<td>
 									<div class="mz-radioset mT10">
-										<div class="mz-radio" th:each="type : ${types.getContractTypes()}">
+										<div class="mz-radio" th:each="type : ${commonTypes.getContractTypes()}">
 											<input type="radio" th:field="*{contractType}" th:value="${type.name}">
 											<label th:for="${#ids.prev('contractType')}" th:text="${type.description}"></label>
 										</div>
 									</div>
 									<div class="mz-chkbxset">
-										<div class="chkbx" th:each="detailType : ${types.getContractDetailTypes()}">
+										<div class="chkbx" th:each="detailType : ${commonTypes.getContractDetailTypes()}">
 											<input type="checkbox" th:field="*{detailTypes}" th:value="${detailType.name}"/>
 											<label th:for="${#ids.prev('detailTypes')}" th:text="${detailType.description}"></label>
 										</div>
@@ -60,17 +60,17 @@
 									<p>계약기간</p>
 								</td>
 								<td>
-									<input class="inputDate" style="width: 40%;" type="text" id="datePickerFr" data-mindate="today" />
+									<input type="text" class="inputDate" id="contractStartDate" data-mindate="today" style="width: 40%;"/>
 									<span>-</span>
-									<input class="inputDate" style="width: 40%;" type="text" id="datePickerFr" data-mindate="today" />
+									<input type="text" class="inputDate" id="contractEndDate" data-mindate="today" style="width: 40%;"/>
 								</td>
 								<td>
 									<p>등록기간</p>
 								</td>
 								<td>
-									<input class="inputDate" style="width: 40%;" type="text" id="datePickerTo" data-mindate="today" />
+									<input type="text" class="inputDate" id="contractCreatedStartDate" data-mindate="today" style="width: 40%;"/>
 									<span>-</span>
-									<input class="inputDate" style="width: 40%;" type="text" id="datePickerTo" data-mindate="today" />
+									<input type="text" class="inputDate" id="contractCreatedEndDate" data-mindate="today" style="width: 40%;"/>
 								</td>
 							</tr>
 
@@ -113,7 +113,7 @@
 								</td>
 								<td>
 									<div class="mz-radioset mT10">
-										<div class="mz-radio" th:each="type : ${types.getContractStatuses()}">
+										<div class="mz-radio" th:each="type : ${commonTypes.contractStatuses}">
 											<input type="radio" th:field="*{status}" th:value="${type.name}">
 											<label th:for="${#ids.prev('status')}" th:text="${type.description}"></label>
 										</div>
@@ -226,13 +226,9 @@
 
 	<script>
       $(function () {
-        $('#datePickerFr, #datePickerTo')
-          .datepicker();
+		  $('#contractStartDate, #contractEndDate, #contractCreatedStartDate, #contractCreatedEndDate')
+				  .datepicker();
       });
-
-      //function deleteContract() {
-      //  return confirm("계약을 삭제하시겠습니까?");
-      //}
 	</script>
 </body>
 </html>

@@ -120,7 +120,7 @@
 							<th>접수 방법 구분</th>
 							<td>
 								<select th:field="*{submissionType}" style="width:100%;">
-									<option th:each="type : ${types.submissionTypes}"
+									<option th:each="type : ${commonTypes.submissionTypes}"
 											th:value="${type.name}"
 											th:text="${type.description}">
 									</option>
@@ -145,7 +145,7 @@
 							<th>체결 분류</th>
 							<td>
 								<select th:field="*{dealType}" style="width:100%;">
-									<option th:each="type : ${types.dealTypes}"
+									<option th:each="type : ${commonTypes.dealTypes}"
 											th:value="${type.name}"
 											th:text="${type.description}">
 									</option>
@@ -170,7 +170,7 @@
 								<div>
 									금액 <input type="text" class="inputArea" th:field="*{amount}" style="width: 50%;">
 									<select th:field="*{currencyUnitType}" style="width:10%;">
-										<option th:each="type : ${types.currencyUnitTypes}"
+										<option th:each="type : ${commonTypes.currencyUnitTypes}"
 												th:value="${type.name}"
 												th:text="${type.description}">
 										</option>
@@ -249,7 +249,7 @@
 							<th>청구방법</th>
 							<td>
 								<select th:field="*{invoiceType}" style="width:100%;">
-									<option th:each="type : ${types.invoiceTypes}"
+									<option th:each="type : ${commonTypes.invoiceTypes}"
 											th:value="${type.name}"
 											th:text="${type.description}">
 									</option>
@@ -393,7 +393,7 @@
 							<tr>
 								<th class="center">특이사항</th>
 								<td>
-									<textarea type="text" class="inputArea" th:field="*{documentRemark}" style="width: 100%" />
+									<textarea type="text" class="inputArea" th:field="*{documentRemark}" style="width: 100%"/>
 								</td>
 							</tr>
 							</table>

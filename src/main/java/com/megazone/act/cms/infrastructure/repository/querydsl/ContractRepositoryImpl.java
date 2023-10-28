@@ -1,4 +1,4 @@
-package com.megazone.act.cms.infrastructure.querydsl;
+package com.megazone.act.cms.infrastructure.repository.querydsl;
 
 import com.megazone.act.cms.domain.dto.condition.ContractCondition;
 import com.megazone.act.cms.domain.dto.query.*;

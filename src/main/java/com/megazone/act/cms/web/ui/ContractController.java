@@ -34,7 +34,6 @@ public class ContractController {
     @GetMapping("/sales-form")
     public String createSalesForm(Model model) {
         model.addAttribute(FORM, ContractSalesCreateRequest.EMPTY);
-        model.addAttribute("types", CommonTypes.TYPES);
         return "contracts/create-sales-form";
     }
 
@@ -57,7 +56,6 @@ public class ContractController {
         List<ContractSimpleQuery> contracts = contractReadService.getContracts(condition);
         model.addAttribute("contracts", contracts);
         model.addAttribute("condition", condition);
-        model.addAttribute("types", CommonTypes.TYPES);
         return "contracts/list";
     }
 
