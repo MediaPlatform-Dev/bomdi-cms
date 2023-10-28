@@ -1,4 +1,4 @@
-package com.megazone.act.cms.application.dto;
+package com.megazone.act.cms.application;
 
 import com.megazone.act.cms.domain.port.storage.FileInfo;
 import com.megazone.act.cms.infrastructure.storage.FileResponse;

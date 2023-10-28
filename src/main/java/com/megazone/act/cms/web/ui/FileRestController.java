@@ -1,6 +1,6 @@
 package com.megazone.act.cms.web.ui;
 
-import com.megazone.act.cms.application.dto.FileService;
+import com.megazone.act.cms.application.FileService;
 import com.megazone.act.cms.domain.port.storage.FileInfo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
