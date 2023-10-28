@@ -1,8 +1,6 @@
 package com.megazone.act.cms.infrastructure.storage;
 
 
-import com.megazone.act.cms.application.dto.response.FileResponse;
-import com.megazone.act.cms.domain.repository.FileInfo;
 import com.megazone.act.cms.domain.repository.FileStorage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.FileSystemResource;
@@ -17,18 +15,17 @@ import static com.megazone.act.cms.utils.EnvironmentUtils.HOME_PATH;
 
 @Slf4j
 @Storage
-public class LocalFileStorage implements FileStorage {
-
+public class LocalFileStorage implements FileStorage<FileResponse> {
 
     @Override
-    public List<FileInfo> upload(List<MultipartFile> files) {
+    public List<FileResponse> upload(List<MultipartFile> files) {
         return files.stream()
                 .map(this::upload)
                 .toList();
     }
 
     @Override
-    public FileInfo upload(MultipartFile file) {
+    public FileResponse upload(MultipartFile file) {
         String originalFilename = file.getOriginalFilename();
         String savedName = randomFileName(file);
         upload(file, savedName, originalFilename);

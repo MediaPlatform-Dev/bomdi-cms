@@ -3,6 +3,7 @@ package com.megazone.act.cms.application.dto.response;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.megazone.act.cms.infrastructure.storage.FileResponse;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.megazone.act.cms.application.dto.request.ContractCustomerEmployeeResponse;

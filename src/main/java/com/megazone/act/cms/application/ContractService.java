@@ -2,7 +2,7 @@ package com.megazone.act.cms.application;
 
 import com.megazone.act.cms.application.dto.request.*;
 import com.megazone.act.cms.application.dto.response.ContractResponse;
-import com.megazone.act.cms.application.dto.response.FileResponse;
+import com.megazone.act.cms.infrastructure.storage.FileResponse;
 import com.megazone.act.cms.domain.dto.condition.ContractCondition;
 import com.megazone.act.cms.domain.dto.query.ContractSimpleQuery;
 import com.megazone.act.cms.domain.entity.*;
@@ -26,14 +26,13 @@ public class ContractService {
     private final EmployeeRepository employeeRepository;
     private final CustomerRepository customerRepository;
     private final CustomerEmployeeRepository customerEmployeeRepository;
-    private final FileStorage fileStorage;
+    private final FileStorage<FileResponse> fileStorage;
 
     @Transactional
     public void createContract(ContractSalesCreateRequest request) {
         Contract contract = entityFrom(request);
         List<AttachmentFile> files = fileStorage.upload(request.files())
                 .stream()
-                .map(it -> (FileResponse) it)
                 .map(FileResponse::toEntity)
                 .toList();
         contract.addAttachmentFiles(files);

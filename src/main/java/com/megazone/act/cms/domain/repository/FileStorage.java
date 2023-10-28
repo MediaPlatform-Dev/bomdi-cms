@@ -8,10 +8,10 @@ import java.util.UUID;
 
 import static org.springframework.util.StringUtils.hasText;
 
-public interface FileStorage {
+public interface FileStorage<T extends FileInfo> {
 
-    List<FileInfo> upload(List<MultipartFile> file);
-    FileInfo upload(MultipartFile file);
+    List<T> upload(List<MultipartFile> file);
+    T upload(MultipartFile file);
     Resource download(String fileId);
 
     default String randomFileName(MultipartFile file) {

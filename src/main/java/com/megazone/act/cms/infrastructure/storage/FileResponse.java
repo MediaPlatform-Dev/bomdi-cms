@@ -1,4 +1,4 @@
-package com.megazone.act.cms.application.dto.response;
+package com.megazone.act.cms.infrastructure.storage;
 
 import com.megazone.act.cms.domain.entity.AttachmentFile;
 import com.megazone.act.cms.domain.repository.FileInfo;

@@ -1,7 +1,8 @@
 package com.megazone.act.cms.web.ui;
 
 import com.megazone.act.cms.application.dto.FileService;
-import com.megazone.act.cms.application.dto.response.FileResponse;
+import com.megazone.act.cms.domain.repository.FileInfo;
+import com.megazone.act.cms.infrastructure.storage.FileResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -22,7 +23,7 @@ public class FileRestController {
 
     @GetMapping("/files")
     public ResponseEntity<Resource> file(@RequestParam String name) throws IOException {
-        FileResponse response = fileService.download(name);
+        FileInfo response = fileService.download(name);
         Resource resource = response.resource();
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=\"" + response.originalName() + "\"")
