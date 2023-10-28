@@ -7,7 +7,7 @@ import lombok.*;
 @NoArgsConstructor
 @Data
 public class ContractEmployeeRequest {
-    private int id;
+    private Integer id;
     private EmployeeRoleType type;
     private String name;
 }

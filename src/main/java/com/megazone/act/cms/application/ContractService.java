@@ -25,28 +25,36 @@ public class ContractService {
     private final EmployeeRepository employeeRepository;
     private final CustomerRepository customerRepository;
     private final CustomerEmployeeRepository customerEmployeeRepository;
-    private final FileService fileService;
+    private final FileStorage fileStorage;
 
     @Transactional
     public void createContract(ContractSalesCreateRequest request) {
         Corporation corporation = corporationRepository.getReferenceById(1L);
         List<Employee> employees = request.getContractEmployees()
             .stream()
+            .filter(it -> it.getId() != null)
             .map(it -> employeeRepository.getReferenceById(it.getId()))
             .toList();
-        Customer customer = customerRepository.getReferenceById(request.getCustomerId());
+        Customer customer = getCustomer(request.getCustomerId());
         List<CustomerEmployee> customerEmployees = request.getCustomerEmployeeIds().stream()
             .map(customerEmployeeRepository::getReferenceById)
             .toList();
 
         Contract contract = request.toEntity(corporation, employees, customer, customerEmployees);
-        fileService.upload(request.files());
+        List<FileInfo> fileInfos = fileStorage.upload(request.files());
 
         try {
             contractRepository.save(contract);
         } catch (EntityNotFoundException e) {
             log.error("데이터를 찾을 수 없습니다. - ", e);
         }
+    }
+
+    private Customer getCustomer(Integer customerId) {
+        if (customerId == null) {
+            return null;
+        }
+        return customerRepository.getReferenceById(customerId);
     }
 
     public List<ContractSimpleQuery> getContracts(ContractCondition condition) {

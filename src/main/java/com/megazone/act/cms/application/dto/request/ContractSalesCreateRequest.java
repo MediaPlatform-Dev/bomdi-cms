@@ -38,7 +38,7 @@ public class ContractSalesCreateRequest {
     private SubmissionType submissionType;
     private CloudServiceType cloudServiceType;
     private DealType dealType;
-    private int customerId;
+    private Integer customerId;
 
     private long amount;
     private CurrencyUnitType currencyUnitType;

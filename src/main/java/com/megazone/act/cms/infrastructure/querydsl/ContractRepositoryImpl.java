@@ -87,7 +87,7 @@ public class ContractRepositoryImpl implements ContractRepositoryCustom {
                 )
             )
             .from(contract)
-            .join(contract.customer)
+            .leftJoin(contract.customer)
             .where(
                 typeEq(condition.contractType()),
                 nameContains(condition.contractName()),
@@ -135,6 +135,10 @@ public class ContractRepositoryImpl implements ContractRepositoryCustom {
     }
 
     private static BooleanExpression employeeNamesIn(ContractCondition condition) {
+        if (!condition.hasEmployeeName()) {
+            return null;
+        }
+
         return JPAExpressions.selectOne()
             .from(contractEmployee)
             .where(

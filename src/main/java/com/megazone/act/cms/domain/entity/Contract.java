@@ -132,4 +132,11 @@ public class Contract extends AuditingFields {
         this.name = name;
         this.remark = contents;
     }
+
+    public String getCustomerName() {
+        if (customer == null) {
+            return "";
+        }
+        return customer.getName();
+    }
 }

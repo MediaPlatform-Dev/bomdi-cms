@@ -18,4 +18,8 @@ public record ContractCondition(
     String contractName,
     String customerName
 ) {
+
+    public boolean hasEmployeeName() {
+        return contractManagerName != null || contractSalesManagerName != null;
+    }
 }

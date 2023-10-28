@@ -72,7 +72,7 @@ public record ContractResponse(
             entity.getCorporation().getName(),
             "",
             entity.getContractTypes().getDealType(),
-            entity.getCustomer().getName(),
+            entity.getCustomerName(),
             entity.getContractPeriod().getStartDate(),
             entity.getContractPeriod().getEndDate(),
             entity.getInvoicePeriod().getStartDate(),

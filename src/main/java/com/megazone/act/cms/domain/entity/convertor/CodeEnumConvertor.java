@@ -7,6 +7,9 @@ abstract class CodeEnumConvertor<T extends Enum<T> & CodeEnum> implements Attrib
 
     @Override
     public String convertToDatabaseColumn(T attribute) {
+        if (attribute == null) {
+            return null;
+        }
         return attribute.getCode();
     }
 
