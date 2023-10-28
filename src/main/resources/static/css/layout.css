@@ -25,16 +25,23 @@ body {
 .colorWhite {color: white;}
 .wrap {min-width: 1600px; overflow: auto; display: flex; flex-flow: row wrap;}
 
+@media screen and (max-width: 1600px) {
+	.wrap {
+		min-width: auto;
+		justify-content: center;
+	}
+}
+
 .flexColumn {display: flex; flex-direction: column;}
 .flexRow {display: flex; flex-direction: row;}
 .flexEnd {margin-top: auto; align-self: flex-end;}
 
 /* 왼쪽 펼치기 - 사이드 네비게이션 영역 */
-.snb {background: #2d3540; width: 310px; height: 100vh; min-height: 860px; display: flex; flex-flow: column wrap; position: relative;}
+.snb {background: #2d3540; width: 230px; height: 100vh; min-height: 860px; display: flex; flex-flow: column wrap; position: relative;}
 .snb i {font-style: normal;}
-.snb .topArea {height: 79px; border-bottom: 1px solid #404751; display: flex; align-items: center; justify-content: space-between; padding: 0 14px 0 25px;}
-.snb h1.logo { background: url("../img/logo.png") no-repeat 0 center; width: 170px; height: 78px; }
-.snb .topArea .menuBtn {background: url("../img/icon_menu.png") no-repeat center; width: 54px; height: 50px; cursor: pointer; font-size: 0; text-indent: -9999px;}
+.snb .topArea {height: 79px; border-bottom: 1px solid #404751; display: flex; align-items: center; justify-content: space-between; padding: 0 14px 0 10px;}
+.snb h1.logo { background: url("../img/logo.png") no-repeat 0 center; width: 150px; height: 78px; }
+.snb .topArea .menuBtn {background: url("../img/icon_menu.png") no-repeat center; width: 30px; height: 50px; cursor: pointer; font-size: 0; text-indent: -9999px;}
 
 .snb .innerRow {padding: 25px 0; border-top: 1px solid #4c535c;}
 .snb .innerRow:last-child {border-top: none;}
