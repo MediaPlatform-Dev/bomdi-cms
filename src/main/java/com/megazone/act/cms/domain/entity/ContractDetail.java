@@ -43,7 +43,7 @@ public class ContractDetail extends AuditingFields {
     private ContractStatus status;
 
     @JoinColumn(name = "cntrct_id")
-    @ManyToOne
+    @Setter @ManyToOne
     private Contract contract;
 
     public ContractDetail(String name, ContractDetailType type) {
@@ -58,9 +58,5 @@ public class ContractDetail extends AuditingFields {
         this.cloudServiceType = cloudServiceType;
         this.period = period;
         this.status = ContractStatus.SAVED;
-    }
-
-    public void setContract(Contract contract) {
-        this.contract = contract;
     }
 }

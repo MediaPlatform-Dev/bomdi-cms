@@ -14,10 +14,6 @@ public class ContractCustomerEmployee {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @JoinColumn(name = "contract_id")
-    @Setter @ManyToOne
-    private Contract contract;
-
     @JoinColumn(name = "customer_employee_id")
     @ManyToOne
     private CustomerEmployee customerEmployee;

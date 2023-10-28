@@ -17,10 +17,6 @@ public class AttachmentFile {
     private String contentType;
     private String filePath;
 
-    @JoinColumn(name = "cntrct_id")
-    @Setter @ManyToOne
-    private Contract contract;
-
     public AttachmentFile(String fileName, String originalFileName, String contentType, String filePath) {
         this.filePath = filePath;
         this.originalFileName = originalFileName;

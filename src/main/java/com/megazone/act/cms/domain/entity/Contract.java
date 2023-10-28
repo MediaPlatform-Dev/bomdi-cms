@@ -60,22 +60,19 @@ public class Contract extends AuditingFields {
     @Column(name = "src_system_ref_id")
     private String salesForceContractNo;
 
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "contract")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "contract")
     private List<ContractDetail> contractDetails = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "contract")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "contract")
     private List<ContractEmployee> contractEmployees = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "contract")
+    @JoinColumn(name = "contract_id", nullable = false, updatable = false)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<ContractCustomerEmployee> contractCustomerEmployees = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "contract")
+    @JoinColumn(name = "contract_id", nullable = false, updatable = false)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<AttachmentFile> files = new ArrayList<>();
-
-    public Contract(String name, String remark) {
-        this.name = name;
-        this.remark = remark;
-    }
 
     public Contract(
         String name,
@@ -126,7 +123,6 @@ public class Contract extends AuditingFields {
     }
 
     private void addContractCustomerEmployee(ContractCustomerEmployee contractCustomerEmployee) {
-        contractCustomerEmployee.setContract(this);
         this.contractCustomerEmployees.add(contractCustomerEmployee);
     }
 
@@ -135,13 +131,7 @@ public class Contract extends AuditingFields {
         contractDetails.add(contractDetail);
     }
 
-    public void update(String name, String contents) {
-        this.name = name;
-        this.remark = contents;
-    }
-
     public void addAttachmentFiles(List<AttachmentFile> attachmentFiles) {
-        attachmentFiles.forEach(it -> it.setContract(this));
         this.files.addAll(attachmentFiles);
     }
 }
