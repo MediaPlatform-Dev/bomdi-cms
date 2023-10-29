@@ -6,3 +6,12 @@ function fetchAndRender(apiPath, render) {
       console.error('error: ', error);
     });
 }
+
+function fetchPageAndRender(apiPath, render) {
+    fetch(apiPath)
+        .then(response => response.json())
+        .then(data => render(data.content))
+        .catch(error => {
+            console.error('error: ', error);
+        });
+}

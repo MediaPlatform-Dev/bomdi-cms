@@ -95,11 +95,11 @@
         `;
 
       function openContractChargerPopup() {
-        fetchAndRender("/employees", renderContractEmployees)
+	    fetchPageAndRender("/employees", renderContractEmployees)
       }
 
       function openSalesChargerPopup() {
-        fetchAndRender("/employees", renderSalesEmployees)
+	    fetchPageAndRender("/employees", renderSalesEmployees)
       }
 
       function renderContractEmployees(data) {

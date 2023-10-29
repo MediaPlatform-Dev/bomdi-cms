@@ -7,7 +7,6 @@ import com.megazone.act.cms.application.dto.response.ContractResponse;
 import com.megazone.act.cms.domain.dto.condition.ContractCondition;
 import com.megazone.act.cms.domain.dto.query.ContractSimpleQuery;
 import com.megazone.act.cms.domain.type.ContractType;
-import com.megazone.act.cms.web.ui.dto.CommonTypes;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
